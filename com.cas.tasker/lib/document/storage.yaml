@@ -1,0 +1,29 @@
+# 2025-03-29 
+# Chienan Studio
+
+currentPageIndex: int
+taskIndex: int
+task: list(*Task)
+
+# below are type of storage format
+
+@Hive(id = 1)
+*Task
+  title: str
+  % type: TodoType
+  & taskList: '""list({
+    head: str,
+    done: bool  
+  })""'
+  createTime: str
+  lastEdit: str
+  color: int
+  - done: bool
+
+# type define
+
+  @ type
+  * typeName
+  - not in init
+  & maybe not
+  % read only
