@@ -1,78 +1,118 @@
 import 'package:flutter/material.dart';
-import 'package:tasker/func/home/calendar/calendar_generator.api.dart';
-import 'package:tasker/library.util.dart';
-import 'package:tasker/util/flexible.util.dart';
+import 'package:tasker/func/home/calendar/calendar.ctrl.dart';
 
-class CalendarGrid extends StatefulWidget {
-  final BoxConstraints constraints;
-  const CalendarGrid({super.key, required this.constraints});
+class GridPageView extends StatefulWidget {
+  final BoxConstraints cons;
+  const GridPageView({
+    super.key,
+    required this.cons,
+  });
 
   @override
-  State<CalendarGrid> createState() => _CalendarGridState();
+  State<GridPageView> createState() => _GridPageViewState();
 }
 
-class _CalendarGridState extends State<CalendarGrid> {
+class _GridPageViewState extends State<GridPageView> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    var cellHeight = (widget.constraints.maxHeight - 40) / 6; // * - (week bar height + 10)
-    var cellWidth = (widget.constraints.maxWidth - 20) / 7; // * - 20 bottom
-    var taskHeight = (cellHeight) / 5 -1 -0.5; // * -1 (margin) , -0.5 (bottom)
+    return SizedBox(
+      width: widget.cons.maxWidth,
+      height: widget.cons.maxHeight -30,
+      child: PageView(
+        controller: CalendarCtrl.controller,
+        onPageChanged: CalendarCtrl.onPageChange,
+        children: CalendarCtrl.getPageMonth(widget.cons),
+      )
+    );
+  }
+}
 
-    return FlexWidget.flex(
-      any: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: List.generate(6, (int week) {
-            return Row(
-              children: List.generate(7, (int day) {
-                return Container(
-                  height: cellHeight,
-                  width: cellWidth,
-                  decoration: BoxDecoration(
-                    border: Border.symmetric(
-                      horizontal: BorderSide(
-                        color: style(),
-                        width: 0.5,
-                      )
-                    ),
-                    // color: primary()
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: taskHeight,
-                        child: text((week + day).toString(), size: 12),
-                      ),
-                      Column(
-                        children: List.generate(4, (int index) {
-                          return Container(
-                            padding: EdgeInsets.symmetric(horizontal: 1.25),
-                            margin: EdgeInsets.symmetric(vertical: 0.5),
-                            height: taskHeight,
-                            width: cellWidth - 2, // * margin
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2.5),
-                              color: primary()
-                            ),
-                            child: Text(
-                              "$week, $day",
-                              style: TextStyle(
-                                color: primaryStyle(),
-                                fontSize: 12,
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
-                    ],
-                  ),
-                );
-              }),
-            );
-          }),
-        ),
+// ddd
+
+class CalendarPageView extends StatefulWidget {
+  const CalendarPageView({super.key});
+
+  @override
+  _CalendarPageViewState createState() => _CalendarPageViewState();
+}
+
+class _CalendarPageViewState extends State<CalendarPageView> {
+  late PageController _pageController;
+  // 假设用 DateTime 表示当前月份
+  DateTime _currentMonth = DateTime.now();
+
+  // 三个页面的数据，可以是 widget 或者直接数据，下面用简单字符串代表
+  late List<String> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: 1);
+    _updatePages();
+  }
+
+  // 根据当前月份更新三个页面的数据（调用你写好的 getPageUpdate()）
+  void _updatePages() {
+    // 假设 getPageUpdate 返回一个包含 [前一月, 这月, 后一月] 的列表
+    // 这里你可以根据 _currentMonth 做相应的计算
+    _pages = getPageUpdate(_currentMonth);
+  }
+
+  // 模拟 getPageUpdate 方法
+  List<String> getPageUpdate(DateTime currentMonth) {
+    DateTime prev = DateTime(currentMonth.year, currentMonth.month - 1);
+    DateTime next = DateTime(currentMonth.year, currentMonth.month + 1);
+    return [
+      '前一月：${prev.year}-${prev.month}',
+      '本月：${currentMonth.year}-${currentMonth.month}',
+      '后一月：${next.year}-${next.month}',
+    ];
+  }
+
+  // 当滑动结束时更新数据
+  void _onPageChanged(int index) {
+    if (index == 0) {
+      // 向左滑，表示进入前一月
+      setState(() {
+        _currentMonth = DateTime(_currentMonth.year, _currentMonth.month - 1);
+        _updatePages();
+      });
+      // 重置为中间页面（无动画跳转）
+      _pageController.jumpToPage(1);
+    } else if (index == 2) {
+      // 向右滑，表示进入后一月
+      setState(() {
+        _currentMonth = DateTime(_currentMonth.year, _currentMonth.month + 1);
+        _updatePages();
+      });
+      _pageController.jumpToPage(1);
+    }
+    // 如果 index == 1，则正好是中间页，不做更新
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('日历 PageView')),
+      body: PageView.builder(
+        controller: _pageController,
+        itemCount: _pages.length, // 固定为3
+        onPageChanged: _onPageChanged,
+        itemBuilder: (context, index) {
+          return Center(
+            child: Text(
+              _pages[index],
+              style: TextStyle(fontSize: 24),
+            ),
+          );
+        },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 }
