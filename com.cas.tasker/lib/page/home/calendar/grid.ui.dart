@@ -20,7 +20,9 @@ class _GridPageViewState extends State<GridPageView> {
       height: widget.cons.maxHeight -30,
       child: PageView(
         controller: CalendarCtrl.controller,
-        onPageChanged: CalendarCtrl.onPageChange,
+        onPageChanged: (index) {
+          CalendarCtrl.onPageChange(index, () => setState(() {}));
+        },
         children: CalendarCtrl.getPageMonth(widget.cons),
       )
     );

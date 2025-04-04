@@ -1,0 +1,7 @@
+# 2025-04-04
+# Chienan Studio
+
+*CalendarGenerator:
+  getData(): map
+    - calendarMonth: list(list(int)) # month data
+    

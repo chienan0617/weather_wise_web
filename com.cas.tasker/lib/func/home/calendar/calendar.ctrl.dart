@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/func/home/calendar/calendar_generator.api.dart';
 import 'package:tasker/page/home/calendar/grid.uif.dart';
 
 class CalendarCtrl {
@@ -8,31 +9,50 @@ class CalendarCtrl {
   static int currentDay = now.day;
   static PageController controller = PageController(initialPage: 1);
 
+  // get the page
   static List<Widget> getPageMonth(BoxConstraints cons) {
-    var m1 = checkDate(currentYear, currentMonth, -1);
-    var m2 = checkDate(currentYear, currentMonth, 0);
-    var m3 = checkDate(currentYear, currentMonth, 1);
+    var m1 = _checkDate(-1);
+    var m2 = _checkDate(0);
+    var m3 = _checkDate(1);
 
     return [
-      CalendarGrid(constraints: cons, year: m1.$1, month: m1.$2),
-      CalendarGrid(constraints: cons, year: m2.$1, month: m2.$2),
-      CalendarGrid(constraints: cons, year: m3.$1, month: m3.$2),
+      CalendarGrid(
+        constraints: cons, year: m1.$1, month: m1.$2, 
+        data: CalendarGeneratorApi.getData(currentYear - 1, currentMonth)
+      ),
+      CalendarGrid(
+        constraints: cons, year: m2.$1, month: m2.$2,
+        data: CalendarGeneratorApi.getData(currentYear + 0, currentMonth),
+      ),
+      CalendarGrid(
+        constraints: cons, year: m3.$1, month: m3.$2,
+        data: CalendarGeneratorApi.getData(currentYear + 1, currentMonth),
+      ),
     ];
   }
 
-  static (int, int) checkDate(int year, int month, int os) {
-    month -= os;
+  // check whether currentYear and currentMonth were out of bound
+  static (int, int) _checkDate(int os) {
+    currentMonth -= os;
 
-    if (month < 1) {
-      return (year - 1, month + 12);
-    } else if (month > 12) {
-      return (year + 1, month - 12);
-    } else {
-      return (year, month);
+    if (currentMonth < 1) {
+      currentYear - 1; currentMonth + 12;
+    } else if (currentMonth > 12) {
+      currentYear + 1; currentMonth - 12;
     }
+
+    return (currentYear, currentMonth);
   }
 
-  static void onPageChange(int index) {
-    
+  // when page move, run this function
+  // connect with onPageChange function in PageView
+  static void onPageChange(int index, VoidCallback rebuild) {
+    switch (index) {
+      case 0: _checkDate(-1); controller.jumpToPage(1); break;
+      case 2: _checkDate(1); controller.jumpToPage(1); break;
+      default: _checkDate(0); controller.jumpToPage(1); break;
+    }
+
+    rebuild();
   }
 }
