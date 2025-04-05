@@ -26,11 +26,10 @@ class _CalendarGridState extends State<CalendarGrid> {
     var cellHeight = (widget.constraints.maxHeight - 40) / 6; // * - (week bar height + 10)
     var cellWidth = (widget.constraints.maxWidth - 20) / 7; // * - 20 bottom
     var taskHeight = (cellHeight) / 5 -1 -0.5; // * -1 (margin) , -0.5 (bottom)
+    var data = widget.data;
 
     return FlexWidget.flex(
       any: Container(
-        // width: widget.constraints.maxWidth,
-        // height: widget.constraints.maxWidth,
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: List.generate(6, (int week) {
@@ -46,13 +45,12 @@ class _CalendarGridState extends State<CalendarGrid> {
                         width: 0.5,
                       )
                     ),
-                    // color: primary()
                   ),
                   child: Column(
                     children: [
                       SizedBox(
                         height: taskHeight,
-                        child: text((week + day).toString(), size: 12),
+                        child: text((data["dateMonth"][week][day]).toString(), size: 12),
                       ),
                       Column(
                         children: List.generate(4, (int index) {

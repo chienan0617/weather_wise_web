@@ -2,6 +2,43 @@
 # Chienan Studio
 
 *CalendarGenerator:
-  getData(): map
+
+  # * get all the data in need
+  &getData(): map
     - calendarMonth: list(list(int)) # month data
+    - total: int
+    - task: list(map(str, any))
+      - title: str
+      - subtitle: str
+      - createTime: DateTime
+    - done: bool
+  
+  # call by [TopBar] to update time display
+  &getFormatTime(): str
+
+*CalendarIo:
+
+  # * store task to database
+  &storeTask(): @void
+    - title: str
+    - subtitle: str
+    - type: TodoType
+    - color: int
+    - lastEdit: DataTime
+    - createTIme: DateTime
+    - done: bool
+    - ^content: list(map(str, any))
+      {
+        head: str,
+        done: bool,
+      }
+    - ^content: str
     
+    
+# type define
+  * type
+  & function
+  - content
+  {} list
+  @ param
+  ^ async

@@ -31,7 +31,7 @@ class CalendarCtrl {
     ];
   }
 
-  // check whether currentYear and currentMonth were out of bound
+  // check whether `currentYear` and `currentMonth` were out of bound
   static (int, int) _checkDate(int os) {
     currentMonth -= os;
 
@@ -45,14 +45,15 @@ class CalendarCtrl {
   }
 
   // when page move, run this function
-  // connect with onPageChange function in PageView
+  // connect with {onPageChange} function in [PageView]
   static void onPageChange(int index, VoidCallback rebuild) {
     switch (index) {
-      case 0: _checkDate(-1); controller.jumpToPage(1); break;
-      case 2: _checkDate(1); controller.jumpToPage(1); break;
+      case 0: _checkDate(1); controller.jumpToPage(1); break;
+      case 2: _checkDate(-1); controller.jumpToPage(1); break;
       default: _checkDate(0); controller.jumpToPage(1); break;
     }
 
     rebuild();
+    CalendarGeneratorApi.getFormateTime();
   }
 }

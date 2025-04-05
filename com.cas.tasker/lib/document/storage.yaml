@@ -11,10 +11,10 @@ task: list(*Task)
 *Task
   title: str
   % type: TodoType
-  & taskList: '''ist({
+  & taskList: {
     head: str,
-    done: bool  
-  })'''
+    done: bool,  
+  } list()
   createTime: str
   lastEdit: str
   color: int

@@ -1,13 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:tasker/func/home/calendar/calendar.ctrl.dart';
 
 class CalendarGeneratorApi {
+  // register the {setState} in topBar
+  static late final VoidCallback topBarRebuild;
+
+  // get the data
   static Map<dynamic, dynamic> getData(int year, int month) {
     return {
-      "dateMonth": getCalendarMonthData(year, month)
+      "dateMonth": _getCalendarMonthData(year, month)
     };
   }
 
   // * the initialize step to get calendar data
-  static List<List<int>> getCalendarMonthData(int year, int month) {
+  static List<List<int>> _getCalendarMonthData(int year, int month) {
     int totalDays = DateTime(year, month + 1, 0).day;
     int firstWeekday = DateTime(year, month, 1).weekday % DateTime.daysPerWeek;
     List<List<int>> date = [];
@@ -47,5 +53,13 @@ class CalendarGeneratorApi {
     }
 
     return date;
+  }
+
+  // detector by [CalendarCtrl.onPageChange()]
+  // give the formate time to the [TopBar]
+  static String getFormateTime() {
+    topBarRebuild();
+    print('rebuild');
+    return "${CalendarCtrl.currentYear}-${CalendarCtrl.currentMonth}";
   }
 }
