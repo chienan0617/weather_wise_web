@@ -53,7 +53,7 @@ class _CalendarGridState extends State<CalendarGrid> {
                         child: text((data["dateMonth"][week][day]).toString(), size: 12),
                       ),
                       Column(
-                        children: List.generate(4, (int index) {
+                        children: List.generate((data['task'][week][day] as Map).length, (int index) {
                           return Container(
                             padding: EdgeInsets.symmetric(horizontal: 1.25),
                             margin: EdgeInsets.symmetric(vertical: 0.5),

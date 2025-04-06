@@ -5,12 +5,12 @@
 
   # * get all the data in need
   &getData(): map
-    - calendarMonth: list(list(int)) # month data
+    - dateMonth: list(list(int)) # month data
     - total: int
-    - task: list(map(str, any))
-      - title: str
-      - subtitle: str
-      - createTime: DateTime
+    - task: list(Task) #list(map(str, any))
+      # - title: str
+      # - subtitle: str
+      # - createTime: DateTime
     - done: bool
   
   # call by [TopBar] to update time display
@@ -19,7 +19,7 @@
 *CalendarIo:
 
   # * store task to database
-  &storeTask(): @void
+  &newTask(): @void
     - title: str
     - subtitle: str
     - type: TodoType
@@ -33,6 +33,9 @@
         done: bool,
       }
     - ^content: str
+  
+  &getTask(): Task
+    
     
     
 # type define

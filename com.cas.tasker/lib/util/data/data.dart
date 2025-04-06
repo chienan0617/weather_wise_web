@@ -1,15 +1,16 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:tasker/util/data/type.dart';
 
 class Data {
   static Box? _box;
+  static _TaskData task = _TaskData();
 
-  // 初始化 Hive
   static Future<void> init() async {
     await Hive.initFlutter();
+    await _TaskData.init();
     _box = await Hive.openBox('appData'); // 打開或建立資料夾 (box)
   }
 
-  // 存取 String 資料
   static void storeString(String key, String value) {
     _box?.put(key, value);
   }
@@ -18,7 +19,6 @@ class Data {
     return _box?.get(key, defaultValue: "") ?? "";
   }
 
-  // 存取 int 資料
   static void storeInt(String key, int value) {
     _box?.put(key, value);
   }
@@ -30,7 +30,6 @@ class Data {
     return 0;
   }
 
-  // 存取 bool 資料
   static void storeBool(String key, bool value) {
     _box?.put(key, value);
   }
@@ -42,7 +41,6 @@ class Data {
     return false;
   }
 
-  // 存取 double 資料
   static void storeDouble(String key, double value) {
     _box?.put(key, value);
   }
@@ -54,7 +52,6 @@ class Data {
     return 0.0;
   }
 
-  // 存取 Map 資料
   static void storeMap<String, V>(String key, V value) {
     _box?.put(key, value);
   }
@@ -82,38 +79,32 @@ class Data {
 }
 
 
-  // 檢查 Key 是否存在
   static bool exists(String key) {
     return _box?.containsKey(key) ?? false;
   }
 
-  // 修改 Map 中的值
   static void changeMap(String mapKey, dynamic key, dynamic value) {
     Map<dynamic, dynamic> map = getMap(mapKey);
     map[key] = value;
     storeMap(mapKey, map);
   }
 
-  // 刪除資料
   static void delete(String key) {
     _box?.delete(key);
   }
 
-  // 在 Map 中新增 Key
   static void addKeyInMap(String mapKey, String key, dynamic value) {
     Map<dynamic, dynamic> map = getMap(mapKey);
     map[key] = value;
     storeMap(mapKey, map);
   }
 
-  // 取得所有資料
   static Map<String, dynamic> getAllData() {
     return _box?.toMap().cast<String, dynamic>() ?? {};
   }
 
-  // 刪除所有資料
   static void deleteAllData() {
-    _box?.clear(); // 清除 Box 內所有資料
+    _box?.clear();
   }
 
   static T get<T>(String key) {
@@ -121,8 +112,44 @@ class Data {
   }
 
   static void put<T>(String key, T value) {
-  _box?.put(key, value);
+    _box?.put(key, value);
+  }
 }
+
+class _TaskData {
+  static Box? _task;
+
+  static Future<void> init() async {
+    await Hive.openBox('task');
+    _task?.containsKey('index') ?? _task?.put('index', 1);
+  }
+
+  void storeTask(
+    int year, int month, int day, int totalIndex, Task task
+  ) {
+    Map data = getTask(year, month, day);
+    data[totalIndex] = task;
+    _task?.put('<$year-$month-$day>', data);
+  }
+
+  Map<int, Task> getTask(int year, int month, int day) {
+    return (_task?.get('<$year-$month-$day>') as Map<int, Task>?) ?? {};
+  }
+
+  Task getTaskByIndex(int index) {
+    return _task?.get(index) as Task;
+  }
+
+  // * get add add self automatically
+  int newTaskIndex() {
+    if (!(_task?.containsKey('index') ?? false)) {
+      _task?.put('index', 0);
+    }
+    
+    int index = _task?.get('index') ?? 0; 
+    _task?.put('index', index + 1); 
+    return index + 1;
+  }
 }
 
 class Type {

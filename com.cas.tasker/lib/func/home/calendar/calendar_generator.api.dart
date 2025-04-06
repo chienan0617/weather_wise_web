@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/func/home/calendar/calendar.ctrl.dart';
+import 'package:tasker/func/home/calendar/calendar_io.api.dart';
 
 class CalendarGeneratorApi {
   // register the {setState} in topBar
-  static late final VoidCallback topBarRebuild;
+  static VoidCallback topBarRebuild = () {};
 
   // get the data
-  static Map<dynamic, dynamic> getData(int year, int month) {
+  static Map<dynamic, dynamic> getData(
+    int year, int month, 
+  ) {
+    var dateData = _getCalendarMonthData(year, month);
+
     return {
-      "dateMonth": _getCalendarMonthData(year, month)
+      "dateMonth": _getCalendarMonthData(year, month),
+      "task": CalendarIoApi.getTaskDataToMonth(year, month, dateData),
     };
   }
 
@@ -59,7 +65,6 @@ class CalendarGeneratorApi {
   // give the formate time to the [TopBar]
   static String getFormateTime() {
     topBarRebuild();
-    print('rebuild');
     return "${CalendarCtrl.currentYear}-${CalendarCtrl.currentMonth}";
   }
 }

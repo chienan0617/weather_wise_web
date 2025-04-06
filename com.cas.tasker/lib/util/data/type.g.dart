@@ -19,35 +19,30 @@ class TaskAdapter extends TypeAdapter<Task> {
     return Task(
       fields[0] as String,
       fields[1] as TodoType,
-      (fields[2] as List)
-          .map((dynamic e) => (e as Map).cast<String, dynamic>())
-          .toList(),
+      fields[2] as DateTime,
       fields[3] as DateTime,
-      fields[4] as DateTime,
-      fields[5] as int,
-      fields[7] as String,
-    )..done = fields[6] as bool;
+      fields[4] as int,
+      fields[6] as dynamic,
+    )..done = fields[5] as bool;
   }
 
   @override
   void write(BinaryWriter writer, Task obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
       ..write(obj.type)
       ..writeByte(2)
-      ..write(obj.taskList)
-      ..writeByte(3)
       ..write(obj.createTime)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.lastEdit)
-      ..writeByte(5)
+      ..writeByte(4)
       ..write(obj.color)
-      ..writeByte(6)
+      ..writeByte(5)
       ..write(obj.done)
-      ..writeByte(7)
+      ..writeByte(6)
       ..write(obj.content);
   }
 

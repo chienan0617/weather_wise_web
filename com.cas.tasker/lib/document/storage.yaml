@@ -3,18 +3,20 @@
 
 currentPageIndex: int
 taskIndex: int
-task: list(*Task)
+task: map(int, *Task)
 
 # below are type of storage format
 
 @Hive(id = 1)
 *Task
+  index: int
   title: str
   % type: TodoType
-  & taskList: {
+  & ^ content: {
     head: str,
     done: bool,  
   } list()
+  & ^ content: str
   createTime: str
   lastEdit: str
   color: int

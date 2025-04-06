@@ -15,28 +15,29 @@ class Task {
   @HiveField(1)    // todo: 'list' or 'card'
   final TodoType type;
 
-  @HiveField(2)    // todo: if type is list
-  List<Map<String, dynamic>> taskList;
+  // @HiveField(2)    // todo: if type is list
+  // List<Map<String, dynamic>> taskList;
 
-  @HiveField(3)
+  @HiveField(2)
   final DateTime createTime;
 
-  @HiveField(4)
+  @HiveField(3)
   DateTime lastEdit;
 
-  @HiveField(5)
+  @HiveField(4)
   int color;
 
-  @HiveField(6)
+  @HiveField(5)
   bool done = false;
 
+  @HiveField(6)
+  dynamic content;
+
   @HiveField(7)
-  String content;
 
   Task(
     this.title,
     this.type,
-    this.taskList,
     this.createTime,
     this.lastEdit,
     this.color,
