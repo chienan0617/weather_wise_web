@@ -1,6 +1,5 @@
 import 'package:tasker/util/data/data.dart';
 import 'package:tasker/util/data/type.dart';
-
 class CalendarIoApi {
 
   // * getTheDate's task
@@ -18,7 +17,7 @@ class CalendarIoApi {
       for (int day in data[i]) {
         var date = checkDateIsCorrectInCalendar(year, month, day, i);
         weekData.add(
-          Data.task.getTask(date.$1, date.$2, date.$3)
+          Data.task.getTask(date.$1, date.$2, date.$3),
         );
       }
       monthData.add(weekData);
@@ -69,7 +68,7 @@ class CalendarIoApi {
     int year, int month, int day
   ) {
     if (month > 12) return (year + 1, month - 12, day);
-    if (month < 12) return (year - 1, month + 12, day);
+    if (month < 0) return (year - 1, month + 12, day);
     return (year, month, day);
   }
 }

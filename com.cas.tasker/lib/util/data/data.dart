@@ -1,3 +1,4 @@
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tasker/util/data/type.dart';
 
@@ -8,7 +9,7 @@ class Data {
   static Future<void> init() async {
     await Hive.initFlutter();
     await _TaskData.init();
-    _box = await Hive.openBox('appData'); // 打開或建立資料夾 (box)
+    _box = await Hive.openBox('appData');
   }
 
   static void storeString(String key, String value) {
@@ -120,7 +121,7 @@ class _TaskData {
   static Box? _task;
 
   static Future<void> init() async {
-    await Hive.openBox('task');
+    _task = await Hive.openBox('task');
     _task?.containsKey('index') ?? _task?.put('index', 1);
   }
 
@@ -133,11 +134,23 @@ class _TaskData {
   }
 
   Map<int, Task> getTask(int year, int month, int day) {
-    return (_task?.get('<$year-$month-$day>') as Map<int, Task>?) ?? {};
+    if (year == 2025 && month == 4 && day == 6) {
+      print(_task?.containsKey('<2025-4-6>'));
+      print(_task?.get('<2025-4-6>'));
+    }
+
+    // return (_task?.get('<2025-4-6>') as Map<dynamic, dynamic>).cast<int, Task>();
+
+    return (_task?.get('<$year-$month-$day>', defaultValue: {})
+        as Map<dynamic, dynamic>).cast<int, Task>();
   }
 
   Task getTaskByIndex(int index) {
     return _task?.get(index) as Task;
+  }
+
+  Map<String, dynamic> getAllData() {
+    return _task?.toMap().cast<String, dynamic>() ?? {};
   }
 
   // * get add add self automatically
@@ -149,6 +162,10 @@ class _TaskData {
     int index = _task?.get('index') ?? 0; 
     _task?.put('index', index + 1); 
     return index + 1;
+  }
+
+  void storeNative(String key, dynamic value) {
+    _task?.put(key, value);
   }
 }
 

@@ -46,11 +46,14 @@ class Init {
 
     //todo: test
     // TaskApi.addTask(title: "title", type: TodoType.card, createTime: DateTime.now(), lastEdit: DateTime.now(), color: primary(), content: "content");
+    Data.task.storeNative('<2025-4-6>', {});
     CalendarIoApi.newTask(2025, 4, 6, title: "title", subtitle: "subtitle", type: TodoType.card, color: Colors.amber.toARGB32(), content: "content");
 
+    
     var data = CalendarGeneratorApi.getData(2025, 4);
 
-    Console.log("content");
+    // Console.log(Data.task.getAllData());
+    // Console.log("dddddddddddddddddddddddddddddddddddddddddddddd");
   }
 }
 

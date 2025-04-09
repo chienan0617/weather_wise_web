@@ -18,15 +18,15 @@ class CalendarCtrl {
     return [
       CalendarGrid(
         constraints: cons, year: m1.$1, month: m1.$2, 
-        data: CalendarGeneratorApi.getData(currentYear - 1, currentMonth)
+        data: CalendarGeneratorApi.getData(currentYear, currentMonth - 1)
       ),
       CalendarGrid(
         constraints: cons, year: m2.$1, month: m2.$2,
-        data: CalendarGeneratorApi.getData(currentYear + 0, currentMonth),
+        data: CalendarGeneratorApi.getData(currentYear, currentMonth + 0),
       ),
       CalendarGrid(
         constraints: cons, year: m3.$1, month: m3.$2,
-        data: CalendarGeneratorApi.getData(currentYear + 1, currentMonth),
+        data: CalendarGeneratorApi.getData(currentYear, currentMonth + 1),
       ),
     ];
   }

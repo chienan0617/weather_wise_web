@@ -42,7 +42,7 @@ class _CalendarGridState extends State<CalendarGrid> {
                     border: Border.symmetric(
                       horizontal: BorderSide(
                         color: style(),
-                        width: 0.5,
+                        width: 0.25,
                       )
                     ),
                   ),
@@ -64,7 +64,7 @@ class _CalendarGridState extends State<CalendarGrid> {
                               color: primary()
                             ),
                             child: Text(
-                              "$week, $day",
+                              "${widget.year}, ${widget.month}, $week, $day",
                               style: TextStyle(
                                 color: primaryStyle(),
                                 fontSize: 12,

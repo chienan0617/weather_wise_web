@@ -8,7 +8,7 @@ class CalendarGeneratorApi {
 
   // get the data
   static Map<dynamic, dynamic> getData(
-    int year, int month, 
+    int year, int month,
   ) {
     var dateData = _getCalendarMonthData(year, month);
 
