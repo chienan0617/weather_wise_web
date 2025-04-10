@@ -3,6 +3,7 @@ import 'package:tasker/library.util.dart';
 import 'package:tasker/page/home/calendar/grid.ui.dart';
 import 'package:tasker/page/home/calendar/top_bar.ui.dart';
 import 'package:tasker/page/home/calendar/week.ui.dart';
+import 'package:tasker/util/guide.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -21,7 +22,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         actions: [Expanded(child: TopBar())],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Guide.calendar.toAddPage(context),
         child: Icon(Icons.add, color: primaryStyle(), size: 24),
       ),
       body: LayoutBuilder(

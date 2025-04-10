@@ -17,7 +17,7 @@ class CalendarIoApi {
       for (int day in data[i]) {
         var date = checkDateIsCorrectInCalendar(year, month, day, i);
         weekData.add(
-          Data.task.getTask(date.$1, date.$2, date.$3),
+          Data.task.getTask(date.$1, date.$2, date.$3).values.toList(),
         );
       }
       monthData.add(weekData);

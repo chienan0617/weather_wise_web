@@ -7,7 +7,7 @@
   &getData(): map
     - dateMonth: list(list(int)) # month data
     - total: int
-    - task: list(Task) #list(map(str, any))
+    - task: map(index, Task) #list(map(str, any))
       # - title: str
       # - subtitle: str
       # - createTime: DateTime
