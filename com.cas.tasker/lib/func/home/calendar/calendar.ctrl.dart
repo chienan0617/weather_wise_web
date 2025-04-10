@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/func/home/calendar/calendar_generator.api.dart';
-import 'package:tasker/page/home/calendar/grid.mod.dart';
+import 'package:tasker/page/home/calendar/grid.ui.mod.dart';
 
 class CalendarCtrl {
   static DateTime now = DateTime.now();

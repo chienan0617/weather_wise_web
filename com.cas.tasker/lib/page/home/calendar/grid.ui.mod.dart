@@ -107,13 +107,16 @@ class _DateCellState extends State<DateCell> {
                   borderRadius: BorderRadius.circular(2.5),
                   color: primary()
                 ),
-                child: Text(
-                  ((data['task'][week][day]) as List<Task>)[index].title,
-                  style: TextStyle(
-                    color: primaryStyle(),
-                    fontSize: 12,
+                child: Container(
+                  padding: EdgeInsets.only(left: 1, bottom: 1),
+                  child: Text(
+                    ((data['task'][week][day]) as List<Task>)[index].title,
+                    style: TextStyle(
+                      color: primaryStyle(),
+                      fontSize: 12,
+                    ),
                   ),
-                ),
+                )
               );
             }),
           ),

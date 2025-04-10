@@ -12,6 +12,7 @@ class TopBar extends StatefulWidget {
 class _TopBarState extends State<TopBar> {
   @override
   void initState() {
+    super.initState();
     CalendarGeneratorApi.topBarRebuild = () => setState(() {});
   }
 
