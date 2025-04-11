@@ -73,7 +73,7 @@ Map<String, List<dynamic>> combine = {
   ]
 };
 
-var colors = [
+List<Color> colors = [
   hexColor('#FF4D40'), // 柿子紅 (Persimmon Red)
   hexColor('#FF7F50'), // 珊瑚色 (Coral)
   hexColor('#FFA500'), // 橙色 (Orange)

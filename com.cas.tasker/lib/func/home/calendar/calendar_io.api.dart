@@ -40,7 +40,6 @@ class CalendarIoApi {
     // assert(type == TodoType.card && content is List);
     // assert(type == TodoType.list && content is Map);
 
-    int taskIndex = Data.getInt(Type.taskIndex);
     Task task = Task(
       title, type, DateTime.now(), DateTime.now(), color, content
     );
