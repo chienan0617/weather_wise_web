@@ -51,8 +51,6 @@ class Init {
     
     var data = CalendarGeneratorApi.getData(2025, 4);
 
-    // Console.log(Data.task.getAllData());
-    // Console.log("dddddddddddddddddddddddddddddddddddddddddddddd");
   }
 }
 
