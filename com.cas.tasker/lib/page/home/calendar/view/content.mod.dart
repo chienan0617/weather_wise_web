@@ -117,7 +117,7 @@ void showSelectColorDialog(BuildContext context) {
 
 
 class _SelectColorDialog extends StatefulWidget {
-  const _SelectColorDialog({super.key});
+  const _SelectColorDialog();
 
   @override
   State<_SelectColorDialog> createState() => __SelectColorDialogState();

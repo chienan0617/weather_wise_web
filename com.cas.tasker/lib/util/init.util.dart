@@ -7,7 +7,6 @@ import 'package:tasker/func/home/calendar/calendar_io.api.dart';
 import 'package:tasker/util/data/data.dart';
 import 'package:tasker/library.util.dart';
 import 'package:tasker/util/data/type.dart';
-import 'package:tasker/util/debug.util.dart';
 
 class Init {
   static void checkData() {
