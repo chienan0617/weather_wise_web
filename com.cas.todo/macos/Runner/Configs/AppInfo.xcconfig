@@ -8,7 +8,7 @@
 PRODUCT_NAME = todo_list
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.cas.todolist.todoList
+PRODUCT_BUNDLE_IDENTIFIER = com.cas.todo.todoList
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2025 com.cas.todo_list. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2025 com.cas.todo. All rights reserved.
