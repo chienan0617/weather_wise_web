@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/func/home/edit/editor.ctrl.dart';
 import 'package:todo_list/func/home/todo_io.api.dart';
 import 'package:todo_list/library.util.dart';
 import 'package:todo_list/util/data/type.dart';
@@ -53,9 +52,10 @@ class _EditInformationState extends State<EditInformation> {
 
     return Container(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            margin: edge(h: 15, v: 5),
+            margin: EdgeInsets.only(left: 15, right: 15, top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -63,22 +63,23 @@ class _EditInformationState extends State<EditInformation> {
                 //   'create time: ${widget.info['createTime']}', os: -128,
                 // ),
                 text(
-                  'last edit time: ${widget.info['lastEditTime']}',
+                  'lately edit time: ${widget.info['lastEditTime']}',
                   os: -128, size: 18
                 )
               ],
             ),
           ),
           Container(
-            margin: edge(h: 15, v: 5),
+            margin: EdgeInsets.only(left: 0, right: 10, top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // text(
                 //   'create time: ${widget.info['createTime']}', os: -128,
                 // ),
                 text(
-                  'last edit time: ${widget.info['lastEditTime']}',
+                  'total text: ${widget.info['contentLength']}',
                   os: -128, size: 18
                 )
               ],
@@ -107,17 +108,26 @@ class ColorDot extends StatefulWidget {
 class _ColorDotState extends State<ColorDot> {
   @override
   Widget build(BuildContext context) {
-    var info = TodoIoApi.getTodoInformation(widget.todo);
-
     return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      margin: edge(v: 0, h: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          EditInformation(todo: widget.todo, info: info),
-          Align(
-            alignment: Alignment.centerRight,
-            child: ColorDot(todo: widget.todo, info: info),
+          Container(
+            decoration: BoxDecoration(
+              color: Color(widget.todo.color),
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(5)
+            ),
+            width: 20, height: 20,
           ),
+          TextButton(
+            onPressed: () {},
+            child: Container(
+              // margin: edge(h: 10),
+              child: text(widget.info['colorName'], os: -64),
+            ),
+          )
         ],
       ),
     );

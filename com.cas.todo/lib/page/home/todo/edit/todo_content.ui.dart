@@ -45,7 +45,7 @@ class _TitleEditorState extends State<TitleEditor> {
           icon: icon(Icons.text_fields, size: 24),
           hintMaxLines: 1,
           hintText: 'enter title',
-          hintStyle: TextStyle(color: style(op: false, os: 48), fontSize: 24),
+          hintStyle: TextStyle(color: style(os: -128), fontSize: 24),
         ),
         cursorColor: primary,
         style: TextStyle(

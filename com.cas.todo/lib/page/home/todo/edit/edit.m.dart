@@ -24,7 +24,7 @@ class _TodoViewScreenState extends State<TodoViewScreen> {
       home: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () =>  Navigator.pop(context),
+            onPressed: () => Navigator.pop(context),
             icon: icon(Icons.arrow_back, size: 28)
           ),
           actions: [

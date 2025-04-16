@@ -1,6 +1,5 @@
 
 
-import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_list/func/home/todo_io.api.dart';
 import 'package:todo_list/library.util.dart';
@@ -50,7 +49,7 @@ class Init {
 
 
     // var data = CalendarGeneratorApi.getData(2025, 4);
-    TodoIoApi.createTodo(title: "title", type: TodoType.card, color: colors[6], content: "content");
+    TodoIoApi.createTodo(title: "title", type: TodoType.card, color: colors[13], content: "content");
   }
 }
 
