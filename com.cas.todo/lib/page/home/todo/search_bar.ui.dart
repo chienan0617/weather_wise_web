@@ -13,14 +13,14 @@ class _TodoSearchBarState extends State<TodoSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: edge(h: 10),
       child: Container(
         decoration: BoxDecoration(
           color: style(n: true, os: 12, op: false),
           borderRadius: BorderRadius.circular(10)
         ),
         height: 40,
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: edge(v: 10),
         child: Container(
           margin: EdgeInsets.only(left: 10, right: 10), // None
           child: TextField(

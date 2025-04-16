@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_list/func/home/todo_io.api.dart';
 import 'package:todo_list/library.util.dart';
+import 'package:todo_list/util/customize.util.dart';
 import 'package:todo_list/util/data/data.dart';
 import 'package:todo_list/util/data/type.dart';
 
@@ -49,7 +50,7 @@ class Init {
 
 
     // var data = CalendarGeneratorApi.getData(2025, 4);
-    TodoIoApi.createTodo(title: "title", type: TodoType.card, color: Colors.amber, content: "content");
+    TodoIoApi.createTodo(title: "title", type: TodoType.card, color: colors[6], content: "content");
   }
 }
 
@@ -58,7 +59,6 @@ Future<void> start() async {
   await Hive.initFlutter();
   typeInit();
   await Data.init();
-  // Init.debug();
   Init.test();
   Init.checkData();
   Init.create();
@@ -72,6 +72,6 @@ class Storage {
       "mail": "0@example.com",
     },
     "darkMode": false,
-    "primaryColor": "	#40E0D0"
+    "primaryColor": "#40E0D0"
   };
 }

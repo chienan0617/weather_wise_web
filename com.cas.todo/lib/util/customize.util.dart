@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/library.util.dart';
 
-int currentLanguageIndex = 1;
+int currentLanguageIndex = 0;
 bool b = true;  // todo true: English, false: Chinese
 
 changeLan(VoidCallback v) {

@@ -27,3 +27,7 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 }
+
+e() {
+  Color(0xFFFFC107) == 0xFFFFC107;
+}

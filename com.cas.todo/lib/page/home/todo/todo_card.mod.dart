@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/library.util.dart';
+import 'package:todo_list/page/home/todo/edit/edit.m.dart';
 import 'package:todo_list/util/data/data.dart';
 import 'package:todo_list/util/data/type.dart';
 
@@ -18,16 +19,16 @@ class TodoCard extends StatefulWidget {
 }
 
 class _TodoCardState extends State<TodoCard> {
-  // var todo = 
-
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context, MaterialPageRoute(
+          builder: (context) => TodoViewScreen(todo: widget.todo)
+        )
+      ),
       child: Container(
-        margin: EdgeInsets.symmetric(
-          vertical: 5,
-          horizontal: 10
-        ),
+        margin: edge(v: 5, h: 10),
         decoration: BoxDecoration(
           color: style(op: false, os: 6),
           borderRadius: BorderRadius.circular(7.5),
@@ -82,10 +83,10 @@ class _TodoCardState extends State<TodoCard> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: edge(h: 12, v: 6),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: System.darkMode 
+                      color: System.darkMode
                         ? Colors.blue.withOpacity(0.3)  // 深色模式下提高背景不透明度
                         : Colors.blue.withOpacity(0.1),
                     ),

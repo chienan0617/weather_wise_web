@@ -11,7 +11,7 @@ List<int> get primaryColor {
     .toList();
 }
 
-Color _primaryColor = hexColor("#028C6A"); 
+Color _primaryColor = hexColor("#028C6A");
 Color _secondaryColor = Color.fromRGBO(211, 194, 42, 1);
 Color _errorColor = Colors.redAccent;
 Color get primary => _primaryColor;
@@ -103,6 +103,15 @@ Color hexColor(String hex, {int os = 0}) {
   return Colors.transparent;
 }
 
+EdgeInsets edge({
+    double h = 0, double v = 0
+  }) {
+    return EdgeInsets.symmetric(
+      horizontal: h,
+      vertical: v,
+    );
+  }
+
 Color adjustColor(Color color, int os) {
   int r = (color.red + os).clamp(0, 255).toInt();
   int g = (color.green + os).clamp(0, 255).toInt();
@@ -159,12 +168,12 @@ ListTile getListTile(IconData leading, String title, {leadingSize = 20.0, titleS
         fontSize: titleSize
       ),
     ),
-    trailing: (trailing == Icons.abc) 
+    trailing: (trailing == Icons.abc)
       ? Container()
       : IconButton(
         onPressed: () {
           trailingFunc();
-        }, 
+        },
         icon: Icon(
           trailing,
           color: style(),
