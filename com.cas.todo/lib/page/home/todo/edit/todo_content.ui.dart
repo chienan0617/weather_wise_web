@@ -69,18 +69,21 @@ class ContentEditor extends StatefulWidget {
 class _ContentEditorState extends State<ContentEditor> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: edge(v: 2.5, h: 15),
-      padding: edge(h: 10),
-      decoration: BoxDecoration(
-        // border: Border.all(color: Colors.amber)
-        // color: style(n: true, os: 0, op: false),
-        borderRadius: BorderRadius.circular(10)
-      ),
-      child: TextField(
-        cursorColor: primary,
-        style: textStyle(24, style()),
-        controller: EditorCtrl.content.controller,
+    return Expanded(
+      child: Container(
+        margin: edge(v: 2.5, h: 15),
+        padding: edge(h: 10),
+        decoration: BoxDecoration(
+          // border: Border.all(color: Colors.amber)
+          // color: style(n: true, os: 0, op: false),
+          borderRadius: BorderRadius.circular(10)
+        ),
+        child: TextField(
+          maxLines: 64,
+          cursorColor: primary,
+          style: textStyle(24, style()),
+          controller: EditorCtrl.content.controller,
+        ),
       ),
     );
   }
