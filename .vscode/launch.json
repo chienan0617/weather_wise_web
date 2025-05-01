@@ -1,0 +1,88 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "com.cas.calculator",
+            "cwd": "com.cas.calculator",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "com.cas.calculator (profile mode)",
+            "cwd": "com.cas.calculator",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "com.cas.calculator (release mode)",
+            "cwd": "com.cas.calculator",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "com.cas.shopping_list",
+            "cwd": "com.cas.shopping_list",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "com.cas.shopping_list (profile mode)",
+            "cwd": "com.cas.shopping_list",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "com.cas.shopping_list (release mode)",
+            "cwd": "com.cas.shopping_list",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "com.cas.tasker",
+            "cwd": "com.cas.tasker",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "com.cas.tasker (profile mode)",
+            "cwd": "com.cas.tasker",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "com.cas.tasker (release mode)",
+            "cwd": "com.cas.tasker",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "com.cas.todo",
+            "cwd": "com.cas.todo",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "com.cas.todo (profile mode)",
+            "cwd": "com.cas.todo",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "com.cas.todo (release mode)",
+            "cwd": "com.cas.todo",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

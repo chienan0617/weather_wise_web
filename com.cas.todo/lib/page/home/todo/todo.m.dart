@@ -17,15 +17,19 @@ class _TodoScreenState extends State<TodoScreen> {
       appBar: AppBar(
         title: text("text", size: 26),
         leading: IconButton(
-          icon: icon(Icons.menu, size: 28),
+          icon: icon(Icons.menu, size: 24),
           onPressed: () {},
         ),
         actions: [
           IconButton(
-            icon: icon(Icons.more_vert, size: 28),
+            icon: icon(Icons.more_vert, size: 24),
             onPressed: () => () {}
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: icon(Icons.add, size: 24)
       ),
     );
   }

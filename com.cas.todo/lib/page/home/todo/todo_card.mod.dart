@@ -50,7 +50,7 @@ class _TodoCardState extends State<TodoCard> {
                     widget.todo.title,
                     style: TextStyle(
                       color: style(), //decideStyle(Color(widget.todo.color)),
-                      fontSize: 28,
+                      fontSize: 24,
                       fontWeight: FontWeight.w600
                     ),
                   ),
@@ -60,7 +60,7 @@ class _TodoCardState extends State<TodoCard> {
                     icon: Icon(
                       Icons.delete_outline,
                       color: Colors.red,
-                      size: 28,
+                      size: 24,
                     ),
                     // todo: clear warning
                     onPressed: () => Data.todo.clear(),

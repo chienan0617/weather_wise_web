@@ -42,15 +42,15 @@ class _TitleEditorState extends State<TitleEditor> {
       ),
       child: TextField(
         decoration: InputDecoration(
-          icon: icon(Icons.text_fields, size: 24),
+          icon: icon(Icons.text_fields, size: 20),
           hintMaxLines: 1,
           hintText: 'enter title',
-          hintStyle: TextStyle(color: style(os: -128), fontSize: 24),
+          hintStyle: TextStyle(color: style(os: -128), fontSize: 20),
         ),
         cursorColor: primary,
         style: TextStyle(
           color: style(),
-          fontSize: 24,
+          fontSize: 20,
           fontWeight: FontWeight.w400
         ),
         controller: EditorCtrl.title.controller,
@@ -81,7 +81,7 @@ class _ContentEditorState extends State<ContentEditor> {
         child: TextField(
           maxLines: 64,
           cursorColor: primary,
-          style: textStyle(24, style()),
+          style: textStyle(20, style()),
           controller: EditorCtrl.content.controller,
         ),
       ),

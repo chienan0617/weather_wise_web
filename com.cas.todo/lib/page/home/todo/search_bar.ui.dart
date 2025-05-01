@@ -14,25 +14,33 @@ class _TodoSearchBarState extends State<TodoSearchBar> {
   Widget build(BuildContext context) {
     return Container(
       margin: edge(h: 10),
-      child: Container(
-        decoration: BoxDecoration(
-          color: style(n: true, os: 12, op: false),
-          borderRadius: BorderRadius.circular(10)
-        ),
-        height: 40,
-        margin: edge(v: 10),
+      // child: Row(
+      //   // mainAxisAlignment: MainAxisAlignment.start
+      //   children: [
+          // Container(
+          //   child: icon(Icons.search),
+          // ),
         child: Container(
-          margin: EdgeInsets.only(left: 10, right: 10), // None
-          child: TextField(
-            style: TextStyle(
-              fontSize: 24,
-              color: style(),
-              // fontWeight: FontWeight.w500
+            decoration: BoxDecoration(
+              color: style(n: true, os: 12, op: false),
+              borderRadius: BorderRadius.circular(10)
             ),
-            controller: TodoSearchCtrl.controller,
+            height: 40,
+            margin: edge(v: 10),
+            child: Container(
+              margin: EdgeInsets.only(left: 10, right: 10), // None
+              child: TextField(
+                style: TextStyle(
+                  fontSize: 24,
+                  color: style(),
+                  // fontWeight: FontWeight.w500
+                ),
+                controller: TodoSearchCtrl.controller,
+              ),
+            ),
           ),
-        ),
-      ),
+        // ],
+      // ),
     );
   }
 }

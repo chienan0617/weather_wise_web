@@ -64,7 +64,7 @@ class _EditInformationState extends State<EditInformation> {
                 // ),
                 text(
                   'lately edit time: ${widget.info['lastEditTime']}',
-                  os: -128, size: 18
+                  os: -128, size: 16
                 )
               ],
             ),
@@ -80,7 +80,7 @@ class _EditInformationState extends State<EditInformation> {
                 // ),
                 text(
                   'total text: ${widget.info['contentLength']}',
-                  os: -128, size: 18
+                  os: -128, size: 16
                 )
               ],
             ),
