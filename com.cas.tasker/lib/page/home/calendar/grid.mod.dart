@@ -9,7 +9,7 @@ class CalendarGrid extends StatefulWidget {
   final Map data;
 
   const CalendarGrid({
-    super.key, 
+    super.key,
     required this.constraints,
     required this.month,
     required this.year,
@@ -105,7 +105,7 @@ class _DateCellState extends State<DateCell> {
                 width: widget.cellWidth - 2, // * margin
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2.5),
-                  color: primary()
+                  color: primary
                 ),
                 child: Container(
                   padding: EdgeInsets.only(left: 1, bottom: 1),

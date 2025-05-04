@@ -11,10 +11,10 @@ List<int> get primaryColor {
     .toList();
 }
 
-Color _primaryColor = hexColor("#028C6A"); 
+Color _primaryColor = hexColor("#028C6A");
 Color _secondaryColor = Color.fromRGBO(211, 194, 42, 1);
 Color _errorColor = Colors.redAccent;
-Color primary() => _primaryColor;
+Color get primary => _primaryColor;
 Color secondary() => _secondaryColor;
 Color errorColor() => _errorColor;
 
@@ -103,6 +103,15 @@ Color hexColor(String hex, {int os = 0}) {
   return Colors.transparent;
 }
 
+EdgeInsets edge({
+    double h = 0, double v = 0
+  }) {
+    return EdgeInsets.symmetric(
+      horizontal: h,
+      vertical: v,
+    );
+  }
+
 Color adjustColor(Color color, int os) {
   int r = (color.red + os).clamp(0, 255).toInt();
   int g = (color.green + os).clamp(0, 255).toInt();
@@ -159,12 +168,12 @@ ListTile getListTile(IconData leading, String title, {leadingSize = 20.0, titleS
         fontSize: titleSize
       ),
     ),
-    trailing: (trailing == Icons.abc) 
+    trailing: (trailing == Icons.abc)
       ? Container()
       : IconButton(
         onPressed: () {
           trailingFunc();
-        }, 
+        },
         icon: Icon(
           trailing,
           color: style(),
@@ -186,26 +195,26 @@ class T {
 // * information
 
 class System {
-  static bool darkMode = true;
+  static const bool darkMode = true;
   static String version = ""; // Beta 1.1.2
   static bool debugMode = true;
 }
 
 class A {
   static ThemeData get themeData => ThemeData(
-    primaryColor: primary(),
-    primaryColorLight: primary(),
-    primaryColorDark: primary(),
+    primaryColor: primary,
+    primaryColorLight: primary,
+    primaryColorDark: primary,
     hoverColor: Color.fromRGBO(192, 192, 192, 1),
     splashColor: style(op: false),
     highlightColor: style(op: false),
     scaffoldBackgroundColor: style(op: false),
-    colorScheme: ColorScheme.fromSwatch().copyWith(secondary: primary()),
+    colorScheme: ColorScheme.fromSwatch().copyWith(secondary: primary),
     hintColor: Color.fromRGBO(128, 128, 128, 1),
     appBarTheme: AppBarTheme(
-      // shadowColor: primary(),
-      // foregroundColor: primary(),
-      surfaceTintColor: primary(),
+      // shadowColor: primary,
+      // foregroundColor: primary,
+      surfaceTintColor: primary,
       actionsIconTheme: getIconThemeData(32),
       backgroundColor: style(n: true, op: false, os: -6),
       titleTextStyle: TextStyle(
@@ -215,7 +224,7 @@ class A {
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: primary(),
+      backgroundColor: primary,
       focusColor: style(os: 96),
       splashColor: style(os: 64),
       hoverColor: style(os: 48),
@@ -223,9 +232,9 @@ class A {
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: style(op: false, n: true, os: 6),
-      selectedIconTheme: IconThemeData(color: primary()),
+      selectedIconTheme: IconThemeData(color: primary),
       unselectedIconTheme: getIconThemeData(24),
-      selectedItemColor: primary(),
+      selectedItemColor: primary,
       unselectedItemColor: style(),
     ),
     inputDecorationTheme: InputDecorationTheme(

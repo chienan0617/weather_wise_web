@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/library.util.dart';
-import 'package:tasker/page/home/calendar/view/content.mod.dart';
+import 'package:tasker/page/home/calendar/add/bottom_tool_bar.dart';
+import 'package:tasker/page/home/calendar/add/content.dart';
+import 'package:tasker/page/home/calendar/add/title.dart';
+import 'package:tasker/page/home/calendar/add/top_bar.dart';
+import 'package:tasker/util/customize.util.dart';
 import 'package:tasker/util/guide.util.dart';
 
 class CalendarAddScreen extends StatefulWidget {
@@ -17,27 +21,29 @@ class _CalendarAddScreenState extends State<CalendarAddScreen> {
       theme: A.themeData,
       home: Scaffold(
         appBar: AppBar(
-          title: text("text"),
-          leading: icon(Icons.abc),
-        ),
-        body: Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
-          child: Column(
-            children: [
-              contentListTile(
-                iconData: Icons.text_fields,
-                title: "內容",
-                trailing: text("text"),
-                onPressed: () => showSelectColorDialog(context),
-                autoTranslate: false,
-              ),
-              contentDivider(),
-              // contentListTile(iconData: Icons.colorize, title: '顏色', trailing: Container())
-            ],
+          title: text(err, size: 22),
+          leading: IconButton(
+            onPressed: () => Guide.back(context),
+            icon: icon(Icons.arrow_back, size: 24)
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {Guide.back(context);}
+        body: Container(
+          // margin: EdgeInsets.symmetric(vertical: 0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    AddTopBar(),
+                    AddTitle(),
+                    divider(),
+                    AddContent(),
+                  ],
+                )
+              ),
+              AddBottomBar()
+            ],
+          ),
         ),
       ),
     );

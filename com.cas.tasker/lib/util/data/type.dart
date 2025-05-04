@@ -5,6 +5,8 @@ part 'type.g.dart';
 void typeInit() {
   Hive.registerAdapter(TaskAdapter());
   Hive.registerAdapter(TodoTypeAdapter());
+  Hive.registerAdapter(TaskTypeAdapter());
+  Hive.registerAdapter(TodoAdapter());
 }
 
 @HiveType(typeId: 0)
@@ -13,7 +15,7 @@ class Task {
   final String title;
 
   @HiveField(1)    // todo: 'list' or 'card'
-  final TodoType type;
+  final TaskType type;
 
   // @HiveField(2)    // todo: if type is list
   // List<Map<String, dynamic>> taskList;
@@ -46,11 +48,38 @@ class Task {
 }
 
 @HiveType(typeId: 1)
+enum TaskType {
+  @HiveField(0)
+  list,
+
+  @HiveField(1)
+  card,
+}
+
+@HiveType(typeId: 2)
+class Todo {
+  @HiveField(0)
+  String title;
+
+  @HiveField(1)
+  dynamic content;
+
+  @HiveField(2)
+  TodoType type;
+
+  Todo(
+    this.title,
+    this.content,
+    this.type
+  );
+}
+
+@HiveType(typeId: 3)
 enum TodoType {
   @HiveField(0)
   list,
-  
-  @HiveField(1)
+
+  @HiveType(typeId: 1)
   card,
 }
 

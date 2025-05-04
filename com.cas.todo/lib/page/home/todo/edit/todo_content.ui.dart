@@ -78,8 +78,7 @@ class _ContentEditorState extends State<ContentEditor> {
           // color: style(n: true, os: 0, op: false),
           borderRadius: BorderRadius.circular(10)
         ),
-        ch
-        ild: TextField(
+        child: TextField(
           maxLines: 64,
           cursorColor: primary,
           style: textStyle(20, style()),

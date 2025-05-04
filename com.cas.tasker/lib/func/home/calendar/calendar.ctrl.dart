@@ -17,7 +17,7 @@ class CalendarCtrl {
 
     return [
       CalendarGrid(
-        constraints: cons, year: m1.$1, month: m1.$2, 
+        constraints: cons, year: m1.$1, month: m1.$2,
         data: CalendarGeneratorApi.getData(currentYear, currentMonth - 1)
       ),
       CalendarGrid(

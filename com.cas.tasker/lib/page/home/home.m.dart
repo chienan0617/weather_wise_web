@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
           onTap: (i) {setState(() {Data.put<int>(Type.currentPageIndex, i);});},
           currentIndex: Data.getInt(Type.currentPageIndex),
-          selectedItemColor: primary(),
+          selectedItemColor: primary,
           unselectedItemColor: style(),
           selectedFontSize: 14,
           unselectedFontSize: 13,

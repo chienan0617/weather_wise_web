@@ -30,18 +30,10 @@ class TodoIoApi {
 
   // * get all the undone todo
   // ? use by: display on generating
-  static List<Todo> getAllUndoneTodo() {
-    Map allTodo = Data.todo.getAllTodo();
-    List<Todo> todos = [];
-
-    for (var todo in allTodo.values) {
-      if (todo is Todo) {
-        if (!todo.done) todos.add(todo);
-      }
-    }
-
-    return todos;
-  }
+  static List<Todo> getAllUndoneTodo() =>
+    Data.todo.getAllTodo().values.where(
+      (todo) => todo is Todo && !todo.done
+    ).toList() as List<Todo>;
 
   // * get the information of the input todo
   // ? use by: editor scene

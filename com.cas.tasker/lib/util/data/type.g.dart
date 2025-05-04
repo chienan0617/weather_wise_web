@@ -18,7 +18,7 @@ class TaskAdapter extends TypeAdapter<Task> {
     };
     return Task(
       fields[0] as String,
-      fields[1] as TodoType,
+      fields[1] as TaskType,
       fields[2] as DateTime,
       fields[3] as DateTime,
       fields[4] as int,
@@ -57,17 +57,94 @@ class TaskAdapter extends TypeAdapter<Task> {
           typeId == other.typeId;
 }
 
-class TodoTypeAdapter extends TypeAdapter<TodoType> {
+class TodoAdapter extends TypeAdapter<Todo> {
+  @override
+  final int typeId = 2;
+
+  @override
+  Todo read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Todo(
+      fields[0] as String,
+      fields[1] as dynamic,
+      fields[2] as TodoType,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Todo obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.title)
+      ..writeByte(1)
+      ..write(obj.content)
+      ..writeByte(2)
+      ..write(obj.type);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TodoAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class TaskTypeAdapter extends TypeAdapter<TaskType> {
   @override
   final int typeId = 1;
+
+  @override
+  TaskType read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return TaskType.list;
+      case 1:
+        return TaskType.card;
+      default:
+        return TaskType.list;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, TaskType obj) {
+    switch (obj) {
+      case TaskType.list:
+        writer.writeByte(0);
+        break;
+      case TaskType.card:
+        writer.writeByte(1);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TaskTypeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class TodoTypeAdapter extends TypeAdapter<TodoType> {
+  @override
+  final int typeId = 3;
 
   @override
   TodoType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
         return TodoType.list;
-      case 1:
-        return TodoType.card;
       default:
         return TodoType.list;
     }
@@ -80,8 +157,8 @@ class TodoTypeAdapter extends TypeAdapter<TodoType> {
         writer.writeByte(0);
         break;
       case TodoType.card:
-        writer.writeByte(1);
-        break;
+        // TODO: Handle this case.
+        throw UnimplementedError();
     }
   }
 

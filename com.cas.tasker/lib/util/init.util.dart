@@ -17,7 +17,7 @@ class Init {
   }
 
   static void create() {
-    
+
   }
 
   static void test() async {
@@ -46,9 +46,9 @@ class Init {
     //todo: test
     // TaskApi.addTask(title: "title", type: TodoType.card, createTime: DateTime.now(), lastEdit: DateTime.now(), color: primary(), content: "content");
     Data.task.storeNative('<2025-4-6>', {});
-    CalendarIoApi.newTask(2025, 4, 6, title: "title", subtitle: "subtitle", type: TodoType.card, color: Colors.amber.toARGB32(), content: "content");
+    CalendarIoApi.newTask(2025, 4, 6, title: "title", subtitle: "subtitle", type: TaskType.card, color: Colors.amber.toARGB32(), content: "content");
 
-    
+
     var data = CalendarGeneratorApi.getData(2025, 4);
 
   }
