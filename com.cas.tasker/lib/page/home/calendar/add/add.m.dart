@@ -35,6 +35,7 @@ class _CalendarAddScreenState extends State<CalendarAddScreen> {
                 child: Column(
                   children: [
                     AddTopBar(),
+                    AddDate(),
                     AddTitle(),
                     divider(),
                     AddContent(),

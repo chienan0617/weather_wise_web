@@ -24,8 +24,8 @@ Color light({int o = 0}) =>
 Color dark({int o = 0}) =>
   Color.fromRGBO(24 + o, 24 + o, 24 + o, 1);
 
-TextStyle textStyle(double fontSize, Color color) =>
-  TextStyle(color: color, fontSize: fontSize);
+TextStyle textStyle({double size = 20, int os = 0, bool op = true, n = false}) =>
+  TextStyle(color: style(os: os, op: op, n: n), fontSize: size);
 
 Text text(String text, {double size = 16, FontWeight w = FontWeight.normal, os = -12, ml = 1}) =>
   Text(text, style: TextStyle(fontSize: size, color: style(os: os), fontWeight: w), maxLines: ml);
@@ -62,7 +62,7 @@ Color decideStyle(Color color) =>
     ? dark() : light();
 
 Color primaryStyle() =>
-  _primaryColor.r + _primaryColor.g + _primaryColor.b > 0.5 * 3
+  _primaryColor.r + _primaryColor.g + _primaryColor.b > 0.45 * 3
     ? dark() : light();
 
 Container divider({
