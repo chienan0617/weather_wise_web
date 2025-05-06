@@ -23,7 +23,7 @@ class _CalendarAddScreenState extends State<CalendarAddScreen> {
         appBar: AppBar(
           title: text(err, size: 22),
           leading: IconButton(
-            onPressed: () => Guide.back(context),
+            onPressed: () => Guide.calendar.toCalendarPage(context),
             icon: icon(Icons.arrow_back, size: 24)
           ),
         ),
@@ -37,6 +37,8 @@ class _CalendarAddScreenState extends State<CalendarAddScreen> {
                     AddTopBar(),
                     AddDate(),
                     AddTitle(),
+                    divider(),
+                    AddContentEditor(),
                     divider(),
                     AddContent(),
                   ],

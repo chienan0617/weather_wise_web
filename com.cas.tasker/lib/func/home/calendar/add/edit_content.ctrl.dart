@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/util/customize.util.dart';
 
-class AddTaskInputCtrl {
-  static final _TitleInputCtrl title = _TitleInputCtrl();
-  static final _ContentInputCtrl content = _ContentInputCtrl();
+class AddTask {
+  static final _TitleInputCtrl titleInput = _TitleInputCtrl();
+  static final _ContentInputCtrl contentInput = _ContentInputCtrl();
+  static final _PickColorCtrl pickColor = _PickColorCtrl();
 
   static void initEditor() {
-    title.controller.text = '';
-    content.controller.text = '';
+    titleInput.controller.text = '';
+    contentInput.controller.text = '';
   }
 }
 
@@ -20,4 +22,12 @@ class _ContentInputCtrl {
   TextEditingController controller = TextEditingController(
     text: ''
   );
+}
+
+class _PickColorCtrl {
+  int currentIndex = 0;
+  List<Color> colorList = colors;
+  List<String> colorLang = com('name');
+
+  void onChange(int value) => currentIndex = value;
 }

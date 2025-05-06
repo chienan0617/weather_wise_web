@@ -28,7 +28,7 @@ class _AddTopBarState extends State<AddTopBar> {
             Container(
               margin: edge(v: 5, h: 20),
               child: text(
-                '字數: ${AddTaskInputCtrl.content.controller.text.length}',
+                '字數: ${AddTask.contentInput.controller.text.length}',
                 os: -128,
               ),
             ),

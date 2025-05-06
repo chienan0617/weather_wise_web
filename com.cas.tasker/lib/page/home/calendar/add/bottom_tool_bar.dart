@@ -41,7 +41,8 @@ class _AddBottomBarState extends State<AddBottomBar> {
             icon: icon(Icons.text_fields)
           ),
           IconButton(
-            onPressed: () => Guide.calendar.toAddPage(context),
+            onPressed: () => Guide.calendar.toCalendarPage(context),
+            // onPressed: () => Navigator.pop(context),
             icon: icon(Icons.check)
           )
         ],

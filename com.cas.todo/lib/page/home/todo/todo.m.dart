@@ -34,3 +34,5 @@ class _TodoScreenState extends State<TodoScreen> {
     );
   }
 }
+
+todoScreen() => TodoScreen();

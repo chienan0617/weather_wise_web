@@ -33,7 +33,7 @@ class TodoIoApi {
   static List<Todo> getAllUndoneTodo() =>
     Data.todo.getAllTodo().values.where(
       (todo) => todo is Todo && !todo.done
-    ).toList() as List<Todo>;
+    ).toList().cast();
 
   // * get the information of the input todo
   // ? use by: editor scene

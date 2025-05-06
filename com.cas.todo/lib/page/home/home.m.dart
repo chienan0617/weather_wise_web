@@ -40,10 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           body: [
-            TodoScreen(), Placeholder()
+            todoScreen(), Placeholder()
           ][Data.getInt(Type.currentPageIndex)],
         )
       ),
     );
   }
 }
+
+homeScreen() => HomeScreen();
