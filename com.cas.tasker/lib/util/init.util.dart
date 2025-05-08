@@ -45,6 +45,8 @@ class Init {
 
     //todo: test
     // TaskApi.addTask(title: "title", type: TodoType.card, createTime: DateTime.now(), lastEdit: DateTime.now(), color: primary(), content: "content");
+
+    // Data.task.getBox().clear();
     Data.task.storeNative('<2025-4-6>', {});
     CalendarIoApi.newTask(2025, 4, 6, title: "title", subtitle: "subtitle", type: TaskType.card, color: Colors.amber.toARGB32(), content: "content");
 

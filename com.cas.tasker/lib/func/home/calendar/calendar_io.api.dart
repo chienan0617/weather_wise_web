@@ -42,9 +42,9 @@ class CalendarIoApi {
   static (int, int, int) checkDateIsCorrectInCalendar(
     int year, int month, int day, int column
   ) {
-    if ([0, 1].contains(column) && day < 15) {
+    if ([0, 1].contains(column) && day > 15) {
       return checkDateIsCorrect(year, month - 1, day);
-    } else if ([4, 5].contains(column) && day > 15) {
+    } else if ([4, 5].contains(column) && day < 15) {
       return checkDateIsCorrect(year, month + 1, day);
     } else {
       return checkDateIsCorrect(year, month, day);

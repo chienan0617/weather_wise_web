@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/func/home/calendar/add/task_io.api.dart';
+import 'package:tasker/func/home/calendar/calendar_io.api.dart';
 import 'package:tasker/library.util.dart';
 import 'package:tasker/util/data/type.dart';
 import 'package:tasker/util/flexible.util.dart';
@@ -35,13 +37,18 @@ class _CalendarGridState extends State<CalendarGrid> {
           children: List.generate(6, (int week) {
             return Row(
               children: List.generate(7, (int day) {
-                return DateCell(
-                  cellHeight: cellHeight,
-                  cellWidth: cellWidth,
-                  taskHeight: taskHeight,
-                  week: week,
-                  day: day,
-                  data: data,
+                return GestureDetector(
+                  onTap: () {
+                    // showDateBottomSheet(context, data);
+                  },
+                  child: DateCell(
+                    cellHeight: cellHeight,
+                    cellWidth: cellWidth,
+                    taskHeight: taskHeight,
+                    week: week,
+                    day: day,
+                    data: data,
+                  ),
                 );
               }),
             );
@@ -105,18 +112,20 @@ class _DateCellState extends State<DateCell> {
                 width: widget.cellWidth - 2, // * margin
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2.5),
-                  color: Color((data['task'][week][day][index] as Task).color),
+                  color: Color(data['task'][week][day][index].color),
                 ),
-                child: Container(
+                child: Padding(
                   padding: EdgeInsets.only(left: 1, bottom: 1),
                   child: Text(
-                    // ((data['task'][week][day]) as List<Task>)[index].title,
-                    ((data['task'][week][day]) as List<Task>)[index].createTime.toString().substring(5),
+                    data['task'][week][day][index].title,
                     style: TextStyle(
-                      color: decideStyle(Color((data['task'][week][day][index] as Task).color)),
-                      fontSize: 12,
+                      color: decideStyle(Color(data['task'][week][day][index].color)),
+                      fontSize: 11.5,
                     ),
-                  ),
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.clip,
+                  )
                 )
               );
             }),
@@ -124,5 +133,69 @@ class _DateCellState extends State<DateCell> {
         ],
       ),
     );
+  }
+}
+
+void showDateBottomSheet(
+  BuildContext context, Map data, int year, int month, int day
+) {
+  Map taskInfp = CalendarIoApi.getTaskByDate(year, month, day);
+  Size size = MediaQuery.of(context).size;
+
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true, // 允許自定義高度
+    backgroundColor: style(n: true, op: false, os: 0), // 可選：使背景透明
+    builder: (context) {
+      return DraggableScrollableSheet(
+        initialChildSize: 0.75, // 初始高度為螢幕的50%
+        minChildSize: 0.5,     // 最小高度為螢幕的50%
+        maxChildSize: 1.0,     // 最大高度為螢幕的100%
+        expand: false,         // 可選：控制是否展開至最大高度
+        builder: (context, scrollController) {
+          return Container(
+            width: size.width,
+            height: size.height,
+            decoration: BoxDecoration(
+              color: style(n: true, op: false, os: 0),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            ),
+            child: Container(
+              child: Column(
+                children: [
+                  Container(
+                    margin: edge(v: 15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7.5),
+                      color: style()
+                    ),
+                    width: size.width * 0.25,
+                    height: 7.5,
+                  ),
+
+                  text(data.toString())
+                ],
+              ),
+            )
+          );
+        },
+      );
+    },
+  );
+}
+
+
+
+class DateInfoBottomSheet extends StatefulWidget {
+  const DateInfoBottomSheet({super.key});
+
+  @override
+  State<DateInfoBottomSheet> createState() => _DateInfoBottomSheetState();
+}
+
+class _DateInfoBottomSheetState extends State<DateInfoBottomSheet> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

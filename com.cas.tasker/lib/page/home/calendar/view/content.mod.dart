@@ -10,9 +10,9 @@ Widget contentListTile({
   required VoidCallback onPressed, // 修改這裡
   bool autoTranslate = true,
 }) => _ContentListTile(
-  iconData: iconData, 
-  title: title, 
-  trailing: trailing, 
+  iconData: iconData,
+  title: title,
+  trailing: trailing,
   autoTranslate: autoTranslate,
   onPressed: onPressed, // 傳入的是 VoidCallback
 );
@@ -50,7 +50,7 @@ class _ContentListTileState extends State<_ContentListTile> {
       child: ListTile(
         onTap: widget.onPressed, // 直接調用 VoidCallback
         leading: Icon(
-          widget.iconData, 
+          widget.iconData,
           size: 24,
           color: style(),
         ),
@@ -86,7 +86,7 @@ class _ContentDivider extends StatelessWidget {
   final double height, marginHor, marginVer, paddingVer;
 
   const _ContentDivider({
-    required this.height, 
+    required this.height,
     required this.marginHor,
     required this.marginVer,
     required this.paddingVer,

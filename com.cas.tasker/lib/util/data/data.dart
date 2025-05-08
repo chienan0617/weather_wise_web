@@ -120,6 +120,8 @@ class Data {
 class _TaskData {
   static Box? _task;
 
+  Box getBox() => _task!;
+
   static Future<void> init() async {
     _task = await Hive.openBox('task');
     _task?.containsKey('index') ?? _task?.put('index', 1);

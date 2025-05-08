@@ -3,6 +3,7 @@ import 'package:tasker/func/home/calendar/add/edit_content.ctrl.dart';
 import 'package:tasker/func/home/calendar/add/task_io.api.dart';
 import 'package:tasker/library.util.dart';
 import 'package:tasker/util/customize.util.dart';
+import 'package:tasker/util/data/data.dart';
 import 'package:tasker/util/guide.util.dart';
 
 class AddBottomBar extends StatefulWidget {
@@ -47,15 +48,17 @@ class _AddBottomBarState extends State<AddBottomBar> {
             onPressed: () {
               Guide.calendar.toCalendarPage(context);
               TaskIoApi.store.storeNewTask(
-                AddTask.dateInput.year,
-                AddTask.dateInput.month,
-                AddTask.dateInput.day,
+                AddTask.dateInput.pickedTime.year,
+                AddTask.dateInput.pickedTime.month,
+                AddTask.dateInput.pickedTime.day,
                 title: AddTask.titleInput.controller.text,
                 subtitle: notYetEnable,
                 type: AddTask.type.taskType,
                 color: AddTask.pickColor.getColor().toARGB32(),
                 content: AddTask.contentInput.controller.text
               );
+
+              print(Data.task.getBox().toMap().toString());
             },
             // onPressed: () => Navigator.pop(context),
             icon: icon(Icons.check)

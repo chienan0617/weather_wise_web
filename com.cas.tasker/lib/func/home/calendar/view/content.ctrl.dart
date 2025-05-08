@@ -19,7 +19,6 @@ class _ColorPick {
     VoidCallback refresh,
     BuildContext context
   ) {
-    print('ddddd');
     currentIndex = index;
     refresh();
     Guide.back(context);
