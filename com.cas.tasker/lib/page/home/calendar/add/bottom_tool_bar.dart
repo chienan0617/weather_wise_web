@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/func/home/calendar/add/edit_content.ctrl.dart';
+import 'package:tasker/func/home/calendar/add/task_io.api.dart';
 import 'package:tasker/library.util.dart';
+import 'package:tasker/util/customize.util.dart';
 import 'package:tasker/util/guide.util.dart';
 
 class AddBottomBar extends StatefulWidget {
@@ -41,7 +44,19 @@ class _AddBottomBarState extends State<AddBottomBar> {
             icon: icon(Icons.text_fields)
           ),
           IconButton(
-            onPressed: () => Guide.calendar.toCalendarPage(context),
+            onPressed: () {
+              Guide.calendar.toCalendarPage(context);
+              TaskIoApi.store.storeNewTask(
+                AddTask.dateInput.year,
+                AddTask.dateInput.month,
+                AddTask.dateInput.day,
+                title: AddTask.titleInput.controller.text,
+                subtitle: notYetEnable,
+                type: AddTask.type.taskType,
+                color: AddTask.pickColor.getColor().toARGB32(),
+                content: AddTask.contentInput.controller.text
+              );
+            },
             // onPressed: () => Navigator.pop(context),
             icon: icon(Icons.check)
           )

@@ -105,14 +105,15 @@ class _DateCellState extends State<DateCell> {
                 width: widget.cellWidth - 2, // * margin
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2.5),
-                  color: primary
+                  color: Color((data['task'][week][day][index] as Task).color),
                 ),
                 child: Container(
                   padding: EdgeInsets.only(left: 1, bottom: 1),
                   child: Text(
-                    ((data['task'][week][day]) as List<Task>)[index].title,
+                    // ((data['task'][week][day]) as List<Task>)[index].title,
+                    ((data['task'][week][day]) as List<Task>)[index].createTime.toString().substring(5),
                     style: TextStyle(
-                      color: primaryStyle(),
+                      color: decideStyle(Color((data['task'][week][day][index] as Task).color)),
                       fontSize: 12,
                     ),
                   ),

@@ -135,8 +135,6 @@ class _TaskData {
 
   Map<int, Task> getTask(int year, int month, int day) {
     if (year == 2025 && month == 4 && day == 6) {
-      print(_task?.containsKey('<2025-4-6>'));
-      print(_task?.get('<2025-4-6>'));
     }
 
     // return (_task?.get('<2025-4-6>') as Map<dynamic, dynamic>).cast<int, Task>();
@@ -158,9 +156,9 @@ class _TaskData {
     if (!(_task?.containsKey('index') ?? false)) {
       _task?.put('index', 0);
     }
-    
-    int index = _task?.get('index') ?? 0; 
-    _task?.put('index', index + 1); 
+
+    int index = _task?.get('index') ?? 0;
+    _task?.put('index', index + 1);
     return index + 1;
   }
 

@@ -4,6 +4,7 @@ import 'package:tasker/library.util.dart';
 int currentLanguageIndex = 1;
 bool b = true;  // todo true: English, false: Chinese
 String err = '<Error!>';
+String notYetEnable = '<Not Yet Enable!>';
 
 changeLan(VoidCallback v) {
   b = !b;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasker/library.util.dart';
 import 'package:tasker/page/home/calendar/add/bottom_tool_bar.dart';
 import 'package:tasker/page/home/calendar/add/content.dart';
+import 'package:tasker/page/home/calendar/add/date.dart';
 import 'package:tasker/page/home/calendar/add/title.dart';
 import 'package:tasker/page/home/calendar/add/top_bar.dart';
 import 'package:tasker/util/customize.util.dart';
@@ -23,7 +24,10 @@ class _CalendarAddScreenState extends State<CalendarAddScreen> {
         appBar: AppBar(
           title: text(err, size: 22),
           leading: IconButton(
-            onPressed: () => Guide.calendar.toCalendarPage(context),
+            onPressed: () {
+              // TaskIoApi.store.storeNewTask(year, month, day, title: title, subtitle: subtitle, type: type, color: color, content: content);
+              Guide.calendar.toCalendarPage(context);
+            },
             icon: icon(Icons.arrow_back, size: 24)
           ),
         ),
