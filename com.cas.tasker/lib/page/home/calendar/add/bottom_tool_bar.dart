@@ -58,7 +58,9 @@ class _AddBottomBarState extends State<AddBottomBar> {
                 content: AddTask.contentInput.controller.text
               );
 
-              print(Data.task.getBox().toMap().toString());
+              // print(AddTask.dateInput.pickedTime.month);
+              // print(AddTask.dateInput.pickedTime.day);
+              // print(Data.task.getBox().toMap());
             },
             // onPressed: () => Navigator.pop(context),
             icon: icon(Icons.check)

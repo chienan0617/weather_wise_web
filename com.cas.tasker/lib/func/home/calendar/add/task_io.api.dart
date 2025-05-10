@@ -5,7 +5,7 @@ class TaskIoApi {
   static final store = _TaskIoApiStore();
 }
 
-class _TaskStateIo {
+class _TaskIoApiStore {
   void storeNewTask(
     int year, int month, int day, {
     required String title,
@@ -23,18 +23,15 @@ class _TaskStateIo {
       content: content,
     );
   }
-}
 
-class _TaskIoApiStore extends _TaskStateIo {
-  void storeNewFormAddScreen(
-    int year, int month, int day, {
+  void changedValue(int year, int month, int day, {
     required String title,
     required String subtitle,
     required TaskType type,
     required int color,
     required dynamic content,
   }) {
-    storeNewTask(
+    CalendarIoApi.newTask(
       year, month, day,
       title: title,
       subtitle: subtitle,

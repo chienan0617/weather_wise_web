@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/func/home/calendar/add/task_io.api.dart';
 import 'package:tasker/func/home/calendar/calendar.ctrl.dart';
 import 'package:tasker/func/home/calendar/calendar_io.api.dart';
+import 'package:tasker/util/data/type.dart';
 
 class CalendarGeneratorApi {
   // register the {setState} in topBar
@@ -66,5 +68,23 @@ class CalendarGeneratorApi {
   static String getFormateTime() {
     topBarRebuild();
     return "${CalendarCtrl.currentYear}-${CalendarCtrl.currentMonth}";
+  }
+
+  // use in generate task cell in calendar
+  // (number of cell, if should add ..., of tow ${num})
+  static (int, bool, int) getGridMaxCount(int num)
+    => num > 5 ? (4, true, num -4 -1) : num == 5 ? (5, false, 0) : (num, false, 0);
+
+  static List<bool> getChecked(Map data, int week, int day) {
+    return List.generate(
+      data['task'][week][day].length,
+      (int index) {
+        return (data['task'][week][day][index] as Task).done;
+      }
+    );
+  }
+
+  static void setValue(int week, int day, int index, bool value) {
+    // TaskIoApi.store.changedValue(year, month, day, title: title, subtitle: subtitle, type: type, color: color, content: content)
   }
 }

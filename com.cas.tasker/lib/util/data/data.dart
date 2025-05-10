@@ -136,11 +136,6 @@ class _TaskData {
   }
 
   Map<int, Task> getTask(int year, int month, int day) {
-    if (year == 2025 && month == 4 && day == 6) {
-    }
-
-    // return (_task?.get('<2025-4-6>') as Map<dynamic, dynamic>).cast<int, Task>();
-
     return (_task?.get('<$year-$month-$day>', defaultValue: {})
         as Map<dynamic, dynamic>).cast<int, Task>();
   }

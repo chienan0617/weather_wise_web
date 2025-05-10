@@ -38,6 +38,12 @@ class CalendarIoApi {
     );
   }
 
+  static void updateNewInfo(
+    int year, int month, int day, int taskIndex, Task changed
+  ) {
+    Data.task.storeTask(year, month, day, taskIndex, changed);
+  }
+
   // check is next or previous month
   static (int, int, int) checkDateIsCorrectInCalendar(
     int year, int month, int day, int column
