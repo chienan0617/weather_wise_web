@@ -23,13 +23,14 @@ class TaskAdapter extends TypeAdapter<Task> {
       fields[3] as DateTime,
       fields[4] as int,
       fields[6] as dynamic,
+      fields[7] as int,
     )..done = fields[5] as bool;
   }
 
   @override
   void write(BinaryWriter writer, Task obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -43,7 +44,9 @@ class TaskAdapter extends TypeAdapter<Task> {
       ..writeByte(5)
       ..write(obj.done)
       ..writeByte(6)
-      ..write(obj.content);
+      ..write(obj.content)
+      ..writeByte(7)
+      ..write(obj.index);
   }
 
   @override
@@ -145,6 +148,8 @@ class TodoTypeAdapter extends TypeAdapter<TodoType> {
     switch (reader.readByte()) {
       case 0:
         return TodoType.list;
+      case 1:
+        return TodoType.card;
       default:
         return TodoType.list;
     }
@@ -157,8 +162,8 @@ class TodoTypeAdapter extends TypeAdapter<TodoType> {
         writer.writeByte(0);
         break;
       case TodoType.card:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        writer.writeByte(1);
+        break;
     }
   }
 

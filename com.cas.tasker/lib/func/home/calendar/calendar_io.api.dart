@@ -30,10 +30,10 @@ class CalendarIoApi {
   }) {
     // assert(type == TodoType.card && content is List);
     // assert(type == TodoType.list && content is Map);
-
+    int newIndex = Data.task.newTaskIndex();
     Data.task.storeTask(
-      year, month, day, Data.task.newTaskIndex(), Task(
-        title, type, DateTime.now(), DateTime.now(), color, content
+      year, month, day, newIndex, Task(
+        title, type, DateTime.now(), DateTime.now(), color, newIndex, content
       )
     );
   }

@@ -1,8 +1,10 @@
 import 'package:hive/hive.dart';
+import 'package:tasker/util/data/data.dart';
 
 part 'type.g.dart';
 
 void typeInit() {
+  Data.task.getBox().clear();
   Hive.registerAdapter(TaskAdapter());
   Hive.registerAdapter(TodoTypeAdapter());
   Hive.registerAdapter(TaskTypeAdapter());
@@ -36,6 +38,7 @@ class Task {
   dynamic content;
 
   @HiveField(7)
+  int index;
 
   Task(
     this.title,
@@ -43,7 +46,8 @@ class Task {
     this.createTime,
     this.lastEdit,
     this.color,
-    this.content
+    this.content,
+    this.index,
   );
 }
 
@@ -79,7 +83,7 @@ enum TodoType {
   @HiveField(0)
   list,
 
-  @HiveType(typeId: 1)
+  @HiveField(1)
   card,
 }
 

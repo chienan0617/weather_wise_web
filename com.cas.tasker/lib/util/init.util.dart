@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:tasker/func/home/calendar/calendar_generator.api.dart';
 import 'package:tasker/func/home/calendar/calendar_io.api.dart';
 import 'package:tasker/util/data/data.dart';
 import 'package:tasker/library.util.dart';
@@ -51,7 +50,7 @@ class Init {
     CalendarIoApi.newTask(2025, 4, 6, title: "title", subtitle: "subtitle", type: TaskType.card, color: Colors.amber.toARGB32(), content: "content");
 
 
-    var data = CalendarGeneratorApi.getData(2025, 4);
+    // var data = CalendarGeneratorApi.getData(2025, 4);
 
   }
 }
@@ -59,12 +58,13 @@ class Init {
 // todo: important in order
 Future<void> start() async {
   await Hive.initFlutter();
+
   typeInit();
   await Data.init();
   // Init.debug();
-  Init.test();
-  Init.checkData();
-  Init.create();
+  // Init.test();
+  // Init.checkData();
+  // Init.create();
 }
 
 class Storage {

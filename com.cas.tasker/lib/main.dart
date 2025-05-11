@@ -4,6 +4,7 @@ import 'package:tasker/util/init.util.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await start();
   runApp(Main());
 }

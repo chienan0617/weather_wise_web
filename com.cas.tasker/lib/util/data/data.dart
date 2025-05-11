@@ -4,7 +4,7 @@ import 'package:tasker/util/data/type.dart';
 
 class Data {
   static Box? _box;
-  static _TaskData task = _TaskData();
+  static final task = _TaskData();
 
   static Future<void> init() async {
     await Hive.initFlutter();
@@ -124,6 +124,8 @@ class _TaskData {
 
   static Future<void> init() async {
     _task = await Hive.openBox('task');
+    Hive.deleteBoxFromDisk('task');
+    await _task?.clear();
     _task?.containsKey('index') ?? _task?.put('index', 1);
   }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tasker/func/home/calendar/add/task_io.api.dart';
 import 'package:tasker/func/home/calendar/calendar.ctrl.dart';
 import 'package:tasker/func/home/calendar/calendar_io.api.dart';
 import 'package:tasker/util/data/type.dart';
@@ -17,6 +16,7 @@ class CalendarGeneratorApi {
     return {
       "dateMonth": _getCalendarMonthData(year, month),
       "task": CalendarIoApi.getTaskDataToMonth(year, month, dateData),
+      "date": [year, month]
     };
   }
 

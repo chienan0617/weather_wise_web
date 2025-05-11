@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasker/func/home/calendar/calendar_generator.api.dart';
 import 'package:tasker/func/home/calendar/calendar_io.api.dart';
 import 'package:tasker/library.util.dart';
+import 'package:tasker/util/data/type.dart';
 import 'package:tasker/util/flexible.util.dart';
 
 class CalendarGrid extends StatefulWidget {
@@ -218,8 +219,14 @@ void showDateBottomSheet(
                       data['task'][week][day].length, (int index) {
                         return CheckboxListTile(
                           value: gridChecked[index],
-                          onChanged: (bool? b) {
-
+                          onChanged: (bool? value) {
+                            CalendarIoApi.updateNewInfo(
+                              data['date'][0],
+                              data['date'][1],
+                              data['dateMonth'][week][day],
+                              data['task'][week][day][index].index,
+                              (data['task'][week][day][index].done = value) as Task
+                            );
                           },
                           controlAffinity: ListTileControlAffinity.leading,
                           activeColor: Color(data['task'][week][day][index].color),
