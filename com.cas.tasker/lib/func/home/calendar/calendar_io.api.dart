@@ -33,7 +33,7 @@ class CalendarIoApi {
     int newIndex = Data.task.newTaskIndex();
     Data.task.storeTask(
       year, month, day, newIndex, Task(
-        title, type, DateTime.now(), DateTime.now(), color, newIndex, content
+        title, type, DateTime.now(), DateTime.now(), color, content, newIndex,
       )
     );
   }

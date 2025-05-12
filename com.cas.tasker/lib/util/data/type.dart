@@ -1,10 +1,8 @@
 import 'package:hive/hive.dart';
-import 'package:tasker/util/data/data.dart';
 
 part 'type.g.dart';
 
 void typeInit() {
-  Data.task.getBox().clear();
   Hive.registerAdapter(TaskAdapter());
   Hive.registerAdapter(TodoTypeAdapter());
   Hive.registerAdapter(TaskTypeAdapter());

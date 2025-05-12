@@ -124,8 +124,6 @@ class _TaskData {
 
   static Future<void> init() async {
     _task = await Hive.openBox('task');
-    Hive.deleteBoxFromDisk('task');
-    await _task?.clear();
     _task?.containsKey('index') ?? _task?.put('index', 1);
   }
 
@@ -135,6 +133,8 @@ class _TaskData {
     Map data = getTask(year, month, day);
     data[totalIndex] = task;
     _task?.put('<$year-$month-$day>', data);
+
+    print(task.toString());
   }
 
   Map<int, Task> getTask(int year, int month, int day) {

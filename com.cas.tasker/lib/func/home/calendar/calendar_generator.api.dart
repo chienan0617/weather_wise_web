@@ -17,6 +17,7 @@ class CalendarGeneratorApi {
       "dateMonth": _getCalendarMonthData(year, month),
       "task": CalendarIoApi.getTaskDataToMonth(year, month, dateData),
       "date": [year, month]
+      // "update":
     };
   }
 
