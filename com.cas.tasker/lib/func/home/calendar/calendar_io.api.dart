@@ -24,6 +24,7 @@ class CalendarIoApi {
     required TaskType type,
     required int color,
     required dynamic content,
+    required String taskGroupName
     // required DateTime lastEdit,
     // required DateTime createTime
     // required bool done
@@ -33,7 +34,7 @@ class CalendarIoApi {
     int newIndex = Data.task.newTaskIndex();
     Data.task.storeTask(
       year, month, day, newIndex, Task(
-        title, type, DateTime.now(), DateTime.now(), color, content, newIndex,
+        title, type, DateTime.now(), DateTime.now(), color, content, newIndex, taskGroupName
       )
     );
   }

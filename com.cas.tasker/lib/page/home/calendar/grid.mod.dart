@@ -166,6 +166,45 @@ void showDateBottomSheet(
     isScrollControlled: true, // 允許自定義高度
     backgroundColor: style(n: true, op: false, os: 0), // 可選：使背景透明
     builder: (context) {
+      Widget unfinished() =>
+        Row(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(left: 20),
+            child: Text(
+              '待完成',
+              style: TextStyle(color: style(op: false, os: 128), fontSize: 16),
+            ),
+          ),
+          Expanded(child: divider(w: 15)),
+        ],
+      );
+
+      Widget finished() =>
+        Row(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(left: 20),
+            child: Text(
+              '已完成',
+              style: TextStyle(color: style(op: false, os: 128), fontSize: 16),
+            ),
+          ),
+          Expanded(child: divider(w: 15)),
+        ],
+      );
+
+      Widget stateBar() =>
+        Container(
+          margin: edge(v: 15),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(7.5),
+            color: style(),
+          ),
+          width: size.width * 0.25,
+          height: 7.5,
+        );
+
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setModalState) {
           return DraggableScrollableSheet(
@@ -185,37 +224,34 @@ void showDateBottomSheet(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Container(
-                        margin: edge(v: 15),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7.5),
-                          color: style(),
-                        ),
-                        width: size.width * 0.25,
-                        height: 7.5,
-                      ),
-
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              '待完成',
-                              style: TextStyle(
-                                color: style(op: false, os: 128),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                          Expanded(child: divider(w: 15)),
-                        ],
-                      ),
+                      stateBar(),
+                      unfinished(),
 
                       Column(
                         children: List.generate(data['task'][week][day].length, (
                           int index,
                         ) {
-                          return CheckboxListTile(
+                          return (!data['task'][week][day][index].done) ?CheckboxListTile(
+                            subtitle: Row(
+                              children: [
+                                Container(
+                                  width: 10, height: 10,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(data['task'][week][day][index].color)
+                                  ),
+                                ),
+                                Text(
+                                  data['task'][week][day][index].taskGroupName,
+                                  style: TextStyle(
+                                    color: CalendarGeneratorApi.getGroupTaskColor(data['task'][week][day][index].taskGroupName)
+                                  ),
+                                )
+                              ]
+                            ),
+                            onFocusChange: (value) {
+                              print("object");
+                            },
                             value: gridChecked[index],
                             onChanged: (bool? value) {
                               data['task'][week][day][index].done = value;
@@ -234,41 +270,78 @@ void showDateBottomSheet(
                             activeColor: Color(data['task'][week][day][index].color),
                             side: BorderSide(color: style()),
                             contentPadding: edge(h: 25),
-                            title: Text(
-                              data['task'][week][day][index].title,
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: style(),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                            title: GestureDetector(
+                              onTap: () {},
+                              child: Text(
+                                data['task'][week][day][index].title,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: style(),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
-                            secondary: Container(
-                              decoration: BoxDecoration(
-                                color: Color(data['task'][week][day][index].color),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              width: 12.5,
-                              height: 12.5,
+                            secondary: IconButton(
+                              onPressed: () {
+                                print('pressed');
+                              },
+                              icon: icon(Icons.arrow_forward_ios, size: 16),
                             ),
-                          );
+                          ) : const SizedBox();
                         }),
                       ),
 
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              '已完成',
-                              style: TextStyle(
-                                color: style(op: false, os: 128),
-                                fontSize: 16,
+                      finished(),
+
+                      Column(
+                        children: List.generate(data['task'][week][day].length, (
+                          int index,
+                        ) {
+                          return (data['task'][week][day][index].done) ?CheckboxListTile(
+                            onFocusChange: (value) {
+                              print("object");
+                            },
+                            value: gridChecked[index],
+                            onChanged: (bool? value) {
+                              data['task'][week][day][index].done = value;
+                              CalendarIoApi.updateNewInfo(
+                                data['date'][0],
+                                data['date'][1],
+                                data['dateMonth'][week][day],
+                                data['task'][week][day][index].index,
+                                (data['task'][week][day][index]) as Task,
+                              );
+                              data = reGet();
+                              gridChecked = reGetBool();
+                              setModalState(() {});
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                            activeColor: Color(data['task'][week][day][index].color),
+                            side: BorderSide(color: style()),
+                            contentPadding: edge(h: 25),
+                            title: GestureDetector(
+                              onTap: () {},
+                              child: Text(
+                                data['task'][week][day][index].title,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: style(os: -128),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  decoration: TextDecoration.lineThrough,
+                                  decorationColor: style(os: -128),
+                                ),
                               ),
                             ),
-                          ),
-                          Expanded(child: divider(w: 15)),
-                        ],
+                            secondary: IconButton(
+                              onPressed: () {
+                                print('pressed');
+                              },
+                              icon: icon(Icons.arrow_forward_ios, size: 16),
+                            ),
+                          ) : const SizedBox();
+                        }),
                       ),
                     ],
                   ),

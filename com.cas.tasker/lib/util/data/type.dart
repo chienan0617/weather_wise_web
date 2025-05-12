@@ -7,6 +7,7 @@ void typeInit() {
   Hive.registerAdapter(TodoTypeAdapter());
   Hive.registerAdapter(TaskTypeAdapter());
   Hive.registerAdapter(TodoAdapter());
+  Hive.registerAdapter(TaskGroupAdapter());
 }
 
 @HiveType(typeId: 0)
@@ -38,6 +39,9 @@ class Task {
   @HiveField(7)
   int index;
 
+  @HiveField(8)
+  String taskGroupName;
+
   Task(
     this.title,
     this.type,
@@ -46,6 +50,7 @@ class Task {
     this.color,
     this.content,
     this.index,
+    this.taskGroupName
   );
 }
 
@@ -83,6 +88,24 @@ enum TodoType {
 
   @HiveField(1)
   card,
+}
+
+@HiveType(typeId: 4)
+class TaskGroup {
+  @HiveField(0)
+  String name;
+
+  @HiveField(1)
+  int color;
+
+  @HiveField(2)
+  int groupIndex;
+
+  TaskGroup(
+    this.name,
+    this.color,
+    this.groupIndex,
+  );
 }
 
 // todo: flutter pub run build_runner build

@@ -46,12 +46,12 @@ class Init {
     // TaskApi.addTask(title: "title", type: TodoType.card, createTime: DateTime.now(), lastEdit: DateTime.now(), color: primary(), content: "content");
 
     // Data.task.getBox().clear();
-    Data.task.storeNative('<2025-4-6>', {});
-    CalendarIoApi.newTask(2025, 4, 6, title: "title", subtitle: "subtitle", type: TaskType.card, color: Colors.amber.toARGB32(), content: "content");
+    // Data.task.storeNative('<2025-4-6>', {});
+    // CalendarIoApi.newTask(2025, 4, 6, title: "title", subtitle: "subtitle", type: TaskType.card, color: Colors.amber.toARGB32(), content: "content");
 
 
     // var data = CalendarGeneratorApi.getData(2025, 4);
-
+    Data.taskGroup.getBox().clear();
   }
 }
 
@@ -61,10 +61,9 @@ Future<void> start() async {
 
   typeInit();
   await Data.init();
-  // Init.debug();
-  // Init.test();
-  // Init.checkData();
-  // Init.create();
+  Init.test();
+  Init.checkData();
+  Init.create();
 }
 
 class Storage {

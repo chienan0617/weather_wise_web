@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/func/home/calendar/calendar.ctrl.dart';
 import 'package:tasker/func/home/calendar/calendar_io.api.dart';
+import 'package:tasker/util/data/data.dart';
 import 'package:tasker/util/data/type.dart';
 
 class CalendarGeneratorApi {
@@ -88,4 +89,9 @@ class CalendarGeneratorApi {
   static void setValue(int week, int day, int index, bool value) {
     // TaskIoApi.store.changedValue(year, month, day, title: title, subtitle: subtitle, type: type, color: color, content: content)
   }
+
+  static Color getGroupTaskColor(String name) =>
+    Color(Data.taskGroup.getTaskGroup(name).color);
+
+  // static String getGroupTaskName
 }

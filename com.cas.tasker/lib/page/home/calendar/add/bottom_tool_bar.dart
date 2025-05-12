@@ -54,7 +54,8 @@ class _AddBottomBarState extends State<AddBottomBar> {
                 subtitle: notYetEnable,
                 type: AddTask.type.taskType,
                 color: AddTask.pickColor.getColor().toARGB32(),
-                content: AddTask.contentInput.controller.text
+                content: AddTask.contentInput.controller.text,
+                taskGroupName: 'default'
               );
 
               // print(AddTask.dateInput.pickedTime.month);

@@ -24,13 +24,14 @@ class TaskAdapter extends TypeAdapter<Task> {
       fields[4] as int,
       fields[6] as dynamic,
       fields[7] as int,
+      fields[8] as String,
     )..done = fields[5] as bool;
   }
 
   @override
   void write(BinaryWriter writer, Task obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -46,7 +47,9 @@ class TaskAdapter extends TypeAdapter<Task> {
       ..writeByte(6)
       ..write(obj.content)
       ..writeByte(7)
-      ..write(obj.index);
+      ..write(obj.index)
+      ..writeByte(8)
+      ..write(obj.taskGroupName);
   }
 
   @override
@@ -96,6 +99,46 @@ class TodoAdapter extends TypeAdapter<Todo> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is TodoAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class TaskGroupAdapter extends TypeAdapter<TaskGroup> {
+  @override
+  final int typeId = 4;
+
+  @override
+  TaskGroup read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return TaskGroup(
+      fields[0] as String,
+      fields[1] as int,
+      fields[2] as int,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, TaskGroup obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.color)
+      ..writeByte(2)
+      ..write(obj.groupIndex);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TaskGroupAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

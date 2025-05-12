@@ -13,6 +13,7 @@ class _TaskIoApiStore {
     required TaskType type,
     required int color,
     required dynamic content,
+    required String taskGroupName
   }) {
     CalendarIoApi.newTask(
       year, month, day,
@@ -21,6 +22,7 @@ class _TaskIoApiStore {
       type: type,
       color: color,
       content: content,
+      taskGroupName: taskGroupName
     );
   }
 
@@ -30,6 +32,7 @@ class _TaskIoApiStore {
     required TaskType type,
     required int color,
     required dynamic content,
+    required String taskGroupName
   }) {
     CalendarIoApi.newTask(
       year, month, day,
@@ -38,6 +41,7 @@ class _TaskIoApiStore {
       type: type,
       color: color,
       content: content,
+      taskGroupName: taskGroupName
     );
   }
 }

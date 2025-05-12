@@ -1,14 +1,17 @@
 
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:tasker/library.util.dart';
 import 'package:tasker/util/data/type.dart';
 
 class Data {
   static Box? _box;
   static final task = _TaskData();
+  static final taskGroup = _TaskGroupData();
 
   static Future<void> init() async {
     await Hive.initFlutter();
     await _TaskData.init();
+    await _TaskGroupData.init();
     _box = await Hive.openBox('appData');
   }
 
@@ -164,6 +167,35 @@ class _TaskData {
   void storeNative(String key, dynamic value) {
     _task?.put(key, value);
   }
+}
+
+class _TaskGroupData {
+  static Box? _taskGroup;
+
+  Box getBox() => _taskGroup!;
+
+  static Future<void> init() async {
+    _taskGroup = await Hive.openBox('taskGroup');
+    _taskGroup?.containsKey('index') ?? _taskGroup?.put('index', 1);
+    _taskGroup?.containsKey('default') ?? _taskGroup?.put('default', TaskGroup('default', primary.toARGB32(), newTaskGroupIndex()));
+  }
+
+  static int newTaskGroupIndex() {
+    if (!(_taskGroup?.containsKey('index') ?? false)) {
+      _taskGroup?.put('index', 0);
+    }
+
+    int index = _taskGroup?.get('index') ?? 0;
+    _taskGroup?.put('index', index + 1);
+    return index + 1;
+  }
+
+  void putTaskGroup(String groupName, TaskGroup taskGroup) {
+    _taskGroup!.put(groupName, taskGroup);
+  }
+
+  TaskGroup getTaskGroup(String name) =>
+    _taskGroup?.get(name) as TaskGroup;
 }
 
 class Type {
