@@ -47,6 +47,7 @@ class CalendarCtrl {
   // when page move, run this function
   // connect with {onPageChange} function in [PageView]
   static void onPageChange(int index, VoidCallback rebuild) {
+    // Future.delayed(Duration(seconds: 1));
     switch (index) {
       case 0: _checkDate(1); controller.jumpToPage(1); break;
       case 2: _checkDate(-1); controller.jumpToPage(1); break;

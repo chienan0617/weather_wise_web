@@ -176,9 +176,16 @@ class _TaskGroupData {
 
   static Future<void> init() async {
     _taskGroup = await Hive.openBox('taskGroup');
-    _taskGroup?.containsKey('index') ?? _taskGroup?.put('index', 1);
-    _taskGroup?.containsKey('default') ?? _taskGroup?.put('default', TaskGroup('default', primary.toARGB32(), newTaskGroupIndex()));
-  }
+
+    if (!_taskGroup!.containsKey('index')) {
+      await _taskGroup?.put('index', 1);
+    }
+
+    if (!_taskGroup!.containsKey('default')) {
+      await _taskGroup?.put('default', TaskGroup('default', primary.toARGB32(), newTaskGroupIndex()));
+    }
+    }
+
 
   static int newTaskGroupIndex() {
     if (!(_taskGroup?.containsKey('index') ?? false)) {
@@ -192,6 +199,10 @@ class _TaskGroupData {
 
   void putTaskGroup(String groupName, TaskGroup taskGroup) {
     _taskGroup!.put(groupName, taskGroup);
+  }
+
+  Map<String, dynamic> getAllData() {
+    return _taskGroup?.toMap().cast<String, dynamic>() ?? {};
   }
 
   TaskGroup getTaskGroup(String name) =>

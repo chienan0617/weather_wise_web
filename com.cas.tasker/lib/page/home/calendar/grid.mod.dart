@@ -232,22 +232,26 @@ void showDateBottomSheet(
                           int index,
                         ) {
                           return (!data['task'][week][day][index].done) ?CheckboxListTile(
-                            subtitle: Row(
-                              children: [
-                                Container(
-                                  width: 10, height: 10,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(data['task'][week][day][index].color)
+                            subtitle: IntrinsicHeight(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 8.5, height: 8.5,
+                                    margin: const EdgeInsets.only(right: 5),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: CalendarGeneratorApi.getGroupTaskColor(
+                                        data['task'][week][day][index].taskGroupName,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  data['task'][week][day][index].taskGroupName,
-                                  style: TextStyle(
-                                    color: CalendarGeneratorApi.getGroupTaskColor(data['task'][week][day][index].taskGroupName)
+                                  text(
+                                    data['task'][week][day][index].taskGroupName,
+                                    size: 14, os: -64
                                   ),
-                                )
-                              ]
+                                ],
+                              ),
                             ),
                             onFocusChange: (value) {
                               print("object");
@@ -299,6 +303,27 @@ void showDateBottomSheet(
                           int index,
                         ) {
                           return (data['task'][week][day][index].done) ?CheckboxListTile(
+                            subtitle: IntrinsicHeight(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 7.5, height: 7.5,
+                                    margin: const EdgeInsets.only(right: 5),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: CalendarGeneratorApi.getGroupTaskColor(
+                                        data['task'][week][day][index].taskGroupName,
+                                      ),
+                                    ),
+                                  ),
+                                  text(
+                                    data['task'][week][day][index].taskGroupName,
+                                    size: 13, os: -128
+                                  ),
+                                ],
+                              ),
+                            ),
                             onFocusChange: (value) {
                               print("object");
                             },
