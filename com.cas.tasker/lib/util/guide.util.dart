@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/page/home/calendar/add/add.m.dart';
-import 'package:tasker/page/home/calendar/view/view.m.dart';
 import 'package:tasker/page/home/home.m.dart';
 
 class Guide {
@@ -22,11 +21,11 @@ class _Calendar {
 
   void toViewPage(context) {
     Navigator.pop(context);
-    Navigator.push(
-      context, MaterialPageRoute(
-        builder: (c) => CalendarViewScreen()
-      )
-    );
+    // Navigator.push(
+    //   // context, MaterialPageRoute(
+    //   //   builder: (c) => CalendarViewScreen()
+    //   // )
+    // );
   }
 
   void toCalendarPage(context) {
