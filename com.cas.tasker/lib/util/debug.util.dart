@@ -3,9 +3,8 @@ class Console {
   //   print("${DateTime.now().toString()}: $content");
   // }
 
-  // static 
+  // static
 }
 
 log(dynamic content) {
-  print("${DateTime.now().toString()}: $content");
 }

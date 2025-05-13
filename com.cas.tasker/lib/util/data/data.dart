@@ -136,8 +136,6 @@ class _TaskData {
     Map data = getTask(year, month, day);
     data[totalIndex] = task;
     _task?.put('<$year-$month-$day>', data);
-
-    print(task.toString());
   }
 
   Map<int, Task> getTask(int year, int month, int day) {
@@ -177,14 +175,17 @@ class _TaskGroupData {
   static Future<void> init() async {
     _taskGroup = await Hive.openBox('taskGroup');
 
-    if (!_taskGroup!.containsKey('index')) {
-      await _taskGroup?.put('index', 1);
+    if (!_taskGroup!.containsKey('index')) _taskGroup?.put('index', 1);
+    if (!_taskGroup!.containsKey('group')) _taskGroup?.put('group', {});
+    if (!_taskGroup!.get('group').containsKey('default')) {
+      var data = _taskGroup!.get('group');
+      data['default'] = TaskGroup('default', primary.toARGB32(), newTaskGroupIndex());
+      _taskGroup?.put('group', data);
     }
 
-    if (!_taskGroup!.containsKey('default')) {
-      await _taskGroup?.put('default', TaskGroup('default', primary.toARGB32(), newTaskGroupIndex()));
-    }
-    }
+
+    // print(Data.taskGroup.getAllData().toString());
+  }
 
 
   static int newTaskGroupIndex() {
@@ -198,15 +199,21 @@ class _TaskGroupData {
   }
 
   void putTaskGroup(String groupName, TaskGroup taskGroup) {
-    _taskGroup!.put(groupName, taskGroup);
+    Map data = _taskGroup?.get('group');
+    data[taskGroup.name] = taskGroup;
+    _taskGroup!.put('group', data);
   }
 
   Map<String, dynamic> getAllData() {
     return _taskGroup?.toMap().cast<String, dynamic>() ?? {};
   }
 
-  TaskGroup getTaskGroup(String name) =>
-    _taskGroup?.get(name) as TaskGroup;
+  Map getAllTaskGroup() =>
+    (_taskGroup?.get('group') as Map);
+
+  TaskGroup getTaskGroup(String name) {
+    return (_taskGroup?.get('group') as Map)[name];
+  }
 }
 
 class Type {

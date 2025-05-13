@@ -42,24 +42,22 @@ class AddContentEditor extends StatefulWidget {
 class _AddContentEditorState extends State<AddContentEditor> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Expanded(
-        child: Container(
-          margin: const EdgeInsets.only(left: 25, right: 15),
-          child: TextField(
-            expands: true,
-            maxLines: null, minLines: null,
-            decoration: InputDecoration(
-              hintText: 'add content...',
-              hintStyle: TextStyle(color: style(os: -128)),
-            ),
-            cursorColor: primary,
-            controller: AddTask.contentInput.controller,
-            style: TextStyle(
-              color: style(),
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.only(left: 25, right: 15),
+        child: TextField(
+          expands: true,
+          maxLines: null, minLines: null,
+          decoration: InputDecoration(
+            hintText: 'add content...',
+            hintStyle: TextStyle(color: style(os: -128)),
+          ),
+          cursorColor: primary,
+          controller: AddTask.contentInput.controller,
+          style: TextStyle(
+            color: style(),
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),

@@ -39,6 +39,15 @@ class CalendarIoApi {
     );
   }
 
+  // use in when create a new task and picking the task group
+  static List<TaskGroup> getTaskGroupList() {
+    return Data.taskGroup.getAllTaskGroup().values.toList().cast<TaskGroup>();
+  }
+
+  static List<String> getTaskGroupListName() {
+    return getTaskGroupList().map((i) => i.name).toList();
+  }
+
   static void updateNewInfo(
     int year, int month, int day, int taskIndex, Task changed
   ) {

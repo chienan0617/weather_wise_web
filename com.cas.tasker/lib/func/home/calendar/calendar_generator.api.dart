@@ -90,8 +90,9 @@ class CalendarGeneratorApi {
     // TaskIoApi.store.changedValue(year, month, day, title: title, subtitle: subtitle, type: type, color: color, content: content)
   }
 
-  static Color getGroupTaskColor(String name) =>
-    Color(Data.taskGroup.getTaskGroup(name).color);
+  static Color getGroupTaskColor(String name) {
+    return Color(Data.taskGroup.getTaskGroup(name).color);
+  }
 
   // static String getGroupTaskName
 }

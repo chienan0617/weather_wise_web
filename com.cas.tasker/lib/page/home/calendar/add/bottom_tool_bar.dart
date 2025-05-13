@@ -53,14 +53,10 @@ class _AddBottomBarState extends State<AddBottomBar> {
                 title: AddTask.titleInput.controller.text,
                 subtitle: notYetEnable,
                 type: AddTask.type.taskType,
-                color: AddTask.pickColor.getColor().toARGB32(),
+                color: AddTask.taskGroup.getColor().toARGB32(),
                 content: AddTask.contentInput.controller.text,
                 taskGroupName: 'default'
               );
-
-              // print(AddTask.dateInput.pickedTime.month);
-              // print(AddTask.dateInput.pickedTime.day);
-              // print(Data.task.getBox().toMap());
             },
             // onPressed: () => Navigator.pop(context),
             icon: icon(Icons.check)

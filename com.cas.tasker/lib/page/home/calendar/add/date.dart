@@ -188,7 +188,7 @@ class _AddDateState extends State<AddDate> {
           // Expanded(
           // flex: 1,
           GestureDetector(
-            onTap: () => showPickColorDialog(
+            onTap: () => showPickTaskGroupDialog(
               context,
               () => setState(() {})
             ),
@@ -197,7 +197,7 @@ class _AddDateState extends State<AddDate> {
                 Container(
                   margin: edge(h: 0),
                   decoration: BoxDecoration(
-                    color: AddTask.pickColor.getColor(),
+                    color: AddTask.taskGroup.getColor(),
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(5),
                   ),
@@ -206,7 +206,7 @@ class _AddDateState extends State<AddDate> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(right: 0, left: 5),
-                  child: text(AddTask.pickColor.getColorName(), os: -128),
+                  child: text(AddTask.taskGroup.getColorName(), os: -128),
                 ),
                 Container(margin: edge(h: 5), child: icon(Icons.arrow_drop_down)),
               ],
@@ -241,9 +241,10 @@ class _DatePickerWithCustomTitle extends StatelessWidget {
   }
 }
 
-void showPickColorDialog(context, recall) =>
+void showPickTaskGroupDialog(context, recall) =>
   showDialog(context: context, builder: (_) => PickDialog(recall: recall,));
 
+// ignore: must_be_immutable
 class PickDialog extends StatefulWidget {
   VoidCallback recall;
   PickDialog({super.key, required this.recall});
@@ -260,29 +261,27 @@ class PickDialogState extends State<PickDialog> {
       content: SingleChildScrollView(
         child: Column(
           children: [...List.generate(
-            AddTask.pickColor.colorList.length,
+            AddTask.taskGroup.taskGroupList.length,
             (int index) {
-              return Container(
-                child: ListTile(
-                  leading: Container(
-                    width: 20, height: 20,
-                    decoration: BoxDecoration(
-                      color: AddTask.pickColor.colorList[index],
-                      shape: BoxShape.circle
-                      // borderRadius: BorderRadius.circular(5)
-                    ),
+              return ListTile(
+                leading: Container(
+                  width: 20, height: 20,
+                  decoration: BoxDecoration(
+                    color: Color(AddTask.taskGroup.taskGroupList[index].color),
+                    shape: BoxShape.circle
+                    // borderRadius: BorderRadius.circular(5)
                   ),
-                  title: text(AddTask.pickColor.colorLang[index]),
-                  trailing: AddTask.pickColor.currentIndex == index
-                    ? icon(Icons.check) : const SizedBox(),
-                  onTap: () {
-                    setState(() {
-                      AddTask.pickColor.onChange(index);
-                      Navigator.pop(context);
-                    });
-                    widget.recall();
-                  },
-                )
+                ),
+                title: text(AddTask.taskGroup.taskGroupListName[index]),
+                trailing: AddTask.taskGroup.currentIndex == index
+                  ? icon(Icons.check) : const SizedBox(),
+                onTap: () {
+                  setState(() {
+                    AddTask.taskGroup.onChange(index);
+                    Navigator.pop(context);
+                  });
+                  widget.recall();
+                },
               );
             }
           ),

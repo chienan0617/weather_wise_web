@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tasker/util/customize.util.dart';
+import 'package:tasker/func/home/calendar/calendar_io.api.dart';
 import 'package:tasker/util/data/type.dart';
 
 class AddTask {
   static final titleInput = _TitleInputCtrl();
   static final contentInput = _ContentInputCtrl();
-  static final pickColor = _PickColorCtrl();
+  static final taskGroup = _PickTaskGroupCtrl();
   static final dateInput = _DateInputCtrl();
   static final type = _TypeCtrl();
 
@@ -27,14 +27,14 @@ class _ContentInputCtrl {
   );
 }
 
-class _PickColorCtrl {
+class _PickTaskGroupCtrl {
   int currentIndex = 0;
-  List<Color> colorList = colors;
-  List<String> colorLang = com('color');
+  List<TaskGroup> taskGroupList = CalendarIoApi.getTaskGroupList();
+  List<String> taskGroupListName = CalendarIoApi.getTaskGroupListName();
 
   void onChange(int value) => currentIndex = value;
-  String getColorName() => colorLang[currentIndex];
-  Color getColor() => colors[currentIndex];
+  String getColorName() => taskGroupListName[currentIndex];
+  Color getColor() => Color(taskGroupList[currentIndex].color);
 }
 
 class _DateInputCtrl {

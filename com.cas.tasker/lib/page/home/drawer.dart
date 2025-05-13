@@ -13,12 +13,10 @@ class SideBarState extends State<SideBar> {
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: primary,
-      child: Container(
-        child: Column(
-          children: [
-            ListTile()
-          ],
-        ),
+      child: Column(
+        children: [
+          ListTile()
+        ],
       ),
     );
   }
