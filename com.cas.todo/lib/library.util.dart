@@ -84,7 +84,7 @@ void setPrimaryColor(Color color) {
   _primaryColor = color;
   var t = Data.getMap(T.setting);
   t["primaryColor"] =
-      "${color.alpha},${color.red},${color.green},${color.blue}";
+      "${color.a},${color.r},${color.g},${color.b}";
   Data.storeMap(T.setting, t);
 }
 
@@ -113,9 +113,9 @@ EdgeInsets edge({
   }
 
 Color adjustColor(Color color, int os) {
-  int r = (color.red + os).clamp(0, 255).toInt();
-  int g = (color.green + os).clamp(0, 255).toInt();
-  int b = (color.blue + os).clamp(0, 255).toInt();
+  int r = (color.r + os).clamp(0, 255).toInt();
+  int g = (color.g + os).clamp(0, 255).toInt();
+  int b = (color.b + os).clamp(0, 255).toInt();
   return Color.fromARGB(color.alpha, r, g, b);
 }
 
