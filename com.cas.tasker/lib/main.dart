@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/model/init/init.dart';
+import 'package:tasker/page/home/_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +18,6 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return HomePage();
   }
 }
