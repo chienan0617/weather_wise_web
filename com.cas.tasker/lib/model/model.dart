@@ -2,15 +2,13 @@ import 'package:tasker/model/app/base.dart';
 import 'package:tasker/model/init/init.dart';
 
 class Model {
-  static BaseModel? base;
+  static BaseModel base = BaseModel();
 
-  Model() {
-    base = BaseModel();
-  }
+  const Model();
 
-  static Future<void> initialize() async {
-    // print('object');
-    // base =
-  }
+  // static Future<void> initialize() async {
+  //   // print('object');
+  //   // base =
+  // }
 
 }

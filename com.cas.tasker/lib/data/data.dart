@@ -17,6 +17,8 @@ abstract class DataBase {
 
   Box getBox();
 
+  void checkKey(String key, dynamic defaultValue);
+
   dynamic get<T>(String name);
 
   void put<T>(String name, dynamic value);

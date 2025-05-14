@@ -3,5 +3,6 @@
     "IDX.aI.enableCodebaseIndexing": true,
     "cSpell.words": [
         "tasker"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

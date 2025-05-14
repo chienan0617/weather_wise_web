@@ -14,5 +14,11 @@ class BaseModel implements Registerable {
     Data.app.put('primaryColor', 0xFFffffff);
   }
 
-  static Color getPrimaryColor() => Color(Data.app.get<int>('primaryColor'));
+  @override
+  void checkKey() {
+    Data.app.checkKey('pageIndex', 0);
+  }
+
+  Color getPrimaryColor() => Color(Data.app.get<int>('primaryColor'));
+  int getPageIndex() => Data.app.get('pageIndex');
 }

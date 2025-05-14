@@ -9,6 +9,13 @@ class AppData implements DataBase {
   AppData(this.boxName);
 
   @override
+  void checkKey(String key, dynamic defaultValue) {
+    if (!box!.containsKey(key)) {
+      box!.put(key, defaultValue);
+    }
+  }
+
+  @override
   Box getBox() => box!;
 
   @override

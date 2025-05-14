@@ -18,6 +18,8 @@ class Initialize {
     // print(modelInstances);
     for (var instance in modelInstances) {
       instance.initialize();
+      instance.checkKey();
+      print("checked");
     }
   }
 
@@ -28,4 +30,5 @@ class Initialize {
 
 abstract class Registerable {
   void initialize();
+  void checkKey();
 }
