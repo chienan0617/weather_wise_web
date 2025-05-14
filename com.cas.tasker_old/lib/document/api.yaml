@@ -1,0 +1,47 @@
+# 2025-04-04
+# Chienan Studio
+
+*CalendarGenerator:
+
+  # * get all the data in need
+  &getData(): map
+    - dateMonth: list(list(int)) # month data
+    - total: int
+    - task: map(index, Task) #list(map(str, any))
+      # - title: str
+      # - subtitle: str
+      # - createTime: DateTime
+    - done: bool
+  
+  # call by [TopBar] to update time display
+  &getFormatTime(): str
+
+*CalendarIo:
+
+  # * store task to database
+  &newTask(): @void
+    - title: str
+    - subtitle: str
+    - type: TodoType
+    - color: int
+    - lastEdit: DataTime
+    - createTIme: DateTime
+    - done: bool
+    - ^content: list(map(str, any))
+      {
+        head: str,
+        done: bool,
+      }
+    - ^content: str
+  
+  &getTask(): Task
+    
+    
+    
+# type definition
+  * type
+  & function
+  - content
+  {} list
+  @ param
+  ^ async

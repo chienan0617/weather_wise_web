@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/util/data/data.dart';
+import 'package:tasker/util/data/data.dart';
 
 // * Theme data
 
