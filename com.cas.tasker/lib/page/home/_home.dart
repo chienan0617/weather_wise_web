@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/model/model.dart';
-import 'package:tasker/model/util/theme.dart';
+import 'package:tasker/util/theme.dart';
 import 'package:tasker/page/home/calendar/_calendar.dart';
 
 
@@ -32,16 +32,9 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {},
               icon: const Icon(Icons.menu, size: 28, color: style_0p)
             ),
-            actions: [
-              // IconButton(
-              //   onPressed: () {},
-              //   icon: const Icon(Icons.menu, size: 28, color: style_0p)
-              // ),
-            ],
+            actions: [],
           ),
-          body: [
-            CalendarPage(), Container()
-          ][Model.base.getPageIndex()],
+          body: [CalendarPage(), Container()][Model.app.getPageIndex()],
         )
       )
     );

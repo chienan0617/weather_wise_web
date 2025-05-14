@@ -1,14 +1,12 @@
-import 'package:tasker/model/app/base.dart';
-import 'package:tasker/model/init/init.dart';
+import 'package:tasker/model/app/app.dart';
+import 'package:tasker/model/page/calendar/calendar_render.dart';
 
 class Model {
-  static BaseModel base = BaseModel();
+  static late final BaseModel app;
+  static late final CalendarRenderModel calendarRender;
 
-  const Model();
-
-  // static Future<void> initialize() async {
-  //   // print('object');
-  //   // base =
-  // }
-
+  static void initialize() {
+    app = BaseModel();
+    calendarRender = CalendarRenderModel();
+  }
 }

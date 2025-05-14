@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasker/model/init/init.dart';
+import 'package:tasker/util/init/init.dart';
 import 'package:tasker/page/home/_home.dart';
 
 void main() async {

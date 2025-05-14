@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tasker/model/app/base.dart';
 import 'package:tasker/model/model.dart';
 
 ThemeData theme = ThemeData(
-  primaryColor: Model.base.getPrimaryColor(),
+  primaryColor: Model.app.getPrimaryColor(),
   // primaryColorLight: Colors.amber,
   // primaryColorDark: Colors.blue,
   // color
@@ -142,7 +141,7 @@ const style_n224p = Color(!darkMode ? 0xFF2A2E37 : 0xFFDCE2E6);
 const style_n232p = Color(!darkMode ? 0xFF232730 : 0xFFE3E9ED);
 const style_n240p = Color(!darkMode ? 0xFF1C2029 : 0xFFEAF0F4);
 const style_n248p = Color(!darkMode ? 0xFF151922 : 0xFFF2F8FB);
-Color primary = Model.base.getPrimaryColor();
+Color primary = Model.app.getPrimaryColor();
 
 const darkMode = false;
 
