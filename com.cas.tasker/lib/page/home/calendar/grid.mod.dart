@@ -93,7 +93,7 @@ class _DateCellState extends State<DateCell> {
     return Container(
       height: widget.cellHeight,
       width: widget.cellWidth,
-      decoration: BoxDecoration(border: Border.symmetric(horizontal: BorderSide(color: style(), width: 0.25))),
+      decoration: BoxDecoration(border: Border.symmetric(horizontal: BorderSide(color: style_0, width: 0.25))),
       child: Column(
         children: [
           SizedBox(
@@ -134,7 +134,7 @@ class _DateCellState extends State<DateCell> {
                 height: widget.taskHeight,
                 child: Text(
                   '${cellCount.$3} more',
-                  style: TextStyle(fontSize: 10.75, color: style(os: -64)),
+                  style: TextStyle(fontSize: 10.75, color: style_64),
                   softWrap: false,
                 ),
               )

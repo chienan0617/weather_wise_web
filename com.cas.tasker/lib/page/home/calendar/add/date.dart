@@ -24,26 +24,26 @@ class _AddDateState extends State<AddDate> {
             // 1. 整體 Dialog 背景
             // colorScheme: Theme.of(context).colorScheme.copyWith(
             //   primary: primary, // 修改這裡以更改標頭背景色 (包含 May 2025 和按鈕)
-            //   onPrimary: style(), // 修改這裡以更改標頭文字和按鈕顏色
+            //   onPrimary: style_0p, // 修改這裡以更改標頭文字和按鈕顏色
             // ),
 
             // 3. DatePicker 主題細節
             datePickerTheme: DatePickerThemeData(
-              backgroundColor: style(op: false, n: true, os: 0),
+              backgroundColor: style_n0,
 
               // a) Header 文字：年、月
-              headerHeadlineStyle: TextStyle(color: style(), fontSize: 24),
+              headerHeadlineStyle: TextStyle(color: style_0p, fontSize: 24),
               // rangePickerHeaderHeadlineStyle: ,
               headerBackgroundColor: primary,
               headerForegroundColor: primaryStyle(), // 使用 .color 獲取顏色
 
               rangePickerHeaderHelpStyle: TextStyle(
-                color: style(),
+                color: style_0p,
                 fontSize: 55,
               ),
-              rangePickerBackgroundColor: style(),
-              rangePickerHeaderBackgroundColor: style(),
-              rangePickerHeaderForegroundColor: style(),
+              rangePickerBackgroundColor: style_0p,
+              rangePickerHeaderBackgroundColor: style_0p,
+              rangePickerHeaderForegroundColor: style_0p,
               inputDecorationTheme: InputDecorationTheme(
                 hintStyle: TextStyle(color: Colors.amber),
               ),
@@ -52,26 +52,26 @@ class _AddDateState extends State<AddDate> {
               yearStyle: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: style(), // 深淺自動選
+                color: style_0p, // 深淺自動選
               ),
 
               yearForegroundColor: WidgetStateColor.resolveWith(
-                (states) => style(),
+                (states) => style_0p,
               ),
 
               // c) 星期標頭
               weekdayStyle: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
-                color: style(),
+                color: style_0p,
               ),
               // weekdayForegroundColor:
-              //     WidgetStateColor.resolveWith((states) => style()),
+              //     WidgetStateColor.resolveWith((states) => style_0p),
 
               // d) 日期格子
-              dayStyle: TextStyle(fontSize: 16, color: style()),
+              dayStyle: TextStyle(fontSize: 16, color: style_0p),
               dayForegroundColor: WidgetStateColor.resolveWith(
-                (states) => style(),
+                (states) => style_0p,
               ),
               dayBackgroundColor: WidgetStateProperty.resolveWith(
                 (states) =>
@@ -104,7 +104,7 @@ class _AddDateState extends State<AddDate> {
               ),
             ),
             dialogTheme: DialogThemeData(
-              backgroundColor: style(op: false, n: true, os: 0),
+              backgroundColor: style_n0,
             ),
           ),
           child: _DatePickerWithCustomTitle(
@@ -143,7 +143,7 @@ class _AddDateState extends State<AddDate> {
               child: TextField(
                 // scrollPadding: edge(h: 10),
                 style: TextStyle(
-                  color: style(),
+                  color: style_0p,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -167,13 +167,13 @@ class _AddDateState extends State<AddDate> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
-                      color: style(os: 32, op: false), // 未聚焦時的邊框顏色
+                      color: style_32, // 未聚焦時的邊框顏色
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
-                      color: style(os: 64, op: false), // 聚焦時的邊框顏色
+                      color: style_64, // 聚焦時的邊框顏色
                     ),
                   ),
                 ),
@@ -257,7 +257,7 @@ class PickDialogState extends State<PickDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: style(n: true, os: 0, op: false),
+      backgroundColor: style_n0,
       content: SingleChildScrollView(
         child: Column(
           children: [...List.generate(

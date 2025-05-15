@@ -17,13 +17,13 @@ class _AddTitleState extends State<AddTitle> {
       child: TextField(
         decoration: InputDecoration(
           hintText: 'add title...',
-          hintStyle: TextStyle(color: style(os: -128)),
+          hintStyle: TextStyle(color: style_128),
           // color
         ),
         cursorColor: primary,
         controller: AddTask.titleInput.controller,
         style: TextStyle(
-          color: style(),
+          color: style_0,
           fontSize: 18,
           fontWeight: FontWeight.w500,
         ),
@@ -50,12 +50,12 @@ class _AddContentEditorState extends State<AddContentEditor> {
           maxLines: null, minLines: null,
           decoration: InputDecoration(
             hintText: 'add content...',
-            hintStyle: TextStyle(color: style(os: -128)),
+            hintStyle: TextStyle(color: style_128),
           ),
           cursorColor: primary,
           controller: AddTask.contentInput.controller,
           style: TextStyle(
-            color: style(),
+            color: style_0,
             fontSize: 18,
             fontWeight: FontWeight.w500,
           ),

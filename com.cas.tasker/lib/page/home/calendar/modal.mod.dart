@@ -20,7 +20,7 @@ void showDateBottomSheet(
   showModalBottomSheet(
     context: context,
     isScrollControlled: true, // 允許自定義高度
-    backgroundColor: style(n: true, op: false, os: 0), // 可選：使背景透明
+    backgroundColor: style_n0, // 可選：使背景透明
     builder: (context) {
       Widget unfinished() =>
         Row(
@@ -29,7 +29,7 @@ void showDateBottomSheet(
             margin: const EdgeInsets.only(left: 20),
             child: Text(
               '待完成',
-              style: TextStyle(color: style(op: false, os: 128), fontSize: 16),
+              style: TextStyle(color: style_128, fontSize: 16),
             ),
           ),
           Expanded(child: divider(w: 15)),
@@ -43,7 +43,7 @@ void showDateBottomSheet(
             margin: const EdgeInsets.only(left: 20),
             child: Text(
               '已完成',
-              style: TextStyle(color: style(op: false, os: 128), fontSize: 16),
+              style: TextStyle(color: style_128, fontSize: 16),
             ),
           ),
           Expanded(child: divider(w: 15)),
@@ -55,7 +55,7 @@ void showDateBottomSheet(
           margin: edge(v: 15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(7.5),
-            color: style(),
+            color: style_0,
           ),
           width: size.width * 0.25,
           height: 7.5,
@@ -84,7 +84,7 @@ void showDateBottomSheet(
                 width: size.width,
                 height: size.height,
                 decoration: BoxDecoration(
-                  color: style(n: true, op: false, os: 0),
+                  color: style_n0,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                 ),
                 child: SingleChildScrollView(
@@ -139,7 +139,7 @@ void showDateBottomSheet(
                             },
                             controlAffinity: ListTileControlAffinity.leading,
                             activeColor: Color(data['task'][week][day][index].color),
-                            side: BorderSide(color: style()),
+                            side: BorderSide(color: style_0),
                             contentPadding: edge(h: 25),
                             title: GestureDetector(
                               onTap: () {},
@@ -147,7 +147,7 @@ void showDateBottomSheet(
                                 data['task'][week][day][index].title,
                                 maxLines: 1,
                                 style: TextStyle(
-                                  color: style(),
+                                  color: style_0,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -212,7 +212,7 @@ void showDateBottomSheet(
                             activeColor: CalendarGeneratorApi.getGroupTaskColor(
                               data['task'][week][day][index].taskGroupName
                             ),//Color(data['task'][week][day][index].color),
-                            side: BorderSide(color: style()),
+                            side: BorderSide(color: style_0),
                             contentPadding: edge(h: 25),
                             title: GestureDetector(
                               onTap: () {},
@@ -220,11 +220,11 @@ void showDateBottomSheet(
                                 data['task'][week][day][index].title,
                                 maxLines: 1,
                                 style: TextStyle(
-                                  color: style(os: -128),
+                                  color: style_128,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
                                   decoration: TextDecoration.lineThrough,
-                                  decorationColor: style(os: -128),
+                                  decorationColor: style_128,
                                 ),
                               ),
                             ),

@@ -10,6 +10,8 @@ class BaseModel implements Registerable {
   @override
   void initialize() {
     Data.app.put('primaryColor', 0xFFffffff);
+    Data.app.put('pageIndex', 0);
+    Data.app.put('languageIndex', 0);
   }
 
   @override

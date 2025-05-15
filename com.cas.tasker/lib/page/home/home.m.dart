@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
         drawer: SideBar(),
         body: [
           CalendarScreen(), Container(), Container(),
-        ][Data.getInt(Type.currentPageIndex)],
+        ][Data.app.getInt('currentPageIndex')],
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
@@ -35,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.settings), label: "setting"
             )
           ],
-          onTap: (i) {setState(() {Data.put<int>(Type.currentPageIndex, i);});},
-          currentIndex: Data.getInt(Type.currentPageIndex),
+          onTap: (i) {setState(() {Data.app.put<int>('currentPageIndex', i);});},
+          currentIndex: Data.app.getInt('currentPageIndex'),
           selectedItemColor: primary,
           unselectedItemColor: style(),
           selectedFontSize: 14,

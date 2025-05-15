@@ -19,7 +19,7 @@ class _AddBottomBarState extends State<AddBottomBar> {
 
     return Container(
       decoration: BoxDecoration(
-        color: style(n: true, os: 0, op: false)
+        color: style_n0
       ),
       height: size.height * 0.05,
       child: Row(

@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:tasker/page/home/home.m.dart';
-import 'package:tasker/util/init.util.dart';
+import 'package:tasker/util/init/init.dart';
+import 'package:tasker/page/home/_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await start();
-  runApp(Main());
+  await Initialize.start();
+  runApp(App());
 }
 
-class Main extends StatefulWidget {
-  const Main({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
 
   @override
-  State<Main> createState() => _MainState();
+  State<App> createState() => _AppState();
 }
 
-class _MainState extends State<Main> {
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return HomeScreen();
+    return HomePage();
   }
 }

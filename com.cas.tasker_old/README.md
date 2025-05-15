@@ -1,6 +1,6 @@
 # tasker
 
-manager your daily work
+A new Flutter project.
 
 ## Getting Started
 

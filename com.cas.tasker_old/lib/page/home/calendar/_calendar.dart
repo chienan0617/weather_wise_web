@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/model/model.dart';
+import 'package:tasker/page/home/calendar/grid.dart';
 import 'package:tasker/page/home/calendar/week_bar.dart';
 import 'package:tasker/util/theme.dart';
 
@@ -16,7 +18,10 @@ class _CalendarPageState extends State<CalendarPage> {
       backgroundColor: style_16,
       body: Column(
         children: [
-          CalendarWeekBar()
+          CalendarWeekBar(),
+          Expanded(
+            child: CalendarGrid(year: 2025, month: 4, date: Model.calendarRender.getMonthData(2025, 4)),
+          ),
         ],
       ),
     );
