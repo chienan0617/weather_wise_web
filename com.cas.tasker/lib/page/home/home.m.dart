@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tasker/library.util.dart';
 import 'package:tasker/page/home/calendar/calendar.m.dart';
 import 'package:tasker/page/home/drawer.dart';
+import 'package:tasker/page/home/setting/setting.m.dart';
+import 'package:tasker/page/home/task_group/task_group.m.dart';
 import 'package:tasker/util/data/data.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,19 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
         // appBar: AppBar(),
         drawer: const SideBar(),
         body: const <Widget>[
-          CalendarScreen(), SizedBox(), SizedBox(),
+          CalendarScreen(), TaskGroupScreen(), SettingScreen()
         ][Data.app.getInt('currentPageIndex')],
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today_outlined), label: "calendar"
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.task), label: "task"
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: "setting"
-            )
+            BottomNavigationBarItem(icon: Icon(Icons.calendar_today_outlined), label: "Calendar"),
+            BottomNavigationBarItem(icon: Icon(Icons.task), label: "Task Group"),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Setting")
           ],
           onTap: (i) {setState(() {Data.app.put<int>('currentPageIndex', i);});},
           currentIndex: Data.app.getInt('currentPageIndex'),

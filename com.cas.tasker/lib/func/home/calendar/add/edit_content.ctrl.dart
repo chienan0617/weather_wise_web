@@ -12,6 +12,8 @@ class AddTask {
   static void initEditor() {
     titleInput.controller.text = '';
     contentInput.controller.text = '';
+    taskGroup.currentIndex = 0;
+    type.taskType = TaskType.card;
   }
 }
 

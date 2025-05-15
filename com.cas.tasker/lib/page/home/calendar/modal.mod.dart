@@ -23,34 +23,32 @@ void showDateBottomSheet(
     backgroundColor: style_n0p, // 可選：使背景透明
     builder: (context) {
       Widget unfinished() =>
-        Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(left: 20, right: 20),
-            child: const Text(
-              '待完成',
+        const Row(
+          children: [
+            SizedBox(width: 20),
+            Text(
+              '未完成',
               style: TextStyle(color: style_128, fontSize: 16),
             ),
-          ),
-          const Expanded(child: Divider(thickness: 0.5,)),
-          const SizedBox(width: 20,)
-        ],
-      );
+            SizedBox(width: 20),
+            Expanded(child: Divider(thickness: 0.5,)),
+            SizedBox(width: 20)
+          ],
+        );
 
       Widget finished() =>
-        Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(left: 20, right: 20),
-            child: const Text(
+        const Row(
+          children: [
+            SizedBox(width: 20),
+            Text(
               '已完成',
               style: TextStyle(color: style_128, fontSize: 16),
             ),
-          ),
-          const Expanded(child: Divider(thickness: 0.5,)),
-          const SizedBox(width: 20,)
-        ],
-      );
+            SizedBox(width: 20),
+            Expanded(child: Divider(thickness: 0.5,)),
+            SizedBox(width: 20)
+          ],
+        );
 
       Widget stateBar() =>
         Container(
@@ -109,7 +107,6 @@ void showDateBottomSheet(
                                 children: [
                                   Container(
                                     width: 8.5, height: 8.5,
-                                    margin: const EdgeInsets.only(right: 5),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: CalendarGeneratorApi.getGroupTaskColor(
@@ -117,9 +114,12 @@ void showDateBottomSheet(
                                       ),
                                     ),
                                   ),
-                                  text(
+                                  const SizedBox(width: 5),
+                                  Text(
                                     data['task'][week][day][index].taskGroupName,
-                                    size: 14, os: -64
+                                    style: TextStyle(
+                                      fontSize: 14, color: style_32,
+                                    ),
                                   ),
                                 ],
                               ),

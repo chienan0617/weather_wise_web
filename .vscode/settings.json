@@ -4,5 +4,6 @@
     "cSpell.words": [
         "tasker"
     ],
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "cmake.sourceDirectory": "C:/Users/jimmy/Desktop/productivity/com.cas.calculator/linux"
 }

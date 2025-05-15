@@ -21,13 +21,13 @@ class _CalendarWeekState extends State<CalendarWeek> {
         children: List.generate(
           DateTime.daysPerWeek, (int index) {
             return Container(
-              alignment: Alignment.center,
               decoration: const BoxDecoration(
-                // border: Border.all(color: Colors.amber)
+                border: Border(bottom: BorderSide(color: style_8, width: 0.5))
               ),
+              alignment: Alignment.center,
               width: (size.width - 20) / 7, // * - margin width * 2
               height: 30,
-              child: Text(com('week_ab')[index], style: const TextStyle(fontSize: 15),),
+              child: Text(com('week_ab')[index], style: const TextStyle(fontSize: 15, color: style_0),),
             );
           }
         ),

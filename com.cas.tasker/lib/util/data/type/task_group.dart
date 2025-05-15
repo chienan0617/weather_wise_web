@@ -6,7 +6,9 @@ import 'package:tasker/util/data/type.dart';
 class TaskGroupData implements DataBase {
   late final Box? box;
 
-  TaskGroupData() {Data.register(this);}
+  TaskGroupData() {
+    Data.register(this);
+  }
 
   @override
   Box getBox() => box!;
@@ -14,11 +16,10 @@ class TaskGroupData implements DataBase {
   @override
   Future<void> initialize() async {
     box = await Hive.openBox('taskGroup');
+    // box?.clear();
   }
 
   @override
-
-
   int newTaskGroupIndex() {
     if (!box!.containsKey('index')) {
       box?.put('index', 0);
@@ -40,8 +41,7 @@ class TaskGroupData implements DataBase {
     return box?.toMap().cast<String, dynamic>() ?? {};
   }
 
-  Map getAllTaskGroup() =>
-    (box?.get('group') as Map);
+  Map getAllTaskGroup() => (box?.get('group') as Map);
 
   TaskGroup getTaskGroup(String name) {
     return (box?.get('group') as Map)[name];
@@ -49,12 +49,8 @@ class TaskGroupData implements DataBase {
 
   @override
   void checkKeyExist(String key, defaultValue) {
-    if (!box!.containsKey('index')) box?.put('index', 1);
-    if (!box!.containsKey('group')) box?.put('group', {});
-    if (!box!.get('group').containsKey('default')) {
-      var data = box!.get('group');
-      data['default'] = TaskGroup('default', primary.toARGB32(), newTaskGroupIndex());
-      box?.put('group', data);
+    if (!box!.containsKey(key)) {
+      box?.put(key, defaultValue);
     }
   }
 
@@ -63,4 +59,24 @@ class TaskGroupData implements DataBase {
 
   @override
   void put<T>(String name, value) => box?.put(name, value);
+
+  @override
+  void initData() {
+    checkKeyExist('index', 1);
+    checkKeyExist('group', {});
+
+    if (!box!.get('group').containsKey('default')) {
+      var data = box!.get('group');
+      data['default'] = TaskGroup(
+        'default',
+        primary.toARGB32(),
+        newTaskGroupIndex(),
+        'title',
+        'subtitle',
+        DateTime.now(),
+        DateTime.now(),
+      );
+      box?.put('group', data);
+    }
+  }
 }

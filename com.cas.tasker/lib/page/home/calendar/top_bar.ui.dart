@@ -46,11 +46,9 @@ class _TopBarState extends State<TopBar> {
         ),
         Row(
           children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: const Icon(Icons.more_vert, size: 24, color: style_0),
-            ),
-            const SizedBox()
+            const SizedBox(width: 10),
+            const Icon(Icons.more_vert, size: 24, color: style_0),
+            const SizedBox(width: 10)
           ],
         ),
       ],

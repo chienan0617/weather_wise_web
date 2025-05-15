@@ -13,7 +13,7 @@ changeLan(VoidCallback v) {
 }
 
 lan(String name) => normal[name]?[currentLanguageIndex] ?? normal[name]?[0] ?? '<Error!>';
-List<String> com(String name) => (combine[name]?[currentLanguageIndex] as List) ?? combine[name]?[0] ?? '<Error!>';
+List<String> com(String name) => (combine[name]?[currentLanguageIndex] as List) ?? combine[name]?[0] ?? err;
 
 getIndex(int normal) => ['en', 'zh'][normal];
 

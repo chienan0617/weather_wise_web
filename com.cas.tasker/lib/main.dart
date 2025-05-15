@@ -6,7 +6,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await start();
-  runApp(Main());
+  runApp(const Main());
 }
 
 class Main extends StatefulWidget {

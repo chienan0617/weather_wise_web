@@ -2,7 +2,6 @@
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tasker/util/data/data.dart';
-import 'package:tasker/library.util.dart';
 import 'package:tasker/util/data/type.dart';
 
 class Init {

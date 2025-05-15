@@ -101,10 +101,26 @@ class TaskGroup {
   @HiveField(2)
   int groupIndex;
 
+  @HiveField(3)
+  String title;
+
+  @HiveField(4)
+  String subtitle;
+
+  @HiveField(5)
+  DateTime createTime;
+
+  @HiveField(6)
+  DateTime lastEditTime;
+
   TaskGroup(
     this.name,
     this.color,
     this.groupIndex,
+    this.title,
+    this.subtitle,
+    this.createTime,
+    this.lastEditTime
   );
 }
 

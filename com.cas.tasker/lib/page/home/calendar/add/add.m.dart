@@ -27,25 +27,22 @@ class _CalendarAddScreenState extends State<CalendarAddScreen> {
             icon: const Icon(Icons.arrow_back, size: 24, color: style_0,)
           ),
         ),
-        body: Container(
-          // margin: EdgeInsets.symmetric(vertical: 0),
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    const AddTopBar(),
-                    const AddDate(),
-                    const AddTitle(),
-                    const Divider(),
-                    const AddContentEditor(),
-                    const Divider(),
-                  ],
-                )
-              ),
-              AddBottomBar()
-            ],
-          ),
+        body: const Column(
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  AddTopBar(),
+                  AddDate(),
+                  AddTitle(),
+                  Divider(indent: 20, endIndent: 20, thickness: 0.5),
+                  AddContentEditor(),
+                  Divider(indent: 20, endIndent: 20, thickness: 0.5),
+                ],
+              )
+            ),
+            AddBottomBar()
+          ],
         ),
       ),
     );

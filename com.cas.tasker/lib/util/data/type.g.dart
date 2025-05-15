@@ -117,19 +117,31 @@ class TaskGroupAdapter extends TypeAdapter<TaskGroup> {
       fields[0] as String,
       fields[1] as int,
       fields[2] as int,
+      fields[3] as String,
+      fields[4] as String,
+      fields[5] as DateTime,
+      fields[6] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskGroup obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.color)
       ..writeByte(2)
-      ..write(obj.groupIndex);
+      ..write(obj.groupIndex)
+      ..writeByte(3)
+      ..write(obj.title)
+      ..writeByte(4)
+      ..write(obj.subtitle)
+      ..writeByte(5)
+      ..write(obj.createTime)
+      ..writeByte(6)
+      ..write(obj.lastEditTime);
   }
 
   @override

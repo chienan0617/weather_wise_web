@@ -11,6 +11,12 @@ class AddDate extends StatefulWidget {
 
 class _AddDateState extends State<AddDate> {
 
+  @override
+  void initState() {
+    super.initState();
+    AddTask.initEditor();
+  }
+
 
   void _selectDate() async {
     DateTime? pickedDate = await showDatePicker(
@@ -139,11 +145,10 @@ class _AddDateState extends State<AddDate> {
               // decoration: BoxDecoration(
               //   // border: Border.all(color: Colors.a)
               // ),
-              margin: edge(h: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
-                // scrollPadding: edge(h: 10),
                 style: TextStyle(
-                  color: style_0p,
+                  color: style_0,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -167,7 +172,8 @@ class _AddDateState extends State<AddDate> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
-                      color: style_32, // 未聚焦時的邊框顏色
+                      color: style_128,
+                      width: 0.5 // 未聚焦時的邊框顏色
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
@@ -195,7 +201,6 @@ class _AddDateState extends State<AddDate> {
             child: Row(
               children: [
                 Container(
-                  margin: edge(h: 0),
                   decoration: BoxDecoration(
                     color: AddTask.taskGroup.getColor(),
                     shape: BoxShape.rectangle,
@@ -204,11 +209,11 @@ class _AddDateState extends State<AddDate> {
                   width: 17.5,
                   height: 17.5,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(right: 0, left: 5),
-                  child: text(AddTask.taskGroup.getColorName(), os: -128),
-                ),
-                Container(margin: edge(h: 5), child: icon(Icons.arrow_drop_down)),
+                const SizedBox(width: 5),
+                Text(AddTask.taskGroup.getColorName(), style: const TextStyle(color: style_128)),
+                const SizedBox(width: 5),
+                const Icon(Icons.arrow_drop_down, color: style_0),
+                const SizedBox(width: 5),
               ],
             ),
           )

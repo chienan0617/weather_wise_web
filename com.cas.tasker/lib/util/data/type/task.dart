@@ -61,4 +61,8 @@ class TaskData implements DataBase {
 
   @override
   void put<T>(String name, value) => box?.put(name, value);
+
+  @override
+  void initData() {
+  }
 }

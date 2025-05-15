@@ -1,6 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tasker/util/data/data.dart';
-import 'package:tasker/util/init.util.dart';
 
 class AppData implements DataBase {
   late final Box? box;
@@ -124,6 +123,10 @@ class AppData implements DataBase {
 
   @override
   Box getBox() => box!;
+
+  @override
+  void initData() {
+  }
 }
 
 

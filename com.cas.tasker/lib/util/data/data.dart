@@ -1,5 +1,4 @@
 
-import 'dart:math';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tasker/util/data/type/app.dart';
@@ -11,7 +10,7 @@ class Data {
   static final TaskData task = TaskData();
   static final TaskGroupData taskGroup = TaskGroupData();
 
-  static List<Registerable> instances = [];
+  static List<DataBase> instances = [];
 
   static Future<void> initialize() async {
     await app.initialize();
@@ -21,14 +20,20 @@ class Data {
     checkData();
   }
 
-  static Future<void> checkData() async => instances.forEach((i) {i.initialize;});
+  static Future<void> checkData() async =>
+    instances.forEach((i) {
+      i.initialize;
+      i.initData();
+    });
 
-  static register(Registerable object) => instances.add(object);
+
+  static register(DataBase object) => instances.add(object);
 }
 
 
 abstract class Registerable {
   void initialize();
+  void checkKeyExist(String key, dynamic defaultValue);
 }
 
 abstract class DataBase implements Registerable {
@@ -39,6 +44,9 @@ abstract class DataBase implements Registerable {
 
   Box getBox();
 
+  void initData();
+
+  @override
   void checkKeyExist(String key, dynamic defaultValue);
 
   dynamic get<T>(dynamic name);
