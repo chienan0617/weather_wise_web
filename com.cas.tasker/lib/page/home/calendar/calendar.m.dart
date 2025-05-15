@@ -17,7 +17,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [Expanded(child: TopBar())],
+        actions: const [Expanded(child: TopBar())],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Guide.calendar.toAddPage(context),
@@ -27,7 +27,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         builder: (context, constraints) {
           return Column(
           children: [
-            CalendarWeek(),
+            const CalendarWeek(),
             GridPageView(cons: constraints),
           ],
         );

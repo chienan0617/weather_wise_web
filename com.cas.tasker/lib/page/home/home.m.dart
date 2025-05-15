@@ -19,12 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
       theme: A.themeData,
       home: Scaffold(
         // appBar: AppBar(),
-        drawer: SideBar(),
-        body: [
-          CalendarScreen(), Container(), Container(),
+        drawer: const SideBar(),
+        body: const <Widget>[
+          CalendarScreen(), SizedBox(), SizedBox(),
         ][Data.app.getInt('currentPageIndex')],
         bottomNavigationBar: BottomNavigationBar(
-          items: [
+          items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.calendar_today_outlined), label: "calendar"
             ),
@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: (i) {setState(() {Data.app.put<int>('currentPageIndex', i);});},
           currentIndex: Data.app.getInt('currentPageIndex'),
           selectedItemColor: primary,
-          unselectedItemColor: style(),
+          unselectedItemColor: style_0,
           selectedFontSize: 14,
           unselectedFontSize: 13,
           showUnselectedLabels: true,

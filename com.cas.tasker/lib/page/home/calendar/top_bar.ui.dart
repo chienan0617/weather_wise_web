@@ -27,25 +27,30 @@ class _TopBarState extends State<TopBar> {
               padding: EdgeInsets.symmetric(horizontal: 5),
               child: IconButton(
                 onPressed: () {},
-                icon: icon(Icons.menu, size: 24),  
+                icon: const Icon(Icons.menu, size: 24, color: style_0,),
               ),
             ),
-            Container(
-              child: text(CalendarGeneratorApi.getFormateTime(), size: 22, w: FontWeight.w500),
+            Text(
+              CalendarGeneratorApi.getFormateTime(),
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+                color: style_0
+              ),
             ),
             IconButton(
-              onPressed: () {}, 
-              icon: icon(Icons.arrow_drop_down)
+              onPressed: () {},
+              icon: const Icon(Icons.arrow_drop_down, color: style_0)
             )
           ],
         ),
         Row(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: icon(Icons.more_vert, size: 24),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: const Icon(Icons.more_vert, size: 24, color: style_0),
             ),
-            Container(),
+            const SizedBox()
           ],
         ),
       ],

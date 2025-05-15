@@ -14,22 +14,22 @@ class _AddTopBarState extends State<AddTopBar> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              margin: edge(v: 5, h: 20),
-              child: text(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              child: Text(
                 '最後編輯: ${DateTime.now().toString().substring(5, 16)}',
-                os: -128,
+                style: const TextStyle(color: style_128),
               ),
             ),
             Container(
-              margin: edge(v: 5, h: 20),
-              child: text(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              child: Text(
                 '字數: ${AddTask.contentInput.controller.text.length}',
-                os: -128,
+                style: const TextStyle(color: style_128),
               ),
             ),
           ],

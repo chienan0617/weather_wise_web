@@ -33,7 +33,7 @@ class _CalendarGridState extends State<CalendarGrid> {
 
     return FlexWidget.flex(
       any: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: List.generate(6, (int week) {
             return Row(
@@ -98,13 +98,16 @@ class _DateCellState extends State<DateCell> {
         children: [
           SizedBox(
             height: widget.taskHeight + 2.5,
-            child: text((data["dateMonth"][week][day]).toString(), size: 12),
+            child: Text(
+              (data["dateMonth"][week][day]).toString(),
+              style: const TextStyle(fontSize: 12, color: style_0)
+            ),
           ),
           Column(
             children: List.generate(cellCount.$1, (int index) {
               return Container(
-                padding: EdgeInsets.symmetric(horizontal: 1.25),
-                margin: EdgeInsets.symmetric(vertical: 0.5),
+                padding: const EdgeInsets.symmetric(horizontal: 1.25),
+                margin: const EdgeInsets.symmetric(vertical: 0.5),
                 height: widget.taskHeight,
                 width: widget.cellWidth - 2, // * margin
                 decoration: BoxDecoration(
@@ -112,7 +115,7 @@ class _DateCellState extends State<DateCell> {
                   color: Color(data['task'][week][day][index].color),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 1, bottom: 1),
+                  padding: const EdgeInsets.only(left: 1, bottom: 1),
                   child: Text(
                     data['task'][week][day][index].title,
                     style: TextStyle(
@@ -134,7 +137,7 @@ class _DateCellState extends State<DateCell> {
                 height: widget.taskHeight,
                 child: Text(
                   '${cellCount.$3} more',
-                  style: TextStyle(fontSize: 10.75, color: style_64),
+                  style: const TextStyle(fontSize: 10.75, color: style_64),
                   softWrap: false,
                 ),
               )

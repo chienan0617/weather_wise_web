@@ -15,7 +15,7 @@ class SideBarState extends State<SideBar> {
       backgroundColor: primary,
       child: Column(
         children: [
-          ListTile()
+          const ListTile()
         ],
       ),
     );

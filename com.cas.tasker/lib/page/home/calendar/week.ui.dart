@@ -15,20 +15,19 @@ class _CalendarWeekState extends State<CalendarWeek> {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      
       // width: (size.width - 20) / 7,
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: List.generate(
           DateTime.daysPerWeek, (int index) {
             return Container(
               alignment: Alignment.center,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 // border: Border.all(color: Colors.amber)
               ),
               width: (size.width - 20) / 7, // * - margin width * 2
               height: 30,
-              child: text(com('week_ab')[index], size: 15),
+              child: Text(com('week_ab')[index], style: const TextStyle(fontSize: 15),),
             );
           }
         ),

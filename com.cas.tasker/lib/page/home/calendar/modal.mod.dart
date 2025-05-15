@@ -20,19 +20,20 @@ void showDateBottomSheet(
   showModalBottomSheet(
     context: context,
     isScrollControlled: true, // 允許自定義高度
-    backgroundColor: style_n0, // 可選：使背景透明
+    backgroundColor: style_n0p, // 可選：使背景透明
     builder: (context) {
       Widget unfinished() =>
         Row(
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 20),
-            child: Text(
+            margin: const EdgeInsets.only(left: 20, right: 20),
+            child: const Text(
               '待完成',
               style: TextStyle(color: style_128, fontSize: 16),
             ),
           ),
-          Expanded(child: divider(w: 15)),
+          const Expanded(child: Divider(thickness: 0.5,)),
+          const SizedBox(width: 20,)
         ],
       );
 
@@ -40,19 +41,20 @@ void showDateBottomSheet(
         Row(
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 20),
-            child: Text(
+            margin: const EdgeInsets.only(left: 20, right: 20),
+            child: const Text(
               '已完成',
               style: TextStyle(color: style_128, fontSize: 16),
             ),
           ),
-          Expanded(child: divider(w: 15)),
+          const Expanded(child: Divider(thickness: 0.5,)),
+          const SizedBox(width: 20,)
         ],
       );
 
       Widget stateBar() =>
         Container(
-          margin: edge(v: 15),
+          margin: const EdgeInsets.symmetric(vertical: 15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(7.5),
             color: style_0,
@@ -63,11 +65,13 @@ void showDateBottomSheet(
 
       Widget dateBar() =>
         Container(
-          margin: edge(h: 20, v: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           alignment: Alignment.centerLeft,
-          child: text(
+          child: Text(
             '${taskInfo['date'][1]} $day',
-            size: 22
+            style: const TextStyle(
+              fontSize: 22, color: style_0
+            ),
           ),
         );
 
@@ -83,8 +87,8 @@ void showDateBottomSheet(
               return Container(
                 width: size.width,
                 height: size.height,
-                decoration: BoxDecoration(
-                  color: style_n0,
+                decoration: const BoxDecoration(
+                  color: style_n8p,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                 ),
                 child: SingleChildScrollView(
@@ -139,14 +143,14 @@ void showDateBottomSheet(
                             },
                             controlAffinity: ListTileControlAffinity.leading,
                             activeColor: Color(data['task'][week][day][index].color),
-                            side: BorderSide(color: style_0),
-                            contentPadding: edge(h: 25),
+                            side: const BorderSide(color: style_0),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 25),
                             title: GestureDetector(
                               onTap: () {},
                               child: Text(
                                 data['task'][week][day][index].title,
                                 maxLines: 1,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: style_0,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
@@ -157,7 +161,7 @@ void showDateBottomSheet(
                               onPressed: () {
                                 // print('pressed');
                               },
-                              icon: icon(Icons.arrow_forward_ios, size: 16),
+                              icon: const Icon(Icons.arrow_forward_ios, size: 16, color: style_0),
                             ),
                           ) : const SizedBox();
                         }),
@@ -184,9 +188,11 @@ void showDateBottomSheet(
                                       ),
                                     ),
                                   ),
-                                  text(
+                                  Text(
                                     data['task'][week][day][index].taskGroupName,
-                                    size: 13, os: -128
+                                    style: const TextStyle(
+                                      fontSize: 13, color: style_128
+                                    ),
                                   ),
                                 ],
                               ),
@@ -212,14 +218,14 @@ void showDateBottomSheet(
                             activeColor: CalendarGeneratorApi.getGroupTaskColor(
                               data['task'][week][day][index].taskGroupName
                             ),//Color(data['task'][week][day][index].color),
-                            side: BorderSide(color: style_0),
-                            contentPadding: edge(h: 25),
+                            side: const BorderSide(color: style_0),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 25),
                             title: GestureDetector(
                               onTap: () {},
                               child: Text(
                                 data['task'][week][day][index].title,
                                 maxLines: 1,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: style_128,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
@@ -232,7 +238,7 @@ void showDateBottomSheet(
                               onPressed: () {
                                 print('pressed');
                               },
-                              icon: icon(Icons.arrow_forward_ios, size: 16),
+                              icon: const Icon(Icons.arrow_forward_ios, size: 16, color: style_0,),
                             ),
                           ) : const SizedBox();
                         }),

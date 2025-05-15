@@ -257,7 +257,7 @@ class PickDialogState extends State<PickDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: style_n0,
+      backgroundColor: style_n8p,
       content: SingleChildScrollView(
         child: Column(
           children: [...List.generate(
@@ -272,9 +272,9 @@ class PickDialogState extends State<PickDialog> {
                     // borderRadius: BorderRadius.circular(5)
                   ),
                 ),
-                title: text(AddTask.taskGroup.taskGroupListName[index]),
+                title: Text(AddTask.taskGroup.taskGroupListName[index], style: TextStyle(color: style_0),),
                 trailing: AddTask.taskGroup.currentIndex == index
-                  ? icon(Icons.check) : const SizedBox(),
+                  ? const Icon(Icons.check, size: 20, color: style_0) : const SizedBox(),
                 onTap: () {
                   setState(() {
                     AddTask.taskGroup.onChange(index);

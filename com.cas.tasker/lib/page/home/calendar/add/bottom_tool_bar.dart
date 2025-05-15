@@ -19,7 +19,7 @@ class _AddBottomBarState extends State<AddBottomBar> {
 
     return Container(
       decoration: BoxDecoration(
-        color: style_n0
+        color: style_n0p
       ),
       height: size.height * 0.05,
       child: Row(
@@ -27,21 +27,21 @@ class _AddBottomBarState extends State<AddBottomBar> {
         children: [
           IconButton(
             onPressed: () {},
-            icon: icon(Icons.undo)
+            icon: const Icon(Icons.undo, size: 20, color: style_0)
           ),
           IconButton(
             onPressed: () {},
-            icon: icon(Icons.redo)
+            icon: const Icon(Icons.redo, size: 20, color: style_0)
           ),
           const SizedBox(),
           const SizedBox(),
           IconButton(
             onPressed: () {},
-            icon: icon(Icons.format_color_text)
+            icon: const Icon(Icons.format_color_text, size: 20, color: style_0)
           ),
           IconButton(
             onPressed: () {},
-            icon: icon(Icons.text_fields)
+            icon: const Icon(Icons.text_fields, size: 20, color: style_0)
           ),
           IconButton(
             onPressed: () {
@@ -59,7 +59,7 @@ class _AddBottomBarState extends State<AddBottomBar> {
               );
             },
             // onPressed: () => Navigator.pop(context),
-            icon: icon(Icons.check)
+            icon: const Icon(Icons.check, size: 20, color: style_0)
           )
         ],
       ),
