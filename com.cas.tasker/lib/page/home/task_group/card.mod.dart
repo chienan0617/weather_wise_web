@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/library.util.dart';
+import 'package:tasker/page/home/task_group/edit/edit.m.dart';
 import 'package:tasker/util/data/type.dart';
 
 class TaskGroupCard extends StatefulWidget {
@@ -17,7 +18,14 @@ class _TaskGroupCardState extends State<TaskGroupCard> {
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TaskGroupEditScreen(
+            taskGroup: widget.taskGroup
+          ),
+        ),
+      ),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         height: size.height * 0.175,
@@ -49,25 +57,23 @@ class _TaskGroupCardState extends State<TaskGroupCard> {
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(
-                    Icons.delete_outline, color: style_0, size: 28,
+                    Icons.delete_outline,
+                    color: style_0,
+                    size: 28,
                   ),
                 ),
-                const SizedBox(width: 10)
+                const SizedBox(width: 10),
               ],
             ),
-            const Expanded(
-              child: SizedBox(),
-            ),
+            const Expanded(child: SizedBox()),
             // content
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10, vertical: 5
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 7.5),
                 decoration: BoxDecoration(
                   color: Colors.blue.withAlpha(128),
-                  borderRadius: BorderRadius.circular(10)
+                  borderRadius: BorderRadius.circular(10),
                 ),
 
                 child: SizedBox(
@@ -81,17 +87,14 @@ class _TaskGroupCardState extends State<TaskGroupCard> {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        widget.taskGroup.createTime.toString().substring(5,10),
-                        style: TextStyle(
-                          color: Colors.blue[300],
-                          fontSize: 16
-                        ),
+                        widget.taskGroup.createTime.toString().substring(5, 10),
+                        style: TextStyle(color: Colors.blue[300], fontSize: 16),
                       ),
                     ],
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

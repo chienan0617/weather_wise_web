@@ -42,6 +42,9 @@ class Task {
   @HiveField(8)
   String taskGroupName;
 
+  @HiveField(9)
+  List<int> date;
+
   Task(
     this.title,
     this.type,
@@ -50,7 +53,8 @@ class Task {
     this.color,
     this.content,
     this.index,
-    this.taskGroupName
+    this.taskGroupName,
+    this.date
   );
 }
 
@@ -113,6 +117,9 @@ class TaskGroup {
   @HiveField(6)
   DateTime lastEditTime;
 
+  @HiveField(7)
+  Map<int, Task> tasks;
+
   TaskGroup(
     this.name,
     this.color,
@@ -120,7 +127,8 @@ class TaskGroup {
     this.title,
     this.subtitle,
     this.createTime,
-    this.lastEditTime
+    this.lastEditTime,
+    this.tasks
   );
 }
 

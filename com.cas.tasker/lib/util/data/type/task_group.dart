@@ -14,12 +14,13 @@ class TaskGroupData implements DataBase {
   Box getBox() => box!;
 
   @override
-  Future<void> initialize() async {
-    box = await Hive.openBox('taskGroup');
-    // box?.clear();
-  }
+  Future<void> initialize() async => box = await Hive.openBox('taskGroup');
 
   @override
+  Map<String, dynamic> getAllData() {
+    return box?.toMap().cast<String, dynamic>() ?? {};
+  }
+
   int newTaskGroupIndex() {
     if (!box!.containsKey('index')) {
       box?.put('index', 0);
@@ -36,16 +37,14 @@ class TaskGroupData implements DataBase {
     box!.put('group', data);
   }
 
-  @override
-  Map<String, dynamic> getAllData() {
-    return box?.toMap().cast<String, dynamic>() ?? {};
+  void addTaskToTaskGroup(Task task, int day) {
+    TaskGroup taskGroup = getTaskGroup(task.taskGroupName);
+    taskGroup.tasks[task.index] = task;
+    putTaskGroup(task.taskGroupName, taskGroup);
   }
 
   Map getAllTaskGroup() => (box?.get('group') as Map);
-
-  TaskGroup getTaskGroup(String name) {
-    return (box?.get('group') as Map)[name];
-  }
+  TaskGroup getTaskGroup(String name) => (box?.get('group') as Map)[name];
 
   @override
   void checkKeyExist(String key, defaultValue) {
@@ -75,6 +74,7 @@ class TaskGroupData implements DataBase {
         'subtitle',
         DateTime.now(),
         DateTime.now(),
+        {}
       );
       box?.put('group', data);
     }

@@ -25,13 +25,14 @@ class TaskAdapter extends TypeAdapter<Task> {
       fields[6] as dynamic,
       fields[7] as int,
       fields[8] as String,
+      (fields[9] as List).cast<int>(),
     )..done = fields[5] as bool;
   }
 
   @override
   void write(BinaryWriter writer, Task obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -49,7 +50,9 @@ class TaskAdapter extends TypeAdapter<Task> {
       ..writeByte(7)
       ..write(obj.index)
       ..writeByte(8)
-      ..write(obj.taskGroupName);
+      ..write(obj.taskGroupName)
+      ..writeByte(9)
+      ..write(obj.date);
   }
 
   @override
@@ -121,13 +124,14 @@ class TaskGroupAdapter extends TypeAdapter<TaskGroup> {
       fields[4] as String,
       fields[5] as DateTime,
       fields[6] as DateTime,
+      (fields[7] as Map).cast<int, Task>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskGroup obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -141,7 +145,9 @@ class TaskGroupAdapter extends TypeAdapter<TaskGroup> {
       ..writeByte(5)
       ..write(obj.createTime)
       ..writeByte(6)
-      ..write(obj.lastEditTime);
+      ..write(obj.lastEditTime)
+      ..writeByte(7)
+      ..write(obj.tasks);
   }
 
   @override

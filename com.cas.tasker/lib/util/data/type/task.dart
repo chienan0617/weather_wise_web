@@ -23,9 +23,7 @@ class TaskData implements DataBase {
         as Map<dynamic, dynamic>).cast<int, Task>();
   }
 
-  Task getTaskByIndex(int index) {
-    return get<Task>(index.toString());
-  }
+  Task getTaskByIndex(int index) => get<Task>(index.toString());
 
   @override
   Map<String, dynamic> getAllData() {

@@ -22,45 +22,6 @@ void showDateBottomSheet(
     isScrollControlled: true, // 允許自定義高度
     backgroundColor: style_n0p, // 可選：使背景透明
     builder: (context) {
-      Widget unfinished() =>
-        const Row(
-          children: [
-            SizedBox(width: 20),
-            Text(
-              '未完成',
-              style: TextStyle(color: style_128, fontSize: 16),
-            ),
-            SizedBox(width: 20),
-            Expanded(child: Divider(thickness: 0.5,)),
-            SizedBox(width: 20)
-          ],
-        );
-
-      Widget finished() =>
-        const Row(
-          children: [
-            SizedBox(width: 20),
-            Text(
-              '已完成',
-              style: TextStyle(color: style_128, fontSize: 16),
-            ),
-            SizedBox(width: 20),
-            Expanded(child: Divider(thickness: 0.5,)),
-            SizedBox(width: 20)
-          ],
-        );
-
-      Widget stateBar() =>
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(7.5),
-            color: style_0,
-          ),
-          width: size.width * 0.25,
-          height: 7.5,
-        );
-
       Widget dateBar() =>
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -92,10 +53,9 @@ void showDateBottomSheet(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      stateBar(),
+                      StateBar(width: size.width),
                       dateBar(),
-                      unfinished(),
-
+                      Finishing(text: '未完成'),
                       Column(
                         children: List.generate(data['task'][week][day].length, (
                           int index,
@@ -167,7 +127,7 @@ void showDateBottomSheet(
                         }),
                       ),
 
-                      finished(),
+                      Finishing(text: '已完成'),
 
                       Column(
                         children: List.generate(data['task'][week][day].length, (
@@ -253,4 +213,42 @@ void showDateBottomSheet(
       );
     },
   );
+}
+
+class Finishing extends StatelessWidget {
+  final String text;
+  const Finishing({
+    super.key, required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(width: 20),
+        Text(text, style: TextStyle(color: style_128, fontSize: 16)),
+        SizedBox(width: 20),
+        Expanded(child: Divider(thickness: 0.5,)),
+        SizedBox(width: 20)
+      ],
+    );
+  }
+}
+
+class StateBar extends StatelessWidget {
+  final double width;
+  const StateBar({super.key, required this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 15),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(7.5),
+        color: style_0,
+      ),
+      width: width * 0.25,
+      height: 7.5,
+    );
+  }
 }

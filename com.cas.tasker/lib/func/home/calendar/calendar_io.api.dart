@@ -32,11 +32,11 @@ class CalendarIoApi {
     // assert(type == TodoType.card && content is List);
     // assert(type == TodoType.list && content is Map);
     int newIndex = Data.task.newTaskIndex();
-    Data.task.storeTask(
-      year, month, day, newIndex, Task(
-        title, type, DateTime.now(), DateTime.now(), color, content, newIndex, taskGroupName
-      )
+    Task task = Task(
+      title, type, DateTime.now(), DateTime.now(), color, content, newIndex, taskGroupName, [year, month, day]
     );
+    Data.task.storeTask(year, month, day, newIndex, task);
+    Data.taskGroup.addTaskToTaskGroup(task, day);
   }
 
   // use in when create a new task and picking the task group
@@ -51,6 +51,7 @@ class CalendarIoApi {
   static void updateNewInfo(
     int year, int month, int day, int taskIndex, Task changed
   ) {
+    Data.taskGroup.addTaskToTaskGroup(changed, day);
     Data.task.storeTask(year, month, day, taskIndex, changed);
   }
 

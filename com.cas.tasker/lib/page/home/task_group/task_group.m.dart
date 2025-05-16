@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/library.util.dart';
-import 'package:tasker/page/home/task_group/card.mod.dart';
 import 'package:tasker/page/home/task_group/content.dart';
 
 class TaskGroupScreen extends StatefulWidget {
@@ -18,7 +17,22 @@ class _TaskGroupScreenState extends State<TaskGroupScreen> {
         onPressed: () {},
         child: Icon(Icons.add, color: primaryStyle()),
       ),
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.menu, color: style_0, size: 28
+          )
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.restart_alt, color: style_0, size: 28
+            )
+          ),
+        ],
+      ),
       body: Column(
         children: [
           TaskGroupContent()
