@@ -22,18 +22,6 @@ void showDateBottomSheet(
     isScrollControlled: true, // 允許自定義高度
     backgroundColor: style_n0p, // 可選：使背景透明
     builder: (context) {
-      Widget dateBar() =>
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          alignment: Alignment.centerLeft,
-          child: Text(
-            '${taskInfo['date'][1]} $day',
-            style: const TextStyle(
-              fontSize: 22, color: style_0
-            ),
-          ),
-        );
-
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setModalState) {
           return DraggableScrollableSheet(
@@ -54,8 +42,8 @@ void showDateBottomSheet(
                   child: Column(
                     children: [
                       StateBar(width: size.width),
-                      dateBar(),
-                      Finishing(text: '未完成'),
+                      DateBar(taskInfo: taskInfo, week: week, day: day),
+                      Finishing(text: '未完成', taskInfo: taskInfo, week: week, day: day, opposite: false,),
                       Column(
                         children: List.generate(data['task'][week][day].length, (
                           int index,
@@ -127,7 +115,7 @@ void showDateBottomSheet(
                         }),
                       ),
 
-                      Finishing(text: '已完成'),
+                      Finishing(text: '已完成', taskInfo: taskInfo, week: week, day: day, opposite: true,),
 
                       Column(
                         children: List.generate(data['task'][week][day].length, (
@@ -217,13 +205,26 @@ void showDateBottomSheet(
 
 class Finishing extends StatelessWidget {
   final String text;
+  final Map taskInfo;
+  final int week, day;
+  final bool opposite;
+
   const Finishing({
-    super.key, required this.text,
+    super.key,
+    required this.text,
+    required this.taskInfo,
+    required this.week,
+    required this.day,
+    required this.opposite,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return
+    // (taskInfo['task'][week][day] as List<Task>).where(
+    //   (task) => opposite ? task.done == true : !task.done == true
+    // ).toList().isEmpty ?
+    Row(
       children: [
         SizedBox(width: 20),
         Text(text, style: TextStyle(color: style_128, fontSize: 16)),
@@ -231,7 +232,7 @@ class Finishing extends StatelessWidget {
         Expanded(child: Divider(thickness: 0.5,)),
         SizedBox(width: 20)
       ],
-    );
+    );// : const SizedBox();
   }
 }
 
@@ -249,6 +250,37 @@ class StateBar extends StatelessWidget {
       ),
       width: width * 0.25,
       height: 7.5,
+    );
+  }
+}
+
+class DateBar extends StatelessWidget {
+  final Map taskInfo;
+  final int week, day;
+  const DateBar({
+    super.key,
+    required this.taskInfo,
+    required this.week,
+    required this.day
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    (int, int, int) date = CalendarIoApi.checkDateIsCorrect(
+      taskInfo['date'][0],
+      taskInfo['date'][1],
+      taskInfo['dateMonth'][week][day]
+    );
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        '${date.$2.toString().padLeft(2, '0')}-${date.$3.toString().padLeft(2, '0')}, ${date.$1}',
+        style: const TextStyle(
+          fontSize: 20, color: style_0, fontWeight: FontWeight.w500
+        ),
+      ),
     );
   }
 }

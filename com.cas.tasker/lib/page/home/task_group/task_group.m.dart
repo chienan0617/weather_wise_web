@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/library.util.dart';
+import 'package:tasker/page/home/task_group/add/add.m.dart';
 import 'package:tasker/page/home/task_group/content.dart';
 
 class TaskGroupScreen extends StatefulWidget {
@@ -14,7 +15,9 @@ class _TaskGroupScreenState extends State<TaskGroupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => TaskGroupAddScreen())
+        ),
         child: Icon(Icons.add, color: primaryStyle()),
       ),
       appBar: AppBar(

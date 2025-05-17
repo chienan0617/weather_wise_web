@@ -23,6 +23,14 @@ class TaskData implements DataBase {
         as Map<dynamic, dynamic>).cast<int, Task>();
   }
 
+  void deleteTask(
+    int year, int month, int day, int totalIndex, Task task
+  ) {
+    Map data = getTask(year, month, day);
+    data.remove(totalIndex);
+    box?.put('<$year-$month-$day>', data);
+  }
+
   Task getTaskByIndex(int index) => get<Task>(index.toString());
 
   @override

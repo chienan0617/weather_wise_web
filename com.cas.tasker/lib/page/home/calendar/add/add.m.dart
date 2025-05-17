@@ -4,7 +4,6 @@ import 'package:tasker/page/home/calendar/add/bottom_tool_bar.dart';
 import 'package:tasker/page/home/calendar/add/date.dart';
 import 'package:tasker/page/home/calendar/add/title.dart';
 import 'package:tasker/page/home/calendar/add/top_bar.dart';
-import 'package:tasker/util/customize.util.dart';
 import 'package:tasker/util/guide.util.dart';
 
 class CalendarAddScreen extends StatefulWidget {
@@ -17,11 +16,9 @@ class CalendarAddScreen extends StatefulWidget {
 class _CalendarAddScreenState extends State<CalendarAddScreen> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: A.themeData,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: text(err, size: 22),
+          title: const Text('create new task', style: TextStyle(color: style_0, fontSize: 24)),
           leading: IconButton(
             onPressed: () => Guide.calendar.toCalendarPage(context),
             icon: const Icon(Icons.arrow_back, size: 24, color: style_0,)
@@ -44,7 +41,6 @@ class _CalendarAddScreenState extends State<CalendarAddScreen> {
             AddBottomBar()
           ],
         ),
-      ),
     );
   }
 }
