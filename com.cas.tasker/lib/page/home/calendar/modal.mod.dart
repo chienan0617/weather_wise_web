@@ -68,6 +68,7 @@ void showDateBottomSheet(
                                     style: TextStyle(
                                       fontSize: 14, color: style_32,
                                     ),
+                                    softWrap: false,
                                   ),
                                 ],
                               ),
@@ -141,6 +142,7 @@ void showDateBottomSheet(
                                     style: const TextStyle(
                                       fontSize: 13, color: style_128
                                     ),
+                                    softWrap: false,
                                   ),
                                 ],
                               ),

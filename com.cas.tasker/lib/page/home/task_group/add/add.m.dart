@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/library.util.dart';
+import 'package:tasker/page/home/task_group/add/bottom_bar.dart';
+import 'package:tasker/page/home/task_group/add/content.dart';
 
 class TaskGroupAddScreen extends StatefulWidget {
   const TaskGroupAddScreen({super.key});
@@ -16,10 +18,15 @@ class _TaskGroupAddScreenState extends State<TaskGroupAddScreen> {
         title: const Text('add task group', style: TextStyle(color: style_0, fontSize: 28)),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back, color: style_0, size: 28),
+          icon: const Icon(Icons.arrow_back, color: style_0, size: 24),
         ),
       ),
-      body: SizedBox(),
+      body: const Column(
+        children: [
+          Expanded(child: AddContent()),
+          TaskGroupAddBottomBar(),
+        ],
+      )
     );
   }
 }

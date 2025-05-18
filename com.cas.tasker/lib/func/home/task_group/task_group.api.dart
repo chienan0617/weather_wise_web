@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:tasker/func/home/task_group/add/input.ctrl.dart';
+import 'package:tasker/page/home/calendar/add/add.m.dart';
+import 'package:tasker/page/home/task_group/card.mod.dart';
 import 'package:tasker/util/data/data.dart';
 import 'package:tasker/util/data/type.dart';
 
@@ -21,6 +25,39 @@ class TaskGroupApi {
       task.index,
       task
     );
-    Data.taskGroup.deleteTaskInTaskGroup(task.taskGroupName, task.index);
+    Data.taskGroup.deleteTaskInTaskGroup(task.taskGroupName);
+  }
+
+  static void storeAddNewTaskGroup() {
+    TaskGroup taskGroup = TaskGroup(
+      TaskGroupAddInputCtrl.name.getValue(),
+      TaskGroupAddInputCtrl.color.currentColor().toARGB32(),
+      Data.taskGroup.newTaskGroupIndex(),
+      TaskGroupAddInputCtrl.name.getValue(),
+      'not yet enable',
+      DateTime.now(),
+      DateTime.now(),
+      {}
+    );
+    Data.taskGroup.putTaskGroup(taskGroup.name, taskGroup);
+  }
+
+  // * use while deleting the task group
+  static bool checkTaskGroupWithTasksNotDone(TaskGroup taskGroup) {
+    return taskGroup.tasks.values.isNotEmpty ? true : false;
+  }
+
+  static void onDeleteButtonPressed(
+    TaskGroup taskGroup, void Function() refresh, BuildContext context
+  ) {
+    checkTaskGroupWithTasksNotDone(taskGroup)
+    ? showDeleteDialog(context, taskGroup, refresh)
+    : deleteTaskGroup(taskGroup, refresh);
+  }
+
+  static void deleteTaskGroup(TaskGroup taskGroup, Function() refresh) {
+    Data.taskGroup.deleteTaskGroup(taskGroup);
+    Data.task.onDeleteTaskGroup(taskGroup.name);
+    refresh();
   }
 }

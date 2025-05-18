@@ -36,11 +36,7 @@ class _TaskGroupScreenState extends State<TaskGroupScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          TaskGroupContent()
-        ],
-      ),
+      body: TaskGroupContent()
     );
   }
 }

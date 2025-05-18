@@ -14,12 +14,15 @@ class _TaskGroupContentState extends State<TaskGroupContent> {
   @override
   Widget build(BuildContext context) {
     List<TaskGroup> taskGroups = TaskGroupApi.getAllTaskGroup();
-    print("reGet taskGroup");
-
-    return Column(
-      children: List.generate(
-        taskGroups.length,
-        (int index) => TaskGroupCard(taskGroup: taskGroups[index])
+    return SingleChildScrollView(
+      child: Column(
+        children: List.generate(
+          taskGroups.length,
+          (int index) => TaskGroupCard(
+            taskGroup: taskGroups[index],
+            refresh: () => setState(() {}),
+          )
+        ),
       ),
     );
   }

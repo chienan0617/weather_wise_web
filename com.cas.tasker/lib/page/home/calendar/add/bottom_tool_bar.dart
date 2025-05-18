@@ -21,30 +21,18 @@ class _AddBottomBarState extends State<AddBottomBar> {
       decoration: BoxDecoration(
         color: style_n0p
       ),
-      height: size.height * 0.05,
+      height: size.height * 0.075,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.undo, size: 20, color: style_0)
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.redo, size: 20, color: style_0)
-          ),
+          section(Icons.undo, () {}),
+          section(Icons.redo, () {}),
           const SizedBox(),
           const SizedBox(),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.format_color_text, size: 20, color: style_0)
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.text_fields, size: 20, color: style_0)
-          ),
-          IconButton(
-            onPressed: () {
+          section(Icons.format_color_text, () {}),
+          section(Icons.text_fields, () {}),
+          section(
+            Icons.check, () {
               Guide.calendar.toCalendarPage(context);
               TaskIoApi.store.storeNewTask(
                 AddTask.dateInput.pickedTime.year,
@@ -55,14 +43,27 @@ class _AddBottomBarState extends State<AddBottomBar> {
                 type: AddTask.type.taskType,
                 color: AddTask.taskGroup.getColor().toARGB32(),
                 content: AddTask.contentInput.controller.text,
-                taskGroupName: 'default'
+                taskGroupName: AddTask.taskGroup.getTaskGroup().name
               );
-            },
-            // onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.check, size: 20, color: style_0)
+            }
           )
         ],
       ),
     );
   }
+
+  Widget section(
+    IconData icon, void Function() onPressed
+  ) {
+    return IconButton(
+      onPressed: onPressed,
+      icon: Icon(icon, size: 24, color: style_0)
+    );
+  }
 }
+
+// N, M, K = list(map(int, input().split()))
+// Q = [list(map(int, input().split())) for _ in range(N)]
+// C = [list(map(int, input().split())) for _ in range(K)]
+
+// # print(N, M, K, Q, C, end = "\n")

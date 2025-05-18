@@ -10,6 +10,50 @@ class TaskData implements DataBase {
   @override
   Box getBox() => box!;
 
+  void onDeleteTaskGroup(String taskGroupName) {
+    Map data = getAllData();
+    // data.values.where(
+    //   (dateData) {
+    //     print("$dateData");
+    //     return dateData.removeWhere(
+    //       (key, value) => value.taskGroupName == taskGroupName
+    //     );
+    //   }
+    // );
+
+    data.forEach(
+      (dateKey, dateTasks) {
+        if (dateTasks is Map) {
+          dateTasks.removeWhere(
+            (taskKey, task) => task.taskGroupName == taskGroupName
+          );
+        }
+      }
+    );
+
+    box?.putAll(data);
+
+    print(getAllData());
+  //   data.values.removeWhere{
+  //     if (date is! Map) continue;
+
+  //     for (Task task in date.values) {
+  //       if (task.taskGroupName == taskGroupName) {
+  //         (int, int, int) d = (
+  //           task.date[0],
+  //           task.date[1],
+  //           task.date[2],
+  //         );
+
+  //         Map dateData = getTask(d.$1, d.$2, d.$3);
+
+  //         dateData.remove(task.index);
+  //         put('<${d.$1}-${d.$2}-${d.$3}>', dateData);
+  //       }
+  //     }
+  //   }
+  }
+
   void storeTask(
     int year, int month, int day, int totalIndex, Task task
   ) {

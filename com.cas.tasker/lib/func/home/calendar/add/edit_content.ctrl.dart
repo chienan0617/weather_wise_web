@@ -37,6 +37,7 @@ class _PickTaskGroupCtrl {
   void onChange(int value) => currentIndex = value;
   String getColorName() => taskGroupListName[currentIndex];
   Color getColor() => Color(taskGroupList[currentIndex].color);
+  TaskGroup getTaskGroup() => taskGroupList[currentIndex];
 }
 
 class _DateInputCtrl {

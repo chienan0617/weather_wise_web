@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/func/home/calendar/calendar_io.api.dart';
+import 'package:tasker/func/home/task_group/task_group.api.dart';
 import 'package:tasker/library.util.dart';
 import 'package:tasker/page/home/task_group/edit/edit.m.dart';
 import 'package:tasker/util/data/type.dart';
 
 class TaskGroupCard extends StatefulWidget {
   final TaskGroup taskGroup;
+  final void Function() refresh;
 
-  const TaskGroupCard({super.key, required this.taskGroup});
+  const TaskGroupCard({
+    super.key,
+    required this.taskGroup,
+    required this.refresh,
+  });
 
   @override
   State<TaskGroupCard> createState() => _TaskGroupCardState();
@@ -18,14 +25,14 @@ class _TaskGroupCardState extends State<TaskGroupCard> {
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => TaskGroupEditScreen(
-            taskGroup: widget.taskGroup
+      onTap:
+        () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder:
+              (context) => TaskGroupEditScreen(taskGroup: widget.taskGroup),
           ),
         ),
-      ),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         height: size.height * 0.175,
@@ -55,7 +62,13 @@ class _TaskGroupCardState extends State<TaskGroupCard> {
                 ),
                 const Expanded(child: SizedBox()),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    TaskGroupApi.onDeleteButtonPressed(
+                      widget.taskGroup,
+                      widget.refresh,
+                      context
+                    );
+                  },
                   icon: const Icon(
                     Icons.delete_outline,
                     color: style_0,
@@ -76,27 +89,97 @@ class _TaskGroupCardState extends State<TaskGroupCard> {
                   borderRadius: BorderRadius.circular(10),
                 ),
 
-                child: SizedBox(
-                  width: 70,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.calendar_month,
-                        color: Colors.blue[300],
-                        size: 18,
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        widget.taskGroup.createTime.toString().substring(5, 10),
-                        style: TextStyle(color: Colors.blue[300], fontSize: 16),
-                      ),
-                    ],
-                  ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.calendar_month,
+                      color: Colors.blue[300],
+                      size: 18,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      widget.taskGroup.createTime.toString().substring(5, 10),
+                      style: TextStyle(color: Colors.blue[300], fontSize: 16),
+                    ),
+                  ],
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+void showDeleteDialog(
+  BuildContext context, TaskGroup taskGroup, void Function() refresh
+) {
+  showDialog(
+    context: context,
+    builder: (context) => TaskGroupDeleteDialog(
+      taskGroup: taskGroup,
+      refresh: refresh,
+    )
+  );
+}
+
+class TaskGroupDeleteDialog extends StatefulWidget {
+  final TaskGroup taskGroup;
+  final void Function() refresh;
+
+  const TaskGroupDeleteDialog({
+    super.key,
+    required this.taskGroup,
+    required this.refresh,
+  });
+
+  @override
+  State<TaskGroupDeleteDialog> createState() => _TaskGroupDeleteDialogState();
+}
+
+class _TaskGroupDeleteDialogState extends State<TaskGroupDeleteDialog> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: style_n8p,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            '還有${widget.taskGroup.tasks.values.length}個未完成的任務，確定要刪除嗎?',
+            style: const TextStyle(
+              color: style_0, fontSize: 20
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {Navigator.pop(context);},
+                child: const Text(
+                  'cancel', style: TextStyle(
+                    color: style_0, fontSize: 22
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              TextButton(
+                onPressed: () {
+                  TaskGroupApi.deleteTaskGroup(widget.taskGroup, widget.refresh);
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'delete', style: TextStyle(
+                    color: style_0, fontSize: 22
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
       ),
     );
   }

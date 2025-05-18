@@ -21,11 +21,15 @@ class TaskGroupData implements DataBase {
     return box?.toMap().cast<String, dynamic>() ?? {};
   }
 
-  void deleteTaskInTaskGroup(
-    String taskGroupName, int taskIndex
-  ) {
+  void deleteTaskInTaskGroup(String taskGroupName) {
     TaskGroup taskGroup = getTaskGroup(taskGroupName);
-    taskGroup.tasks.remove(taskIndex);
+    taskGroup.tasks.remove(taskGroup.groupIndex);
+  }
+
+  void deleteTaskGroup(TaskGroup taskGroup) {
+    Map data = getAllTaskGroup();
+    data.remove(taskGroup.name);
+    box?.put('group', data);
   }
 
   int newTaskGroupIndex() {
