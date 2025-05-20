@@ -100,7 +100,12 @@ class _DateCellState extends State<DateCell> {
             height: widget.taskHeight + 2.5,
             child: Text(
               (data["dateMonth"][week][day]).toString(),
-              style: const TextStyle(fontSize: 12, color: style_0)
+              style: TextStyle(
+                fontSize: 12,
+                color: CalendarGeneratorApi.getTheDayColor(
+                  [...data['date'], data['dateMonth'][week][day]], week
+                )
+              )
             ),
           ),
           Column(
@@ -112,7 +117,10 @@ class _DateCellState extends State<DateCell> {
                 width: widget.cellWidth - 2, // * margin
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2.5),
-                  color: Color(data['task'][week][day][index].color),
+                  // color: Color(data['task'][week][day][index].color),
+                  color: CalendarGeneratorApi.getTheDayTaskColor(
+                    [...data['date'], data['dateMonth'][week][day]], week, Color(data['task'][week][day][index].color)
+                  ),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 1, bottom: 1),

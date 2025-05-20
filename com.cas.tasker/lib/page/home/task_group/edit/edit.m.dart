@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/library.util.dart';
+import 'package:tasker/page/home/task_group/edit/bottom_bar.dart';
 import 'package:tasker/page/home/task_group/edit/content.dart';
 import 'package:tasker/page/home/task_group/edit/title_bar.dart';
 import 'package:tasker/page/home/task_group/edit/top_bar.dart';
@@ -7,8 +8,13 @@ import 'package:tasker/util/data/type.dart';
 
 class TaskGroupEditScreen extends StatefulWidget {
   final TaskGroup taskGroup;
+  final void Function() refresh;
 
-  const TaskGroupEditScreen({super.key, required this.taskGroup});
+  const TaskGroupEditScreen({
+    super.key,
+    required this.taskGroup,
+    required this.refresh,
+  });
 
   @override
   State<TaskGroupEditScreen> createState() => _TaskGroupEditScreenState();
@@ -33,7 +39,7 @@ class _TaskGroupEditScreenState extends State<TaskGroupEditScreen> {
           const SizedBox(height: 10),
           // const Divider(indent: 15, endIndent: 15, thickness: 0.25, height: 25),
           Expanded(child: EditContentItem(taskGroup: widget.taskGroup)),
-          // const EditBottomBar(),
+          EditBottomBar(taskGroup: widget.taskGroup, refresh: widget.refresh),
         ],
       ),
     );

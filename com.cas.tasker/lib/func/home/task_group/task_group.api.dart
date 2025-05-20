@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/annotation.dart';
 import 'package:tasker/func/home/task_group/add/input.ctrl.dart';
-import 'package:tasker/page/home/calendar/add/add.m.dart';
+import 'package:tasker/func/home/task_group/input.ctrl.dart';
 import 'package:tasker/page/home/task_group/card.mod.dart';
 import 'package:tasker/util/data/data.dart';
 import 'package:tasker/util/data/type.dart';
@@ -59,5 +60,26 @@ class TaskGroupApi {
     Data.taskGroup.deleteTaskGroup(taskGroup);
     Data.task.onDeleteTaskGroup(taskGroup.name);
     refresh();
+  }
+
+  @UseIn('edit screen when pressed check button')
+  static void onChangeTaskGroupName(TaskGroup originTaskGroup) {
+    // Data.taskGroup.putTaskGroup(taskGroupOriginName, taskGroup);
+    // TaskGroup newTaskGroup = originTaskGroup;
+    var allData = Data.taskGroup.getAllData();
+    allData['group'].remove(originTaskGroup.name);
+
+    String newName = TaskGroupEditInputCtrl.title.controller.text;
+    String oldName = originTaskGroup.name;
+    originTaskGroup.name = newName;
+
+    allData['group'][newName] = originTaskGroup;
+
+    Data.taskGroup.box?.putAll(allData);
+    // Data.task.onDeleteTaskGroup(oldName);
+    print('282');
+    Data.task.onChangeTaskGroupName(newName, oldName);
+    print('233');
+    Data.taskGroup.onTaskGroupNameChange(newName, oldName);
   }
 }

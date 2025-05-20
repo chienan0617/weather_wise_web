@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tasker/func/home/calendar/calendar_io.api.dart';
 import 'package:tasker/func/home/task_group/task_group.api.dart';
 import 'package:tasker/library.util.dart';
 import 'package:tasker/page/home/task_group/edit/edit.m.dart';
@@ -30,7 +29,7 @@ class _TaskGroupCardState extends State<TaskGroupCard> {
           context,
           MaterialPageRoute(
             builder:
-              (context) => TaskGroupEditScreen(taskGroup: widget.taskGroup),
+              (context) => TaskGroupEditScreen(taskGroup: widget.taskGroup, refresh: widget.refresh),
           ),
         ),
       child: Container(
@@ -56,7 +55,7 @@ class _TaskGroupCardState extends State<TaskGroupCard> {
                   widget.taskGroup.name,
                   style: const TextStyle(
                     color: style_0,
-                    fontSize: 28,
+                    fontSize: 24,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -150,7 +149,7 @@ class _TaskGroupDeleteDialogState extends State<TaskGroupDeleteDialog> {
           Text(
             '還有${widget.taskGroup.tasks.values.length}個未完成的任務，確定要刪除嗎?',
             style: const TextStyle(
-              color: style_0, fontSize: 20
+              color: style_0, fontSize: 16
             ),
           ),
           const SizedBox(height: 20),
@@ -161,7 +160,7 @@ class _TaskGroupDeleteDialogState extends State<TaskGroupDeleteDialog> {
                 onPressed: () {Navigator.pop(context);},
                 child: const Text(
                   'cancel', style: TextStyle(
-                    color: style_0, fontSize: 22
+                    color: style_0, fontSize: 16
                   ),
                 ),
               ),
@@ -173,7 +172,7 @@ class _TaskGroupDeleteDialogState extends State<TaskGroupDeleteDialog> {
                 },
                 child: const Text(
                   'delete', style: TextStyle(
-                    color: style_0, fontSize: 22
+                    color: Colors.red, fontSize: 16
                   ),
                 ),
               )

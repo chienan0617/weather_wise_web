@@ -3,7 +3,8 @@ import 'package:tasker/func/home/task_group/task_group.api.dart';
 import 'package:tasker/library.util.dart';
 
 class TaskGroupAddBottomBar extends StatefulWidget {
-  const TaskGroupAddBottomBar({super.key});
+  final void Function() refresh;
+  const TaskGroupAddBottomBar({super.key, required this.refresh});
 
   @override
   State<TaskGroupAddBottomBar> createState() => _TaskGroupAddBottomBarState();
@@ -35,6 +36,7 @@ class _TaskGroupAddBottomBarState extends State<TaskGroupAddBottomBar> {
             () {
               TaskGroupApi.storeAddNewTaskGroup();
               Navigator.pop(context);
+              widget.refresh();
             },
             Icons.check
           )

@@ -54,7 +54,46 @@ class TaskGroupData implements DataBase {
     putTaskGroup(task.taskGroupName, taskGroup);
   }
 
-  Map getAllTaskGroup() => (box?.get('group') as Map);
+  // void onTaskGroupNameChange(String newName, String oldName) {
+  //   Map data = getAllTaskGroup();
+  //   data['group'].forEach(
+  //     (groupKey, groupValue) {
+  //       if (groupValue.name == oldName) groupValue.name == newName;
+  //     }
+  //   );
+
+
+  // }
+
+  void onTaskGroupNameChange(String newName, String oldName) {
+    // 1. Fetch the map of all TaskGroup objects
+    final Map<String, TaskGroup> groups = getAllTaskGroup();
+
+    // 2. Prepare to update keys if the group name itself is the map key
+    final List<String> toRename = [];
+
+    // 3. Iterate over a copy of entries to avoid concurrent modification
+    groups.forEach((groupKey, groupValue) {
+      if (groupValue.name == oldName) {
+        // mark old key for removal
+        toRename.add(groupKey);
+        // actually rename the TaskGroup’s name property
+        groupValue.name = newName;
+      }
+    });
+
+    // 4. Re-key the map entries if needed
+    for (var oldKey in toRename) {
+      final tg = groups.remove(oldKey)!;
+      groups[newName] = tg;
+    }
+
+    // 5. Persist the updated map back to Hive
+    box?.put('group', groups);
+  }
+
+
+  Map<String, TaskGroup> getAllTaskGroup() => (box?.get('group') as Map).cast<String, TaskGroup>();
   TaskGroup getTaskGroup(String name) => (box?.get('group') as Map)[name];
 
   @override

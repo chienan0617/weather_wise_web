@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/func/home/task_group/task_group.api.dart';
 import 'package:tasker/library.util.dart';
+import 'package:tasker/util/data/type.dart';
 
 class EditBottomBar extends StatefulWidget {
-  const EditBottomBar({super.key});
+  final TaskGroup taskGroup;
+  final void Function() refresh;
+  const EditBottomBar({
+    super.key,
+    required this.taskGroup,
+    required this.refresh,
+  });
 
   @override
   State<EditBottomBar> createState() => _EditBottomBarState();
@@ -21,7 +29,15 @@ class _EditBottomBarState extends State<EditBottomBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          EditBottomBarItem(icon: Icons.check, onPressed: () {}),
+          EditBottomBarItem(icon: Icons.check, onPressed: () {
+            // var taskGroup = widget.taskGroup;
+            // taskGroup.name = TaskGroupEditInputCtrl.title.controller.text;
+            TaskGroupApi.onChangeTaskGroupName(widget.taskGroup);
+            // print('successfully');
+            // print(Data.taskGroup.getAllTaskGroup().values.where((i) {print(i.name); return false;}));
+            Navigator.pop(context);
+            widget.refresh();
+          }),
           const SizedBox(width: 20)
           // EditBottomBarItem(icon: Icons.check, onPressed: () {}),
           // EditBottomBarItem(icon: Icons.check, onPressed: () {}),

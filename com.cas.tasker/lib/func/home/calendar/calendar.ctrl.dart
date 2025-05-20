@@ -54,8 +54,8 @@ class CalendarCtrl {
       default: _checkDate(0); controller.jumpToPage(1); break;
     }
 
-    rebuild();
     CalendarGeneratorApi.getFormateTime();
+    rebuild();
   }
 }
 

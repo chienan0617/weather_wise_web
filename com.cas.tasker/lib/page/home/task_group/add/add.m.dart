@@ -4,7 +4,9 @@ import 'package:tasker/page/home/task_group/add/bottom_bar.dart';
 import 'package:tasker/page/home/task_group/add/content.dart';
 
 class TaskGroupAddScreen extends StatefulWidget {
-  const TaskGroupAddScreen({super.key});
+  final void Function() refresh;
+
+  const TaskGroupAddScreen({super.key, required this.refresh});
 
   @override
   State<TaskGroupAddScreen> createState() => _TaskGroupAddScreenState();
@@ -15,16 +17,19 @@ class _TaskGroupAddScreenState extends State<TaskGroupAddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('add task group', style: TextStyle(color: style_0, fontSize: 28)),
+        title: const Text('', style: TextStyle(color: style_0, fontSize: 28)),
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back, color: style_0, size: 24),
+          onPressed: () {
+            Navigator.pop(context);
+            widget.refresh();
+          },
+          icon: const Icon(Icons.arrow_back, color: style_0, size: 28),
         ),
       ),
-      body: const Column(
+      body: Column(
         children: [
-          Expanded(child: AddContent()),
-          TaskGroupAddBottomBar(),
+          const Expanded(child: AddContent()),
+          TaskGroupAddBottomBar(refresh: widget.refresh),
         ],
       )
     );

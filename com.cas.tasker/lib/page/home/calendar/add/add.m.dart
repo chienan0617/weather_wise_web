@@ -18,10 +18,10 @@ class _CalendarAddScreenState extends State<CalendarAddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('create new task', style: TextStyle(color: style_0, fontSize: 24)),
+          title: const Text('', style: TextStyle(color: style_0, fontSize: 24)),
           leading: IconButton(
             onPressed: () => Guide.calendar.toCalendarPage(context),
-            icon: const Icon(Icons.arrow_back, size: 24, color: style_0,)
+            icon: const Icon(Icons.arrow_back, size: 28, color: style_0,)
           ),
         ),
         body: const Column(

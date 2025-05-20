@@ -31,7 +31,7 @@ class _TopBarState extends State<TopBar> {
               ),
             ),
             Text(
-              CalendarGeneratorApi.getFormateTime(),
+              CalendarGeneratorApi.getFormateTime(),//() => setState(() {})),
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,

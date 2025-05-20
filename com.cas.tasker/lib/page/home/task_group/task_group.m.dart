@@ -16,7 +16,9 @@ class _TaskGroupScreenState extends State<TaskGroupScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
-          context, MaterialPageRoute(builder: (context) => TaskGroupAddScreen())
+          context, MaterialPageRoute(
+            builder: (context) => TaskGroupAddScreen(refresh: () => setState(() {}))
+          )
         ),
         child: Icon(Icons.add, color: primaryStyle()),
       ),
@@ -29,14 +31,14 @@ class _TaskGroupScreenState extends State<TaskGroupScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => setState(() {}),
             icon: const Icon(
               Icons.restart_alt, color: style_0, size: 28
             )
           ),
         ],
       ),
-      body: TaskGroupContent()
+      body: TaskGroupContent(refresh: () => setState(() {}))
     );
   }
 }

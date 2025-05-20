@@ -1,11 +1,14 @@
+import 'package:tasker/annotation.dart';
 import 'package:tasker/util/data/data.dart';
 import 'package:tasker/util/data/type.dart';
 class CalendarIoApi {
 
   // * getTheDate's task
+  @Method()
   static Map<int, Task> getTaskByDate(int year, int month, int day) =>
     Data.task.getTask(year, month, day);
 
+  @UseIn('generator api file')
   static List<List<List>> getTaskDataToMonth(
     int year, int month, List<List<int>> data
   ) {
@@ -18,6 +21,7 @@ class CalendarIoApi {
   }
 
   // * create a new task and store
+  @Method()
   static void newTask(int year, int month, int day, {
     required String title,
     required String subtitle,
@@ -40,14 +44,17 @@ class CalendarIoApi {
   }
 
   // use in when create a new task and picking the task group
+  @Method()
   static List<TaskGroup> getTaskGroupList() {
     return Data.taskGroup.getAllTaskGroup().values.toList().cast<TaskGroup>();
   }
 
+  @Method()
   static List<String> getTaskGroupListName() {
     return getTaskGroupList().map((i) => i.name).toList();
   }
 
+  @UseIn('modal sheet work update')
   static void updateNewInfo(
     int year, int month, int day, int taskIndex, Task changed
   ) {
@@ -56,6 +63,7 @@ class CalendarIoApi {
   }
 
   // check is next or previous month
+  @Branch('checkDateIsCorrect')
   static (int, int, int) checkDateIsCorrectInCalendar(
     int year, int month, int day, int column
   ) {
@@ -69,11 +77,12 @@ class CalendarIoApi {
   }
 
   // check the month and year is correct
+  @Method()
   static (int, int, int) checkDateIsCorrect(
-    int year, int month, int day
+    int year, int month, [int day = 1]
   ) {
     if (month > 12) return (year + 1, month - 12, day);
-    if (month < 0) return (year - 1, month + 12, day);
+    if (month <= 0) return (year - 1, month + 12, day);
     return (year, month, day);
   }
 }

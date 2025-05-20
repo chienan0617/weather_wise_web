@@ -12,14 +12,6 @@ class TaskData implements DataBase {
 
   void onDeleteTaskGroup(String taskGroupName) {
     Map data = getAllData();
-    // data.values.where(
-    //   (dateData) {
-    //     print("$dateData");
-    //     return dateData.removeWhere(
-    //       (key, value) => value.taskGroupName == taskGroupName
-    //     );
-    //   }
-    // );
 
     data.forEach(
       (dateKey, dateTasks) {
@@ -32,26 +24,24 @@ class TaskData implements DataBase {
     );
 
     box?.putAll(data);
+  }
 
-    print(getAllData());
-  //   data.values.removeWhere{
-  //     if (date is! Map) continue;
+  void onChangeTaskGroupName(String newGroupName, String oldGroupName) {
+    Map data = getAllData();
 
-  //     for (Task task in date.values) {
-  //       if (task.taskGroupName == taskGroupName) {
-  //         (int, int, int) d = (
-  //           task.date[0],
-  //           task.date[1],
-  //           task.date[2],
-  //         );
-
-  //         Map dateData = getTask(d.$1, d.$2, d.$3);
-
-  //         dateData.remove(task.index);
-  //         put('<${d.$1}-${d.$2}-${d.$3}>', dateData);
-  //       }
-  //     }
-  //   }
+    data.forEach(
+      (dateKey, dateTasks) {
+        if (dateTasks is Map) {
+          dateTasks.forEach(
+            (taskKey, task) {
+              if (task.taskGroupName == oldGroupName) {
+                task.taskGroupName = newGroupName;
+              }
+            }
+          );
+        }
+      }
+    );
   }
 
   void storeTask(
