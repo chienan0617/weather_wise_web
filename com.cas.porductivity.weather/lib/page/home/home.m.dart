@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather/func/home/bottom_bar.ctrl.dart';
+import 'package:weather/page/home/local/local.m.dart';
 import 'package:weather/page/home/today_info.dart';
 import 'package:weather/util/library.dart';
 
@@ -11,28 +13,26 @@ class HomePageScreen extends StatefulWidget {
 
 class _HomePageScreenState extends State<HomePageScreen> {
   @override
+  void initState() {
+    super.initState();
+    BottomBarCtrl.refresh = () => setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: const Color(0xFF1C1121),
-        // appBar: AppBar(
-        //   backgroundColor: const Color(0xFF1C1121),
-        // ),
-        body: Expanded(
-          child: LayoutBuilder(
-            builder: (context, cons) {
-              return TodayInformation(
-                size: Size(cons.maxWidth, cons.maxHeight),
-              );
-            },
-          ),
-        ),
-        bottomNavigationBar: BottomSelectBar(),
-      ),
+      home: SafeArea(
+        child: Scaffold(
+          body: BottomBarCtrl.getCurrentPage(),
+          bottomNavigationBar: BottomSelectBar(),
+        )
+      )
     );
   }
 }
+
+const List<Widget> pages = [LocalPageScreen(), SizedBox(), SizedBox()];
 
 class BottomSelectBar extends StatefulWidget {
   const BottomSelectBar({super.key});
@@ -52,6 +52,8 @@ class _BottomSelectBarState extends State<BottomSelectBar> {
         // borderRadius: BorderRadius.circular(20)
       ),
       child: BottomNavigationBar(
+        currentIndex: BottomBarCtrl.pageIndex,
+        onTap: BottomBarCtrl.onValueChanged,
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.location_on_outlined),

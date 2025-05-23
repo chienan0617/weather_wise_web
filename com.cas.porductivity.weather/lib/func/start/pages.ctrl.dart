@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:weather/page/start/pages.dart';
+import 'package:weather/util/annotation.dart';
 import 'package:weather/util/data/data.dart';
 
 class IntroductionCtrl {
   static int currentPage = 0;
+
+  @registerFirst
   static void Function() dotsRefresh = () => {};
+
+  @registerFirst
   static void Function() pagesRefresh = () => {};
+
+  @registerFirst
   static void Function() changeToNormalPage = () => {};
 
-  static int getIndex() => currentPage;
-  static void setIndex(int value) => currentPage = value;
   static Widget getPage() => pages[currentPage];
   static bool isCurrentPage(int index) => currentPage == index;
   static bool isLastPage() => currentPage == pages.length -1;

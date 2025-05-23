@@ -19,3 +19,11 @@ class Branch {
 
   const Branch(this.from);
 }
+
+class RegisterFirst {
+  final String message;
+
+  const RegisterFirst(this.message);
+}
+
+const registerFirst = RegisterFirst('register first message');
