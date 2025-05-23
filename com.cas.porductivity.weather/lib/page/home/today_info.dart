@@ -5,7 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather/util/library.dart';
 
 class TodayInformation extends StatefulWidget {
-  const TodayInformation({super.key});
+  final Size size;
+
+  const TodayInformation({super.key, required this.size});
 
   @override
   State<TodayInformation> createState() => _TodayInformationState();
@@ -14,23 +16,20 @@ class TodayInformation extends StatefulWidget {
 class _TodayInformationState extends State<TodayInformation> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        SizedBox(
-          width: size.width,
-          height: size.height * 2 / 3,
-          child: ColorGradient(),
-        ),
+        SizedBox(height: widget.size.height * 3 / 5, child: ColorGradient(size: widget.size,)),
+        SizedBox(height: widget.size.height * 2 / 5, child: TodayForecast(size: widget.size,)),
       ],
     );
   }
 }
 
 class ColorGradient extends StatefulWidget {
-  const ColorGradient({super.key});
+  final Size size;
+  const ColorGradient({super.key, required this.size});
 
   @override
   State<ColorGradient> createState() => _ColorGradientState();
@@ -39,14 +38,13 @@ class ColorGradient extends StatefulWidget {
 class _ColorGradientState extends State<ColorGradient> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
 
     return Stack(
       children: [
         // 背景漸層
         Container(
-          width: size.width,
-          height: size.height * 0.75,
+          width: widget.size.width,
+          height: widget.size.height * 0.75,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -69,7 +67,7 @@ class _ColorGradientState extends State<ColorGradient> {
           ),
         ),
         // 中央的文字和圖示
-        Center(
+        Align(
           child: Column(
             mainAxisSize: MainAxisSize.min, // 收紧到内容高度
             mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +79,7 @@ class _ColorGradientState extends State<ColorGradient> {
                 height: 200,
                 fit: BoxFit.cover,
               ),
-              const SizedBox(height: 12), // 图片和文字间距
+              // const SizedBox(height: 12), // 图片和文字间距
               // <-- 温度文字 + 图标
               const Text(
                 '27°',
@@ -89,6 +87,15 @@ class _ColorGradientState extends State<ColorGradient> {
                   fontSize: 48,
                   fontWeight: FontWeight.w700,
                   color: Colors.white,
+                ),
+              ),
+              const Text(
+                'Taipei\n H: 39° / L: 12°',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white70,
                 ),
               ),
             ],
@@ -118,21 +125,53 @@ class _ColorGradientState extends State<ColorGradient> {
             icon: const Icon(Icons.settings, size: 26, color: Colors.white),
           ),
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10, vertical: 10
-              ),
-              child: Text(
-                'Today',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-            ),
-          ],
-        ),
       ],
+    );
+  }
+}
+
+class TodayForecast extends StatefulWidget {
+  final Size size;
+  const TodayForecast({super.key ,required this.size});
+
+  @override
+  State<TodayForecast> createState() => _TodayForecastState();
+}
+
+class _TodayForecastState extends State<TodayForecast> {
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      width: widget.size.width,
+      height: widget.size.height * 2 / 5,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF161121),
+            spreadRadius: 20,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(75),
+          topRight: Radius.circular(50),
+        ),
+        color: const Color(0xFF161121),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: const Text(
+              'Today',
+              style: TextStyle(fontSize: 16, color: Colors.white70),
+            ),
+          ),
+          const Divider(indent: 15, endIndent: 15, thickness: 0.5, height: 20,)
+        ],
+      ),
     );
   }
 }
