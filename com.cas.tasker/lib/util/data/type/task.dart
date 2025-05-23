@@ -69,7 +69,7 @@ class TaskData implements DataBase {
 
   @override
   Map<String, dynamic> getAllData() {
-    return box?.toMap().cast<String, dynamic>() ?? {};
+   return box?.toMap().cast<String, dynamic>() ?? {};
   }
 
   // * get add add self automatically
