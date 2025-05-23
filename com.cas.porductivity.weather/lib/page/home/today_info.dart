@@ -16,12 +16,17 @@ class TodayInformation extends StatefulWidget {
 class _TodayInformationState extends State<TodayInformation> {
   @override
   Widget build(BuildContext context) {
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        SizedBox(height: widget.size.height * 3 / 5, child: ColorGradient(size: widget.size,)),
-        SizedBox(height: widget.size.height * 2 / 5, child: TodayForecast(size: widget.size,)),
+        SizedBox(
+          height: widget.size.height * 3 / 5,
+          child: ColorGradient(size: widget.size),
+        ),
+        SizedBox(
+          height: widget.size.height * 2 / 5,
+          child: TodayForecast(size: widget.size),
+        ),
       ],
     );
   }
@@ -38,7 +43,6 @@ class ColorGradient extends StatefulWidget {
 class _ColorGradientState extends State<ColorGradient> {
   @override
   Widget build(BuildContext context) {
-
     return Stack(
       children: [
         // 背景漸層
@@ -90,7 +94,7 @@ class _ColorGradientState extends State<ColorGradient> {
                 ),
               ),
               const Text(
-                'Taipei\n H: 39° / L: 12°',
+                'H: 39° / L: 12° \n partly cloudy rain',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -110,15 +114,28 @@ class _ColorGradientState extends State<ColorGradient> {
             onPressed: () {},
             icon: const Icon(Icons.menu, size: 26, color: Colors.white),
           ),
-          title: const Text(
-            'Local Weather',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Space Grotesk',
-            ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Taipei',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Space Grotesk',
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+            ],
           ),
           trailing: IconButton(
             onPressed: () {},
@@ -132,7 +149,7 @@ class _ColorGradientState extends State<ColorGradient> {
 
 class TodayForecast extends StatefulWidget {
   final Size size;
-  const TodayForecast({super.key ,required this.size});
+  const TodayForecast({super.key, required this.size});
 
   @override
   State<TodayForecast> createState() => _TodayForecastState();
@@ -141,7 +158,6 @@ class TodayForecast extends StatefulWidget {
 class _TodayForecastState extends State<TodayForecast> {
   @override
   Widget build(BuildContext context) {
-
     return Container(
       width: widget.size.width,
       height: widget.size.height * 2 / 5,
@@ -169,7 +185,7 @@ class _TodayForecastState extends State<TodayForecast> {
               style: TextStyle(fontSize: 16, color: Colors.white70),
             ),
           ),
-          const Divider(indent: 15, endIndent: 15, thickness: 0.5, height: 20,)
+          const Divider(indent: 15, endIndent: 15, thickness: 0.5, height: 20),
         ],
       ),
     );
