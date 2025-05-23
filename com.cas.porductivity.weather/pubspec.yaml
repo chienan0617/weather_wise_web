@@ -13,6 +13,7 @@ dependencies:
   path_provider: ^2.1.5
   intl: ^0.17.0
   auto_size_text: ^3.0.0
+  flutter_svg: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -28,8 +29,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/rainy.png
-    - assets/weather/final
+    - assets/
+    - assets/weather/partly-cloudy-night-rain.svg
 
 analyzer:
   enable-experiment:

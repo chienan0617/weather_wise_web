@@ -15,10 +15,10 @@ class IntroductionCtrl {
   static bool isLastPage() => currentPage == pages.length -1;
 
   static void onPageChange() {
+    detectEndPage();
     dotsRefresh();
     pagesRefresh();
 
-    detectEndPage();
   }
 
   static void nextPage() {
