@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather/page/home/city/add/add.m.dart';
+import 'package:weather/page/home/city/content.dart';
 import 'package:weather/util/library.dart';
 
 class SearchPageScreen extends StatefulWidget {
@@ -31,7 +33,15 @@ class _SearchPageScreenState extends State<SearchPageScreen> {
           ),
         ),
       ),
-      body: SizedBox(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF2B11EA),
+        onPressed: () {
+          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CityAddPageScreen()));
+        },
+        child: const Icon(Icons.add, size: 28, color: Colors.white),
+      ),
+      body: const SearchContent(),
     );
   }
 }

@@ -186,7 +186,8 @@ class _TodayForecastState extends State<TodayForecast> {
               style: TextStyle(fontSize: 16, color: Colors.white70),
             ),
           ),
-          const Divider(indent: 15, endIndent: 15, thickness: 0.5, height: 20),
+          const SizedBox(height: 10),
+          // const Divider(indent: 15, endIndent: 15, thickness: 0.25),
 
           // 滾動區域
           Expanded(
@@ -258,67 +259,3 @@ class _TodayForecastState extends State<TodayForecast> {
     );
   }
 }
-
-
-// Stack(
-//       children: [
-//         Align(
-//           alignment: Alignment(0.625, -0.5),
-//           child: Container(
-//             width: 750, height: 200,
-//             decoration: BoxDecoration(
-//               color: Color.fromRGBO(97, 111, 192, 1)
-//             ),
-//             child: const SizedBox(),
-//           ),
-//         ),
-//         Align(
-//           alignment: Alignment(-0.625, 0.5),
-//           child: Container(
-//             width: 500, height: 200,
-//             decoration: BoxDecoration(
-//               color: Color.fromRGBO(21, 14, 109, 1)
-//             ),
-//             child: const SizedBox(),
-//           ),
-//         ),
-//         ClipRect(
-//           child: BackdropFilter(
-//             filter: ImageFilter.blur(sigmaX: 75, sigmaY: 75),
-//             child: Container(
-//                   color: Colors.black.withOpacity(0.2),
-//                 ),
-//           ),
-//         )
-//       ],
-//     );
-
-
-// Padding(
-        //   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        //   child: const Align(
-        //     alignment: Alignment(0, -1),
-        //     child: TextField(
-        //       decoration: InputDecoration(
-        //         prefixIcon: Icon(
-        //           Icons.search,
-        //           color: Colors.white,
-        //           size: 28,
-        //         ),
-        //         hintText: 'search for a city',
-        //         hintStyle: TextStyle(
-        //           color: Colors.white38,
-        //           fontSize: 20,
-        //           fontFamily: 'Space Grotesk',
-        //           fontWeight: FontWeight.w500,
-        //           height: 1.50,
-        //         ),
-        //       ),
-        //       style: TextStyle(
-        //         color: Colors.white,
-        //         fontSize: 20,
-        //         fontWeight: FontWeight.w500,
-        //       ),
-        //     ),
-        //   ),
-        // ),

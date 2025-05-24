@@ -2,8 +2,10 @@ name: weather
 description: "manager your daily work"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
+
 environment:
   sdk: ^3.7.0-323.2.beta
+
 dependencies:
   flutter:
     sdk: flutter
@@ -14,6 +16,7 @@ dependencies:
   intl: ^0.17.0
   auto_size_text: ^3.0.0
   flutter_svg: ^2.1.0
+  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +35,7 @@ flutter:
     - assets/
     - assets/weather/partly-cloudy-night-rain.svg
     - assets/weather/overcast-night-rain.svg
+    - assets/weather/rain.svg
 
 analyzer:
   enable-experiment:

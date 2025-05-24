@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather/page/home/today_info.dart';
+import 'package:weather/page/home/local/today_info.dart';
 
 class LocalPageScreen extends StatefulWidget {
   const LocalPageScreen({super.key});

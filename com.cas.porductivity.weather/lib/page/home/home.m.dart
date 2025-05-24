@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/func/home/bottom_bar.ctrl.dart';
 import 'package:weather/page/home/local/local.m.dart';
-import 'package:weather/page/home/search/search.m.dart';
+import 'package:weather/page/home/city/city.m.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -74,7 +74,10 @@ class _BottomSelectBarState extends State<BottomSelectBar> {
             icon: Icon(Icons.cloud_outlined),
             label: 'Forecast',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map_outlined),
+            label: 'City',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings_outlined),
             label: 'Setting',
