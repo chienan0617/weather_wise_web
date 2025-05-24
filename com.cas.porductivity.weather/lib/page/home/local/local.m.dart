@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather/page/home/home.m.dart';
 import 'package:weather/page/home/today_info.dart';
 
 class LocalPageScreen extends StatefulWidget {
@@ -17,13 +16,11 @@ class _LocalPageScreenState extends State<LocalPageScreen> {
       // appBar: AppBar(
       //   backgroundColor: const Color(0xFF1C1121),
       // ),
-      body: Expanded(
-        child: LayoutBuilder(
+      body: LayoutBuilder(
           builder: (context, cons) {
             return TodayInformation(size: Size(cons.maxWidth, cons.maxHeight));
           },
         ),
-      ),
     );
   }
 }

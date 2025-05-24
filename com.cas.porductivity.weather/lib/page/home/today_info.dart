@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather/util/library.dart';
 
 class TodayInformation extends StatefulWidget {
   final Size size;
@@ -67,7 +66,7 @@ class _ColorGradientState extends State<ColorGradient> {
         ClipRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 75, sigmaY: 75),
-            child: Container(color: Colors.black.withOpacity(0.2)),
+            child: Container(color: Colors.black.withValues(alpha: 0.2)),
           ),
         ),
         // 中央的文字和圖示
@@ -156,6 +155,8 @@ class TodayForecast extends StatefulWidget {
 }
 
 class _TodayForecastState extends State<TodayForecast> {
+  final int itemCount = 7;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -169,7 +170,7 @@ class _TodayForecastState extends State<TodayForecast> {
             blurStyle: BlurStyle.outer,
           ),
         ],
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(75),
           topRight: Radius.circular(50),
         ),
@@ -178,19 +179,86 @@ class _TodayForecastState extends State<TodayForecast> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: const Text(
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: Text(
               'Today',
               style: TextStyle(fontSize: 16, color: Colors.white70),
             ),
           ),
           const Divider(indent: 15, endIndent: 15, thickness: 0.5, height: 20),
+
+          // 滾動區域
+          Expanded(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final lineHeight = itemCount * 60.0;
+
+                return section(lineHeight);
+              },
+            ),
+          ),
         ],
       ),
     );
   }
+
+  Widget section(double lineHeight) {
+    return Stack(
+      children: [
+        Positioned(
+          left: 25,
+          child: Container(
+            width: 0.75,
+            height: lineHeight,
+            color: Colors.white70,
+          ),
+        ),
+        // 滾動的內容
+        ListView.builder(
+          padding: const EdgeInsets.only(left: 40),
+          itemCount: itemCount,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Row(
+                children: [
+                  Text(
+                    '${(index * 3).toString().padRight(2)} AM',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.white70,
+                      fontFamily: 'Space Grotesk',
+                    ),
+                  ),
+                  const SizedBox(width: 15),
+                  SvgPicture.asset(
+                    'assets/weather/overcast-night-rain.svg',
+                    width: 50,
+                    height: 50,
+                  ),
+                  // const SizedBox(width: 20),
+                  const Expanded(child: SizedBox()),
+                  const Text(
+                    '22° / 16°',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 16,
+                      fontFamily: 'Space Grotesk',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(width: 25),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
 }
+
 
 // Stack(
 //       children: [
