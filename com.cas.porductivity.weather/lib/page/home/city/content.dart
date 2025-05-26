@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather/func/home/city/city_content.ctrl.dart';
+import 'package:weather/func/home/city/city_io.api.dart';
 import 'package:weather/page/home/city/edit/edit.m.dart';
 import 'package:weather/util/library.dart';
 
@@ -14,12 +15,7 @@ class SearchContent extends StatefulWidget {
 class _SearchContentState extends State<SearchContent> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SearchBar(),
-        const Items(),
-      ]
-    );
+    return Column(children: [const SearchBar(), const Items()]);
   }
 }
 
@@ -53,16 +49,17 @@ class _SearchBarState extends State<SearchBar> {
             color: const Color(0xFF9991C9),
             fontSize: 16,
             fontFamily: 'Space Grotesk',
-            height: 1.50,
+            // height: 1.5,
           ),
         ),
         style: GoogleFonts.spaceGrotesk(
           textStyle: TextStyle(
             color: style_0,
             fontWeight: FontWeight.w500,
-            fontFamily: 'Space Grotesk'
+            fontFamily: 'Space Grotesk',
+            height: 1.5,
           ),
-        )
+        ),
       ),
     );
   }
@@ -79,13 +76,17 @@ class _ItemsState extends State<Items> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    List<String> cityList = CityIoApi.getCityList();
 
     return Column(
-      children: List.generate(3, (int index) {
+      children: List.generate(cityList.length, (int index) {
         return GestureDetector(
           onTap: () {
             Navigator.pop(context);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => CityEditPageScreen()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CityEditPageScreen()),
+            );
           },
           child: Container(
             width: size.width,
@@ -108,9 +109,9 @@ class _ItemsState extends State<Items> {
                   ),
                 ),
                 const SizedBox(width: 25),
-                const Text(
-                  'Taipei',
-                  style: TextStyle(
+                Text(
+                  cityList[index],
+                  style: const TextStyle(
                     color: style_8,
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -118,15 +119,8 @@ class _ItemsState extends State<Items> {
                   ),
                 ),
                 const Expanded(child: SizedBox()),
-                IconButton(
-                  onPressed: () {
-                  },
-                  icon: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: style_104,
-                    size: 20,
-                  ),
-                ),
+                const Icon(Icons.arrow_forward_ios, color: style_104, size: 20),
+                const SizedBox(width: 10)
               ],
             ),
           ),

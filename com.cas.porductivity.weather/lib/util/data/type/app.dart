@@ -16,6 +16,7 @@ class AppData implements DataBase {
   }
 
   @override
+
   T get<T>(String key) => box?.get(key) as T;
 
   @override
@@ -25,6 +26,7 @@ class AppData implements DataBase {
   void initData() {
     checkKeyExist('pageIndex', 0);
     checkKeyExist('tutorial', false);
+    checkKeyExist('location', ['default']);
   }
 
   @override

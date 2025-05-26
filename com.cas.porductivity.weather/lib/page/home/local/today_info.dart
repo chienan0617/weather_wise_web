@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:weather/func/home/local/local_io.api.dart';
 
 class TodayInformation extends StatefulWidget {
   final Size size;
@@ -225,7 +226,7 @@ class _TodayForecastState extends State<TodayForecast> {
               child: Row(
                 children: [
                   Text(
-                    '${(index * 3).toString().padRight(2)} AM',
+                    LocalIoApi.getFormatTime(index),
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.white70,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/func/home/bottom_bar.ctrl.dart';
+import 'package:weather/page/home/forecast/forecast.m.dart';
 import 'package:weather/page/home/local/local.m.dart';
 import 'package:weather/page/home/city/city.m.dart';
 
@@ -38,7 +39,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
 const List<Widget> pages = [
   LocalPageScreen(),
-  SizedBox(),
+  ForecastPageScreen(),
   SearchPageScreen(),
   SizedBox(),
 ];

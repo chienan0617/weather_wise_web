@@ -17,6 +17,8 @@ dependencies:
   auto_size_text: ^3.0.0
   flutter_svg: ^2.1.0
   google_fonts: ^4.0.3
+  http: ^1.4.0
+
 
 dev_dependencies:
   flutter_test:
@@ -54,13 +56,13 @@ analyzer:
   enable-experiment:
     - records
 
-flutter_native_splash:
-  color: "#232730"
-  image: assets/splash/splash_icon.png
-  android: true
-  ios: true
+# flutter_native_splash:
+#   color: "#232730"
+#   image: assets/splash/splash_icon.png
+#   android: true
+#   ios: true
 
-flutter_launcher_icons:
-  android: true
-  ios: true
-  image_path: "assets/icon/app_icon.png"
+# flutter_launcher_icons:
+#   android: true
+#   ios: true
+#   image_path: "assets/icon/app_icon.png"
