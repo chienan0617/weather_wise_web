@@ -1,7 +1,5 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather/func/home/local/local_io.api.dart';
 import 'package:weather/func/home/local/weather.mod.dart';
 
