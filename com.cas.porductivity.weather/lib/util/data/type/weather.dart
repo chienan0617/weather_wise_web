@@ -1,6 +1,6 @@
 
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:weather/func/home/local/weater_current_io.api.dart';
+import 'package:weather/func/home/local/weather_current_io.api.dart';
 import 'package:weather/util/data/data.dart';
 
 class WeatherData implements DataBase {
@@ -23,7 +23,7 @@ class WeatherData implements DataBase {
 
   @override
   void initData() {
-    CurrentWeatherApi.currentWeatherInitialize();
+    CurrentWeatherApi.weatherInitialize();
   }
 
   @override

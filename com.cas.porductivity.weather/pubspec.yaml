@@ -37,7 +37,49 @@ flutter:
     - assets/
     - assets/weather/partly-cloudy-night-rain.svg
     - assets/weather/overcast-night-rain.svg
+
+    - assets/weather/clear-day.svg
+    - assets/weather/clear-night.svg
+    - assets/weather/partly-cloudy-night.svg
+    - assets/weather/partly-cloudy-night.svg
+    - assets/weather/cloudy.svg
+    - assets/weather/overcast.svg
+    - assets/weather/overcast.svg
+    - assets/weather/mist.svg
+    - assets/weather/overcast-day-rain.svg
+    - assets/weather/overcast-night-rain.svg
+    - assets/weather/overcast-day-snow.svg
+    - assets/weather/overcast-night-snow.svg
+    - assets/weather/snowflake.svg
+    - assets/weather/thunderstorms-day-extreme.svg
+    - assets/weather/thunderstorms-night-extreme.svg
+    - assets/weather/wind-snow.svg
+    - assets/weather/thunderstorms-extreme-snow.svg
+    - assets/weather/fog-day.svg
+    - assets/weather/fog-night.svg
+    - assets/weather/fog.svg
+    - assets/weather/overcast-day-drizzle.svg
+    - assets/weather/overcast-night-drizzle.svg
+    - assets/weather/drizzle.svg
+    - assets/weather/snow.svg
+    - assets/weather/thunderstorms-day-extreme-snow.svg
+    - assets/weather/thunderstorms-night-extreme-snow.svg
     - assets/weather/rain.svg
+    - assets/weather/overcast-rain.svg
+    - assets/weather/extreme-rain.svg
+    - assets/weather/extreme-snow.svg
+    - assets/weather/sleet.svg
+    - assets/weather/extreme-sleet.svg
+    - assets/weather/overcast-snow.svg
+    - assets/weather/thunderstorms-rain.svg
+    - assets/weather/overcast-sleet.svg
+    - assets/weather/extreme-sleet.svg
+    - assets/weather/thunderstorms-snow.svg
+    - assets/weather/thunderstorms-extreme-snow.svg
+    - assets/weather/thunderstorms-extreme-rain.svg
+    - assets/weather/partly-cloudy-day.svg
+    - assets/weather/smoke.svg
+
   fonts:
     - family: Space Grotesk
       fonts:
@@ -56,13 +98,13 @@ analyzer:
   enable-experiment:
     - records
 
-# flutter_native_splash:
-#   color: "#232730"
-#   image: assets/splash/splash_icon.png
-#   android: true
-#   ios: true
+flutter_native_splash:
+  color: "#232730"
+  image: assets/splash/splash_icon.png
+  android: true
+  ios: true
 
-# flutter_launcher_icons:
-#   android: true
-#   ios: true
-#   image_path: "assets/icon/app_icon.png"
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather/func/home/local/weater_current_io.api.dart';
+import 'package:weather/func/home/local/weather_current_io.api.dart';
 
 class ForecastPageScreen extends StatelessWidget {
   const ForecastPageScreen({super.key});
@@ -21,7 +21,7 @@ class ForecastPageScreen extends StatelessWidget {
               // 這裡包一層 Expanded
               child: SingleChildScrollView(
                 child: Text(
-                  CurrentWeatherApi.currentWeather.toString(),
+                  CurrentWeatherApi.weather.toString(),
                   style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'Space Grotesk',

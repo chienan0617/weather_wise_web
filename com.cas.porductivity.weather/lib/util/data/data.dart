@@ -1,5 +1,5 @@
 import 'package:hive_flutter/adapters.dart';
-import 'package:weather/func/home/local/weather_current.mod.dart';
+import 'package:weather/func/home/local/weather.mod.dart';
 import 'package:weather/util/data/type/app.dart';
 import 'package:weather/util/data/type/weather.dart';
 
@@ -16,7 +16,15 @@ class Data {
   }
 
   static void typeInitialize() {
-    Hive.registerAdapter(WeatherCurrentAdapter());
+    Hive.registerAdapter(WeatherAdapter());
+    Hive.registerAdapter(LocationAdapter());
+    Hive.registerAdapter(CurrentWeatherAdapter());
+    Hive.registerAdapter(ForecastDayAdapter());
+    Hive.registerAdapter(DaySummaryAdapter());
+    Hive.registerAdapter(AstroAdapter());
+    Hive.registerAdapter(HourForecastAdapter());
+    Hive.registerAdapter(ConditionAdapter());
+    Hive.registerAdapter(AirQualityAdapter());
   }
 
   static Future<void> checkData() async {

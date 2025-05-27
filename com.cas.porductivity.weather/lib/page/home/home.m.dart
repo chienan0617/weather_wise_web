@@ -3,6 +3,7 @@ import 'package:weather/func/home/bottom_bar.ctrl.dart';
 import 'package:weather/page/home/forecast/forecast.m.dart';
 import 'package:weather/page/home/local/local.m.dart';
 import 'package:weather/page/home/city/city.m.dart';
+import 'package:weather/page/home/setting/temp.m.d.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -41,7 +42,7 @@ const List<Widget> pages = [
   LocalPageScreen(),
   ForecastPageScreen(),
   SearchPageScreen(),
-  SizedBox(),
+  DebugConsole(),
 ];
 
 class BottomSelectBar extends StatefulWidget {
@@ -80,8 +81,8 @@ class _BottomSelectBarState extends State<BottomSelectBar> {
             label: 'City',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            label: 'Setting',
+            icon: Icon(Icons.control_camera),
+            label: 'console',
           ),
         ],
         selectedFontSize: 14,
