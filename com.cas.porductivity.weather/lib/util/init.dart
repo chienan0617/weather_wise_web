@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:weather/util/data/data.dart';
 
-Future<void> setupApp() async{
+Future<void> setupApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  Data.typeInitialize();
   await Data.initialize();
   _test();
 }

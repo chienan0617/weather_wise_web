@@ -1,12 +1,12 @@
-import 'package:hive_flutter/adapters.dart';
+
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:weather/func/home/local/weater_current_io.api.dart';
 import 'package:weather/util/data/data.dart';
 
-class AppData implements DataBase {
+class WeatherData implements DataBase {
   late final Box? box;
 
-  AppData() {
-    Data.register(this);
-  }
+  WeatherData() {Data.register(this);}
 
   @override
   void checkKeyExist(String key, defaultValue) {
@@ -23,14 +23,12 @@ class AppData implements DataBase {
 
   @override
   void initData() {
-    checkKeyExist('pageIndex', 0);
-    checkKeyExist('tutorial', false);
-    checkKeyExist('location', ['default']);
+    CurrentWeatherApi.currentWeatherInitialize();
   }
 
   @override
   Future<void> initialize() async {
-    box = await Hive.openBox('app');
+    box = await Hive.openBox('weather');
   }
 
   @override

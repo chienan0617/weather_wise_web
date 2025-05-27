@@ -1,107 +1,150 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
+// part 'package:weather/util/data/type.g.dart';
+part 'weather_current.mod.g.dart';
+
+
 /// 表示特定地點的即時天氣資訊
+@HiveType(typeId: 0)
 class WeatherCurrent {
   /// 城市名稱
+  /// 城市名稱
+  @HiveField(0)
   final String cityName;
 
   /// 地區或省份名稱
+  @HiveField(1)
   final String region;
 
   /// 國家名稱
+  @HiveField(2)
   final String country;
 
   /// 緯度
+  @HiveField(3)
   final double lat;
 
   /// 經度
+  @HiveField(4)
   final double lon;
 
   /// 時區 ID, 例如 "Asia/Taipei"
+  @HiveField(5)
   final String timeZoneID;
 
   /// 當地時間的 Unix 時間戳
+  @HiveField(6)
   final int localtimeEpoch;
 
   /// 當地時間的字串表示, 例如 "2025-05-25 22:25"
+  @HiveField(7)
   final String localtime;
 
   /// 最後更新時間的 Unix 時間戳
+  @HiveField(8)
   final int lastUpdatedEpoch;
 
   /// 最後更新時間的字串表示, 例如 "2025-05-25 22:15"
+  @HiveField(9)
   final String lastUpdated;
 
   /// 溫度(攝氏)
+  @HiveField(10)
   final double tempC;
 
   /// 溫度(華氏)
+  @HiveField(11)
   final double tempF;
 
   /// 是否為白天(1:是, 0:否)
+  @HiveField(12)
   final int isDay;
 
   /// 天氣狀況描述, 例如 "局部多雲"
+  @HiveField(13)
   final String conditionText;
 
   /// 天氣圖示的 URL
+  @HiveField(14)
   final String conditionIcon;
 
   /// 天氣狀況代碼
+  @HiveField(15)
   final int conditionCode;
 
   /// 風速(英里/小時)
+  @HiveField(16)
   final double windMph;
 
   /// 風速(公里/小時)
+  @HiveField(17)
   final double windKph;
 
   /// 風向角度(度)
+  @HiveField(18)
   final int windDegree;
 
   /// 風向, 例如 "E"
+  @HiveField(19)
   final String windDir;
 
   /// 氣壓(毫巴)
+  @HiveField(20)
   final double pressureMb;
 
   /// 氣壓(英吋)
+  @HiveField(21)
   final double pressureIn;
 
   /// 降水量(毫米)
+  @HiveField(22)
   final double precipMm;
 
   /// 降水量(英吋)
+  @HiveField(23)
   final double precipIn;
 
   /// 相對濕度(百分比)
+  @HiveField(24)
   final int humidity;
 
   /// 雲量(百分比)
+  @HiveField(25)
   final int cloud;
 
   /// 體感溫度(攝氏)
+  @HiveField(26)
   final double feelslikeC;
 
   /// 體感溫度(華氏)
+  @HiveField(27)
   final double feelslikeF;
 
   /// 能見度(公里)
+  @HiveField(28)
   final double visKm;
 
   /// 能見度(英里)
+  @HiveField(29)
   final double visMiles;
 
   /// 紫外線指數
+  @HiveField(30)
   final double uv;
 
   /// 陣風風速(英里/小時)
+  @HiveField(31)
   final double gustMph;
 
   /// 陣風風速(公里/小時)
+  @HiveField(32)
   final double gustKph;
+
+  @HiveField(33)
+  final DateTime lastFetchTime;
 
   WeatherCurrent({
     required this.cityName,
@@ -137,6 +180,7 @@ class WeatherCurrent {
     required this.uv,
     required this.gustMph,
     required this.gustKph,
+    required this.lastFetchTime
   });
 
   /// 從 JSON 物件建立 WeatherCurrent 實例
@@ -179,6 +223,7 @@ class WeatherCurrent {
       uv: current['uv'].toDouble(),
       gustMph: current['gust_mph'].toDouble(),
       gustKph: current['gust_kph'].toDouble(),
+      lastFetchTime: DateTime.now(),
     );
   }
 
