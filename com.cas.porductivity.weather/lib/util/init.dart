@@ -14,8 +14,9 @@ Future<void> setupApp() async {
 
 Future<void> _test() async {
   // print(Data.app.get('pageIndex'));
-  Data.app.put('pageIndex', 0);
+  // Data.app.put('pageIndex', 0);
   // CityIoApi.removeCity('cityName');
+  // await CurrentWeatherApi.updateWeather();
 }
 
 void checkTutorial() {

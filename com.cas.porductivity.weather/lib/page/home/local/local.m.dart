@@ -26,23 +26,24 @@ class _LocalPageScreenState extends State<LocalPageScreen> {
         builder: (context, cons) {
           Size size = Size(cons.maxWidth, cons.maxHeight);
           return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: size.height * 5 / 7,
-            child: ColorGradient(size: size, weather: weather),
-          ),
-          SizedBox(
-            height: size.height * 2 / 7,
-            child: TodayForecast(size: size, weather: weather),
-          ),
-          SizedBox(
-            child: TodayInfo(),
-          )
-        ],
-      ),
-    );
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: size.height * 5 / 7,
+                  child: ColorGradient(size: size, weather: weather),
+                ),
+                SizedBox(
+                  height: size.height * 2 / 7,
+                  child: TodayForecast(size: size, weather: weather),
+                ),
+                SizedBox(
+                  width: size.width,
+                  child: TodayInfo(size: size, weather: weather),
+                ),
+              ],
+            ),
+          );
         },
       ),
     );

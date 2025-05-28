@@ -91,10 +91,10 @@ class _ColorGradientState extends State<ColorGradient> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Taipei',
+              Text(
+                widget.weather.location.name,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

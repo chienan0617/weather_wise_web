@@ -5,15 +5,16 @@ import 'package:weather/func/home/local/weather.mod.dart';
 import 'package:weather/util/library.dart';
 
 class LocalIoApi {
-  static String getFormatTime(int index) {
+  static (String, bool) getFormatTime(int index) {
     index += 1;
     // index *= 3;
+    bool isCurrent = hourIsCurrent(index);
     if (index < 12) {
-      return "${index.toString().padRight(2)}AM";
+      return ("${index.toString().padRight(2)}AM", isCurrent ? true : false);
     } else if (index == 12) {
-      return '12PM';
+      return ('12PM', isCurrent ? true : false);
     } else {
-      return "${(index - 12).toString().padRight(2)}PM";
+      return ("${(index - 12).toString().padRight(2)}PM", isCurrent ? true : false);
     }
   }
 
@@ -38,5 +39,9 @@ class LocalIoApi {
       weather.current.isDay,
       size
     );
+  }
+
+  static bool hourIsCurrent(int hours) {
+    return DateTime.now().hour == hours;
   }
 }
