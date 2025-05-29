@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather/func/home/local/weather.mod.dart';
-import 'package:weather/util/library.dart';
 
 class TodayInfo extends StatefulWidget {
   final Weather weather;

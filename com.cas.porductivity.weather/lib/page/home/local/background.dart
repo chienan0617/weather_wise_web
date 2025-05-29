@@ -57,7 +57,7 @@ class _ColorGradientState extends State<ColorGradient> {
               // const SizedBox(height: 12), // 图片和文字间距
               // <-- 温度文字 + 图标
               Text(
-                "${widget.weather.current.tempC.round()}°",
+                "${widget.weather.forecast[0].hour[DateTime.now().hour]}°",
                 style: const TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.w700,
