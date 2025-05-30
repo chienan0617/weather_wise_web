@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/func/home/local/local_io.api.dart';
 import 'package:weather/func/home/local/weather.mod.dart';
+import 'package:weather/util/language.dart';
 import 'package:weather/util/library.dart';
 
 class TodayForecast extends StatefulWidget {
@@ -24,7 +25,7 @@ class _TodayForecastState extends State<TodayForecast> {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF161121),
+            color: const Color(0xFF111121),
             spreadRadius: 20,
             blurStyle: BlurStyle.outer,
           ),
@@ -33,7 +34,7 @@ class _TodayForecastState extends State<TodayForecast> {
           topLeft: Radius.circular(75),
           topRight: Radius.circular(50),
         ),
-        color: const Color(0xFF161121),
+        color: const Color(0xFF111121),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,9 +43,9 @@ class _TodayForecastState extends State<TodayForecast> {
             // mainAxisAlignment: MainAxisAlignment,
             children: [
               const SizedBox(width: 30),
-              const Text(
-                'Today',//  |  ',
-                style: TextStyle(
+              Text(
+                Language.get('24h forecast'),//  |  ',
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white70,
                   fontFamily: 'Space Grotesk',
@@ -66,28 +67,35 @@ class _TodayForecastState extends State<TodayForecast> {
           // const Divider(indent: 15, endIndent: 15, thickness: 0.25),
 
           // 滾動區域
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            width: widget.size.width,
-            height: (widget.size.height * 2 / 7) - 33,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(24, (int index) {
-                  return hoursSection(index, widget.weather);
-                })
-              ),
-            )
+          Expanded(
+            child: LayoutBuilder(
+              builder: (context, cons) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  width: widget.size.width,
+                  height: (widget.size.height * 2 / 7) - 33,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(24, (int index) {
+                        List info = LocalIoApi.getForecastHoursTemps(
+                          widget.weather, 24,
+                        );
+                        return hoursSection(index, info[index]);
+                      })
+                    ),
+                  )
+                );
+              }
+            ),
           )
         ],
       ),
     );
   }
 
-  Widget hoursSection(int index, Weather weather) {
+  Widget hoursSection(int index, (int, double, int, String) info) {
     // log("$index ${weather.forecast[0].hour[index].condition.code.toString()}");
-    var time = LocalIoApi.getFormatTime(index);
-
     return SizedBox(
       width: 75,
       child: Padding(
@@ -96,7 +104,7 @@ class _TodayForecastState extends State<TodayForecast> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "${weather.forecast[0].hour[index].tempC}°",
+              "${info.$2}°",
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 14,
@@ -105,21 +113,20 @@ class _TodayForecastState extends State<TodayForecast> {
               ),
             ),
             LocalIoApi.getWeatherImage(
-              widget.weather.forecast[0].hour[index].condition.code,
-              widget.weather.forecast[0].hour[index].isDay,
+              info.$1, info.$3,
               Size(50, 50)
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(7.5),
-                color: time.$2 ? style_0 : Colors.transparent
+                color: index == 0 ? style_0 : Colors.transparent
               ),
               child: Text(
-                time.$1,
+                info.$4,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: time.$2 ? style_0p : style_0,
+                  color: index == 0 ? style_0p : style_0,
                   fontSize: 14,
                   fontFamily: 'Space Grotesk',
                   // backgroundColor:

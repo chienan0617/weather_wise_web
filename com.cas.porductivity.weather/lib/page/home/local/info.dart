@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/func/home/local/weather.mod.dart';
+import 'package:weather/util/language.dart';
 
 class TodayInfo extends StatefulWidget {
   final Weather weather;
@@ -21,9 +22,9 @@ class _TodayInfoState extends State<TodayInfo> {
         // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: 50),
-          const Text(
-            'Information',
-            style: TextStyle(
+          Text(
+            Language.get("Information"),
+            style: const TextStyle(
               color: Colors.white70,
               fontSize: 16,
               fontFamily: 'Space Grotesk',

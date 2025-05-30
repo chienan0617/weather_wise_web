@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather/page/home/city/add/add.m.dart';
-import 'package:weather/page/home/city/content.dart';
+import 'package:weather/page/home/search/add/add.m.dart';
+import 'package:weather/page/home/search/content.dart';
+import 'package:weather/util/language.dart';
 import 'package:weather/util/library.dart';
 
 class SearchPageScreen extends StatefulWidget {
@@ -21,10 +22,10 @@ class _SearchPageScreenState extends State<SearchPageScreen> {
           onPressed: () {},
           icon: const Icon(Icons.menu, color: style_0, size: 26),
         ),
-        title: const Text(
-          'Locations',
+        title: Text(
+          Language.get('Locations'),
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontFamily: 'Space Grotesk',

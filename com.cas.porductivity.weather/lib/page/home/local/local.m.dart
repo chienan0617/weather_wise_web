@@ -18,7 +18,7 @@ class _LocalPageScreenState extends State<LocalPageScreen> {
     Weather weather = CurrentWeatherApi.weather;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1C1121),
+      backgroundColor: const Color(0xFF111121),
       // appBar: AppBar(
       //   backgroundColor: const Color(0xFF1C1121),
       // ),

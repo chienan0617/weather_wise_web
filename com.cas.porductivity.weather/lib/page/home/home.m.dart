@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:weather/func/home/bottom_bar.ctrl.dart';
 import 'package:weather/page/home/forecast/forecast.m.dart';
 import 'package:weather/page/home/local/local.m.dart';
-import 'package:weather/page/home/city/city.m.dart';
+import 'package:weather/page/home/search/city.m.dart';
 import 'package:weather/page/home/setting/temp.m.d.dart';
+import 'package:weather/util/language.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -67,22 +68,22 @@ class _BottomSelectBarState extends State<BottomSelectBar> {
       child: BottomNavigationBar(
         currentIndex: BottomBarCtrl.pageIndex,
         onTap: BottomBarCtrl.onValueChanged,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.location_on_outlined),
-            label: 'Local',
+            label: Language.get('Local'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud_outlined),
-            label: 'Forecast',
+            label: Language.get('Forecast'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.map_outlined),
-            label: 'City',
+            icon: Icon(Icons.search),
+            label: Language.get('Search'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.control_camera),
-            label: 'console',
+            icon: Icon(Icons.settings_outlined),
+            label: Language.get('Setting'),
           ),
         ],
         selectedFontSize: 14,

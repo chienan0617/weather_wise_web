@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:weather/func/home/local/local_io.api.dart';
 import 'package:weather/func/home/local/weather.mod.dart';
+import 'package:weather/util/language.dart';
 
 class ColorGradient extends StatefulWidget {
   final Size size;
@@ -50,14 +51,11 @@ class _ColorGradientState extends State<ColorGradient> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // <-- 上方图片
-              LocalIoApi.getCurrentWeatherImage(
-                widget.weather,
-                Size(200, 200)
-              ),
+              LocalIoApi.getCurrentWeatherImage(widget.weather, Size(200, 200)),
               // const SizedBox(height: 12), // 图片和文字间距
               // <-- 温度文字 + 图标
               Text(
-                "${widget.weather.forecast[0].hour[DateTime.now().hour]}°",
+                "${widget.weather.forecast[0].hour[DateTime.now().hour].tempC.round()}°",
                 style: const TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.w700,
@@ -65,10 +63,10 @@ class _ColorGradientState extends State<ColorGradient> {
                 ),
               ),
               Text(
-                'H: ${widget.weather.forecast[0].day.maxTempC}° '
-                'L: ${widget.weather.forecast[0].day.minTempC}°'
+                '${LocalIoApi.getDescription(widget.weather.current.condition.code, widget.weather.current.isDay)}'
                 '\n '
-                '${widget.weather.current.condition.text}',
+                '${Language.get('Highest')}: ${widget.weather.forecast[0].day.maxTempC}° '
+                '${Language.get('Lowest')}: ${widget.weather.forecast[0].day.minTempC}°',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,

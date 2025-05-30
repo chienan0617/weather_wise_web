@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather/func/home/city/city_content.ctrl.dart';
 import 'package:weather/func/home/city/city_io.api.dart';
-import 'package:weather/page/home/city/edit/edit.m.dart';
+import 'package:weather/page/home/search/edit/edit.m.dart';
+import 'package:weather/util/language.dart';
 import 'package:weather/util/library.dart';
 
 class SearchContent extends StatefulWidget {
@@ -44,9 +45,9 @@ class _SearchBarState extends State<SearchBar> {
             color: Color(0xFF9991C9),
             size: 28,
           ),
-          hintText: 'Search for a city or airport',
-          hintStyle: TextStyle(
-            color: const Color(0xFF9991C9),
+          hintText: Language.get('Search for a city or airport'),
+          hintStyle: const TextStyle(
+            color: Color(0xFF9991C9),
             fontSize: 16,
             fontFamily: 'Space Grotesk',
             // height: 1.5,

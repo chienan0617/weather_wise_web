@@ -26,6 +26,7 @@ class AppData implements DataBase {
     checkKeyExist('pageIndex', 0);
     checkKeyExist('tutorial', false);
     checkKeyExist('location', ['default']);
+    checkKeyExist('language', true);
   }
 
   @override
