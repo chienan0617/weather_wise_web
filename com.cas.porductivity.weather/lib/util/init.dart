@@ -3,13 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:weather/util/data/data.dart';
 import 'package:weather/util/language.dart';
+import 'package:weather/util/location.dart';
 
 Future<void> setupApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Data.typeInitialize();
+  await Data.typeInitialize();
   await Data.initialize();
   await Language.initialize();
+  await SearchedLocation.initialize();
   _test();
 }
 

@@ -42,7 +42,7 @@ class _SearchPageScreenState extends State<SearchPageScreen> {
         },
         child: const Icon(Icons.add, size: 28, color: Colors.white),
       ),
-      body: const SearchContent(),
+      body: const Column(children: [Testing(), Items()]),
     );
   }
 }

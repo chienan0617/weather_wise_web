@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:weather/func/home/city/city_content.ctrl.dart';
 import 'package:weather/func/home/city/city_io.api.dart';
 import 'package:weather/page/home/search/edit/edit.m.dart';
 import 'package:weather/util/language.dart';
 import 'package:weather/util/library.dart';
-
-class SearchContent extends StatefulWidget {
-  const SearchContent({super.key});
-
-  @override
-  State<SearchContent> createState() => _SearchContentState();
-}
-
-class _SearchContentState extends State<SearchContent> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [const SearchBar(), const Items()]);
-  }
-}
+import 'package:weather/util/location.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({super.key});
+  final TextEditingController controller;
+  final FocusNode focusNode;
+  const SearchBar({
+    super.key,
+    required this.controller,
+    required this.focusNode,
+  });
 
   @override
   State<SearchBar> createState() => _SearchBarState();
@@ -37,7 +29,8 @@ class _SearchBarState extends State<SearchBar> {
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextField(
-        controller: CityContentCtrl.search.controller,
+        controller: widget.controller, //CityContentCtrl.search.controller,
+        focusNode: widget.focusNode,
         decoration: InputDecoration(
           border: InputBorder.none,
           prefixIcon: const Icon(
@@ -121,12 +114,80 @@ class _ItemsState extends State<Items> {
                 ),
                 const Expanded(child: SizedBox()),
                 const Icon(Icons.arrow_forward_ios, color: style_104, size: 20),
-                const SizedBox(width: 10)
+                const SizedBox(width: 10),
               ],
             ),
           ),
         );
       }),
+    );
+  }
+}
+
+class Testing extends StatefulWidget {
+  const Testing({super.key});
+
+  @override
+  State<Testing> createState() => _TestingState();
+}
+
+class _TestingState extends State<Testing> {
+  @override
+  Widget build(BuildContext context) {
+
+    return Autocomplete<SearchedLocation>(
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        return CityIoApi.getOptions(textEditingValue);
+      },
+      optionsViewBuilder: (context, onSelected, options) {
+        return Align(
+          alignment: Alignment.topLeft,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: const Color(0xFF282644),
+            ),
+            child: ListView.builder(
+              itemCount: options.length,
+              itemBuilder: (BuildContext context, int index) {
+                final SearchedLocation option = options.elementAt(index);
+                return GestureDetector(
+                  onTap: () => onSelected(option),
+                  child: ListTile(
+                    leading: const Icon(
+                      Icons.location_on_outlined,
+                      color: style_0,
+                      size: 22,
+                    ),
+                    title: Text(
+                      option.name,
+                      style: const TextStyle(
+                        color: style_0,
+                        fontFamily: 'Space Grotesk',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
+                    subtitle: Text(
+                      "${option.county}${option.country == "" ? "" : ","} "
+                      "${option.state}${option.country == "" ? "" : ","}  "
+                      "${option.country}",
+                      style: const TextStyle(
+                        color: style_64,
+                        fontFamily: 'Space Grotesk',
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
+      fieldViewBuilder: (context, controller, focusNode, onEditingComplete) {
+        return SearchBar(controller: controller, focusNode: focusNode);
+      },
     );
   }
 }

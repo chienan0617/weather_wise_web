@@ -34,6 +34,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/city/world_cities.json
     - assets/lang/weather.json
     - assets/lang/word.json
     - assets/weather/partly-cloudy-night-rain.svg
