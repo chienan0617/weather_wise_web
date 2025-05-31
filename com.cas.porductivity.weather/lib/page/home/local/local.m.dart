@@ -15,7 +15,7 @@ class LocalPageScreen extends StatefulWidget {
 class _LocalPageScreenState extends State<LocalPageScreen> {
   @override
   Widget build(BuildContext context) {
-    Weather weather = CurrentWeatherApi.weather;
+    Weather weather = CurrentWeatherApi.getDefaultWeather();
 
     return Scaffold(
       backgroundColor: const Color(0xFF111121),

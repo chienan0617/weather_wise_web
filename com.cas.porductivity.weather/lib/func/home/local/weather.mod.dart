@@ -33,7 +33,8 @@ class Weather {
 
   /// 從 JSON 建構 Weather 實例
   factory Weather.fromJson(Map<String, dynamic> json) {
-    log(jsonEncode(json));
+    // log(jsonEncode(json));
+    log('fetch data !');
     final loc = Location.fromJson(json['location']);
     final cur = CurrentWeather.fromJson(json['current']);
     final days =

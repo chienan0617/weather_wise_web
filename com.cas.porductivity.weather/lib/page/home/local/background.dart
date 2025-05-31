@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:weather/func/home/local/local_io.api.dart';
+import 'package:weather/func/home/local/select_city.ctrl.dart';
 import 'package:weather/func/home/local/weather.mod.dart';
 import 'package:weather/util/language.dart';
+import 'package:weather/util/location.dart';
 
 class ColorGradient extends StatefulWidget {
   final Size size;
@@ -91,17 +93,17 @@ class _ColorGradientState extends State<ColorGradient> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               DropdownButton<String>(
-                value: selectedCity,
+                value: SelectCityCtrl.getCurrentOption(),
                 // hint: Text('請選擇城市'),
                 onChanged: (String? newValue) {
-                  setState(() {
-                    selectedCity = newValue;
-                  });
+                  SelectCityCtrl.onChanged(newValue ?? '');
+                  setState(() {});
                 },
+
                 items: LocalIoApi.getItems(),
-                // dropdownColor: Colors.transparent,
+                dropdownColor: Color.fromRGBO(0, 0, 0, 0.25),
                 icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-                // underline: const SizedBox(),
+                underline: const SizedBox(),
                 elevation: 10,
               ),
 

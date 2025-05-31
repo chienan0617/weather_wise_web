@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather/func/home/city/city_io.api.dart';
@@ -9,10 +8,13 @@ import 'package:weather/util/location.dart';
 class SearchBar extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
+  // final VoidCallback onComplete;
+
   const SearchBar({
     super.key,
     required this.controller,
     required this.focusNode,
+    // required this.onComplete,
   });
 
   @override
@@ -45,14 +47,16 @@ class _SearchBarState extends State<SearchBar> {
             fontFamily: 'Space Grotesk',
             // height: 1.5,
           ),
-        ),
-        style: GoogleFonts.spaceGrotesk(
-          textStyle: TextStyle(
-            color: style_0,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Space Grotesk',
-            height: 1.5,
+          suffixIcon: IconButton(
+            onPressed: () => widget.controller.text = '',
+            icon: const Icon(Icons.cancel, color: style_0, size: 22),
           ),
+        ),
+        style: const TextStyle(
+          color: style_0,
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Space Grotesk',
+          height: 1.5,
         ),
       ),
     );
@@ -98,26 +102,44 @@ class _ItemsState extends State<Items> {
                     ),
                   ),
                   const SizedBox(width: 25),
-                  Text(
-                    cityList[index].name,
-                    style: const TextStyle(
-                      color: style_8,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Space Grotesk',
+                  Expanded(
+                    child: Text(
+                      cityList[index].name,
+                      style: const TextStyle(
+                        color: style_8,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Space Grotesk',
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
                     ),
                   ),
-                  const Expanded(child: SizedBox()),
+                  // const Expanded(child: SizedBox()),
                   IconButton(
                     onPressed: () {
-                      CityIoApi.removeCity(cityList[index]);
-                      widget.refresh();
+                      CityIoApi.removeCity(cityList[index])
+                      ? const SizedBox()
+                      : ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          padding: const EdgeInsets.all(0),
+                          content: Container(
+                            color: Colors.red,
+                            height: 30,
+                            width: MediaQuery.of(context).size.width,
+                            child: Center(
+                              child: Text(
+                                Language.get('There should be at least one city'),
+                                style: const TextStyle(color: Colors.white, fontFamily: 'Space Grotesk', fontSize: 16, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
                     },
-                    icon: const Icon(
-                      Icons.close,
-                      color: style_104,
-                      size: 24,
-                    ),
+                    icon: const Icon(Icons.close, color: style_96, size: 24),
                   ),
                   const SizedBox(width: 10),
                 ],
@@ -158,8 +180,15 @@ class _TestingState extends State<Testing> {
               itemCount: options.length,
               itemBuilder: (BuildContext context, int index) {
                 final SearchedLocation option = options.elementAt(index);
+
+                void onComplete() {
+                  CityIoApi.addCity(option);
+                  widget.refresh();
+                  onSelected(option);
+                }
+
                 return ListTile(
-                  // onTap: () => onSelected(option),
+                  onTap: onComplete,
                   leading: const Icon(
                     Icons.location_on_outlined,
                     color: style_0,
@@ -185,13 +214,7 @@ class _TestingState extends State<Testing> {
                     ),
                   ),
                   trailing: IconButton(
-                    onPressed: () {
-                      CityIoApi.addCity(option);
-                      // onSelected(option.name);
-                      // Navigator.pop(context);
-                      widget.refresh();
-                      onSelected(option);
-                    },
+                    onPressed: onComplete,
                     icon: const Icon(Icons.add, color: style_0, size: 24),
                   ),
                 );

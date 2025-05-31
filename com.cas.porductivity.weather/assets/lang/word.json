@@ -14,5 +14,6 @@
   "Weather Forecast": ["Weather Forecast", "天氣預報"],
   "Locations": ["Locations", "地點"],
   "Highest": ["H", "最高"],
-  "Lowest": ["L", "最低"]
+  "Lowest": ["L", "最低"],
+  "There should be at least one city": ["There should be at least one city", "至少應該有一個城市"]
 }

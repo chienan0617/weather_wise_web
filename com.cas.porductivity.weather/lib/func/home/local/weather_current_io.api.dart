@@ -6,7 +6,24 @@ bool isFreeVersion = true;
 
 class CurrentWeatherApi {
   static void putWeather(Weather weather) {
-    Data.weather.put<Weather>('weather', weather);
+    Data.weather.checkKeyExist('weather', {});
+
+    Map data = Data.weather.get<Map>('weather');
+    // print(data);
+    data[weather.hashCode] = weather;
+    Data.weather.put<Map>('weather', data);
+  }
+
+  static Weather getWeather(Weather weather, [bool all = false]) {
+    return getAllWeatherData()[weather.hashCode]!;
+  }
+
+  static Map<int, Weather> getAllWeatherData() {
+    return Data.weather.get<Map>('weather').cast<int, Weather>();
+  }
+
+  static Weather getDefaultWeather() {
+    return getAllWeatherData().values.toList()[0];
   }
 
   static Future<Weather> fetchWeather() async {
@@ -20,7 +37,7 @@ class CurrentWeatherApi {
       Data.app.put('error', error.toString());
 
       if (!Data.weather.box!.containsKey('weather')) {
-        return Data.weather.get<Weather>('weather');
+        return getDefaultWeather();
       } else {
         return weatherTemplate;
       }
@@ -33,7 +50,7 @@ class CurrentWeatherApi {
       return;
     }
 
-    Weather weather = Data.weather.get<Weather>('weather');
+    Weather weather = getDefaultWeather();
 
     if (DateTime.now().difference(weather.lastFetchTime) > Duration(hours: 3)) {
       putWeather(await fetchWeather());
@@ -42,9 +59,6 @@ class CurrentWeatherApi {
     //   putWeather(await fetchWeather());
     // }
   }
-
-  static Weather get weather => Data.weather.get('weather');
-  // static set weather() =>
 
   static Future<void> updateWeather() async {
     putWeather(await fetchWeather());

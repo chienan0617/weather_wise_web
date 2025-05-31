@@ -20,17 +20,21 @@ class CityIoApi {
   }
 
   static void addCity(SearchedLocation cityName) {
-    List<SearchedLocation> cityList =
-        Data.app.get('location').cast<SearchedLocation>();
+    List<SearchedLocation> cityList = Data.app.get('location').cast<SearchedLocation>();
     cityList.add(cityName);
     Data.app.put('location', cityList);
   }
 
-  static void removeCity(SearchedLocation city) {
-    List<SearchedLocation> cityList =
-        Data.app.get('location').cast<SearchedLocation>();
-    cityList.remove(city);
-    Data.app.put('location', cityList);
+  static bool removeCity(SearchedLocation city) {
+    List<SearchedLocation> cityList = Data.app.get('location').cast<SearchedLocation>();
+
+    if (cityList.length == 1) {
+      return false;
+    } else {
+      cityList.remove(city);
+      Data.app.put('location', cityList);
+      return true;
+    }
   }
 
   static Iterable<SearchedLocation> getOptions(TextEditingValue value) {
