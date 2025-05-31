@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:weather/func/home/city/city_io.api.dart';
 import 'package:weather/util/language.dart';
 import 'package:weather/util/library.dart';
@@ -73,6 +72,12 @@ class Items extends StatefulWidget {
 
 class _ItemsState extends State<Items> {
   @override
+  void initState() {
+    super.initState();
+    // SelectCityCtrl.refreshSelectCity = () => setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     List<SearchedLocation> cityList = CityIoApi.getCityList();
@@ -119,25 +124,34 @@ class _ItemsState extends State<Items> {
                   // const Expanded(child: SizedBox()),
                   IconButton(
                     onPressed: () {
-                      CityIoApi.removeCity(cityList[index])
-                      ? const SizedBox()
-                      : ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          padding: const EdgeInsets.all(0),
-                          content: Container(
-                            color: Colors.red,
-                            height: 30,
-                            width: MediaQuery.of(context).size.width,
-                            child: Center(
-                              child: Text(
-                                Language.get('There should be at least one city'),
-                                style: const TextStyle(color: Colors.white, fontFamily: 'Space Grotesk', fontSize: 16, fontWeight: FontWeight.w500),
+                      setState(() {
+                        CityIoApi.removeCity(cityList[index])
+                            ? const SizedBox()
+                            : ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                padding: const EdgeInsets.all(0),
+                                content: Container(
+                                  color: Colors.red,
+                                  height: 30,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Center(
+                                    child: Text(
+                                      Language.get(
+                                        'There should be at least one city',
+                                      ),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Space Grotesk',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                duration: Duration(seconds: 1),
                               ),
-                            ),
-                          ),
-                          duration: Duration(seconds: 1),
-                        ),
-                      );
+                            );
+                      });
                     },
                     icon: const Icon(Icons.close, color: style_96, size: 24),
                   ),

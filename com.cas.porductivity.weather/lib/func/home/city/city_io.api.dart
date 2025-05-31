@@ -5,6 +5,8 @@ import 'package:weather/util/data/data.dart';
 import 'package:weather/util/location.dart';
 
 class CityIoApi {
+  static VoidCallback localPageCityListRefresh = () => ();
+
   static List<SearchedLocation> getCityList() {
     List<SearchedLocation> cityList =
         Data.app.get('location').cast<SearchedLocation>();
@@ -19,20 +21,27 @@ class CityIoApi {
     return cityList;
   }
 
+  static List<SearchedLocation> getAllCity() {
+    return (Data.app.get('location') as List).cast<SearchedLocation>();
+  }
+
   static void addCity(SearchedLocation cityName) {
-    List<SearchedLocation> cityList = Data.app.get('location').cast<SearchedLocation>();
+    List<SearchedLocation> cityList = getAllCity();
     cityList.add(cityName);
     Data.app.put('location', cityList);
   }
 
   static bool removeCity(SearchedLocation city) {
-    List<SearchedLocation> cityList = Data.app.get('location').cast<SearchedLocation>();
+    List<SearchedLocation> cityList = getAllCity();
 
     if (cityList.length == 1) {
       return false;
     } else {
       cityList.remove(city);
       Data.app.put('location', cityList);
+
+      // SelectCityCtrl.updateLocations();
+      // SelectCityCtrl.updateDefaultValue();
       return true;
     }
   }

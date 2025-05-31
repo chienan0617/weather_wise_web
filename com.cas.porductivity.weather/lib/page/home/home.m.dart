@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/func/home/bottom_bar.ctrl.dart';
+import 'package:weather/func/home/local/select_city.ctrl.dart';
+import 'package:weather/func/home/local/weather_current_io.api.dart';
 import 'package:weather/page/home/forecast/forecast.m.dart';
 import 'package:weather/page/home/local/local.m.dart';
 import 'package:weather/page/home/search/city.m.dart';
@@ -14,36 +16,44 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
+  late (double, double) currentLocated;
+
   @override
   void initState() {
     super.initState();
+    // 1) 預設要拿 (lat,lon)
+    currentLocated = CurrentWeatherApi.getDefaultWeatherLocated();
+
+    // 2) 當選城市時，拿到 matched.lat, matched.lng
+    SelectCityCtrl.rebuildLocalPage = (double lat, double lon) {
+      setState(() {
+        currentLocated = (lat, lon);
+      });
+    };
+    SelectCityCtrl.refreshCallback = () => setState(() {});
     BottomBarCtrl.refresh = () => setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          backgroundColor: const Color(0xFF282347),
-          body: BottomBarCtrl.getCurrentPage(),
-          bottomNavigationBar: BottomSelectBar(),
-        ),
-      ),
+    final pages = <Widget>[
+      LocalPageScreen(located: currentLocated),
+      const ForecastPageScreen(),
+      const SearchPageScreen(),
+      const DebugConsole(),
+    ];
+    return Scaffold(
+      body: pages[BottomBarCtrl.pageIndex],
+      bottomNavigationBar: const BottomSelectBar(),
     );
   }
 }
 
-const List<Widget> pages = [
-  LocalPageScreen(),
-  ForecastPageScreen(),
-  SearchPageScreen(),
-  DebugConsole(),
+List<Widget> pages = [
+  LocalPageScreen(located: CurrentWeatherApi.getDefaultWeatherLocated()),
+  const ForecastPageScreen(),
+  const SearchPageScreen(),
+  const DebugConsole(),
 ];
 
 class BottomSelectBar extends StatefulWidget {

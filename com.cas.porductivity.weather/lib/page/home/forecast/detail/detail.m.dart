@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:weather/func/home/forecast/forecast_io.api.dart';
 import 'package:weather/func/home/local/weather.mod.dart';
+import 'package:weather/func/home/local/weather_current_io.api.dart';
 import 'package:weather/page/home/forecast/detail/section.dart';
 import 'package:weather/page/home/home.m.dart';
-import 'package:weather/util/data/data.dart';
 import 'package:weather/util/language.dart';
 import 'package:weather/util/library.dart';
 
@@ -19,9 +19,9 @@ class _ForecastDetailPageScreenState extends State<ForecastDetailPageScreen> {
   late Weather weather;
 
   @override
-  void initState() {
-    super.initState();
-    weather = Data.weather.get<Weather>('weather');
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    weather = CurrentWeatherApi.getDefaultWeather();
   }
 
   @override

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather/func/home/local/weather.mod.dart';
-import 'package:weather/util/data/data.dart';
 import 'package:weather/util/library.dart';
 import 'package:intl/intl.dart';
-import 'package:weather/util/location.dart';
 
 
 class LocalIoApi {
@@ -52,22 +50,5 @@ class LocalIoApi {
 
   static Object? getDescription(int code, int isDay) {
     return weatherData[code]?[isDay == 1 ? 2 : 3];
-  }
-
-  static List<DropdownMenuItem<String>> getItems() {
-    return (Data.app.get('location') as List)
-      .cast<SearchedLocation>()
-      .map((location) => DropdownMenuItem<String>(
-        value: location.name,
-        child: Text(
-          location.name,
-          style: const TextStyle(
-            color: style_0,
-            fontSize: 14,
-            fontFamily: "Space Grotesk",
-          ),
-        ),
-      ))
-      .toList();
   }
 }
