@@ -1,7 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather/func/home/city/city_io.api.dart';
-import 'package:weather/page/home/search/edit/edit.m.dart';
 import 'package:weather/util/language.dart';
 import 'package:weather/util/library.dart';
 import 'package:weather/util/location.dart';
@@ -60,7 +60,8 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 class Items extends StatefulWidget {
-  const Items({super.key});
+  final VoidCallback refresh;
+  const Items({super.key, required this.refresh});
 
   @override
   State<Items> createState() => _ItemsState();
@@ -70,62 +71,68 @@ class _ItemsState extends State<Items> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    List<String> cityList = CityIoApi.getCityList();
+    List<SearchedLocation> cityList = CityIoApi.getCityList();
 
-    return Column(
-      children: List.generate(cityList.length, (int index) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CityEditPageScreen()),
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          children: List.generate(cityList.length, (int index) {
+            return Container(
+              width: size.width,
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(width: 10),
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1C1933),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      Icons.location_on_outlined,
+                      color: style_0,
+                      size: 28,
+                    ),
+                  ),
+                  const SizedBox(width: 25),
+                  Text(
+                    cityList[index].name,
+                    style: const TextStyle(
+                      color: style_8,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Space Grotesk',
+                    ),
+                  ),
+                  const Expanded(child: SizedBox()),
+                  IconButton(
+                    onPressed: () {
+                      CityIoApi.removeCity(cityList[index]);
+                      widget.refresh();
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      color: style_104,
+                      size: 24,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                ],
+              ),
             );
-          },
-          child: Container(
-            width: size.width,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(width: 10),
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1C1933),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(
-                    Icons.location_on_outlined,
-                    color: style_0,
-                    size: 28,
-                  ),
-                ),
-                const SizedBox(width: 25),
-                Text(
-                  cityList[index],
-                  style: const TextStyle(
-                    color: style_8,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'Space Grotesk',
-                  ),
-                ),
-                const Expanded(child: SizedBox()),
-                const Icon(Icons.arrow_forward_ios, color: style_104, size: 20),
-                const SizedBox(width: 10),
-              ],
-            ),
-          ),
-        );
-      }),
+          }),
+        ),
+      ),
     );
   }
 }
 
 class Testing extends StatefulWidget {
-  const Testing({super.key});
+  final VoidCallback refresh;
+  const Testing({super.key, required this.refresh});
 
   @override
   State<Testing> createState() => _TestingState();
@@ -134,11 +141,11 @@ class Testing extends StatefulWidget {
 class _TestingState extends State<Testing> {
   @override
   Widget build(BuildContext context) {
-
     return Autocomplete<SearchedLocation>(
       optionsBuilder: (TextEditingValue textEditingValue) {
-        return CityIoApi.getOptions(textEditingValue);
+        return CityIoApi.getDebouncedOptions(textEditingValue);
       },
+      displayStringForOption: (option) => option.name,
       optionsViewBuilder: (context, onSelected, options) {
         return Align(
           alignment: Alignment.topLeft,
@@ -151,33 +158,41 @@ class _TestingState extends State<Testing> {
               itemCount: options.length,
               itemBuilder: (BuildContext context, int index) {
                 final SearchedLocation option = options.elementAt(index);
-                return GestureDetector(
-                  onTap: () => onSelected(option),
-                  child: ListTile(
-                    leading: const Icon(
-                      Icons.location_on_outlined,
+                return ListTile(
+                  // onTap: () => onSelected(option),
+                  leading: const Icon(
+                    Icons.location_on_outlined,
+                    color: style_0,
+                    size: 24,
+                  ),
+                  title: Text(
+                    option.name,
+                    style: const TextStyle(
                       color: style_0,
-                      size: 22,
+                      fontFamily: 'Space Grotesk',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
                     ),
-                    title: Text(
-                      option.name,
-                      style: const TextStyle(
-                        color: style_0,
-                        fontFamily: 'Space Grotesk',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
+                  ),
+                  subtitle: Text(
+                    "${option.county}${option.county.isEmpty ? "" : ", "}"
+                    "${option.state}${option.state.isEmpty ? "" : ", "}"
+                    "${option.country}",
+                    style: const TextStyle(
+                      color: style_64,
+                      fontFamily: 'Space Grotesk',
+                      fontSize: 14,
                     ),
-                    subtitle: Text(
-                      "${option.county}${option.country == "" ? "" : ","} "
-                      "${option.state}${option.country == "" ? "" : ","}  "
-                      "${option.country}",
-                      style: const TextStyle(
-                        color: style_64,
-                        fontFamily: 'Space Grotesk',
-                        fontSize: 14,
-                      ),
-                    ),
+                  ),
+                  trailing: IconButton(
+                    onPressed: () {
+                      CityIoApi.addCity(option);
+                      // onSelected(option.name);
+                      // Navigator.pop(context);
+                      widget.refresh();
+                      onSelected(option);
+                    },
+                    icon: const Icon(Icons.add, color: style_0, size: 24),
                   ),
                 );
               },

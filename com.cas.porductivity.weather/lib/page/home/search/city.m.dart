@@ -38,11 +38,19 @@ class _SearchPageScreenState extends State<SearchPageScreen> {
         backgroundColor: const Color(0xFF2B11EA),
         onPressed: () {
           Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CityAddPageScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CityAddPageScreen()),
+          );
         },
         child: const Icon(Icons.add, size: 28, color: Colors.white),
       ),
-      body: const Column(children: [Testing(), Items()]),
+      body: Column(
+        children: [
+          Testing(refresh: () => setState(() {})),
+          Items(refresh: () => setState(() {})),
+        ],
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
+import 'package:weather/util/transfer.dart';
 
 part 'location.g.dart';
 
@@ -39,6 +40,10 @@ class SearchedLocation {
     this.lng,
   );
 
+  int getHash() {
+    return Transfer.getListHash([country, state, county, name]);
+  }
+
   /// 從 Map 物件建立 SearchedLocation 實例
   factory SearchedLocation.fromMap(Map<String, dynamic> map) {
     return SearchedLocation(
@@ -60,10 +65,13 @@ class SearchedLocation {
       'assets/city/world_cities.json',
     );
 
-    locations = (
-      jsonDecode(originContents) as List<dynamic>
-    )
+    locations = (jsonDecode(originContents) as List<dynamic>)
       .map((item) => SearchedLocation.fromMap(item as Map<String, dynamic>))
       .toList();
+  }
+
+  @override
+  String toString() {
+    return hashCode.toString();
   }
 }

@@ -1,24 +1,30 @@
 import 'package:weather/func/home/local/weather.mod.dart';
 import 'package:weather/util/data/data.dart';
 
-String API_KEY = '569f2ae006bb4c4c9f8153435252005';
+String apiKey = '569f2ae006bb4c4c9f8153435252005';
+bool isFreeVersion = true;
 
 class CurrentWeatherApi {
-  static String formatDay(DateTime date) {
-    // '<2025-05-29:6>'
-    return '<${date.year}-${date.month}-${date.day}:${date.hour}>';
-  }
-
   static void putWeather(Weather weather) {
     Data.weather.put<Weather>('weather', weather);
   }
 
   static Future<Weather> fetchWeather() async {
-    return await Weather.fetchForecastWeather(
-      apiKey: API_KEY,
-      queryLocation: '25.0172177,121.4564431',
-      days: 14
-    );
+    try {
+      return await Weather.fetchForecastWeather(
+        apiKey: apiKey,
+        queryLocation: '25.0172177,121.4564431',
+        days: isFreeVersion ? 14 : 3
+      );
+    } catch(error) {
+      Data.app.put('error', error.toString());
+
+      if (!Data.weather.box!.containsKey('weather')) {
+        return Data.weather.get<Weather>('weather');
+      } else {
+        return weatherTemplate;
+      }
+    }
   }
 
   static Future<void> weatherInitialize() async {

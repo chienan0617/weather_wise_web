@@ -1,5 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:weather/util/data/data.dart';
+import 'package:weather/util/location.dart';
 
 class AppData implements DataBase {
   late final Box? box;
@@ -25,16 +26,18 @@ class AppData implements DataBase {
   void initData() {
     checkKeyExist('pageIndex', 0);
     checkKeyExist('tutorial', false);
-    checkKeyExist('location', ['default']);
+    checkKeyExist('location', [
+      SearchedLocation('default', 'default', 'default', 'default', 0.0, 0.0)
+    ]);
     checkKeyExist('language', true);
   }
 
   @override
   Future<void> initialize() async {
     box = await Hive.openBox('app');
+    // box?.clear();
   }
 
   @override
   void put<T>(String key, value) => box?.put(key, value);
-
 }

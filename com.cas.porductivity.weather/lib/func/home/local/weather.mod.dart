@@ -230,8 +230,6 @@ class Weather {
 
     return sb.toString();
   }
-
-
 }
 
 /// 查詢地點資訊
@@ -1015,10 +1013,22 @@ class AirQuality {
     no2: (json['no2']) == null ? 0.toDouble() : (json['no2'] as num).toDouble(),
     o3: (json['o3']) == null ? 0.toDouble() : (json['o3'] as num).toDouble(),
     so2: (json['so2']) == null ? 0.toDouble() : (json['so2'] as num).toDouble(),
-    pm25: (json['pm2_5']) == null ? 0.toDouble() : (json['pm2_5'] as num).toDouble(),
-    pm10: (json['pm10']) == null ? 0.toDouble() : (json['pm10'] as num).toDouble(),
-    usEpaIndex: (json['us-epa-index']) == null ? 0 : (json['us-epa-index'] as num).toInt(),
-    gbDefraIndex: (json['gb-defra-index']) == null ? 0 : (json['gb-defra-index'] as num).toInt(),
+    pm25:
+        (json['pm2_5']) == null
+            ? 0.toDouble()
+            : (json['pm2_5'] as num).toDouble(),
+    pm10:
+        (json['pm10']) == null
+            ? 0.toDouble()
+            : (json['pm10'] as num).toDouble(),
+    usEpaIndex:
+        (json['us-epa-index']) == null
+            ? 0
+            : (json['us-epa-index'] as num).toInt(),
+    gbDefraIndex:
+        (json['gb-defra-index']) == null
+            ? 0
+            : (json['gb-defra-index'] as num).toInt(),
   );
 }
 
@@ -1044,7 +1054,9 @@ extension WeatherChineseString on Weather {
     sb.writeln('攝氏溫度 : ${current.tempC} ℃');
     sb.writeln('華氏溫度 : ${current.tempF} ℉');
     sb.writeln('是否白天 : ${current.isDay == 1 ? '是' : '否'}');
-    sb.writeln('天氣狀況 : ${current.condition.text}(代碼 ${current.condition.code})');
+    sb.writeln(
+      '天氣狀況 : ${current.condition.text}(代碼 ${current.condition.code})',
+    );
     sb.writeln('狀況圖示網址 : ${current.condition.icon}');
     sb.writeln('風速(英里／小時) : ${current.windMph}');
     sb.writeln('風速(公里／小時) : ${current.windKph}');
@@ -1098,9 +1110,13 @@ extension WeatherChineseString on Weather {
       sb.writeln('下雨機率(％) : ${day.day.dailyChanceOfRain}');
       sb.writeln('當日會下雪 : ${day.day.dailyWillItSnow == 1 ? '是' : '否'}');
       sb.writeln('下雪機率(％) : ${day.day.dailyChanceOfSnow}');
-      sb.writeln('當日狀況 : ${day.day.condition.text}(代碼 ${day.day.condition.code})');
+      sb.writeln(
+        '當日狀況 : ${day.day.condition.text}(代碼 ${day.day.condition.code})',
+      );
       sb.writeln('當日紫外線指數 : ${day.day.uv}');
-      sb.writeln('當日 AQI : US ${day.day.airQuality.usEpaIndex}，GB ${day.day.airQuality.gbDefraIndex}');
+      sb.writeln(
+        '當日 AQI : US ${day.day.airQuality.usEpaIndex}，GB ${day.day.airQuality.gbDefraIndex}',
+      );
 
       // 天文資訊
       sb.writeln('--- 天文資訊 ---');
@@ -1125,11 +1141,162 @@ extension WeatherChineseString on Weather {
         sb.writeln('  雲量(％) : ${h.cloud}');
         sb.writeln('  能見度(km) : ${h.visKm}');
         sb.writeln('  陣風(kph)  : ${h.gustKph}');
-        sb.writeln('  降水 : ${h.willItRain == 1 ? '是' : '否'}  機率 ${h.chanceOfRain}%');
-        sb.writeln('  AQI : US ${h.airQuality.usEpaIndex}，GB ${h.airQuality.gbDefraIndex}');
+        sb.writeln(
+          '  降水 : ${h.willItRain == 1 ? '是' : '否'}  機率 ${h.chanceOfRain}%',
+        );
+        sb.writeln(
+          '  AQI : US ${h.airQuality.usEpaIndex}，GB ${h.airQuality.gbDefraIndex}',
+        );
       }
     }
 
     return sb.toString();
   }
 }
+
+Weather weatherTemplate = Weather(
+  location: Location(
+    name: '--',
+    region: '--',
+    country: '--',
+    lat: 0.0,
+    lon: 0.0,
+    tzId: '--',
+    localtimeEpoch: 0,
+    localtime: 'localtime',
+  ),
+  current: CurrentWeather(
+    lastUpdatedEpoch: 0,
+    lastUpdated: '--',
+    tempC: 0.0,
+    tempF: 0.0,
+    isDay: 0,
+    condition: Condition(text: '--', icon: '--', code: 0),
+    windMph: 0.0,
+    windKph: 0.0,
+    windDegree: 0,
+    windDir: '--',
+    pressureMb: 0.0,
+    pressureIn: 0.0,
+    precipMm: 0.0,
+    precipIn: 0.0,
+    humidity: 0,
+    cloud: 0,
+    feelslikeC: 0.0,
+    feelslikeF: 0.0,
+    visKm: 0.0,
+    visMiles: 0.0,
+    uv: 0.0,
+    gustMph: 0.0,
+    gustKph: 0.0,
+    airQuality: AirQuality(
+      co: 0.0,
+      no2: 0.0,
+      o3: 0.0,
+      so2: 0.0,
+      pm25: 0.0,
+      pm10: 0.0,
+      usEpaIndex: 0,
+      gbDefraIndex: 0,
+    ),
+  ),
+  forecast: [
+    ForecastDay(
+      date: '--',
+      dateEpoch: 0,
+      day: DaySummary(
+        maxTempC: 0.0,
+        maxTempF: 0.0,
+        minTempC: 0.0,
+        minTempF: 0.0,
+        avgTempC: 0.0,
+        avgTempF: 0.0,
+        maxWindMph: 0.0,
+        maxWindKph: 0.0,
+        totalPrecipMm: 0.0,
+        totalPrecipIn: 0.0,
+        totalSnowCm: 0.0,
+        avgVisKm: 0.0,
+        avgVisMiles: 0.0,
+        avgHumidity: 0,
+        dailyWillItRain: 0,
+        dailyChanceOfRain: 0,
+        dailyWillItSnow: 0,
+        dailyChanceOfSnow: 0,
+        condition: Condition(text: '--', icon: '--', code: 0),
+        uv: 0.0,
+        airQuality: AirQuality(
+          co: 0.0,
+          no2: 0.0,
+          o3: 0.0,
+          so2: 0.0,
+          pm25: 0.0,
+          pm10: 0.0,
+          usEpaIndex: 0,
+          gbDefraIndex: 0,
+        ),
+      ),
+      astro: Astro(
+        sunrise: '--',
+        sunset: '--',
+        moonrise: '--',
+        moonset: '--',
+        moonPhase: '--',
+        moonIllumination: 0,
+        isMoonUp: 0,
+        isSunUp: 0,
+      ),
+      hour: [
+        HourForecast(
+          timeEpoch: 0,
+          time: '--',
+          tempC: 0.0,
+          tempF: 0.0,
+          isDay: 0,
+          condition: Condition(text: '--', icon: '--', code: 0),
+          windMph: 0.0,
+          windKph: 0.0,
+          windDegree: 0,
+          windDir: '--',
+          pressureMb: 0.0,
+          pressureIn: 0.0,
+          precipMm: 0.0,
+          precipIn: 0.0,
+          snowCm: 0,
+          humidity: 0,
+          cloud: 0,
+          feelslikeC: 0.0,
+          feelslikeF: 0.0,
+          windchillC: 0.0,
+          windchillF: 0.0,
+          heatindexC: 0.0,
+          heatindexF: 0.0,
+          dewpointC: 0.0,
+          dewpointF: 0.0,
+          willItRain: 0,
+          chanceOfRain: 0,
+          willItSnow: 0,
+          chanceOfSnow: 0,
+          visKm: 0.0,
+          visMiles: 0.0,
+          gustMph: 0.0,
+          gustKph: 0.0,
+          uv: 0.0,
+          airQuality: AirQuality(
+            co: 0.0,
+            no2: 0.0,
+            o3: 0.0,
+            so2: 0.0,
+            pm25: 0.0,
+            pm10: 0.0,
+            usEpaIndex: 0,
+            gbDefraIndex: 0,
+          ),
+          shortRad: 0,
+          diffRad: 0,
+        ),
+      ],
+    ),
+  ],
+  lastFetchTime: DateTime.now(),
+);

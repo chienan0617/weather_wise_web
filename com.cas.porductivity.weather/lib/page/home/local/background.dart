@@ -17,6 +17,7 @@ class ColorGradient extends StatefulWidget {
 class _ColorGradientState extends State<ColorGradient> {
   @override
   Widget build(BuildContext context) {
+    String? selectedCity; // 初始為 null
     return Stack(
       children: [
         // 背景漸層
@@ -89,24 +90,39 @@ class _ColorGradientState extends State<ColorGradient> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                widget.weather.location.name,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Space Grotesk',
-                ),
+              DropdownButton<String>(
+                value: selectedCity,
+                // hint: Text('請選擇城市'),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedCity = newValue;
+                  });
+                },
+                items: LocalIoApi.getItems(),
+                // dropdownColor: Colors.transparent,
+                icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+                // underline: const SizedBox(),
+                elevation: 10,
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
+
+              // Text(
+              //   widget.weather.location.name,
+              //   textAlign: TextAlign.center,
+              //   style: const TextStyle(
+              //     fontSize: 18,
+              //     color: Colors.white,
+              //     fontWeight: FontWeight.bold,
+              //     fontFamily: 'Space Grotesk',
+              //   ),
+              // ),
+              // IconButton(
+              //   onPressed: () {},
+              //   icon: const Icon(
+              //     Icons.arrow_drop_down,
+              //     color: Colors.white,
+              //     size: 20,
+              //   ),
+              // ),
             ],
           ),
           trailing: IconButton(
