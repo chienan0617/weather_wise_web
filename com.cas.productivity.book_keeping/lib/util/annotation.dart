@@ -64,3 +64,12 @@ class Mode {
 }
 
 const Mode mode = Mode();
+
+///
+class Page {
+  const Page();
+}
+
+const Page page = Page();
+
+///

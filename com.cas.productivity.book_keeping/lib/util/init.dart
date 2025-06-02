@@ -1,5 +1,9 @@
+import 'package:bookkeeping/util/annotation.dart';
 import 'package:bookkeeping/util/base.dart';
 import 'package:bookkeeping/util/data/data.dart';
+import 'package:bookkeeping/util/language.dart';
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class Init implements Initializable {
   @override
@@ -8,6 +12,11 @@ class Init implements Initializable {
   }
 }
 
+@initially
 Future<void> setupApp() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Hive.initFlutter();
   await Data.initialize();
+  await Data.typeInit();
+  await Language.initialize();
 }
