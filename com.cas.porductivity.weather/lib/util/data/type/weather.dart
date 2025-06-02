@@ -23,8 +23,9 @@ class WeatherData implements DataBase {
 
   @override
   void initData() {
-    CurrentWeatherApi.weatherInitialize();
     checkKeyExist('weather:default', 0);
+    checkKeyExist('weatherCache', {});
+    CurrentWeatherApi.weatherInitialize();
   }
 
   @override

@@ -59,10 +59,8 @@ class CurrentWeatherApi {
 
   /// App 啟動時先執行：確保「預設地點」有第一筆快取
   static Future<void> weatherInitialize() async {
-    // 1. 先看 Data.weather.getDefaultWeatherLocated() 取得 app 內定的經緯度
     final defaultLoc = getDefaultWeatherLocated();
 
-    // 2. 用跟上面同樣的 key 生成邏輯
     final String key = _makeLocationKey(defaultLoc);
 
     // 3. 讀現有快取，若無或過期，就 fetch 一次並寫回
@@ -85,7 +83,7 @@ class CurrentWeatherApi {
   }
 
   static Map<int, Weather> getAllWeatherData() {
-    return Data.weather.get<Map>('weather').cast<int, Weather>();
+    return Data.weather.get<Map>('weatherCache').cast<int, Weather>();
   }
 
   static Weather getDefaultWeather() {
@@ -93,7 +91,14 @@ class CurrentWeatherApi {
   }
 
   static (double, double) getDefaultWeatherLocated() {
-    final def = getDefaultWeather().location;
-    return (def.lat, def.lon);
+    // 嘗試從快取裡拿第一筆
+    final allWeather = getAllWeatherData().values.toList();
+    if (allWeather.isNotEmpty) {
+      final def = allWeather[0].location;
+      return (def.lat, def.lon);
+    }
+    
+    // 如果快取是空的，就退回一組硬編碼的「台北市中心經緯度」
+    return (25.0330, 121.5654);
   }
 }

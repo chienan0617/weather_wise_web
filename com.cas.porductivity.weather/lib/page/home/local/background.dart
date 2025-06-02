@@ -71,8 +71,8 @@ class _ColorGradientState extends State<ColorGradient> {
               Text(
                 '${LocalIoApi.getDescription(widget.weather.current.condition.code, widget.weather.current.isDay)}'
                 '\n '
-                '${Language.get('Highest')}: ${widget.weather.forecast[0].day.maxTempC}° '
-                '${Language.get('Lowest')}: ${widget.weather.forecast[0].day.minTempC}°',
+                '${Language.get('Highest')}: ${widget.weather.forecast[0].day.maxTempC.round()}° '
+                '${Language.get('Lowest')}: ${widget.weather.forecast[0].day.minTempC.round()}°',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 16,

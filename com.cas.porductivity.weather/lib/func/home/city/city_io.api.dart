@@ -9,15 +9,7 @@ class CityIoApi {
 
   static List<SearchedLocation> getCityList() {
     List<SearchedLocation> cityList =
-        Data.app.get('location').cast<SearchedLocation>();
-    // if (cityList.contains('default')) {
-    //   if (cityList.length == 1) {
-    //     return cityList;
-    //   } else {
-    //     cityList.remove('default');
-    //     return cityList;
-    //   }
-    // }
+      Data.app.get('location').cast<SearchedLocation>();
     return cityList;
   }
 
@@ -40,25 +32,26 @@ class CityIoApi {
       cityList.remove(city);
       Data.app.put('location', cityList);
 
-      // SelectCityCtrl.updateLocations();
-      // SelectCityCtrl.updateDefaultValue();
       return true;
     }
   }
 
-  static Iterable<SearchedLocation> getOptions(TextEditingValue value) {
-    if (value.text == '') {
-      return const Iterable<SearchedLocation>.empty();
-    }
-    return SearchedLocation.locations.where((SearchedLocation location) {
-      return location.name.toLowerCase().contains(value.text.toLowerCase());
-    });
-  }
 
   static Future<Iterable<SearchedLocation>> getDebouncedOptions(
     TextEditingValue textEditingValue,
   ) async {
     await Future.delayed(const Duration(milliseconds: 250));
-    return CityIoApi.getOptions(textEditingValue);
+    if (textEditingValue.text.isEmpty) {
+      return const <SearchedLocation>[];
+    }
+
+    final query = textEditingValue.text.toLowerCase();
+
+    return SearchedLocation.locations.where((location) {
+      return location.name.toLowerCase().contains(query);// ||
+        // location.state.toLowerCase().contains(query) ||
+        // location.country.toLowerCase().contains(query) ||
+        // location.county.toLowerCase().contains(query);
+    });
   }
 }

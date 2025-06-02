@@ -65,6 +65,12 @@ class BottomSelectBar extends StatefulWidget {
 
 class _BottomSelectBarState extends State<BottomSelectBar> {
   @override
+  void initState() {
+    super.initState();
+    // BottomBarCtrl.refresh = () => setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(bottom: 15),
