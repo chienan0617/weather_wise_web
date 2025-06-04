@@ -27,10 +27,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       // debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        drawer: SideBar(),
-        body: HomePageCtrl.getCurrentPage(),
-        bottomNavigationBar: _bottomSelectBar(),
+      home: SafeArea(
+        child: Scaffold(
+          drawer: SideBar(),
+          body: HomePageCtrl.getCurrentPage(),
+          bottomNavigationBar: _bottomSelectBar(),
+        ),
       ),
     );
   }

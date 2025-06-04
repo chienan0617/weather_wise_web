@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:http/http.dart';
 import 'package:weather_wise/util/annotation.dart';
 import 'package:weather_wise/util/data/data.dart';
 import 'package:weather_wise/util/service/location.mod.dart';

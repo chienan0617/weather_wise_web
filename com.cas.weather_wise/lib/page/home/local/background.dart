@@ -1,8 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_wise/util/service/location.mod.dart';
 import 'package:weather_wise/util/service/weather.mod.dart';
 import 'package:weather_wise/util/util.dart';
 import 'package:weather_wise/util/language.dart';
@@ -21,14 +19,6 @@ class _LocalBackgroundState extends State<LocalBackground> {
   @override
   void initState() {
     super.initState();
-
-    // LocalPageController.rebuild = () => setState(() {});
-    // SelectCityCtrl.refreshCallback = () {
-    //   if (mounted) {
-    //     setState(() {});
-    //   }
-    // };
-    // SelectCityCtrl.reloadLocations();
   }
 
   @override
@@ -95,28 +85,25 @@ class _LocalBackgroundState extends State<LocalBackground> {
               icon: const Icon(Icons.menu, size: 26, color: Colors.white),
             ),
 
-            const SizedBox(width: 15),
-
-            Expanded(
-              child: DropdownButton<String>(
-                items: LocalPageController.getDropDownMenuItems(),
-                onChanged: LocalPageController.onSelect,
-                value: LocalPageController.getDropDownMenuCurrentValue(),
-                // items: LocalPageController.getDropMenuItems(),
-                dropdownColor: Color.fromRGBO(62, 64, 153, 1),
-                icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-                underline: const SizedBox(),
-                elevation: 10,
-                // onChanged: (String? newValue) {
-                //   if (newValue == null) return;
-                //   LocalPageController.onChanged(newValue);
-                // },
-                hint: const Text(
-                  "請選擇城市",
-                  style: TextStyle(color: Colors.white54),
-                ),
-                // style: const TextStyle(color: Colors.white, fontSize: 16),
+            // const SizedBox(width: 15),
+            DropdownButton<String>(
+              items: LocalPageController.getDropDownMenuItems(),
+              onChanged: LocalPageController.onSelect,
+              value: LocalPageController.getDropDownMenuCurrentValue(),
+              // items: LocalPageController.getDropMenuItems(),
+              dropdownColor: Color.fromRGBO(62, 64, 153, 1),
+              icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+              underline: const SizedBox(),
+              elevation: 10,
+              // onChanged: (String? newValue) {
+              //   if (newValue == null) return;
+              //   LocalPageController.onChanged(newValue);
+              // },
+              hint: const Text(
+                "請選擇城市",
+                style: TextStyle(color: Colors.white54),
               ),
+              // style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
 
             IconButton(

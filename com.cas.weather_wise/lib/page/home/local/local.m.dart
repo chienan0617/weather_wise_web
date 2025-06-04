@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/local_page.dart';
-import 'package:weather_wise/page/home/home.m.dart';
 import 'package:weather_wise/page/home/local/background.dart';
 import 'package:weather_wise/page/home/local/today_forecast.dart';
 import 'package:weather_wise/page/home/local/today_info.dart';

@@ -1,5 +1,4 @@
 import 'package:weather_wise/func/controller/search_page.dart';
-import 'package:weather_wise/func/method/weather_data_info.dart';
 import 'package:weather_wise/util/data/data.dart';
 import 'package:hive_flutter/adapters.dart';
 

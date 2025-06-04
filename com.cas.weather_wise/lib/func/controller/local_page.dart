@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:weather_wise/func/method/weather_data_info.dart';
 import 'package:weather_wise/util/annotation.dart';
 import 'package:weather_wise/util/data/data.dart';
-import 'package:weather_wise/util/language.dart';
 import 'package:weather_wise/util/library.dart';
 import 'package:weather_wise/util/service/location.mod.dart';
 import 'package:weather_wise/util/service/weather.mod.dart';
