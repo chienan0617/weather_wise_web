@@ -34,7 +34,7 @@ class _LocalPageScreenState extends State<LocalPageScreen> {
     print('🟢 [LocalPageScreen] build (located=${widget.located})');
     // 確保 build 裡不要再重新 assign _futureWeather！只在 initState/didUpdateWidget 重新賦值
     return Scaffold(
-      backgroundColor: const Color(0xFF111121),
+      backgroundColor: const Color.fromARGB(255, 17, 17, 33),
       body: FutureBuilder<Weather>(
         future: _futureWeather,
         builder: (context, snapshot) {

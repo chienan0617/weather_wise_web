@@ -53,7 +53,7 @@ class Weather {
   static Future<Weather> fetchForecastWeather({
     required String apiKey,
     required String queryLocation,
-    int days = 1,
+    required int days
   }) async {
     final uri = Uri.parse(
       'https://api.weatherapi.com/v1/forecast.json'
@@ -61,9 +61,10 @@ class Weather {
       '&q=$queryLocation'
       '&days=$days'
       '&aqi=yes'
-      '&alerts=no',
+      '&alerts=yes',
     );
     final resp = await http.get(uri);
+    log(jsonDecode(resp.body));
     if (resp.statusCode != 200) {
       throw Exception('WeatherAPI request failed: ${resp.statusCode}');
     }

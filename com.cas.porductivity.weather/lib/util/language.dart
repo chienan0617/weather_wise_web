@@ -31,8 +31,7 @@ class Language {
   static String get(String text) =>
       word[text]?[index]?.toString() ?? err;
 
-  static Map<int, List<dynamic>> getWeatherData() =>
-      weatherData;
+  static Map<int, List<dynamic>> getWeatherData() => weatherData;
 
   static changeIndex(bool b, BuildContext context) {
     Data.app.put('language', b);

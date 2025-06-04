@@ -26,12 +26,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
     // 2) 當選城市時，拿到 matched.lat, matched.lng
     SelectCityCtrl.rebuildLocalPage = (double lat, double lon) {
-      setState(() {
-        currentLocated = (lat, lon);
-      });
+      setState(() => currentLocated = (lat, lon));
     };
     SelectCityCtrl.refreshCallback = () => setState(() {});
-    BottomBarCtrl.refresh = () => setState(() {});
   }
 
   @override
@@ -67,7 +64,7 @@ class _BottomSelectBarState extends State<BottomSelectBar> {
   @override
   void initState() {
     super.initState();
-    // BottomBarCtrl.refresh = () => setState(() {});
+    BottomBarCtrl.refresh = () => setState(() {});
   }
 
   @override

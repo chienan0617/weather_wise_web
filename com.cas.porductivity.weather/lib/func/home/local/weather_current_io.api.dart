@@ -4,7 +4,7 @@ import 'package:weather/func/home/local/weather.mod.dart';
 import 'package:weather/util/data/data.dart';
 
 String apiKey = '569f2ae006bb4c4c9f8153435252005';
-bool isFreeVersion = true;
+bool isFreeVersion = false;
 
 class CurrentWeatherApi {
   static String _makeLocationKey((double, double) located) {
@@ -15,16 +15,16 @@ class CurrentWeatherApi {
     final double lat = located.$1;
     final double lon = located.$2;
     log('→ _fetchWeather 收到 (lat,lon)=($lat,$lon)；傳給 API="$lat,$lon"');
-    try {
+    // try {
       return await Weather.fetchForecastWeather(
         apiKey: apiKey,
-        queryLocation: '$lat,$lon', // 確保真的是 "緯度,經度"
-        days: isFreeVersion ? 14 : 3,
+        queryLocation: '$lat,$lon',
+        days: 3,
       );
-    } catch (error) {
-      log('⚠️ _fetchWeather 例外: $error');
-      return weatherTemplate;
-    }
+    // } catch (error) {
+    //   log('⚠️ _fetchWeather 例外: $error');
+    //   return weatherTemplate;
+    // }
   }
 
   static Future<Weather> getWeatherByLocated((double, double) located) async {
@@ -97,7 +97,7 @@ class CurrentWeatherApi {
       final def = allWeather[0].location;
       return (def.lat, def.lon);
     }
-    
+
     // 如果快取是空的，就退回一組硬編碼的「台北市中心經緯度」
     return (25.0330, 121.5654);
   }
