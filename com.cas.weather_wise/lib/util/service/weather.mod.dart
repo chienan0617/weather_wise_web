@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,33 +23,31 @@ class Weather {
   @HiveField(3)
   final DateTime lastFetchTime;
 
+  @HiveField(4)
+  final List<double> loc;
+
   Weather({
     required this.location,
     required this.current,
     required this.forecast,
     required this.lastFetchTime,
+    required this.loc,
   });
 
   /// 從 JSON 建構 Weather 實例
-  factory Weather.fromJson(Map<String, dynamic> json) {
-    // log(jsonEncode(json));
-    log('fetch data !');
+  factory Weather.fromJson(Map<String, dynamic> json, List<double> loca) {
     final loc = Location.fromJson(json['location']);
-    log('fetch loc !');
-
     final cur = CurrentWeather.fromJson(json['current']);
-    // log(json.toString());
-    log('fetch current !');
     final days = (json['forecast']['forecastday'] as List)
         .map((e) => ForecastDay.fromJson(e as Map<String, dynamic>))
         .toList();
 
-    log('fetch days');
     return Weather(
       location: loc,
       current: cur,
       forecast: days,
       lastFetchTime: DateTime.now(),
+      loc: loca
     );
   }
 
@@ -59,13 +56,15 @@ class Weather {
     required String apiKey,
     required String queryLocation,
     required int days,
+    required double lat,
+    required double lon,
   }) async {
-    // print('https://api.weatherapi.com/v1/forecast.json'
-    //   '?key=$apiKey'
-    //   '&q=$queryLocation'
-    //   '&days=$days'
-    //   '&aqi=yes'
-    //   '&alerts=no');
+    print('https://api.weatherapi.com/v1/forecast.json'
+      '?key=$apiKey'
+      '&q=$queryLocation'
+      '&days=$days'
+      '&aqi=yes'
+      '&alerts=no');
     final uri = Uri.parse(
       'https://api.weatherapi.com/v1/forecast.json'
       '?key=$apiKey'
@@ -78,7 +77,7 @@ class Weather {
     if (resp.statusCode != 200) {
       throw Exception('WeatherAPI request failed: ${resp.statusCode}');
     }
-    return Weather.fromJson(jsonDecode(resp.body));
+    return Weather.fromJson(jsonDecode(resp.body), [lat, lon]);
   }
 
   @override
@@ -90,8 +89,8 @@ class Weather {
     sb.writeln(' name          : ${location.name}');
     sb.writeln(' region        : ${location.region}');
     sb.writeln(' country       : ${location.country}');
-    sb.writeln(' lat           : ${location.lat}');
-    sb.writeln(' lon           : ${location.lon}');
+    // sb.writeln(' lat           : ${location.lat}');
+    // sb.writeln(' lon           : ${location.lon}');
     sb.writeln(' tzId          : ${location.tzId}');
     sb.writeln(' localtimeEpoch: ${location.localtimeEpoch}');
     sb.writeln(' localtime     : ${location.localtime}');
@@ -260,12 +259,12 @@ class Location {
   final String country;
 
   /// JSON: lat — 緯度
-  @HiveField(3)
-  final double lat;
+  // @HiveField(3)
+  // final double lat;
 
-  /// JSON: lon — 經度
-  @HiveField(4)
-  final double lon;
+  // /// JSON: lon — 經度
+  // @HiveField(4)
+  // final double lon;
 
   /// JSON: tz_id — 時區 ID
   @HiveField(5)
@@ -283,8 +282,8 @@ class Location {
     required this.name,
     required this.region,
     required this.country,
-    required this.lat,
-    required this.lon,
+    // required this.lat,
+    // required this.lon,
     required this.tzId,
     required this.localtimeEpoch,
     required this.localtime,
@@ -294,15 +293,15 @@ class Location {
     name: json['name'],
     region: json['region'],
     country: json['country'],
-    lat: (json['lat'] as num).toDouble(),
-    lon: (json['lon'] as num).toDouble(),
+    // lat: (json['lat'] as num).toDouble(),
+    // lon: (json['lon'] as num).toDouble(),
     tzId: json['tz_id'],
     localtimeEpoch: json['localtime_epoch'],
     localtime: json['localtime'],
   );
 
-  @override
-  String toString() => '$name, $region, $country (@$lat,$lon) $localtime';
+  // @override
+  // String toString() => '$name, $region, $country (@$lat,$lon) $localtime';
 }
 
 /// 當前天氣資料
@@ -1045,8 +1044,8 @@ extension WeatherChineseString on Weather {
     sb.writeln('城市名稱 : ${location.name}');
     sb.writeln('地區／省份 : ${location.region}');
     sb.writeln('國家 : ${location.country}');
-    sb.writeln('緯度 : ${location.lat}');
-    sb.writeln('經度 : ${location.lon}');
+    // sb.writeln('緯度 : ${location.lat}');
+    // sb.writeln('經度 : ${location.lon}');
     sb.writeln('時區編號 : ${location.tzId}');
     sb.writeln('當地時間戳 : ${location.localtimeEpoch}');
     sb.writeln('當地時間 : ${location.localtime}');

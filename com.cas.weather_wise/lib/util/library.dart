@@ -227,12 +227,13 @@ extension HexColor on Color {
 }
 
 Weather weatherTemplate = Weather(
+  loc: [0.0, 0.0],
   location: Location(
     name: '--',
     region: '--',
     country: '--',
-    lat: 0.0,
-    lon: 0.0,
+    // lat: 0.0,
+    // lon: 0.0,
     tzId: '--',
     localtimeEpoch: 0,
     localtime: 'localtime',

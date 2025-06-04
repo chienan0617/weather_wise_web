@@ -10,7 +10,7 @@ class Language {
   static final wordData = _Word();
   static final weatherData = _Weather();
 
-  static int index = 0;
+  static int index = 1;
   static String error = '<Error>';
 
   @initially

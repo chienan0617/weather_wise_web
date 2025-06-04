@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:weather_wise/func/controller/forecast_page.dart';
 import 'package:weather_wise/func/method/weather_data_info.dart';
 import 'package:weather_wise/util/annotation.dart';
 import 'package:weather_wise/util/data/data.dart';
@@ -33,6 +34,9 @@ class LocalPageController {
     cityNameList = weatherStored.map(
       (e) => e.name
     ).toList();
+
+    weatherList = WeatherInfo.getAllWeatherStored();
+    ForecastPageController.refresh();
   }
 
   static Future<Weather> getCurrentIndexCityInfo() async {
@@ -45,13 +49,10 @@ class LocalPageController {
 
   @functional
   static SearchedLocation getCurrentLocation() {
-    log(weatherStored.toString());
-    log(index.toString());
     return weatherStored[index];
   }
 
   static List<DropdownMenuItem<String>> getDropDownMenuItems() {
-    print(cityNameList);
     return cityNameList.map((e) => DropdownMenuItem<String>(
       value: e,
       child: Text(e, style: const TextStyle(color: style_0)),

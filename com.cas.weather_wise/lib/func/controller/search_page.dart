@@ -1,9 +1,12 @@
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/local_page.dart';
 import 'package:weather_wise/util/annotation.dart';
 import 'package:weather_wise/util/data/data.dart';
 import 'package:weather_wise/util/service/location.mod.dart';
+import 'package:weather_wise/util/service/weather.mod.dart';
 
 class SearchPageController {
   @functional
@@ -23,7 +26,12 @@ class SearchPageController {
       return false;
     } else {
       Data.search.box.delete('search:<${city.lat},${city.lng}');
+      Data.weather.box.delete('weather:<${city.lat},${city.lng}');
+      // log(Data.weather.box.values.toList().whereType<Weather>().map((e) => e.loc).toList().toString());
+      // log(Data.search.box.values.toList().whereType<SearchedLocation>().map((e) => e.lat).toList().toString());
       LocalPageController.update();
+      LocalPageController.index = 0;
+      // Data.weather.box.delete('weather:<>');
       return true;
     }
   }

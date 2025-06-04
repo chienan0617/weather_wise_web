@@ -21,13 +21,14 @@ class WeatherAdapter extends TypeAdapter<Weather> {
       current: fields[1] as CurrentWeather,
       forecast: (fields[2] as List).cast<ForecastDay>(),
       lastFetchTime: fields[3] as DateTime,
+      loc: (fields[4] as List).cast<double>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Weather obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.location)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class WeatherAdapter extends TypeAdapter<Weather> {
       ..writeByte(2)
       ..write(obj.forecast)
       ..writeByte(3)
-      ..write(obj.lastFetchTime);
+      ..write(obj.lastFetchTime)
+      ..writeByte(4)
+      ..write(obj.loc);
   }
 
   @override
@@ -63,8 +66,6 @@ class LocationAdapter extends TypeAdapter<Location> {
       name: fields[0] as String,
       region: fields[1] as String,
       country: fields[2] as String,
-      lat: fields[3] as double,
-      lon: fields[4] as double,
       tzId: fields[5] as String,
       localtimeEpoch: fields[6] as int,
       localtime: fields[7] as String,
@@ -74,17 +75,13 @@ class LocationAdapter extends TypeAdapter<Location> {
   @override
   void write(BinaryWriter writer, Location obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.region)
       ..writeByte(2)
       ..write(obj.country)
-      ..writeByte(3)
-      ..write(obj.lat)
-      ..writeByte(4)
-      ..write(obj.lon)
       ..writeByte(5)
       ..write(obj.tzId)
       ..writeByte(6)

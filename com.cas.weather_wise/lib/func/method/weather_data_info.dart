@@ -12,7 +12,7 @@ class WeatherInfo {
   @functional
   static void putData(Weather weather) {
     Data.weather.put<Weather>(
-      'weather:<${weather.location.lat},${weather.location.lon}',
+      'weather:<${weather.loc[0]},${weather.loc[1]}',
       weather,
     );
   }
@@ -25,7 +25,9 @@ class WeatherInfo {
       return await Weather.fetchForecastWeather(
         apiKey: apiKey,
         queryLocation: '$lat,$lon', // 確保真的是 "緯度,經度"
-        days: 3,
+        days: 14,
+        lat: lat,
+        lon: lon
       );
     } catch (error) {
       log('You are defeated: $error');

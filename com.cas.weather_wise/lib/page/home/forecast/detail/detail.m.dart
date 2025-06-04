@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_wise/func/controller/local_page.dart';
 import 'package:weather_wise/page/home/forecast/detail/section.dart';
 import 'package:weather_wise/page/home/home.m.dart';
 import 'package:weather_wise/util/language.dart';
@@ -8,7 +7,9 @@ import 'package:weather_wise/util/service/weather.mod.dart';
 import 'package:weather_wise/util/util.dart';
 
 class ForecastDetailPage extends StatefulWidget {
-  const ForecastDetailPage({super.key});
+  final Weather weather;
+
+  const ForecastDetailPage({super.key, required this.weather});
 
   @override
   State<ForecastDetailPage> createState() =>
@@ -16,12 +17,12 @@ class ForecastDetailPage extends StatefulWidget {
 }
 
 class _ForecastDetailPageState extends State<ForecastDetailPage> {
-  late Weather weather;
+  // late Weather weather;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    weather = LocalPageController.getCurrentWeather();
+    // weather = LocalPageController.getCurrentWeather();
   }
 
   // @override
@@ -61,9 +62,9 @@ class _ForecastDetailPageState extends State<ForecastDetailPage> {
             padding: const EdgeInsets.all(16.0),
             child: LayoutBuilder(
               builder: (context, cons) {
-                var hours = Util.getForecastHours(weather, 56);
+                var hours = Util.getForecastHours(widget.weather);
                 return Column(
-                  children: List.generate(56, (int index) {
+                  children: List.generate(hours.length, (int index) {
                     return CityForecastSection(
                       hourForecast: hours[index].$2,
                       size: Size(cons.maxWidth, cons.maxHeight),

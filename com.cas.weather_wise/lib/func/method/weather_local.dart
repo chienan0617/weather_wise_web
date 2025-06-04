@@ -7,7 +7,7 @@ class WeatherLocal {
 
     return SearchedLocation.locations.where((s) {
       return allWeathers.any(
-        (w) => w.location.lat == s.lat && w.location.lon == s.lng,
+        (w) => w.loc[0] == s.lat && w.loc[1] == s.lng,
       );
     }).toList();
   }
@@ -16,7 +16,7 @@ class WeatherLocal {
     return SearchedLocation.locations.where((s) {
       final key = '${s.lat}_${s.lng}';
       return WeatherInfo.getAllWeatherStored()
-        .map((w) => '${w.location.lat}_${w.location.lon}')
+        .map((w) => '${w.loc[0]}_${w.loc[1]}')
         .toSet()
         .contains(key);
     }).toList();

@@ -40,7 +40,8 @@ class Util {
     }
   }
 
-  static List<(DateTime date, HourForecast)> getForecastHours(Weather weather, int length) {
+  static List<(DateTime date, HourForecast)> getForecastHours(Weather weather) {
+    // print(weather.forecast[0].)
     return weather.forecast
       .expand(
         (d) => d.hour
@@ -54,7 +55,7 @@ class Util {
             ),
           ),
       )
-      .take(length)
-      .toList();
+      // .take(length)
+      .toList();//, weather.forecast.length);
   }
 }
