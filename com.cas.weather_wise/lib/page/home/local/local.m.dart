@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/local_page.dart';
+import 'package:weather_wise/page/home/home.m.dart';
 import 'package:weather_wise/page/home/local/background.dart';
 import 'package:weather_wise/page/home/local/today_forecast.dart';
 import 'package:weather_wise/page/home/local/today_info.dart';
@@ -13,12 +14,15 @@ class LocalPage extends StatefulWidget {
 }
 
 class _LocalPageState extends State<LocalPage> {
-  late Future<Weather> _futureWeather;
+  late Future<Weather> futureWeather;
 
   @override
   void initState() {
     super.initState();
-    _futureWeather = LocalPageController.getCurrentIndexCityInfo();
+    LocalPageController.localPageRefresh = () => setState(() {
+      futureWeather = LocalPageController.getCurrentIndexCityInfo();
+    });
+    futureWeather = LocalPageController.getCurrentIndexCityInfo();
   }
 
   @override
@@ -26,7 +30,7 @@ class _LocalPageState extends State<LocalPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF111121),
       body: FutureBuilder<Weather>(
-        future: _futureWeather,
+        future: futureWeather,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

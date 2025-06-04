@@ -23,4 +23,38 @@ class Util {
       size,
     );
   }
+
+  static (String, bool) getFormatTime(int index) {
+    index += 1;
+    // index *= 3;
+    bool isCurrent = DateTime.now().hour == index;
+    if (index < 12) {
+      return ("${index.toString().padRight(2)}AM", isCurrent ? true : false);
+    } else if (index == 12) {
+      return ('12PM', isCurrent ? true : false);
+    } else {
+      return (
+        "${(index - 12).toString().padRight(2)}PM",
+        isCurrent ? true : false,
+      );
+    }
+  }
+
+  static List<(DateTime date, HourForecast)> getForecastHours(Weather weather, int length) {
+    return weather.forecast
+      .expand(
+        (d) => d.hour
+          .where(
+            (h) => DateTime.parse("${d.date} ${h.time.split(' ').last}").isAfter(DateTime.now()),
+          )
+          .map(
+            (h) => (
+              DateTime.parse("${d.date} ${h.time.split(' ').last}"),
+              h,
+            ),
+          ),
+      )
+      .take(length)
+      .toList();
+  }
 }

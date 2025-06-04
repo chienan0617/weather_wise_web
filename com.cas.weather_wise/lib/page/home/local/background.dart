@@ -18,12 +18,11 @@ class LocalBackground extends StatefulWidget {
 }
 
 class _LocalBackgroundState extends State<LocalBackground> {
-
   @override
   void initState() {
     super.initState();
 
-    LocalPageController.rebuild = () => setState(() {});
+    // LocalPageController.rebuild = () => setState(() {});
     // SelectCityCtrl.refreshCallback = () {
     //   if (mounted) {
     //     setState(() {});
@@ -88,45 +87,43 @@ class _LocalBackgroundState extends State<LocalBackground> {
             ],
           ),
         ),
-        ListTile(
-          contentPadding: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 10,
-          ),
-          leading: IconButton(
-            onPressed: () {
-              // TODO: 菜单点击逻辑
-            },
-            icon: const Icon(Icons.menu, size: 26, color: Colors.white),
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DropdownMenu<SearchedLocation>(
-                dropdownMenuEntries: LocalPageController.getDropDownMenuItems(),
-                onSelected: LocalPageController.onSelect
-                // value: LocalPageController.getCurrentLocation().name,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.menu, size: 26, color: Colors.white),
+            ),
+
+            const SizedBox(width: 15),
+
+            Expanded(
+              child: DropdownButton<String>(
+                items: LocalPageController.getDropDownMenuItems(),
+                onChanged: LocalPageController.onSelect,
+                value: LocalPageController.getDropDownMenuCurrentValue(),
                 // items: LocalPageController.getDropMenuItems(),
-                // dropdownColor: const Color.fromRGBO(0, 0, 0, 0.25),
-                // icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-                // underline: const SizedBox(),
-                // elevation: 10,
+                dropdownColor: Color.fromRGBO(62, 64, 153, 1),
+                icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+                underline: const SizedBox(),
+                elevation: 10,
                 // onChanged: (String? newValue) {
                 //   if (newValue == null) return;
                 //   LocalPageController.onChanged(newValue);
                 // },
-                // hint: const Text(
-                //   "請選擇城市",
-                //   style: TextStyle(color: Colors.white54),
-                // ),
+                hint: const Text(
+                  "請選擇城市",
+                  style: TextStyle(color: Colors.white54),
+                ),
                 // style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
-            ],
-          ),
-          trailing: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.settings, size: 26, color: Colors.white),
-          ),
+            ),
+
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.settings, size: 26, color: Colors.white),
+            ),
+          ],
         ),
       ],
     );

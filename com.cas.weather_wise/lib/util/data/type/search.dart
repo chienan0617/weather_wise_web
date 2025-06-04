@@ -1,3 +1,4 @@
+import 'package:weather_wise/func/controller/search_page.dart';
 import 'package:weather_wise/func/method/weather_data_info.dart';
 import 'package:weather_wise/util/data/data.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -27,6 +28,7 @@ class SearchData implements Database {
   @override
   Future<void> initialize() async {
     box = await Hive.openBox('search');
+    SearchPageController.initialize();
     // log(box.values.toString());
     // await WeatherInfo.initialize();
   }

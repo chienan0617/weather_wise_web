@@ -39,7 +39,7 @@ class Weather {
     log('fetch loc !');
 
     final cur = CurrentWeather.fromJson(json['current']);
-    log(json.toString());
+    // log(json.toString());
     log('fetch current !');
     final days = (json['forecast']['forecastday'] as List)
         .map((e) => ForecastDay.fromJson(e as Map<String, dynamic>))

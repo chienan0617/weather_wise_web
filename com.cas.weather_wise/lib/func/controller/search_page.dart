@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ class SearchPageController {
 
   @functional
   static List<SearchedLocation> getAllCityStored() {
-    log(Data.search.box.values.toString());
     return Data.search.box.values.toList().cast<SearchedLocation>();
   }
 
@@ -42,10 +40,20 @@ class SearchPageController {
     final query = textEditingValue.text.toLowerCase();
 
     return SearchedLocation.locations.where((location) {
-      return location.name.toLowerCase().contains(query);// ||
-        // location.state.toLowerCase().contains(query) ||
-        // location.country.toLowerCase().contains(query) ||
-        // location.county.toLowerCase().contains(query);
+      return location.name.toLowerCase().contains(query); // ||
+      // location.state.toLowerCase().contains(query) ||
+      // location.country.toLowerCase().contains(query) ||
+      // location.county.toLowerCase().contains(query);
     });
+  }
+
+  @initially
+  static Future<void> initialize() async {
+    if (Data.search.box.values.isEmpty) {
+      Data.search.put(
+        'search:default',
+        SearchedLocation('', '', '', 'default', 25.0097809, 121.4506019),
+      );
+    }
   }
 }

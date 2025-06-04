@@ -1,4 +1,5 @@
 import 'package:weather_wise/func/controller/home_bottom_bar.dart';
+import 'package:weather_wise/func/controller/local_page.dart';
 import 'package:weather_wise/page/home/drawer.dart';
 import 'package:weather_wise/page/home/forecast/forecast.m.dart';
 import 'package:weather_wise/page/home/local/local.m.dart';
@@ -18,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    LocalPageController.localPageRefresh = () => setState(() {});
     HomePageCtrl.refresh = () => setState(() {});
   }
 
