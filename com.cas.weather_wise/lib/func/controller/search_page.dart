@@ -1,12 +1,10 @@
 
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/local_page.dart';
 import 'package:weather_wise/util/annotation.dart';
 import 'package:weather_wise/util/data/data.dart';
 import 'package:weather_wise/util/service/location.mod.dart';
-import 'package:weather_wise/util/service/weather.mod.dart';
 
 class SearchPageController {
   @functional

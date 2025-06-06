@@ -17,7 +17,9 @@ class Data {
 
   @initially
   static Future<void> solveRegister() async {
-    for (var e in instances) e.initData();
+    for (var e in instances) {
+      e.initData();
+    }
   }
 
   @functional
