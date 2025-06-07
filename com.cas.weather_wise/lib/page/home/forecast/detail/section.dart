@@ -100,7 +100,7 @@ class _CityForecastSectionState extends State<CityForecastSection> {
                       vertical: 5,
                     ),
                     child: Text(
-                      '${LocalPageController.getDescription(widget.hourForecast.condition.code, widget.hourForecast.isDay)}',
+                      LocalPageController.getDescription(widget.hourForecast.condition.code, widget.hourForecast.isDay),
                       style: const TextStyle(
                         color: style_0,
                         fontFamily: 'Space Grotesk',

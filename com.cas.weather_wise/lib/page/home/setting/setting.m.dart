@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:weather_wise/util/data/data.dart';
 import 'package:weather_wise/util/language.dart';
@@ -10,13 +9,19 @@ class DebugConsole extends StatefulWidget {
   @override
   State<DebugConsole> createState() => _DebugConsoleState();
 }
+
 class _DebugConsoleState extends State<DebugConsole> {
+  // Move showLogo here, so its value persists across rebuilds:
+  bool showLogo = false;
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      backgroundColor: style_0p,
+      backgroundColor: const Color(0xFF00111F),
       appBar: AppBar(
-        backgroundColor: style_0p, //const Color(0xFF1C1933),
+        backgroundColor: const Color(0xFF00111F),
         title: const Text(
           'Debug Console',
           style: TextStyle(color: Colors.white),
@@ -28,41 +33,40 @@ class _DebugConsoleState extends State<DebugConsole> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              // 這裡包一層 Expanded
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Switch(value: Data.app.get<bool>('language'), onChanged:(b) => Language.changeIndex(b, context))
-                    // const Text(
-                    //   '基本資訊',
-                    //   style: TextStyle(
-                    //     color: Color.fromARGB(255, 255, 255, 255),
-                    //     // fontFamily: 'Space Grotesk',
-                    //     fontSize: 24,
-                    //   ),
-                    // ),
-                    // // Text(
-                    // //   CurrentWeatherApi.weather.toString(),
-                    // //   style: const TextStyle(
-                    // //     color: Color.fromARGB(255, 255, 255, 255),
-                    // //     // fontFamily: 'Space Grotesk',
-                    // //   ),
-                    // // ),
-                    // const Text(
-                    //   '天氣資訊對照',
-                    //   style: TextStyle(
-                    //     color: Color.fromARGB(255, 255, 255, 255),
-                    //     // fontFamily: 'Space Grotesk',
-                    //     fontSize: 24,
-                    //   ),
-                    // ),
-                    // Text(
-                    //   prettyJson,
-                    //   style: const TextStyle(
-                    //     color: Color.fromARGB(255, 255, 255, 255),
-                    //     // fontFamily: 'Space Grotesk',
-                    //   ),
-                    // ),
+                    Switch(
+                      value: Data.app.get<bool>('language'),
+                      onChanged: (b) => Language.changeIndex(b, context),
+                    ),
+
+                    const SizedBox(height: 100),
+
+                    Center(
+                      child: FilledButton(
+                        onPressed: () {
+                          setState(() {
+                            showLogo = !showLogo;
+                          });
+                        },
+                        child: const Text('CAS'),
+                      ),
+                    ),
+
+                    // Only show the GIF when showLogo == true
+                    if (showLogo)
+                      Image.asset(
+                        'assets/image/logo_animation.gif',
+                        width: size.width * 0.75,
+                        height: size.width * 0.75,
+                      ),
+                    if (showLogo)
+                      Image.asset(
+                        'assets/image/logo_cas.png',
+                        width: size.width * 0.75,
+                        height: size.width * 0.75,
+                      ),
                   ],
                 ),
               ),
@@ -73,11 +77,3 @@ class _DebugConsoleState extends State<DebugConsole> {
     );
   }
 }
- // 1. Map<int, List> → Map<String, dynamic>
-// final Map<String, dynamic> stringKeyMap = weatherData.map(
-//   (int key, List<dynamic> value) => MapEntry(key.toString(), value),
-// );
-
-// 2. 使用帶縮排的 JsonEncoder
-// final prettyJson = const JsonEncoder.withIndent('  ')
-    // .convert(stringKeyMap);

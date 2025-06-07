@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/tutorial.dart';
+import 'package:weather_wise/util/language.dart';
 
 class IntroductionPage extends StatefulWidget {
   const IntroductionPage({super.key});
@@ -103,7 +104,7 @@ class _BottomBarState extends State<BottomBar> {
               borderRadius: BorderRadius.circular(24),
             ),
             child: Text(
-              TutorialController.isLastPage() ? 'Get Started' : 'Next',
+              TutorialController.isLastPage() ? Language.word('Get Started') : Language.word('Next'),
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.white,

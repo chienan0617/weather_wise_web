@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:weather_wise/func/controller/home_bottom_bar.dart';
+import 'package:weather_wise/page/home/forecast/forecast.m.dart';
 import 'package:weather_wise/page/home/home.m.dart';
+import 'package:weather_wise/page/home/local/local.m.dart';
+import 'package:weather_wise/page/home/search/search.m.dart';
+import 'package:weather_wise/page/home/setting/setting.m.dart';
 import 'package:weather_wise/util/annotation.dart';
 import 'package:weather_wise/util/data/data.dart';
 
@@ -39,7 +44,15 @@ class TutorialController {
   static void detectEndPage() {
     if (currentPage == pages.length -1) {
       changeToNormalPage();
-      Data.app.put<bool>('tutorial', true);
+      Data.app.put<bool>('tutored', true);
     }
   }
 }
+
+
+List<Widget> pages = [
+  AbsorbPointer(child: LocalPage()),
+  AbsorbPointer(child: ForecastPage()),
+  AbsorbPointer(child: SearchPage()),
+  AbsorbPointer(child: DebugConsole()),
+];

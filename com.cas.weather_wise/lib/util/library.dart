@@ -227,6 +227,7 @@ extension HexColor on Color {
 }
 
 Weather weatherTemplate = Weather(
+  cityName: '--',
   loc: [0.0, 0.0],
   location: Location(
     name: '--',

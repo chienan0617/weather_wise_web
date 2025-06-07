@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_wise/func/controller/forecast_page.dart';
+import 'package:weather_wise/func/controller/home_bottom_bar.dart';
+import 'package:weather_wise/func/controller/local_page.dart';
 import 'package:weather_wise/page/home/forecast/detail/detail.m.dart';
 import 'package:weather_wise/util/data/data.dart';
 import 'package:weather_wise/util/language.dart';
@@ -27,13 +30,35 @@ class _ForecastPageState extends State<ForecastPage> {
     List<Weather> weatherList = Data.weather.box.values
         .whereType<Weather>()
         .toList();
-    print(
-      "list::${weatherList.length}, ${weatherList.map((e) => e.location.name)}",
-    );
+    // print(
+    //   "list::${weatherList.length}, ${weatherList.map((e) => e.location.name)}",
+    // );
 
     return Scaffold(
       backgroundColor: const Color(0xFF111121),
-      appBar: AppBar(backgroundColor: const Color(0xFF1C1933)),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF1C1933),
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.menu, color: style_0, size: 26),
+        ),
+        title: Text(
+          Language.word('Forecast'),
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontFamily: 'Space Grotesk',
+            fontWeight: FontWeight.w700,
+            height: 1.28,
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => HomePageCtrl.onValueChanged(2),
+        backgroundColor: const Color(0xFF2B11EA),
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
       body: Column(
         children: [
           SingleChildScrollView(
@@ -50,14 +75,7 @@ class _ForecastPageState extends State<ForecastPage> {
               ),
             ),
           ),
-          // 使用 Expanded 包裹 PageView.builder
           Expanded(
-            // child: PageView.builder(
-            //   itemCount: weatherList.length,
-            //   itemBuilder: (BuildContext context, int index) {
-            //     return citySection(weatherList[index], size);
-            //   },
-            // ),
             child: Column(
               children: List.generate(weatherList.length, (int index) {
                 return citySection(weatherList[index], size);
@@ -76,12 +94,25 @@ class _ForecastPageState extends State<ForecastPage> {
       // width: size.width,
       // height: 60,
       child: GestureDetector(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ForecastDetailPage(weather: weather),
+        onTap: () => Navigator.of(context).push(
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                ForecastDetailPage(weather: weather),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  return SlideTransition(
+                    position: animation.drive(
+                      Tween(
+                        begin: Offset(1.0, 0.0),
+                        end: Offset.zero,
+                      ).chain(CurveTween(curve: Curves.ease)),
+                    ),
+                    child: child,
+                  );
+                },
           ),
         ),
+
         child: Container(
           height: size.height * 0.15,
           margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -96,7 +127,7 @@ class _ForecastPageState extends State<ForecastPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      weather.location.name,
+                      weather.cityName,
                       style: const TextStyle(
                         color: style_0,
                         fontFamily: 'Space Grotesk',
@@ -122,48 +153,43 @@ class _ForecastPageState extends State<ForecastPage> {
               ),
               const SizedBox(),
               Row(
+                // mainAxisSize: MainAxisSize.,
+                // crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   const SizedBox(width: 10),
                   Util.getCurrentWeatherImage(weather, Size(62.5, 62.5)),
                   const SizedBox(width: 10),
-                  Text('<點擊 ', style: const TextStyle(color: Colors.white)),
-                  Text('${Object.hashAll([weather.location.name, weather.loc])}>', style: const TextStyle(color: Colors.white),)
+                  Text(
+                    LocalPageController.getDescription(
+                      weather.current.condition.code,
+                      weather.current.isDay,
+                    ),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Space Grotesk',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                    ),
+                  ),
+                  // Text('${Object.hashAll([weather.location.name, weather.loc])}>', style: const TextStyle(color: Colors.white),)
+                  const Expanded(child: SizedBox()),
+                  // const SizedBox(height: 10,),
+                  Text(
+                    DateFormat('yyyy-MM-dd HH:mm')
+                        .parse(weather.location.localtime.toString())
+                        .toString()
+                        .substring(5, 16),
+                    style: const TextStyle(
+                      fontFamily: 'Space Grotesk',
+                      color: Colors.white70,
+                    ),
+                  ),
+                  const SizedBox(width: 15),
                 ],
               ),
+              // const SizedBox(height: )
             ],
           ),
-          // child: Row(
-          //   children: [
-          //     const SizedBox(width: 10),
-          //     Container(
-          //       width: 60,
-          //       height: 60,
-          //       decoration: BoxDecoration(
-          //         color: const Color(0xFF1C1933),
-          //         borderRadius: BorderRadius.circular(10),
-          //       ),
-          //       child: Icon(
-          //         Icons.location_on_outlined,
-          //         color: style_0,
-          //         size: 28,
-          //       ),
-          //     ),
-          //     const SizedBox(width: 25),
-          //     Text(
-          //       // Language.word('72 Hour Forecast'),
-          //       weather.location.name,
-          //       style: const TextStyle(
-          //         color: style_8,
-          //         fontSize: 18,
-          //         fontWeight: FontWeight.w500,
-          //         fontFamily: 'Space Grotesk',
-          //       ),
-          //     ),
-          //     const Expanded(child: SizedBox()),
-          //     const Icon(Icons.arrow_forward_ios, color: style_104, size: 20),
-          //     const SizedBox(width: 10),
-          //   ],
-          // ),
         ),
       ),
     );

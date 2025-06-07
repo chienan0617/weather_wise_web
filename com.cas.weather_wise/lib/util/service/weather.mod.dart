@@ -26,16 +26,22 @@ class Weather {
   @HiveField(4)
   final List<double> loc;
 
+  @HiveField(5)
+  final String cityName;
+
   Weather({
     required this.location,
     required this.current,
     required this.forecast,
     required this.lastFetchTime,
     required this.loc,
+    required this.cityName,
   });
 
   /// 從 JSON 建構 Weather 實例
-  factory Weather.fromJson(Map<String, dynamic> json, List<double> loca) {
+  factory Weather.fromJson(
+    Map<String, dynamic> json, List<double> loca, String cityName
+  ) {
     final loc = Location.fromJson(json['location']);
     final cur = CurrentWeather.fromJson(json['current']);
     final days = (json['forecast']['forecastday'] as List)
@@ -47,7 +53,8 @@ class Weather {
       current: cur,
       forecast: days,
       lastFetchTime: DateTime.now(),
-      loc: loca
+      loc: loca,
+      cityName: cityName,
     );
   }
 
@@ -58,6 +65,7 @@ class Weather {
     required int days,
     required double lat,
     required double lon,
+    required String cityName
   }) async {
     print('https://api.weatherapi.com/v1/forecast.json'
       '?key=$apiKey'
@@ -77,7 +85,7 @@ class Weather {
     if (resp.statusCode != 200) {
       throw Exception('WeatherAPI request failed: ${resp.statusCode}');
     }
-    return Weather.fromJson(jsonDecode(resp.body), [lat, lon]);
+    return Weather.fromJson(jsonDecode(resp.body), [lat, lon], cityName);
   }
 
   @override

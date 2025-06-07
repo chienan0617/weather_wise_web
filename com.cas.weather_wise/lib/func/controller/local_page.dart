@@ -44,7 +44,7 @@ class LocalPageController {
     return await WeatherInfo.getAndChecksDataTimesOut(currentLocation);
   }
 
-  static Object? getDescription(int code, int isDay) =>
+  static String getDescription(int code, int isDay) =>
       weatherData[code]?[isDay == 1 ? 2 : 3];
 
   @functional
@@ -63,11 +63,14 @@ class LocalPageController {
     return cityNameList[index];
   }
 
-  static onSelect(String? location) {
+  static void onSelect(String? location) {
+    if (location == cityNameList[index]) {
+      return;
+    }
+
     if (location != null) {
       index = cityNameList.indexOf(location);
       localPageRefresh();
-      log('refreshed');
     }
   }
 

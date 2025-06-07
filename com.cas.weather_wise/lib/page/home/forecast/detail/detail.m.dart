@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_wise/func/controller/home_bottom_bar.dart';
 import 'package:weather_wise/page/home/forecast/detail/section.dart';
 import 'package:weather_wise/page/home/home.m.dart';
 import 'package:weather_wise/util/language.dart';
@@ -12,8 +13,7 @@ class ForecastDetailPage extends StatefulWidget {
   const ForecastDetailPage({super.key, required this.weather});
 
   @override
-  State<ForecastDetailPage> createState() =>
-      _ForecastDetailPageState();
+  State<ForecastDetailPage> createState() => _ForecastDetailPageState();
 }
 
 class _ForecastDetailPageState extends State<ForecastDetailPage> {
@@ -40,16 +40,35 @@ class _ForecastDetailPageState extends State<ForecastDetailPage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1C1933),
         title: Text(
-          Language.word('Weather Forecast'),
+          widget.weather.cityName,
           style: const TextStyle(color: Colors.white),
         ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
+            // HomePageCtrl.controller.animateToPage(
+            //   1,
+            //   duration: const Duration(milliseconds: 300),
+            //   curve: Curves.easeInOut,
+            // );
+            // Navigator.of(context).push(
+            //   PageRouteBuilder(
+            //     pageBuilder: (context, animation, secondaryAnimation) =>
+            //         HomePage(),
+            //     transitionsBuilder:
+            //         (context, animation, secondaryAnimation, child) {
+            //           return SlideTransition(
+            //             position: animation.drive(
+            //               Tween(
+            //                 begin: Offset(-1.0, 0.0),
+            //                 end: Offset.zero,
+            //               ).chain(CurveTween(curve: Curves.ease)),
+            //             ),
+            //             child: child,
+            //           );
+            //         },
+            //   ),
+            // );
           },
           icon: Icon(Icons.arrow_back, size: 26, color: style_0),
         ),

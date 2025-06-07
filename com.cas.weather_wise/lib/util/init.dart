@@ -24,7 +24,7 @@ class Initialize implements Initializable {
   }
 
   static Future<void> test() async {
-    Data.app.put('tutored', true);
+    // Data.app.put('tutored', false);
     // Data.app.box.clear();
   }
 }

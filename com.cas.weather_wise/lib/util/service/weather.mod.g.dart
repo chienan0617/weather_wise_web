@@ -22,13 +22,14 @@ class WeatherAdapter extends TypeAdapter<Weather> {
       forecast: (fields[2] as List).cast<ForecastDay>(),
       lastFetchTime: fields[3] as DateTime,
       loc: (fields[4] as List).cast<double>(),
+      cityName: fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Weather obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.location)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class WeatherAdapter extends TypeAdapter<Weather> {
       ..writeByte(3)
       ..write(obj.lastFetchTime)
       ..writeByte(4)
-      ..write(obj.loc);
+      ..write(obj.loc)
+      ..writeByte(5)
+      ..write(obj.cityName);
   }
 
   @override

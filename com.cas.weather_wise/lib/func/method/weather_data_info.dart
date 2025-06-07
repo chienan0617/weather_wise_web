@@ -18,7 +18,7 @@ class WeatherInfo {
   }
 
   @functional
-  static Future<Weather> _fetchWeather((double, double) located) async {
+  static Future<Weather> _fetchWeather((double, double) located, String cityName) async {
     final double lat = located.$1;
     final double lon = located.$2;
     try {
@@ -27,7 +27,8 @@ class WeatherInfo {
         queryLocation: '$lat,$lon', // 確保真的是 "緯度,經度"
         days: 14,
         lat: lat,
-        lon: lon
+        lon: lon,
+        cityName: cityName
       );
     } catch (error) {
       log('You are defeated: $error');
@@ -49,15 +50,13 @@ class WeatherInfo {
   static Future<void> initialize() async {
     var defaultLocation = (25.01195123107038, 121.45814408697204);
     if (!Data.weather.box.containsKey('weather:default')) {
-      // 如果完全沒有 default，就先 fetch 並存
-      final w = await _fetchWeather(defaultLocation);
+      final w = await _fetchWeather(defaultLocation, '你學校');
       Data.weather.put<Weather>('weather:default', w);
     }
-    // 再取一次 defaultWeather
     Weather defaultWeather = Data.weather.get<Weather>('weather:default');
     if (DateTime.now().difference(defaultWeather.lastFetchTime) >=
         Duration(hours: 3)) {
-      final w2 = await _fetchWeather(defaultLocation);
+      final w2 = await _fetchWeather(defaultLocation, '你學校');
       Data.weather.put<Weather>('weather:default', w2);
     }
   }
@@ -83,7 +82,9 @@ class WeatherInfo {
     }
   }
 
-  final newWeather = await _fetchWeather((location.lat, location.lng));
+  final newWeather = await _fetchWeather(
+    (location.lat, location.lng), location.name,
+  );
   Data.weather.put<Weather>(
     'weather:<${location.lat},${location.lng}>',
     newWeather,

@@ -42,7 +42,8 @@ class _LocalBackgroundState extends State<LocalBackground> {
             ),
           ),
         ),
-        ClipRect(
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 75, sigmaY: 75),
             child: Container(color: Colors.black.withOpacity(0.2)),
