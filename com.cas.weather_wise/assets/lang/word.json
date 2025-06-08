@@ -19,5 +19,8 @@
   "Next": ["Next", "下一個"],
   "Get Started": ["Get Started", "開始"],
   "Introduction Page": ["Introduction Page", "介紹頁面"],
-  "Skip": ["Skip", "跳過"]
+  "Skip": ["Skip", "跳過"],
+  "Premium": ["Premium", "Premium"],
+  "Weather Units": ["Weather Units", "天氣單位"],
+  "Unit": ["Unit", "單位"]
 }

@@ -6,6 +6,7 @@ import 'package:weather_wise/util/data/type/search.dart';
 import 'package:weather_wise/util/data/type/weather.dart';
 import 'package:weather_wise/util/service/location.mod.dart';
 import 'package:weather_wise/util/service/weather.mod.dart';
+import 'package:weather_wise/util/init.dart';
 
 class Data {
   static AppData app = AppData();
@@ -18,6 +19,8 @@ class Data {
     await weather.initialize();
     await search.initialize();
 
+
+    await Initialize.onDifferentVersion();
     solveRegister();
   }
 

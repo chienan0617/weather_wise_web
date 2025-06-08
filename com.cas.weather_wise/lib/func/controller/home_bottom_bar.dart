@@ -1,6 +1,6 @@
 import 'package:weather_wise/page/error/error.m.dart';
+import 'package:weather_wise/page/home/premium/premium.m.dart';
 import 'package:weather_wise/page/home/forecast/forecast.m.dart';
-import 'package:weather_wise/page/home/home.m.dart';
 import 'package:weather_wise/page/home/local/local.m.dart';
 import 'package:weather_wise/page/home/search/search.m.dart';
 import 'package:weather_wise/page/home/setting/setting.m.dart';
@@ -21,9 +21,7 @@ class HomePageCtrl {
   @initially
   static void onValueChanged(int newValue) {
     _pageIndex = newValue;
-    controller.jumpToPage(
-      newValue,
-    );
+    controller.jumpToPage(newValue);
     refresh();
   }
 
@@ -37,9 +35,11 @@ class HomePageCtrl {
   }
 }
 
-final List<Widget> pages = <Widget>[
+final List<Widget> pages = [
   LocalPage(),
   ForecastPage(),
+  PremiumPage(),
   SearchPage(),
-  DebugConsole()
+  SettingPage(),
+  // DebugConsole(),
 ];

@@ -1,13 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/home_bottom_bar.dart';
 import 'package:weather_wise/func/controller/local_page.dart';
 import 'package:weather_wise/page/home/drawer.dart';
-import 'package:weather_wise/page/home/forecast/forecast.m.dart';
-import 'package:weather_wise/page/home/local/local.m.dart';
-import 'package:weather_wise/page/home/search/search.m.dart';
-import 'package:weather_wise/page/home/setting/setting.m.dart';
 import 'package:weather_wise/util/language.dart';
-import 'package:flutter/material.dart';
-
+import 'package:weather_wise/util/library.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,94 +13,123 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // 这里和 HomePageCtrl.pages 保持完全一致
-  final List<Widget> _pages = [
-    LocalPage(),
-    ForecastPage(),
-    SearchPage(),
-    DebugConsole(),
-  ];
-
   @override
   void initState() {
     super.initState();
-    // 将 HomePageCtrl.refresh 绑到 setState()，让它能刷 UI
     HomePageCtrl.refresh = () => setState(() {});
-    // 如果 LocalPageController 需要通知 HomePage 刷新，也一并绑定
     LocalPageController.localPageRefresh = () => setState(() {});
   }
 
   @override
   void dispose() {
-    // 程序结束或退出 HomePage 时再释放控制器
     HomePageCtrl.controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
           drawer: SideBar(),
           body: PageView(
             controller: HomePageCtrl.controller,
             onPageChanged: HomePageCtrl.onValueChanged,
-            children: _pages,
+            children: pages,
           ),
-          bottomNavigationBar: _buildBottomNavigationBar(),
+          floatingActionButton: SizedBox(
+            width: size.width / 5 / 1.375,
+            height: size.width / 5 / 1.375,
+            child: FloatingActionButton(
+              heroTag: 'fab_chat',
+              onPressed: () => HomePageCtrl.onValueChanged(2),
+              backgroundColor: HomePageCtrl.pageIndex == 2
+                  ? Colors.white
+                  : const Color(0xFF383366),
+              shape: const CircleBorder(),
+              child: Icon(
+                Icons.assistant,
+                color: HomePageCtrl.pageIndex == 2
+                    ? const Color(0xFF383366)
+                    : Colors.white,
+              ),
+            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: BottomAppBar(
+            // height: kBottomNavigationBarHeight + 16,
+            // padding: EdgeInsets.only(top: 0),
+            color: const Color(0xFF1C1933),
+            // shape: const CircularNotchedRectangle(),
+            // notchMargin: 8.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildNavItem(Icons.location_on_outlined, 'Local', 0, size),
+                _buildNavItem(Icons.cloud_outlined, 'Forecast', 1, size),
+                // _buildNavItem(Icons.add, 'Premium', 2, size),
+                Column(
+                  children: [
+                    const SizedBox(height: 25),
+                    Text(
+                      Language.word('Premium'),
+                      style: TextStyle(
+                        color: HomePageCtrl.pageIndex == 2
+                            ? Colors.white
+                            : const Color(0xFF9993C6),
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ),
+                _buildNavItem(Icons.search, 'Search', 3, size),
+                _buildNavItem(Icons.settings_outlined, 'Setting', 4, size),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildBottomNavigationBar() {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 15),
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: Color(0xFF282644), width: 1.5)),
-        // color: Color(0xFF1C1933),
-        color: Color(0xFF1C1933),
-      ),
-      child: BottomNavigationBar(
-        currentIndex: HomePageCtrl.pageIndex,
-        onTap: HomePageCtrl.onValueChanged,
-        items: [
-          _bottomNavItem(Icons.location_on_outlined, 'Local'),
-          _bottomNavItem(Icons.cloud_outlined, 'Forecast'),
-          _bottomNavItem(Icons.search, 'Search'),
-          _bottomNavItem(Icons.settings_outlined, 'Setting'),
-        ],
-        selectedFontSize: 14,
-        unselectedFontSize: 12,
-        selectedLabelStyle: const TextStyle(
-          color: Color(0xFF9993C6),
-          fontSize: 14,
-          fontFamily: 'Space Grotesk',
-          fontWeight: FontWeight.w500,
-          height: 1.50,
+  Widget _buildNavItem(IconData icon, String label, int index, Size size) {
+    final isSelected = HomePageCtrl.pageIndex == index;
+    return GestureDetector(
+      onTap: () => HomePageCtrl.onValueChanged(index),
+      child: SizedBox(
+        width: (size.width - (size.width / 5 / 1.25) - 10) / 5,
+        child: Container(
+          decoration: BoxDecoration(
+            // border: Border.all(color: Colors.amber)
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                color: isSelected ? Colors.white : const Color(0xFF9993C6),
+                size: 28,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                Language.word(label),
+                style: TextStyle(
+                  color: isSelected ? Colors.white : const Color(0xFF9993C6),
+                  fontSize: 12,
+                  fontFamily: fontFamilyDefault,
+                  fontWeight: FontWeight.w500,
+                  height: 1.5,
+                ),
+              ),
+              // SizedBox(height: 20,),
+            ],
+          ),
         ),
-        unselectedLabelStyle: const TextStyle(
-          color: Color(0xFF9993C6),
-          fontSize: 14,
-          fontFamily: 'Space Grotesk',
-          fontWeight: FontWeight.w500,
-          height: 1.50,
-        ),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: const Color(0xFF9993C6),
-        backgroundColor: const Color(0xFF1C1933),
-        type: BottomNavigationBarType.shifting,
-        // showUnselectedLabels: true,
       ),
-    );
-  }
-
-  BottomNavigationBarItem _bottomNavItem(IconData icon, String label) {
-    return BottomNavigationBarItem(
-      icon: Icon(icon),
-      label: Language.word(label),
-      backgroundColor: const Color(0xFF1C1933),
     );
   }
 }

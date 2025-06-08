@@ -88,167 +88,167 @@ class Weather {
     return Weather.fromJson(jsonDecode(resp.body), [lat, lon], cityName);
   }
 
-  @override
-  String toString() {
-    final sb = StringBuffer();
+  // @override
+  // String toString() {
+  //   final sb = StringBuffer();
 
-    // 1. Location 全部欄位
-    sb.writeln('=== Location ===');
-    sb.writeln(' name          : ${location.name}');
-    sb.writeln(' region        : ${location.region}');
-    sb.writeln(' country       : ${location.country}');
-    // sb.writeln(' lat           : ${location.lat}');
-    // sb.writeln(' lon           : ${location.lon}');
-    sb.writeln(' tzId          : ${location.tzId}');
-    sb.writeln(' localtimeEpoch: ${location.localtimeEpoch}');
-    sb.writeln(' localtime     : ${location.localtime}');
+  //   // 1. Location 全部欄位
+  //   sb.writeln('=== Location ===');
+  //   sb.writeln(' name          : ${location.name}');
+  //   sb.writeln(' region        : ${location.region}');
+  //   sb.writeln(' country       : ${location.country}');
+  //   // sb.writeln(' lat           : ${location.lat}');
+  //   // sb.writeln(' lon           : ${location.lon}');
+  //   sb.writeln(' tzId          : ${location.tzId}');
+  //   sb.writeln(' localtimeEpoch: ${location.localtimeEpoch}');
+  //   sb.writeln(' localtime     : ${location.localtime}');
 
-    // 2. CurrentWeather 全部欄位
-    sb.writeln('\n=== CurrentWeather ===');
-    sb.writeln(' lastUpdatedEpoch: ${current.lastUpdatedEpoch}');
-    sb.writeln(' lastUpdated     : ${current.lastUpdated}');
-    sb.writeln(' tempC           : ${current.tempC}');
-    sb.writeln(' tempF           : ${current.tempF}');
-    sb.writeln(' isDay           : ${current.isDay}');
-    sb.writeln(' condition.text  : ${current.condition.text}');
-    sb.writeln(' condition.icon  : ${current.condition.icon}');
-    sb.writeln(' condition.code  : ${current.condition.code}');
-    sb.writeln(' windMph         : ${current.windMph}');
-    sb.writeln(' windKph         : ${current.windKph}');
-    sb.writeln(' windDegree      : ${current.windDegree}');
-    sb.writeln(' windDir         : ${current.windDir}');
-    sb.writeln(' pressureMb      : ${current.pressureMb}');
-    sb.writeln(' pressureIn      : ${current.pressureIn}');
-    sb.writeln(' precipMm        : ${current.precipMm}');
-    sb.writeln(' precipIn        : ${current.precipIn}');
-    sb.writeln(' humidity        : ${current.humidity}');
-    sb.writeln(' cloud           : ${current.cloud}');
-    sb.writeln(' feelslikeC      : ${current.feelslikeC}');
-    sb.writeln(' feelslikeF      : ${current.feelslikeF}');
-    sb.writeln(' visKm           : ${current.visKm}');
-    sb.writeln(' visMiles        : ${current.visMiles}');
-    sb.writeln(' uv              : ${current.uv}');
-    sb.writeln(' gustMph         : ${current.gustMph}');
-    sb.writeln(' gustKph         : ${current.gustKph}');
-    // sb.writeln(' airQuality.co   : ${current.airQuality.co}');
-    // sb.writeln(' airQuality.no2  : ${current.airQuality.no2}');
-    // sb.writeln(' airQuality.o3   : ${current.airQuality.o3}');
-    // sb.writeln(' airQuality.so2  : ${current.airQuality.so2}');
-    // sb.writeln(' airQuality.pm25 : ${current.airQuality.pm25}');
-    // sb.writeln(' airQuality.pm10 : ${current.airQuality.pm10}');
-    // sb.writeln(' airQuality.usEpaIndex : ${current.airQuality.usEpaIndex}');
-    // sb.writeln(' airQuality.gbDefraIndex: ${current.airQuality.gbDefraIndex}');
+  //   // 2. CurrentWeather 全部欄位
+  //   sb.writeln('\n=== CurrentWeather ===');
+  //   sb.writeln(' lastUpdatedEpoch: ${current.lastUpdatedEpoch}');
+  //   sb.writeln(' lastUpdated     : ${current.lastUpdated}');
+  //   sb.writeln(' tempC           : ${current.tempC}');
+  //   sb.writeln(' tempF           : ${current.tempF}');
+  //   sb.writeln(' isDay           : ${current.isDay}');
+  //   sb.writeln(' condition.text  : ${current.condition.text}');
+  //   sb.writeln(' condition.icon  : ${current.condition.icon}');
+  //   sb.writeln(' condition.code  : ${current.condition.code}');
+  //   sb.writeln(' windMph         : ${current.windMph}');
+  //   sb.writeln(' windKph         : ${current.windKph}');
+  //   sb.writeln(' windDegree      : ${current.windDegree}');
+  //   sb.writeln(' windDir         : ${current.windDir}');
+  //   sb.writeln(' pressureMb      : ${current.pressureMb}');
+  //   sb.writeln(' pressureIn      : ${current.pressureIn}');
+  //   sb.writeln(' precipMm        : ${current.precipMm}');
+  //   sb.writeln(' precipIn        : ${current.precipIn}');
+  //   sb.writeln(' humidity        : ${current.humidity}');
+  //   sb.writeln(' cloud           : ${current.cloud}');
+  //   sb.writeln(' feelslikeC      : ${current.feelslikeC}');
+  //   sb.writeln(' feelslikeF      : ${current.feelslikeF}');
+  //   sb.writeln(' visKm           : ${current.visKm}');
+  //   sb.writeln(' visMiles        : ${current.visMiles}');
+  //   sb.writeln(' uv              : ${current.uv}');
+  //   sb.writeln(' gustMph         : ${current.gustMph}');
+  //   sb.writeln(' gustKph         : ${current.gustKph}');
+  //   // sb.writeln(' airQuality.co   : ${current.airQuality.co}');
+  //   // sb.writeln(' airQuality.no2  : ${current.airQuality.no2}');
+  //   // sb.writeln(' airQuality.o3   : ${current.airQuality.o3}');
+  //   // sb.writeln(' airQuality.so2  : ${current.airQuality.so2}');
+  //   // sb.writeln(' airQuality.pm25 : ${current.airQuality.pm25}');
+  //   // sb.writeln(' airQuality.pm10 : ${current.airQuality.pm10}');
+  //   // sb.writeln(' airQuality.usEpaIndex : ${current.airQuality.usEpaIndex}');
+  //   // sb.writeln(' airQuality.gbDefraIndex: ${current.airQuality.gbDefraIndex}');
 
-    // 3. ForecastDay 清單
-    for (var i = 0; i < forecast.length; i++) {
-      final day = forecast[i];
-      sb.writeln('\n=== ForecastDay #${i + 1} ===');
-      sb.writeln(' date       : ${day.date}');
-      sb.writeln(' dateEpoch  : ${day.dateEpoch}');
+  //   // 3. ForecastDay 清單
+  //   for (var i = 0; i < forecast.length; i++) {
+  //     final day = forecast[i];
+  //     sb.writeln('\n=== ForecastDay #${i + 1} ===');
+  //     sb.writeln(' date       : ${day.date}');
+  //     sb.writeln(' dateEpoch  : ${day.dateEpoch}');
 
-      // 3a. DaySummary
-      sb.writeln('--- DaySummary ---');
-      sb.writeln(' maxTempC         : ${day.day.maxTempC}');
-      sb.writeln(' maxTempF         : ${day.day.maxTempF}');
-      sb.writeln(' minTempC         : ${day.day.minTempC}');
-      sb.writeln(' minTempF         : ${day.day.minTempF}');
-      sb.writeln(' avgTempC         : ${day.day.avgTempC}');
-      sb.writeln(' avgTempF         : ${day.day.avgTempF}');
-      sb.writeln(' maxWindMph       : ${day.day.maxWindMph}');
-      sb.writeln(' maxWindKph       : ${day.day.maxWindKph}');
-      sb.writeln(' totalPrecipMm    : ${day.day.totalPrecipMm}');
-      sb.writeln(' totalPrecipIn    : ${day.day.totalPrecipIn}');
-      sb.writeln(' totalSnowCm      : ${day.day.totalSnowCm}');
-      sb.writeln(' avgVisKm         : ${day.day.avgVisKm}');
-      sb.writeln(' avgVisMiles      : ${day.day.avgVisMiles}');
-      sb.writeln(' avgHumidity      : ${day.day.avgHumidity}');
-      sb.writeln(' dailyWillItRain  : ${day.day.dailyWillItRain}');
-      sb.writeln(' dailyChanceOfRain: ${day.day.dailyChanceOfRain}');
-      sb.writeln(' dailyWillItSnow  : ${day.day.dailyWillItSnow}');
-      sb.writeln(' dailyChanceOfSnow: ${day.day.dailyChanceOfSnow}');
-      sb.writeln(' condition.text   : ${day.day.condition.text}');
-      sb.writeln(' condition.icon   : ${day.day.condition.icon}');
-      sb.writeln(' condition.code   : ${day.day.condition.code}');
-      sb.writeln(' uv               : ${day.day.uv}');
-      // sb.writeln(' day.airQuality.co         : ${day.day.airQuality.co}');
-      // sb.writeln(' day.airQuality.no2        : ${day.day.airQuality.no2}');
-      // sb.writeln(' day.airQuality.o3         : ${day.day.airQuality.o3}');
-      // sb.writeln(' day.airQuality.so2        : ${day.day.airQuality.so2}');
-      // sb.writeln(' day.airQuality.pm25       : ${day.day.airQuality.pm25}');
-      // sb.writeln(' day.airQuality.pm10       : ${day.day.airQuality.pm10}');
-      // sb.writeln(
-      //   ' day.airQuality.usEpaIndex : ${day.day.airQuality.usEpaIndex}',
-      // );
-      // sb.writeln(
-      //   ' day.airQuality.gbDefraIndex: ${day.day.airQuality.gbDefraIndex}',
-      // );
+  //     // 3a. DaySummary
+  //     sb.writeln('--- DaySummary ---');
+  //     sb.writeln(' maxTempC         : ${day.day.maxTempC}');
+  //     sb.writeln(' maxTempF         : ${day.day.maxTempF}');
+  //     sb.writeln(' minTempC         : ${day.day.minTempC}');
+  //     sb.writeln(' minTempF         : ${day.day.minTempF}');
+  //     sb.writeln(' avgTempC         : ${day.day.avgTempC}');
+  //     sb.writeln(' avgTempF         : ${day.day.avgTempF}');
+  //     sb.writeln(' maxWindMph       : ${day.day.maxWindMph}');
+  //     sb.writeln(' maxWindKph       : ${day.day.maxWindKph}');
+  //     sb.writeln(' totalPrecipMm    : ${day.day.totalPrecipMm}');
+  //     sb.writeln(' totalPrecipIn    : ${day.day.totalPrecipIn}');
+  //     sb.writeln(' totalSnowCm      : ${day.day.totalSnowCm}');
+  //     sb.writeln(' avgVisKm         : ${day.day.avgVisKm}');
+  //     sb.writeln(' avgVisMiles      : ${day.day.avgVisMiles}');
+  //     sb.writeln(' avgHumidity      : ${day.day.avgHumidity}');
+  //     sb.writeln(' dailyWillItRain  : ${day.day.dailyWillItRain}');
+  //     sb.writeln(' dailyChanceOfRain: ${day.day.dailyChanceOfRain}');
+  //     sb.writeln(' dailyWillItSnow  : ${day.day.dailyWillItSnow}');
+  //     sb.writeln(' dailyChanceOfSnow: ${day.day.dailyChanceOfSnow}');
+  //     sb.writeln(' condition.text   : ${day.day.condition.text}');
+  //     sb.writeln(' condition.icon   : ${day.day.condition.icon}');
+  //     sb.writeln(' condition.code   : ${day.day.condition.code}');
+  //     sb.writeln(' uv               : ${day.day.uv}');
+  //     // sb.writeln(' day.airQuality.co         : ${day.day.airQuality.co}');
+  //     // sb.writeln(' day.airQuality.no2        : ${day.day.airQuality.no2}');
+  //     // sb.writeln(' day.airQuality.o3         : ${day.day.airQuality.o3}');
+  //     // sb.writeln(' day.airQuality.so2        : ${day.day.airQuality.so2}');
+  //     // sb.writeln(' day.airQuality.pm25       : ${day.day.airQuality.pm25}');
+  //     // sb.writeln(' day.airQuality.pm10       : ${day.day.airQuality.pm10}');
+  //     // sb.writeln(
+  //     //   ' day.airQuality.usEpaIndex : ${day.day.airQuality.usEpaIndex}',
+  //     // );
+  //     // sb.writeln(
+  //     //   ' day.airQuality.gbDefraIndex: ${day.day.airQuality.gbDefraIndex}',
+  //     // );
 
-      // 3b. Astro
-      sb.writeln('--- Astro ---');
-      sb.writeln(' sunrise        : ${day.astro.sunrise}');
-      sb.writeln(' sunset         : ${day.astro.sunset}');
-      sb.writeln(' moonrise       : ${day.astro.moonrise}');
-      sb.writeln(' moonset        : ${day.astro.moonset}');
-      sb.writeln(' moonPhase      : ${day.astro.moonPhase}');
-      sb.writeln(' moonIllumination: ${day.astro.moonIllumination}');
-      sb.writeln(' isMoonUp       : ${day.astro.isMoonUp}');
-      sb.writeln(' isSunUp        : ${day.astro.isSunUp}');
+  //     // 3b. Astro
+  //     sb.writeln('--- Astro ---');
+  //     sb.writeln(' sunrise        : ${day.astro.sunrise}');
+  //     sb.writeln(' sunset         : ${day.astro.sunset}');
+  //     sb.writeln(' moonrise       : ${day.astro.moonrise}');
+  //     sb.writeln(' moonset        : ${day.astro.moonset}');
+  //     sb.writeln(' moonPhase      : ${day.astro.moonPhase}');
+  //     sb.writeln(' moonIllumination: ${day.astro.moonIllumination}');
+  //     sb.writeln(' isMoonUp       : ${day.astro.isMoonUp}');
+  //     sb.writeln(' isSunUp        : ${day.astro.isSunUp}');
 
-      // 3c. 全部 HourForecast
-      for (var h in day.hour) {
-        sb.writeln('--- HourForecast @ ${h.time} ---');
-        sb.writeln(' timeEpoch        : ${h.timeEpoch}');
-        sb.writeln(' tempC            : ${h.tempC}');
-        sb.writeln(' tempF            : ${h.tempF}');
-        sb.writeln(' isDay            : ${h.isDay}');
-        sb.writeln(' condition.text   : ${h.condition.text}');
-        sb.writeln(' condition.icon   : ${h.condition.icon}');
-        sb.writeln(' condition.code   : ${h.condition.code}');
-        sb.writeln(' windMph          : ${h.windMph}');
-        sb.writeln(' windKph          : ${h.windKph}');
-        sb.writeln(' windDegree       : ${h.windDegree}');
-        sb.writeln(' windDir          : ${h.windDir}');
-        sb.writeln(' pressureMb       : ${h.pressureMb}');
-        sb.writeln(' pressureIn       : ${h.pressureIn}');
-        sb.writeln(' precipMm         : ${h.precipMm}');
-        sb.writeln(' precipIn         : ${h.precipIn}');
-        sb.writeln(' snowCm           : ${h.snowCm}');
-        sb.writeln(' humidity         : ${h.humidity}');
-        sb.writeln(' cloud            : ${h.cloud}');
-        sb.writeln(' feelslikeC       : ${h.feelslikeC}');
-        sb.writeln(' feelslikeF       : ${h.feelslikeF}');
-        sb.writeln(' windchillC       : ${h.windchillC}');
-        sb.writeln(' windchillF       : ${h.windchillF}');
-        sb.writeln(' heatindexC       : ${h.heatindexC}');
-        sb.writeln(' heatindexF       : ${h.heatindexF}');
-        sb.writeln(' dewpointC        : ${h.dewpointC}');
-        sb.writeln(' dewpointF        : ${h.dewpointF}');
-        sb.writeln(' willItRain       : ${h.willItRain}');
-        sb.writeln(' chanceOfRain     : ${h.chanceOfRain}');
-        sb.writeln(' willItSnow       : ${h.willItSnow}');
-        sb.writeln(' chanceOfSnow     : ${h.chanceOfSnow}');
-        sb.writeln(' visKm            : ${h.visKm}');
-        sb.writeln(' visMiles         : ${h.visMiles}');
-        sb.writeln(' gustMph          : ${h.gustMph}');
-        sb.writeln(' gustKph          : ${h.gustKph}');
-        sb.writeln(' uv               : ${h.uv}');
-        // sb.writeln(' shortRad         : ${h.shortRad}');
-        // sb.writeln(' diffRad          : ${h.diffRad}');
-        // sb.writeln(' hour.airQuality.co         : ${h.airQuality.co}');
-        // sb.writeln(' hour.airQuality.no2        : ${h.airQuality.no2}');
-        // sb.writeln(' hour.airQuality.o3         : ${h.airQuality.o3}');
-        // sb.writeln(' hour.airQuality.so2        : ${h.airQuality.so2}');
-        // sb.writeln(' hour.airQuality.pm25       : ${h.airQuality.pm25}');
-        // sb.writeln(' hour.airQuality.pm10       : ${h.airQuality.pm10}');
-        // sb.writeln(' hour.airQuality.usEpaIndex : ${h.airQuality.usEpaIndex}');
-        // sb.writeln(
-        //   ' hour.airQuality.gbDefraIndex: ${h.airQuality.gbDefraIndex}',
-        // );
-      }
-    }
+  //     // 3c. 全部 HourForecast
+  //     for (var h in day.hour) {
+  //       sb.writeln('--- HourForecast @ ${h.time} ---');
+  //       sb.writeln(' timeEpoch        : ${h.timeEpoch}');
+  //       sb.writeln(' tempC            : ${h.tempC}');
+  //       sb.writeln(' tempF            : ${h.tempF}');
+  //       sb.writeln(' isDay            : ${h.isDay}');
+  //       sb.writeln(' condition.text   : ${h.condition.text}');
+  //       sb.writeln(' condition.icon   : ${h.condition.icon}');
+  //       sb.writeln(' condition.code   : ${h.condition.code}');
+  //       sb.writeln(' windMph          : ${h.windMph}');
+  //       sb.writeln(' windKph          : ${h.windKph}');
+  //       sb.writeln(' windDegree       : ${h.windDegree}');
+  //       sb.writeln(' windDir          : ${h.windDir}');
+  //       sb.writeln(' pressureMb       : ${h.pressureMb}');
+  //       sb.writeln(' pressureIn       : ${h.pressureIn}');
+  //       sb.writeln(' precipMm         : ${h.precipMm}');
+  //       sb.writeln(' precipIn         : ${h.precipIn}');
+  //       sb.writeln(' snowCm           : ${h.snowCm}');
+  //       sb.writeln(' humidity         : ${h.humidity}');
+  //       sb.writeln(' cloud            : ${h.cloud}');
+  //       sb.writeln(' feelslikeC       : ${h.feelslikeC}');
+  //       sb.writeln(' feelslikeF       : ${h.feelslikeF}');
+  //       sb.writeln(' windchillC       : ${h.windchillC}');
+  //       sb.writeln(' windchillF       : ${h.windchillF}');
+  //       sb.writeln(' heatindexC       : ${h.heatindexC}');
+  //       sb.writeln(' heatindexF       : ${h.heatindexF}');
+  //       sb.writeln(' dewpointC        : ${h.dewpointC}');
+  //       sb.writeln(' dewpointF        : ${h.dewpointF}');
+  //       sb.writeln(' willItRain       : ${h.willItRain}');
+  //       sb.writeln(' chanceOfRain     : ${h.chanceOfRain}');
+  //       sb.writeln(' willItSnow       : ${h.willItSnow}');
+  //       sb.writeln(' chanceOfSnow     : ${h.chanceOfSnow}');
+  //       sb.writeln(' visKm            : ${h.visKm}');
+  //       sb.writeln(' visMiles         : ${h.visMiles}');
+  //       sb.writeln(' gustMph          : ${h.gustMph}');
+  //       sb.writeln(' gustKph          : ${h.gustKph}');
+  //       sb.writeln(' uv               : ${h.uv}');
+  //       // sb.writeln(' shortRad         : ${h.shortRad}');
+  //       // sb.writeln(' diffRad          : ${h.diffRad}');
+  //       // sb.writeln(' hour.airQuality.co         : ${h.airQuality.co}');
+  //       // sb.writeln(' hour.airQuality.no2        : ${h.airQuality.no2}');
+  //       // sb.writeln(' hour.airQuality.o3         : ${h.airQuality.o3}');
+  //       // sb.writeln(' hour.airQuality.so2        : ${h.airQuality.so2}');
+  //       // sb.writeln(' hour.airQuality.pm25       : ${h.airQuality.pm25}');
+  //       // sb.writeln(' hour.airQuality.pm10       : ${h.airQuality.pm10}');
+  //       // sb.writeln(' hour.airQuality.usEpaIndex : ${h.airQuality.usEpaIndex}');
+  //       // sb.writeln(
+  //       //   ' hour.airQuality.gbDefraIndex: ${h.airQuality.gbDefraIndex}',
+  //       // );
+  //     }
+  //   }
 
-    return sb.toString();
-  }
+  //   return sb.toString();
+  // }
 }
 
 /// 查詢地點資訊
@@ -511,9 +511,9 @@ class ForecastDay {
         .toList(),
   );
 
-  @override
-  String toString() =>
-      '[$date] ${day.condition.text}, H:${day.maxTempC}°C L:${day.minTempC}°C';
+  // @override
+  // String toString() =>
+  //     '[$date] ${day.condition.text}, H:${day.maxTempC}°C L:${day.minTempC}°C';
 }
 
 /// 當日摘要
@@ -650,9 +650,9 @@ class DaySummary {
     // airQuality: AirQuality.fromJson(json['air_quality']),
   );
 
-  @override
-  String toString() =>
-      'Max:$maxTempC°C Min:$minTempC°C Condition:${condition.text}';
+  // @override
+  // String toString() =>
+  //     'Max:$maxTempC°C Min:$minTempC°C Condition:${condition.text}';
 }
 
 /// 天文資訊
@@ -712,9 +712,9 @@ class Astro {
     isSunUp: json['is_sun_up'],
   );
 
-  @override
-  String toString() =>
-      'Sunrise:$sunrise Sunset:$sunset MoonPhase:$moonPhase Illum:$moonIllumination%';
+  // @override
+  // String toString() =>
+  //     'Sunrise:$sunrise Sunset:$sunset MoonPhase:$moonPhase Illum:$moonIllumination%';
 }
 
 /// 每小時預報
@@ -948,9 +948,9 @@ class HourForecast {
     // diffRad: (json['diff_rad'] as num).toDouble(),
   );
 
-  @override
-  String toString() =>
-      '$time: $tempC°C, ${condition.text}, rain:${willItRain == 1 ? "yes" : "no"}';
+  // @override
+  // String toString() =>
+  //     '$time: $tempC°C, ${condition.text}, rain:${willItRain == 1 ? "yes" : "no"}';
 }
 
 /// 共用的天氣狀況
@@ -973,8 +973,8 @@ class Condition {
   factory Condition.fromJson(Map<String, dynamic> json) =>
       Condition(text: json['text'], icon: json['icon'], code: json['code']);
 
-  @override
-  String toString() => text;
+  // @override
+  // String toString() => text;
 }
 
 /// 共用的空氣品質指標

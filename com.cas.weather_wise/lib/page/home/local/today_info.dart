@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_wise/util/language.dart';
+import 'package:weather_wise/util/library.dart';
 import 'package:weather_wise/util/service/weather.mod.dart';
 
 class TodayInfo extends StatefulWidget {
@@ -17,9 +18,7 @@ class _TodayInfoState extends State<TodayInfo> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: 50),
           Text(
@@ -27,15 +26,11 @@ class _TodayInfoState extends State<TodayInfo> {
             style: const TextStyle(
               color: Colors.white70,
               fontSize: 16,
-              fontFamily: 'Space Grotesk',
+              fontFamily: fontFamilyDefault,
             ),
           ),
           const SizedBox(height: 30,),
-          section('title', 'value'),
-          // Text(
-          //   'Humidity: ${widget.weather.forecast[0].day.avgHumidity}',
-          //   style: const TextStyle(color: style_0),
-          // ),
+          section('title', 'value')
         ],
       ),
     );
@@ -44,22 +39,10 @@ class _TodayInfoState extends State<TodayInfo> {
   Widget section(String title, String value) {
     return SizedBox(
       width: widget.size.width,
-      // child: ListTile(
-      //   leading:
-      //   // title: Text(title),
-      // ),
       child: Row(
         children: [
-          // Container(
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(7.5),
-          //     color: const Color(0xFF1C1933),
-          //   ),
-          //   child: Center(child: Icon(icon, size: 24, color: Colors.white)),
-          // ),
-          Text(title, style: TextStyle(color: Colors.white70, )),
-          // Text(data)
-          Text(value, style: TextStyle(color: Colors.white),),
+          Text(title, style: TextStyle(color: Colors.white70)),
+          Text(value, style: TextStyle(color: Colors.white)),
         ],
       ),
     );

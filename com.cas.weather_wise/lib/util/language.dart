@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:weather_wise/page/home/home.m.dart';
+import 'package:weather_wise/func/controller/home_bottom_bar.dart';
 import 'package:weather_wise/util/annotation.dart';
 import 'package:flutter/services.dart';
 import 'package:weather_wise/util/data/data.dart';
@@ -27,8 +27,9 @@ class Language {
   static changeIndex(bool b, BuildContext context) {
     Data.app.put('language', b);
     index = Data.app.get<bool>('language') ? 1 : 0;
-    Navigator.pop(context);
-    Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
+    // Navigator.pop(context);
+    // Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
+    HomePageCtrl.onValueChanged(3);
   }
 }
 

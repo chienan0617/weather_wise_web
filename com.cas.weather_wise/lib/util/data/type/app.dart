@@ -1,3 +1,4 @@
+import 'package:weather_wise/util/constant.dart';
 import 'package:weather_wise/util/data/data.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -23,11 +24,16 @@ class AppData implements Database {
     checkKeyExist('pageIndex', 0);
     checkKeyExist('tutored', false);
     checkKeyExist('language', true);
+    checkKeyExist('information', System.toMap());
+    checkKeyExist('tempType', 0);
+    checkKeyExist('backgroundType', 0);
+    checkKeyExist('isDay', false);
   }
 
   @override
   Future<void> initialize() async {
     box = await Hive.openBox('app');
+
     // log(box.values.toString());
   }
 

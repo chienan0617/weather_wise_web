@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:weather_wise/page/home/search/search_bar.dart';
 import 'package:weather_wise/util/language.dart';
 import 'package:weather_wise/util/library.dart';
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+class PremiumPage extends StatefulWidget {
+  const PremiumPage({super.key});
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<PremiumPage> createState() => _PremiumPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _PremiumPageState extends State<PremiumPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class _SearchPageState extends State<SearchPage> {
           icon: const Icon(Icons.menu, color: style_0, size: 26),
         ),
         title: Text(
-          Language.word('Locations'),
+          Language.word('Premium'),
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.white,
@@ -32,12 +31,6 @@ class _SearchPageState extends State<SearchPage> {
             height: 1.28,
           ),
         ),
-      ),
-      body: Column(
-        children: [
-          SearchField(refresh: () => setState(() {})),
-          Items(refresh: () => setState(() {})),
-        ],
       ),
     );
   }

@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:weather_wise/func/controller/local_page.dart';
 import 'package:weather_wise/util/language.dart';
 import 'package:weather_wise/util/library.dart';
 import 'package:weather_wise/util/service/weather.mod.dart';
@@ -20,6 +18,8 @@ class _TodayForecastState extends State<TodayForecast> {
 
   @override
   Widget build(BuildContext context) {
+    List info = Util.getForecastHoursTemps(widget.weather, 24);
+
     return Container(
       width: widget.size.width,
       height: widget.size.height * 2 / 7,
@@ -45,11 +45,11 @@ class _TodayForecastState extends State<TodayForecast> {
             children: [
               const SizedBox(width: 30),
               Text(
-                Language.word('24h forecast'),//  |  ',
+                Language.word('24h forecast'), //  |  ',
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white70,
-                  fontFamily: 'Space Grotesk',
+                  fontFamily: fontFamilyDefault,
                 ),
               ),
               // const SizedBox(width: 20),
@@ -59,7 +59,7 @@ class _TodayForecastState extends State<TodayForecast> {
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white70,
-                  fontFamily: 'Space Grotesk',
+                  fontFamily: fontFamilyDefault,
                 ),
               ),
             ],
@@ -77,19 +77,22 @@ class _TodayForecastState extends State<TodayForecast> {
                   height: (widget.size.height * 2 / 7) - 33,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(24, (int index) {
-                        List info = LocalPageController.getForecastHoursTemps(
-                          widget.weather, 24,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: info.length,
+                      itemBuilder: (_, index) {
+                        return SizedBox(
+                          width: 75,
+                          child: hoursSection(index, info[index]),
                         );
-                        return hoursSection(index, info[index]);
-                      })
+                      },
                     ),
-                  )
+                  ),
                 );
-              }
+              },
             ),
-          )
+          ),
         ],
       ),
     );
@@ -109,19 +112,16 @@ class _TodayForecastState extends State<TodayForecast> {
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 14,
-                fontFamily: 'Space Grotesk',
+                fontFamily: fontFamilyDefault,
                 // backgroundColor: Colors.amber
               ),
             ),
-            Util.getWeatherImage(
-              info.$1, info.$3,
-              Size(50, 50)
-            ),
+            Util.getWeatherImage(info.$1, info.$3, Size(50, 50)),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(7.5),
-                color: index == 0 ? style_0 : Colors.transparent
+                color: index == 0 ? style_0 : Colors.transparent,
               ),
               child: Text(
                 info.$4,
@@ -129,15 +129,14 @@ class _TodayForecastState extends State<TodayForecast> {
                 style: TextStyle(
                   color: index == 0 ? style_0p : style_0,
                   fontSize: 14,
-                  fontFamily: 'Space Grotesk',
+                  fontFamily: fontFamilyDefault,
                   // backgroundColor:
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
-

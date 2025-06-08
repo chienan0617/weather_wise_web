@@ -1,5 +1,6 @@
 import 'package:weather_wise/util/annotation.dart';
 import 'package:weather_wise/util/base.dart';
+import 'package:weather_wise/util/constant.dart';
 import 'package:weather_wise/util/data/data.dart';
 import 'package:weather_wise/util/language.dart';
 import 'package:flutter/material.dart';
@@ -26,5 +27,33 @@ class Initialize implements Initializable {
   static Future<void> test() async {
     // Data.app.put('tutored', false);
     // Data.app.box.clear();
+    // Data.weather.box.clear();
+    // Data.search.box.clear();
+    Data.app.put('isDay', false);
+  }
+
+  static Future<void> onDifferentVersion() async {
+    // ignore: unrelated_type_equality_checks
+    late Map<String, String> information;
+
+    try {
+      information = Data.app.get<Map>('information').cast<String, String>();
+    } catch(e) {
+      e;
+      return;
+    }
+
+    String version = information['version'] ?? '';
+
+    // ignore: unnecessary_null_comparison
+    if (version != null && version == System.version) {
+      return;
+    } else {
+      if (System.isDebugMode) {
+        Data.app.box.clear();
+        Data.weather.box.clear();
+        Data.search.box.clear();
+      }
+    }
   }
 }

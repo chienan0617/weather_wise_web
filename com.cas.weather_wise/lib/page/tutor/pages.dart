@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_wise/func/controller/home_bottom_bar.dart';
 import 'package:weather_wise/func/controller/tutorial.dart';
 import 'package:weather_wise/util/language.dart';
 
@@ -22,7 +23,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
   }
 }
 
-const List<Widget> pages = [Page1(), SizedBox(), Page1(), SizedBox()];
+// const List<Widget> pages = [Page1(), SizedBox(), Page1(), SizedBox()];
 
 class Page1 extends StatefulWidget {
   const Page1({super.key});
@@ -76,7 +77,7 @@ class _BottomBarState extends State<BottomBar> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 10,
-            children: List.generate(pages.length, (int index) {
+            children: List.generate(pages.length -1, (int index) {
               return Container(
                 width: 10,
                 height: 10,

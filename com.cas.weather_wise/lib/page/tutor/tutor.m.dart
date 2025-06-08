@@ -3,6 +3,7 @@ import 'package:weather_wise/func/controller/tutorial.dart';
 import 'package:weather_wise/page/home/home.m.dart';
 import 'package:weather_wise/page/tutor/pages.dart';
 import 'package:weather_wise/util/language.dart';
+import 'package:weather_wise/util/library.dart';
 
 class TutorPage extends StatefulWidget {
   const TutorPage({super.key});
@@ -31,7 +32,7 @@ class _TutorPageState extends State<TutorPage> {
             style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
-              fontFamily: 'Space Grotesk',
+              fontFamily: fontFamilyDefault,
               fontWeight: FontWeight.w700,
               height: 1.28,
             ),
@@ -84,7 +85,7 @@ class SkipButton extends StatelessWidget {
         //   Language.word('Introduction Page'),
         //   style: const TextStyle(
         //     color: Colors.white,
-        //     fontFamily: 'Space Grotesk',
+        //     fontFamily: fontFamilyDefault,
         //     fontWeight: FontWeight.w500,
         //     fontSize: 24,
         //   ),
@@ -96,7 +97,7 @@ class SkipButton extends StatelessWidget {
             Language.word('Skip'),
             style: const TextStyle(
               color: Color(0xFFA393C6),
-              fontFamily: 'Space Grotesk',
+              fontFamily: fontFamilyDefault,
               fontWeight: FontWeight.w700,
               fontSize: 16,
             ),

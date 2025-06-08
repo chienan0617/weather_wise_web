@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather_wise/func/controller/home_bottom_bar.dart';
 import 'package:weather_wise/page/home/forecast/forecast.m.dart';
-import 'package:weather_wise/page/home/home.m.dart';
 import 'package:weather_wise/page/home/local/local.m.dart';
+import 'package:weather_wise/page/home/premium/premium.m.dart';
 import 'package:weather_wise/page/home/search/search.m.dart';
 import 'package:weather_wise/page/home/setting/setting.m.dart';
 import 'package:weather_wise/util/annotation.dart';
@@ -20,9 +19,9 @@ class TutorialController {
   @registerFirst
   static void Function() changeToNormalPage = () => {};
 
-  static Widget getPage() => pages[currentPage];
+  static Widget getPage() => lockedPages[currentPage];
   static bool isCurrentPage(int index) => currentPage == index;
-  static bool isLastPage() => currentPage == pages.length -1;
+  static bool isLastPage() => currentPage == lockedPages.length -1;
 
   static void onPageChange() {
     detectEndPage();
@@ -37,12 +36,12 @@ class TutorialController {
   }
 
   static void onSkipPressed() {
-    currentPage = pages.length - 1;
+    currentPage = lockedPages.length - 1;
     onPageChange();
   }
 
   static void detectEndPage() {
-    if (currentPage == pages.length -1) {
+    if (currentPage == lockedPages.length -1) {
       changeToNormalPage();
       Data.app.put<bool>('tutored', true);
     }
@@ -50,9 +49,10 @@ class TutorialController {
 }
 
 
-List<Widget> pages = [
+const List<Widget> lockedPages = [
   AbsorbPointer(child: LocalPage()),
   AbsorbPointer(child: ForecastPage()),
+  AbsorbPointer(child: PremiumPage()),
   AbsorbPointer(child: SearchPage()),
-  AbsorbPointer(child: DebugConsole()),
+  AbsorbPointer(child: SettingPage()),
 ];

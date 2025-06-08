@@ -50,7 +50,7 @@ class _SearchFieldState extends State<SearchField> {
                     option.name,
                     style: const TextStyle(
                       color: style_0,
-                      fontFamily: 'Space Grotesk',
+                      fontFamily: fontFamilyDefault,
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                     ),
@@ -61,7 +61,7 @@ class _SearchFieldState extends State<SearchField> {
                     "${option.country}",
                     style: const TextStyle(
                       color: style_64,
-                      fontFamily: 'Space Grotesk',
+                      fontFamily: fontFamilyDefault,
                       fontSize: 14,
                     ),
                   ),
@@ -122,7 +122,7 @@ class _SearchingBarState extends State<SearchingBar> {
           hintStyle: const TextStyle(
             color: Color(0xFF9991C9),
             fontSize: 16,
-            fontFamily: 'Space Grotesk',
+            fontFamily: fontFamilyDefault,
             // height: 1.5,
           ),
           suffixIcon: IconButton(
@@ -133,7 +133,7 @@ class _SearchingBarState extends State<SearchingBar> {
         style: const TextStyle(
           color: style_0,
           fontWeight: FontWeight.w500,
-          fontFamily: 'Space Grotesk',
+          fontFamily: fontFamilyDefault,
           height: 1.5,
         ),
       ),
@@ -193,7 +193,7 @@ class _ItemsState extends State<Items> {
                         color: style_8,
                         fontSize: 17,
                         fontWeight: FontWeight.w500,
-                        fontFamily: 'Space Grotesk',
+                        fontFamily: fontFamilyDefault,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -220,7 +220,7 @@ class _ItemsState extends State<Items> {
                                       ),
                                       style: const TextStyle(
                                         color: Colors.white,
-                                        fontFamily: 'Space Grotesk',
+                                        fontFamily: fontFamilyDefault,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                       ),

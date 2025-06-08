@@ -376,3 +376,4 @@ Weather weatherTemplate = Weather(
 );
 
 Map weatherData = Language.weatherData.weatherData;
+const String fontFamilyDefault = 'Space Grotesk';

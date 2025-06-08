@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_wise/func/controller/forecast_page.dart';
@@ -28,11 +29,10 @@ class _ForecastPageState extends State<ForecastPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     List<Weather> weatherList = Data.weather.box.values
-        .whereType<Weather>()
-        .toList();
-    // print(
-    //   "list::${weatherList.length}, ${weatherList.map((e) => e.location.name)}",
-    // );
+      .whereType<Weather>()
+      .toList();
+
+    // log(Data.weather.box.values.toList().length.toString());
 
     return Scaffold(
       backgroundColor: const Color(0xFF111121),
@@ -48,41 +48,33 @@ class _ForecastPageState extends State<ForecastPage> {
           style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
-            fontFamily: 'Space Grotesk',
+            fontFamily: fontFamilyDefault,
             fontWeight: FontWeight.w700,
             height: 1.28,
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => HomePageCtrl.onValueChanged(2),
+        onPressed: () => HomePageCtrl.onValueChanged(3),
         backgroundColor: const Color(0xFF2B11EA),
         child: const Icon(Icons.add, color: Colors.white),
       ),
-      body: Column(
-        children: [
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Text(
-                Language.word('Forecast'),
-                style: const TextStyle(
-                  color: style_0,
-                  fontFamily: 'Space Grotesk',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 24,
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text(
+              Language.word('Forecast'),
+              style: const TextStyle(
+                color: style_0,
+                fontFamily: fontFamilyDefault,
+                fontWeight: FontWeight.w500,
+                fontSize: 24,
               ),
             ),
-          ),
-          Expanded(
-            child: Column(
-              children: List.generate(weatherList.length, (int index) {
-                return citySection(weatherList[index], size);
-              }),
-            ),
-          ),
-        ],
+            const SizedBox(height: 20),
+            ...weatherList.map((w) => citySection(w, size)),
+          ],
+        ),
       ),
     );
   }
@@ -130,7 +122,7 @@ class _ForecastPageState extends State<ForecastPage> {
                       weather.cityName,
                       style: const TextStyle(
                         color: style_0,
-                        fontFamily: 'Space Grotesk',
+                        fontFamily: fontFamilyDefault,
                         fontSize: 20,
                       ),
                     ),
@@ -141,11 +133,11 @@ class _ForecastPageState extends State<ForecastPage> {
                       vertical: 5,
                     ),
                     child: Text(
-                      '${weather.current.tempC.round()}°',
+                      '${Util.tempIsC() ? weather.current.tempC.round() : weather.current.tempF.round()}°',
                       style: const TextStyle(
                         color: style_0,
                         fontSize: 24,
-                        fontFamily: 'Space Grotesk',
+                        fontFamily: fontFamilyDefault,
                       ),
                     ),
                   ),
@@ -166,7 +158,7 @@ class _ForecastPageState extends State<ForecastPage> {
                     ),
                     style: const TextStyle(
                       color: Colors.white,
-                      fontFamily: 'Space Grotesk',
+                      fontFamily: fontFamilyDefault,
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
                     ),
@@ -180,7 +172,7 @@ class _ForecastPageState extends State<ForecastPage> {
                         .toString()
                         .substring(5, 16),
                     style: const TextStyle(
-                      fontFamily: 'Space Grotesk',
+                      fontFamily: fontFamilyDefault,
                       color: Colors.white70,
                     ),
                   ),

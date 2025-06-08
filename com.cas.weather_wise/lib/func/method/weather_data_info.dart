@@ -2,11 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:weather_wise/util/annotation.dart';
+import 'package:weather_wise/util/constant.dart';
 import 'package:weather_wise/util/data/data.dart';
 import 'package:weather_wise/util/service/location.mod.dart';
 import 'package:weather_wise/util/service/weather.mod.dart';
 
-String apiKey = '569f2ae006bb4c4c9f8153435252005';
 
 class WeatherInfo {
   @functional
@@ -23,7 +23,7 @@ class WeatherInfo {
     final double lon = located.$2;
     try {
       return await Weather.fetchForecastWeather(
-        apiKey: apiKey,
+        apiKey: System.apiKey,
         queryLocation: '$lat,$lon', // 確保真的是 "緯度,經度"
         days: 14,
         lat: lat,
@@ -53,6 +53,7 @@ class WeatherInfo {
       final w = await _fetchWeather(defaultLocation, '你學校');
       Data.weather.put<Weather>('weather:default', w);
     }
+
     Weather defaultWeather = Data.weather.get<Weather>('weather:default');
     if (DateTime.now().difference(defaultWeather.lastFetchTime) >=
         Duration(hours: 3)) {
@@ -66,30 +67,39 @@ class WeatherInfo {
   }
 
   static Future<Weather> getAndChecksDataTimesOut(SearchedLocation location) async {
-  Weather? tempWeather;
-  try {
-    tempWeather = Data.weather.get<Weather>(
-      'weather:<${location.lat},${location.lng}>'
-    );
-  } catch (e) {
-    tempWeather = null;
-  }
-
-  if (tempWeather != null) {
-    final diff = DateTime.now().difference(tempWeather.lastFetchTime);
-    if (diff <= const Duration(hours: 3)) {
-      return tempWeather;
+    Weather? tempWeather;
+    try {
+      tempWeather = Data.weather.get<Weather>(
+        'weather:<${location.lat},${location.lng}>'
+      );
+    } catch (e) {
+      tempWeather = null;
     }
+
+    if (tempWeather != null) {
+      final diff = DateTime.now().difference(tempWeather.lastFetchTime);
+      if (diff <= const Duration(hours: 3)) {
+        return tempWeather;
+      }
+    }
+
+    final newWeather = await _fetchWeather(
+      (location.lat, location.lng), location.name,
+    );
+    Data.weather.put<Weather>(
+      'weather:<${location.lat},${location.lng}>',
+      newWeather,
+    );
+    return newWeather;
   }
-
-  final newWeather = await _fetchWeather(
-    (location.lat, location.lng), location.name,
-  );
-  Data.weather.put<Weather>(
-    'weather:<${location.lat},${location.lng}>',
-    newWeather,
-  );
-  return newWeather;
 }
 
-}
+String a = 'a';
+void Function() b = () {};
+int c = 2;
+void d() {}
+
+// typedef f = void;
+class F{}
+
+List y = ['a', 2, d, null, F, c, true];
