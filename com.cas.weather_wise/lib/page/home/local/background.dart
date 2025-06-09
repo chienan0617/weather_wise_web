@@ -141,7 +141,7 @@ class _LocalBackgroundState extends State<LocalBackground> {
 }
 
 const bp = {
-  'Morning': 'assets/image/local_page_background_morning.png',
-  'Noon': 'assets/image/local_page_background_noon.png',
-  'Night': 'assets/image/local_page_background.png',
+  'Morning': 'assets/image/local_page_background_morning.webp',
+  'Noon': 'assets/image/local_page_background_noon.webp',
+  'Night': 'assets/image/local_page_background.webp',
 };

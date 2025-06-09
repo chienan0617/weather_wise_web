@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.1.3
+version: 1.1.6
 
 environment:
   sdk: ">=3.8.0 <4.0.0"
@@ -37,13 +37,10 @@ dependencies:
   flutter_lints: ^5.0.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  path_provider: ^2.1.5
   intl: ^0.17.0
 
   flutter_svg: ^2.1.0
   http: ^1.4.0
-  persistent_bottom_nav_bar_v2: ^6.0.1
-  # flutter_gifimage: ^2.12.0
 
 dev_dependencies:
   flutter_test:
@@ -87,8 +84,8 @@ flutter:
 
   assets:
     - assets/city/world_cities.json
-    - assets/lang/weather.json
-    - assets/lang/word.json
+    - assets/document/weather.json
+    - assets/document/word.json
     - assets/weather/partly-cloudy-night-rain.svg
 
     - assets/weather/clear-day.svg
@@ -133,15 +130,15 @@ flutter:
     - assets/weather/partly-cloudy-day.svg
     - assets/weather/smoke.svg
 
-    - assets/icon/splash_icon.png
-    - assets/icon/app_icon_debug.png
-    - assets/icon/app_icon.png
+    - assets/icon/splash_icon.webp
+    - assets/icon/app_icon_debug.webp
+    - assets/icon/app_icon.webp
     - assets/image/logo_animation.gif
-    - assets/image/logo_cas.png
-    - assets/image/local_page_background.png
-    - assets/image/local_page_background_morning.png
-    - assets/image/local_page_background_noon_sun.png
-    - assets/image/local_page_background_noon.png
+    - assets/image/logo_cas.webp
+    - assets/image/local_page_background.webp
+    - assets/image/local_page_background_morning.webp
+    - assets/image/local_page_background_noon_sun.webp
+    - assets/image/local_page_background_noon.webp
 
 analyzer:
   enable-experiment:
@@ -149,14 +146,14 @@ analyzer:
 
 flutter_native_splash:
   color: "#111121"
-  image: assets/icon/app_icon_debug.png
+  image: assets/icon/app_icon_debug.webp
   android: true
   ios: true
 
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/icon/app_icon_debug.png"
+  image_path: "assets/icon/app_icon_debug.webp"
 # To add assets to your application, add an assets section, like this:
 # assets:
 #   - images/a_dot_burr.jpeg
