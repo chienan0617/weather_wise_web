@@ -86,8 +86,8 @@ flutter:
     - assets/city/world_cities.json
     - assets/document/weather.json
     - assets/document/word.json
-    - assets/weather/partly-cloudy-night-rain.svg
 
+    - assets/weather/partly-cloudy-night-rain.svg
     - assets/weather/clear-day.svg
     - assets/weather/clear-night.svg
     - assets/weather/partly-cloudy-night.svg
@@ -130,15 +130,14 @@ flutter:
     - assets/weather/partly-cloudy-day.svg
     - assets/weather/smoke.svg
 
-    - assets/icon/splash_icon.webp
-    - assets/icon/app_icon_debug.webp
-    - assets/icon/app_icon.webp
+    - assets/icon/
     - assets/image/logo_animation.gif
     - assets/image/logo_cas.webp
-    - assets/image/local_page_background.webp
-    - assets/image/local_page_background_morning.webp
-    - assets/image/local_page_background_noon_sun.webp
-    - assets/image/local_page_background_noon.webp
+    # - assets/image/local_page_background.webp
+    # - assets/image/local_page_background_morning.webp
+    # - assets/image/local_page_background_noon_sun.webp
+    # - assets/image/local_page_background_noon.webp
+    - assets/image/background/
 
 analyzer:
   enable-experiment:
