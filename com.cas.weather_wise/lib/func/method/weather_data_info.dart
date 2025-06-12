@@ -78,7 +78,7 @@ class WeatherInfo {
 
     if (tempWeather != null) {
       final diff = DateTime.now().difference(tempWeather.lastFetchTime);
-      if (diff <= const Duration(hours: 3)) {
+      if (diff <= const Duration(minutes: 15)) {
         return tempWeather;
       }
     }
