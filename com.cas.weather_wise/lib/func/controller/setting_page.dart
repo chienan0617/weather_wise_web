@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:weather_wise/util/annotation.dart';
 import 'package:weather_wise/util/data/data.dart';
+import 'package:weather_wise/util/file_handle.dart';
 import 'package:weather_wise/util/library.dart';
 
 class SettingPageController {
@@ -34,17 +34,20 @@ class _TempType {
   @method
   List<DropdownMenuItem<String>> getItems() {
     return temps
-      .map((v) => DropdownMenuItem(
-        value: v, child:
-        Text(
-          v, style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontFamily: fontFamilyDefault
+        .map(
+          (v) => DropdownMenuItem(
+            value: v,
+            child: Text(
+              v,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: fontFamilyDefault,
+              ),
+            ),
           ),
         )
-      ))
-      .toList();
+        .toList();
   }
 }
 
@@ -60,36 +63,51 @@ class _IsDay {
 
 class _BackgroundType {
   String dataName = 'backgroundType';
-  List<String> background = ['Morning', 'Noon', 'Night'];
+  List<String> background = [];
+
   late String currentValue = background[value];
 
   int get value => Data.app.get<int>(dataName);
   set value(int index) => Data.app.put<String>(dataName, index);
 
+  bool inited = false;
   // @method String getCurrentItem() => page
+
+  @initially
+  void init() {
+    for (int i = 0; i < 123; i++) {
+      background.add((i+1).toString());
+    }
+    inited = true;
+  }
 
   @method
   void onValueChanged(String? newValue) {
     if (newValue != null) value = background.indexOf(newValue);
     currentValue = background[value];
     SettingPageController.refresh();
+    // LocalPageController.localPageRefresh();
     // log('message');
   }
 
   @method
   List<DropdownMenuItem<String>> getItems() {
+    inited ? Language.error : init();
     return background
-      .map((v) => DropdownMenuItem(
-        value: v, child:
-        Text(
-          v, style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontFamily: fontFamilyDefault
+        .map(
+          (v) => DropdownMenuItem(
+            value: v,
+            child: Text(
+              v,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: fontFamilyDefault,
+              ),
+            ),
           ),
         )
-      ))
-      .toList();
+        .toList();
   }
 }
 

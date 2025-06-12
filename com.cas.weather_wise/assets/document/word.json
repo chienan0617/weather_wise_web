@@ -22,5 +22,15 @@
   "Skip": ["Skip", "跳過"],
   "Premium": ["Premium", "Premium"],
   "Weather Units": ["Weather Units", "天氣單位"],
-  "Unit": ["Unit", "單位"]
+  "Unit": ["Unit", "單位"],
+  "customize background": ["customize background", "自訂背景"],
+  "open to customize background": ["open to customize background", "打開以自訂背景"],
+  "effective after opening customize background": ["effective after opening customize background", "打開自訂背景後生效"],
+  "background style": ["background style", "背景樣式"],
+  "no K": ["no K", "沒有克氏溫標"],
+  "Humidity": ["Humidity", "濕度"],
+  "Temperature": ["Temperature", "溫度"],
+  "Feels Like": ["Feels Like", "體感溫度"],
+  "Ultraviolet Ray": ["Ultraviolet Ray", "紫外線"],
+  "Hourly Precipitation": ["Hourly Precipitation", "小時降雨"]
 }

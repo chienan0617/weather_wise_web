@@ -94,12 +94,12 @@ class WeatherInfo {
   }
 }
 
-String a = 'a';
-void Function() b = () {};
-int c = 2;
-void d() {}
+// String a = 'a';
+// void Function() b = () {};
+// int c = 2;
+// void d() {}
 
-// typedef f = void;
-class F{}
+// // typedef f = void;
+// class F{}
 
-List y = ['a', 2, d, null, F, c, true];
+// List y = ['a', 2, d, null, F, c, true];

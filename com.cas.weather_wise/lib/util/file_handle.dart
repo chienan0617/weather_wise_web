@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/home_bottom_bar.dart';
 import 'package:weather_wise/util/annotation.dart';
 import 'package:flutter/services.dart';
+import 'package:weather_wise/util/base.dart';
 import 'package:weather_wise/util/data/data.dart';
 
 class Language {
   static final wordData = _Word();
   static final weatherData = _Weather();
+  static final backgroundImage = _BackgroundImage();
 
   static int index = 1;
   static String error = '<Error>';
@@ -17,6 +19,7 @@ class Language {
   static Future<void> initialize() async {
     await wordData.initialize();
     await weatherData.initialize();
+    await backgroundImage.initialize();
   }
 
   @functional
@@ -33,29 +36,49 @@ class Language {
   }
 }
 
-class _Word {
+class _Word implements Initializable {
   Map<String, List> words = {};
 
   @initially
+  @override
   Future<void> initialize() async {
     final String wordContents = await rootBundle.loadString(
-      'assets/lang/word.json',
+      'assets/document/word.json',
     );
     words = (jsonDecode(wordContents) as Map).cast<String, List>();
   }
 }
 
-class _Weather {
+class _Weather implements Initializable {
   Map<int, List<dynamic>> weatherData = {};
 
   @initially
+  @override
   Future<void> initialize() async {
     final String weatherContents = await rootBundle.loadString(
-      'assets/lang/weather.json',
+      'assets/document/weather.json',
     );
     final List<dynamic> weatherList = jsonDecode(weatherContents);
     weatherData = (weatherList[Language.index] as Map<String, dynamic>).map(
       (key, value) => MapEntry(int.parse(key), value as List<dynamic>),
     );
+  }
+}
+
+class _BackgroundImage implements Initializable {
+  Map<int, List<int>> images = {};
+
+  @initially
+  @override
+  Future<void> initialize() async {
+    final String backgroundContents = await rootBundle.loadString(
+      'assets/document/weather_icon.json',
+    );
+    final Map<String, dynamic> raw = jsonDecode(backgroundContents);
+
+    images = <int, List<int>>{
+      for (var entry in raw.entries)
+        int.parse(entry.key): (entry.value as List<dynamic>).cast<int>(),
+    };
   }
 }

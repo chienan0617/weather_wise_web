@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/setting_page.dart';
-import 'package:weather_wise/util/language.dart';
+import 'package:weather_wise/util/file_handle.dart';
 import 'package:weather_wise/util/library.dart';
 
 class SettingPage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _SettingPageState extends State<SettingPage> {
           icon: const Icon(Icons.menu, color: style_0, size: 26),
         ),
         title: Text(
-          Language.word('Premium'),
+          Language.word('Setting'),
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.white,
@@ -44,7 +44,7 @@ class _SettingPageState extends State<SettingPage> {
           title('Unit'),
           section(
             'Weather Units',
-            'weather format',
+            'no K',
             DropdownButton<String>(
               items: SettingPageController.tempType.getItems(),
               onChanged: SettingPageController.tempType.onValueChanged,
@@ -59,8 +59,8 @@ class _SettingPageState extends State<SettingPage> {
             ),
           ),
           section(
-            'Is day',
-            'Next',
+            'background style',
+            'effective after opening customize background',
             DropdownButton<String>(
               items: SettingPageController.backgroundType.getItems(),
               onChanged: SettingPageController.backgroundType.onValueChanged,
@@ -75,8 +75,8 @@ class _SettingPageState extends State<SettingPage> {
             ),
           ),
           section(
-            'Is day',
-            'subtitle',
+            'customize background',
+            'open to customize background',
             Switch(
               value: SettingPageController.isDay.value,
               onChanged: SettingPageController.isDay.onValueChanged,

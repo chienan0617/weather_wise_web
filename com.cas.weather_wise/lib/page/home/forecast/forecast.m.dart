@@ -6,7 +6,7 @@ import 'package:weather_wise/func/controller/home_bottom_bar.dart';
 import 'package:weather_wise/func/controller/local_page.dart';
 import 'package:weather_wise/page/home/forecast/detail/detail.m.dart';
 import 'package:weather_wise/util/data/data.dart';
-import 'package:weather_wise/util/language.dart';
+import 'package:weather_wise/util/file_handle.dart';
 import 'package:weather_wise/util/library.dart';
 import 'package:weather_wise/util/service/weather.mod.dart';
 import 'package:weather_wise/util/util.dart';

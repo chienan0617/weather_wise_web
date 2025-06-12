@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/tutorial.dart';
 import 'package:weather_wise/page/home/home.m.dart';
 import 'package:weather_wise/page/tutor/pages.dart';
-import 'package:weather_wise/util/language.dart';
+import 'package:weather_wise/util/file_handle.dart';
 import 'package:weather_wise/util/library.dart';
 
 class TutorPage extends StatefulWidget {

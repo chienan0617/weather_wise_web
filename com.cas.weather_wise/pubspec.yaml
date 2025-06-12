@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.1.6
+version: 1.2.2-Beta
 
 environment:
   sdk: ">=3.8.0 <4.0.0"
@@ -83,9 +83,8 @@ flutter:
           weight: 300
 
   assets:
-    - assets/city/world_cities.json
-    - assets/document/weather.json
-    - assets/document/word.json
+    - assets/city/
+    - assets/document/
 
     - assets/weather/partly-cloudy-night-rain.svg
     - assets/weather/clear-day.svg
@@ -130,8 +129,8 @@ flutter:
     - assets/weather/partly-cloudy-day.svg
     - assets/weather/smoke.svg
 
-    - assets/icon/
-    - assets/image/logo_animation.gif
+    # - assets/icon/
+    # - assets/image/logo_animation.gif
     - assets/image/logo_cas.webp
     # - assets/image/local_page_background.webp
     # - assets/image/local_page_background_morning.webp
@@ -145,14 +144,14 @@ analyzer:
 
 flutter_native_splash:
   color: "#111121"
-  image: assets/icon/app_icon_debug.webp
+  image: assets/icon/app_icon_debug.png
   android: true
   ios: true
 
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/icon/app_icon_debug.webp"
+  image_path: "assets/icon/app_icon_debug.png"
 # To add assets to your application, add an assets section, like this:
 # assets:
 #   - images/a_dot_burr.jpeg

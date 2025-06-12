@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/home_bottom_bar.dart';
 import 'package:weather_wise/func/controller/tutorial.dart';
-import 'package:weather_wise/util/language.dart';
+import 'package:weather_wise/util/file_handle.dart';
 
 class IntroductionPage extends StatefulWidget {
   const IntroductionPage({super.key});
