@@ -61,7 +61,7 @@ class _LocalBackgroundState extends State<LocalBackground> {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
                 child: Container(
-                  color: Colors.black.withOpacity(0.0),
+                  color: Colors.black.withOpacity(0.1),
                   // decoration: BoxDecoration(
                   //   color: Colors.black.withOpacity(0.1)
                   // ),
@@ -77,8 +77,9 @@ class _LocalBackgroundState extends State<LocalBackground> {
               items: LocalPageController.getDropDownMenuItems(),
               onChanged: LocalPageController.onSelect,
               value: LocalPageController.getDropDownMenuCurrentValue(),
-              dropdownColor: const Color(0xFF1C1933),
-              // dropdownColor: Color.fromRGBO(62, 64, 153, 1),
+              // dropdownColor: const Color(0xFF1C1933),
+              // dropdownColor: Color.fromRGBO(62, 64, 153, 1)
+              dropdownColor: Color.fromRGBO(0, 0, 0, 0.1),
               icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
               underline: const SizedBox(),
               elevation: 10,
@@ -101,7 +102,7 @@ class _LocalBackgroundState extends State<LocalBackground> {
               child: Container(
                 decoration: BoxDecoration(
                   // color: Colors.black.withOpacity(0.05),
-                  border: Border.all(color: Colors.black.withOpacity(0.1), width: 1)
+                  // border: Border.all(color: Colors.black.withOpacity(0.1), width: 1)
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

@@ -105,7 +105,7 @@ class _TodayInfoState extends State<TodayInfo> {
                 subtitle,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 18,
                   fontFamily: fontFamilyDefault,
                   fontWeight: FontWeight.w500,
                 ),

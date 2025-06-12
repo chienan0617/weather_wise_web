@@ -22,7 +22,7 @@ class Util {
 
   static SvgPicture getCurrentWeatherImage(Weather weather, Size size) {
     return getWeatherImage(
-      weather.forecast[0].hour[DateTime.now().hour].condition.code,
+      weather.forecast[0].hour[DateTime.now().hour -1].condition.code,
       weather.current.isDay,
       size,
     );
@@ -55,7 +55,7 @@ class Util {
           final dt = DateTime.parse("$date ${h.time.split(' ').last}");
           return (dt, h);
         })
-        .where((tuple) => !tuple.$1.isBefore(now.subtract(Duration(hours: 2))))
+        .where((tuple) => !tuple.$1.isBefore(now.subtract(Duration(hours: 0))))
         .toList();
   }
 
