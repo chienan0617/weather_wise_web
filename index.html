@@ -25,119 +25,140 @@
 
 
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-  <div id="a2hs-banner" class="topBar">
-    <p>在 Safari 中點擊「分享」圖示 ➜ 選擇「加入主畫面」。</p>
-    <div class="topBarButton">
-      <button onclick="dismiss()">知道了</button>
-    </div>
-  </div>
 
-  <div class="web-version">
-    <p>Web-Alpha 測試版</p>
-  </div>
-
-
-  <script>
-    function isIos() {
-      return /iphone|ipad|ipod/i.test(navigator.userAgent);
-    }
-    window.addEventListener('load', () => {
-      if (isIos() && !navigator.standalone) {
-        document.getElementById('a2hs-banner').style.display = 'block';
-      }
-    });
-    function dismiss() {
-      document.getElementById('a2hs-banner').style.display = 'none';
-    }
-  </script>
 
   <style>
-    /* TopBar 容器樣式 */
     .topBar {
+      /* iOS 加主畫面提示 */
       position: fixed;
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
       background-color: #1C1933;
-      color: #FFFFFF;
+      color: #FFF;
       padding: 12px 20px;
       border-radius: 8px;
-      display: flex;
+      display: none;
       align-items: center;
       gap: 16px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       z-index: 1000;
     }
 
-    /* 訊息文字調整 */
     .topBar p {
       margin: 0;
       font-size: 14px;
-      line-height: 1.4;
     }
 
-    /* 實際按鈕樣式 */
     .topBarButton button {
       background-color: #2B12EB;
-      color: #FFFFFF;
+      color: #FFF;
       border: none;
       padding: 8px 16px;
       font-size: 14px;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s, transform 0.1s;
+      transition: background-color .3s, transform .1s;
     }
 
-    /* 滑鼠懸停效果 */
     .topBarButton button:hover {
       background-color: #1F0EC9;
       transform: translateY(-1px);
     }
 
-    /* 按下效果 */
     .topBarButton button:active {
       background-color: #1A0AA0;
       transform: translateY(1px);
     }
 
-    /* 焦點輪廓（鍵盤或無障礙） */
-    .topBarButton button:focus {
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(42, 28, 194, 0.5);
-    }
-
-    /* 禁用狀態 */
-    .topBarButton button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    /* Web‑version 標籤樣式 */
     .web-version {
       position: fixed;
       top: 80px;
-      /* 避開 topBar */
       left: 50%;
       transform: translateX(-50%);
-      background-color: rgba(28, 25, 51, 0.9);
-      color: #FFFFFF;
+      background: rgba(28, 25, 51, 0.9);
+      color: #FFF;
       padding: 6px 12px;
       font-size: 12px;
-      font-weight: 500;
       border-radius: 6px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       z-index: 999;
-      display: flex;
+      /* display: flex; */
       align-items: center;
       gap: 8px;
     }
 
-    /* 可選：在 web‑version 中加上圖示 */
     .web-version::before {
       content: "⚙️";
-      margin-right: 4px;
     }
   </style>
+</head>
+
+<body>
+  <!-- splash 略... -->
+
+  <!-- iOS Safari 加主畫面 Banner -->
+  <div id="a2hs-banner" class="topBar">
+    <p>在 Safari 中點擊「分享」➜「加入主畫面」</p>
+    <div class="topBarButton"><button onclick="dismissIosBanner()">知道了</button></div>
+  </div>
+
+  <!-- Android / Chrome 安裝按鈕 -->
+  <div id="install-container" style="display:none; position:fixed; bottom:24px; right:24px; z-index:1000;">
+    <button id="install-btn" style="
+      background-color:#007AFF;color:#FFF;border:none;
+      padding:12px 20px;font-size:14px;border-radius:8px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);cursor:pointer;
+      transition:background-color .3s; ">
+      安裝 App
+    </button>
+  </div>
+
+  <!-- Web‑Alpha 測試版提示 -->
+  <div class="web-version">Web‑Alpha 測試版</div>
+
+  <!-- Flutter Bootstrapping -->
+  <script src="./flutter_bootstrap.js" async></script>
+
+  <script>
+    // iOS 加主畫面提示
+    function isIos() {
+      return /iphone|ipad|ipod/i.test(navigator.userAgent);
+    }
+    window.addEventListener('load', () => {
+      if (isIos() && !navigator.standalone) {
+        document.getElementById('a2hs-banner').style.display = 'flex';
+      }
+    });
+    function dismissIosBanner() {
+      document.getElementById('a2hs-banner').style.display = 'none';
+    }
+
+    // Android Chrome PWA 安裝
+    let deferredPrompt;
+    const installContainer = document.getElementById('install-container');
+    const installBtn = document.getElementById('install-btn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installContainer.style.display = 'block';
+      console.log('🛠 PWA install prompt ready');
+    });
+
+    installBtn.addEventListener('click', async () => {
+      installContainer.style.display = 'none';
+      deferredPrompt.prompt();
+      const choiceResult = await deferredPrompt.userChoice;
+      console.log('User choice:', choiceResult.outcome);
+      deferredPrompt = null;
+    });
+
+    // Optional: install 完成監聽
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA was installed');
+    });
+  </script>
 
 
   <style id="splash-screen-style">
@@ -208,20 +229,18 @@
       document.body.style.background = "transparent";
     }
   </script>
-</head>
+  </head>
 
-<body>
-  <picture id="splash">
-    <source
-      srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x"
-      media="(prefers-color-scheme: light)">
-    <source
-      srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x"
-      media="(prefers-color-scheme: dark)">
-    <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
-  </picture>
-
-
+  <body>
+    <picture id="splash">
+      <source
+        srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x"
+        media="(prefers-color-scheme: light)">
+      <source
+        srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x"
+        media="(prefers-color-scheme: dark)">
+      <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
+    </picture>
 
 
 
@@ -246,9 +265,11 @@
 
 
 
-  <script src="./flutter_bootstrap.js" async=""></script>
 
 
-</body>
+    <script src="./flutter_bootstrap.js" async=""></script>
+
+
+  </body>
 
 </html>
