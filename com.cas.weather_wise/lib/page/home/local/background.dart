@@ -99,7 +99,7 @@ class _LocalBackgroundState extends State<LocalBackground> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
+              filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
               child: Container(
                 decoration: BoxDecoration(
                   // color: Colors.black.withOpacity(0.05),
