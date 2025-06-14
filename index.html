@@ -6,7 +6,7 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="weather_wise">
+  <meta name="description" content="Weather Wise">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#1C1933">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1C1933">
 
@@ -14,7 +14,7 @@
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="weather_wise">
+  <meta name="apple-mobile-web-app-title" content="Weather Wise">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
@@ -25,15 +25,23 @@
 
 
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-
-
-
-
-
-
-
-
-
+  <div id="a2hs-banner" style="position:fixed;bottom:10px;left:10px;padding:10px;background:#fff;border:1px solid #ccc;">
+    <p>在 Safari 中點擊「分享」圖示 ➜ 選擇「加入主畫面」。</p>
+    <button onclick="dismiss()">知道了</button>
+  </div>
+  <script>
+    function isIos() {
+      return /iphone|ipad|ipod/i.test(navigator.userAgent);
+    }
+    window.addEventListener('load', () => {
+      if (isIos() && !navigator.standalone) {
+        document.getElementById('a2hs-banner').style.display = 'block';
+      }
+    });
+    function dismiss() {
+      document.getElementById('a2hs-banner').style.display = 'none';
+    }
+  </script>
 
 
 
