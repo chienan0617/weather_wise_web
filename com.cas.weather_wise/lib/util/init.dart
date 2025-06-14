@@ -19,6 +19,7 @@ class Initialize implements Initializable {
     await Hive.initFlutter();
     await Data.typeInit();
     await Data.initialize();
+    await onDifferentVersion();
     await Language.initialize();
     await SearchedLocation.initialize();
     await test();
@@ -33,7 +34,6 @@ class Initialize implements Initializable {
   }
 
   static Future<void> onDifferentVersion() async {
-    // ignore: unrelated_type_equality_checks
     late Map<String, String> information;
 
     try {

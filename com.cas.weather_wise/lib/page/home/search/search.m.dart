@@ -22,6 +22,19 @@ class _SearchPageState extends State<SearchPage> {
           onPressed: () => Util.openDrawer(context),
           icon: const Icon(Icons.menu, color: style_0, size: 26),
         ),
+        actions: [
+          const Align(
+            alignment: Alignment.topRight,
+            child: Banner(
+              message: 'Web Alpha',
+              location: BannerLocation.topEnd,
+              // color: Colors.lightBlue,
+              // textStyle: TextStyle(
+              //   // fontSize: 14
+              // ),
+            ),
+          ),
+        ],
         title: Text(
           Language.word('Locations'),
           textAlign: TextAlign.center,

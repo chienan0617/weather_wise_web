@@ -67,12 +67,6 @@ class Weather {
     required double lon,
     required String cityName
   }) async {
-    print('https://api.weatherapi.com/v1/forecast.json'
-      '?key=$apiKey'
-      '&q=$queryLocation'
-      '&days=$days'
-      '&aqi=yes'
-      '&alerts=no');
     final uri = Uri.parse(
       'https://api.weatherapi.com/v1/forecast.json'
       '?key=$apiKey'

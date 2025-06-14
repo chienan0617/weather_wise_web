@@ -61,9 +61,7 @@ class _LocalBackgroundState extends State<LocalBackground> {
             flexibleSpace: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
-                child: Container(
-                  color: Colors.black.withOpacity(0.1),
-                ),
+                child: Container(color: Colors.black.withOpacity(0.1)),
               ),
             ),
             // backgroundColor: const Color(0xFF1C1933),
@@ -75,13 +73,17 @@ class _LocalBackgroundState extends State<LocalBackground> {
               items: LocalPageController.getDropDownMenuItems(),
               onChanged: LocalPageController.onSelect,
               value: LocalPageController.getDropDownMenuCurrentValue(),
-              // dropdownColor: const Color(0xFF1C1933),
-              // dropdownColor: Color.fromRGBO(62, 64, 153, 1)
-              dropdownColor: Color.fromRGBO(0, 0, 0, 0.1),
+              dropdownColor: const Color(0xFF1C1933),
+              // dropdownColor: Color.fromRGBO(255, 255, 255, 255),
+              // dropdownColor: Colors.black,
+              // dropdownColor: Color.fromRGBO(0, 0, 0, 0.1),
               icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
               underline: const SizedBox(),
               elevation: 10,
-              hint: const Text("請選擇城市", style: TextStyle(color: Colors.white54)),
+              hint: const Text(
+                "請選擇城市",
+                style: TextStyle(color: Colors.white54),
+              ),
               // style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
             actions: [
@@ -137,6 +139,17 @@ class _LocalBackgroundState extends State<LocalBackground> {
                 ),
               ),
             ),
+          ),
+        ),
+        const Align(
+          alignment: Alignment.topRight,
+          child: Banner(
+            message: 'Web Alpha',
+            location: BannerLocation.topEnd,
+            // color: Colors.lightBlue,
+            // textStyle: TextStyle(
+            //   // fontSize: 14
+            // ),
           ),
         ),
       ],

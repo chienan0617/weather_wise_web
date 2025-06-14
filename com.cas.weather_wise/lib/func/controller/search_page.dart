@@ -64,7 +64,7 @@ class SearchPageController {
     if (Data.search.box.values.isEmpty) {
       Data.search.put(
         'search:default',
-        SearchedLocation('', '', '', 'default', 25.0097809, 121.4506019),
+        SearchedLocation('', '', '', '板橋高中', 25.0097809, 121.4506019),
       );
     }
   }

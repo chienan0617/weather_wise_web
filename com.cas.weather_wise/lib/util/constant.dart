@@ -1,5 +1,5 @@
 class System {
-  static String version = 'Beta 1.0.3';
+  static String version = 'Beta 1.2.4+1';
   static bool isPublicVersion = false;
   static bool isStableVersion = false;
   static bool isDebugMode = true;

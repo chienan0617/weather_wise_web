@@ -23,7 +23,7 @@ class _TodayInfoState extends State<TodayInfo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 50),
+          // const SizedBox(height: 50),
           const Divider(indent: 20, endIndent: 20, thickness: 0.25),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),

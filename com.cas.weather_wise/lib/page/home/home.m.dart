@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
 
     return MaterialApp(
+      // debugShowCheckedModeBanner: false,
       debugShowCheckedModeBanner: false,
       home: SizedBox(
         child: Scaffold(

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_wise/func/controller/forecast_page.dart';
@@ -29,8 +28,8 @@ class _ForecastPageState extends State<ForecastPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     List<Weather> weatherList = Data.weather.box.values
-      .whereType<Weather>()
-      .toList();
+        .whereType<Weather>()
+        .toList();
 
     // log(Data.weather.box.values.toList().length.toString());
 
@@ -42,6 +41,19 @@ class _ForecastPageState extends State<ForecastPage> {
           onPressed: () => Util.openDrawer(context),
           icon: const Icon(Icons.menu, color: style_0, size: 26),
         ),
+        actions: [
+          const Align(
+            alignment: Alignment.topRight,
+            child: Banner(
+              message: 'Web Alpha',
+              location: BannerLocation.topEnd,
+              // color: Colors.lightBlue,
+              // textStyle: TextStyle(
+              //   // fontSize: 14
+              // ),
+            ),
+          ),
+        ],
         title: Text(
           Language.word('Forecast'),
           textAlign: TextAlign.center,
@@ -109,7 +121,10 @@ class _ForecastPageState extends State<ForecastPage> {
         child: Container(
           height: size.height * 0.15,
           margin: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(color: const Color(0xFF1C1933), borderRadius: BorderRadius.circular(10)),
+          decoration: BoxDecoration(
+            color: const Color(0xFF1C1933),
+            borderRadius: BorderRadius.circular(10),
+          ),
           // padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -168,10 +183,7 @@ class _ForecastPageState extends State<ForecastPage> {
                   const Expanded(child: SizedBox()),
                   // const SizedBox(height: 10,),
                   Text(
-                    '${DateFormat('yyyy-MM-dd HH:mm')
-                        .parse(weather.location.localtime)
-                        .toString()
-                        .substring(11, 13)}:${DateTime.now().minute}',
+                    '${DateFormat('yyyy-MM-dd HH:mm').parse(weather.location.localtime).toString().substring(11, 13)}:${DateTime.now().minute}',
                     style: const TextStyle(
                       fontFamily: fontFamilyDefault,
                       color: Colors.white70,

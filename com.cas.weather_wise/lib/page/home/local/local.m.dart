@@ -36,24 +36,9 @@ class _LocalPageState extends State<LocalPage> {
       body: FutureBuilder<Weather>(
         future: futureWeather,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(color: Colors.white),
-            );
-          }
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                '無法取得天氣：${snapshot.error}',
-                style: const TextStyle(color: Colors.white),
-              ),
-            );
-          }
-          if (!snapshot.hasData) {
-            return const Center(
-              child: Text('暫無天氣資料', style: TextStyle(color: Colors.white)),
-            );
-          }
+          if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator(color: Colors.white));
+          if (snapshot.hasError) return Center(child: Text('無法取得天氣：${snapshot.error}', style: const TextStyle(color: Colors.white)));
+          if (!snapshot.hasData) return const Center(child: Text('暫無天氣資料', style: TextStyle(color: Colors.white)));
           final weather = snapshot.data!; // 確定此時非 null
           // … 後續建構 LocalBackground / TodayForecast / TodayInfo …
           return LayoutBuilder(

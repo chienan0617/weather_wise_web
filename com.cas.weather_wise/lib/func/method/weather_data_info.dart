@@ -50,14 +50,14 @@ class WeatherInfo {
   static Future<void> initialize() async {
     var defaultLocation = (25.01195123107038, 121.45814408697204);
     if (!Data.weather.box.containsKey('weather:default')) {
-      final w = await _fetchWeather(defaultLocation, '你學校');
+      final w = await _fetchWeather(defaultLocation, '板橋高中');
       Data.weather.put<Weather>('weather:default', w);
     }
 
     Weather defaultWeather = Data.weather.get<Weather>('weather:default');
     if (DateTime.now().difference(defaultWeather.lastFetchTime) >=
-        Duration(hours: 3)) {
-      final w2 = await _fetchWeather(defaultLocation, '你學校');
+        Duration(minutes: 15)) {
+      final w2 = await _fetchWeather(defaultLocation, '板橋高中');
       Data.weather.put<Weather>('weather:default', w2);
     }
   }
@@ -93,13 +93,3 @@ class WeatherInfo {
     return newWeather;
   }
 }
-
-// String a = 'a';
-// void Function() b = () {};
-// int c = 2;
-// void d() {}
-
-// // typedef f = void;
-// class F{}
-
-// List y = ['a', 2, d, null, F, c, true];
