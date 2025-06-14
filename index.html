@@ -26,10 +26,9 @@
 
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 
-
   <style>
+    /* TopBar 容器樣式 */
     .topBar {
-      /* iOS 加主畫面提示 */
       position: fixed;
       top: 20px;
       left: 50%;
@@ -45,11 +44,13 @@
       z-index: 1000;
     }
 
+    /* 訊息文字調整 */
     .topBar p {
       margin: 0;
       font-size: 14px;
     }
 
+    /* 實際按鈕樣式 */
     .topBarButton button {
       background-color: #2B12EB;
       color: #FFF;
@@ -61,16 +62,19 @@
       transition: background-color .3s, transform .1s;
     }
 
+    /* 滑鼠懸停效果 */
     .topBarButton button:hover {
       background-color: #1F0EC9;
       transform: translateY(-1px);
     }
 
+    /* 按下效果 */
     .topBarButton button:active {
       background-color: #1A0AA0;
       transform: translateY(1px);
     }
 
+    /* Web-Alpha 測試版提示 */
     .web-version {
       position: fixed;
       top: 80px;
@@ -83,7 +87,7 @@
       border-radius: 6px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       z-index: 999;
-      /* display: flex; */
+      display: flex;
       align-items: center;
       gap: 8px;
     }
@@ -95,23 +99,10 @@
 </head>
 
 <body>
-  <!-- splash 略... -->
-
-  <!-- iOS Safari 加主畫面 Banner -->
+  <!-- iOS Safari 加主畫面提示 -->
   <div id="a2hs-banner" class="topBar">
     <p>在 Safari 中點擊「分享」➜「加入主畫面」</p>
     <div class="topBarButton"><button onclick="dismissIosBanner()">知道了</button></div>
-  </div>
-
-  <!-- Android / Chrome 安裝按鈕 -->
-  <div id="install-container" style="display:none; position:fixed; bottom:24px; right:24px; z-index:1000;">
-    <button id="install-btn" style="
-      background-color:#007AFF;color:#FFF;border:none;
-      padding:12px 20px;font-size:14px;border-radius:8px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.3);cursor:pointer;
-      transition:background-color .3s; ">
-      安裝 App
-    </button>
   </div>
 
   <!-- Web‑Alpha 測試版提示 -->
@@ -125,39 +116,31 @@
     function isIos() {
       return /iphone|ipad|ipod/i.test(navigator.userAgent);
     }
+
     window.addEventListener('load', () => {
-      if (isIos() && !navigator.standalone) {
-        document.getElementById('a2hs-banner').style.display = 'flex';
+      // 檢查是否為 PWA 模式
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        // 如果是 PWA 模式，隱藏提示橫幅
+        document.getElementById('a2hs-banner').style.display = 'none';
+        document.querySelector('.web-version').style.display = 'none';
+      } else {
+        // 如果不是 PWA 模式，顯示 iOS 加主畫面提示
+        if (isIos() && !navigator.standalone) {
+          document.getElementById('a2hs-banner').style.display = 'flex';
+        }
       }
     });
+
     function dismissIosBanner() {
       document.getElementById('a2hs-banner').style.display = 'none';
     }
 
-    // Android Chrome PWA 安裝
-    let deferredPrompt;
-    const installContainer = document.getElementById('install-container');
-    const installBtn = document.getElementById('install-btn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installContainer.style.display = 'block';
-      console.log('🛠 PWA install prompt ready');
+    // 監聽 Flutter 載入完成事件
+    window.addEventListener('flutter-loaded', () => {
+      // 隱藏提示橫幅
+      document.querySelector('.web-version').style.display = 'none';
     });
-
-    installBtn.addEventListener('click', async () => {
-      installContainer.style.display = 'none';
-      deferredPrompt.prompt();
-      const choiceResult = await deferredPrompt.userChoice;
-      console.log('User choice:', choiceResult.outcome);
-      deferredPrompt = null;
-    });
-
-    // Optional: install 完成監聽
-    window.addEventListener('appinstalled', () => {
-      console.log('PWA was installed');
-    });
+  </script>
   </script>
 
 
