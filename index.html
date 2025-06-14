@@ -2,18 +2,21 @@
 <html lang="zh-TW">
 
 <head>
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Weather Wise">
-  <meta name="theme-color" content="#1C1933">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Weather Wise">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta charset="UTF-8" />
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+  <meta name="description" content="Weather Wise" />
+  <meta name="theme-color" content="#1C1933" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Weather Wise" />
+  <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+  <link rel="icon" type="image/png" href="./favicon.png" />
   <title>weather_wise</title>
-  <link rel="manifest" href="./manifest.json">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <link rel="manifest" href="./manifest.json" />
+  <meta
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    name="viewport"
+  />
   <style>
     /* TopBar 容器樣式 */
     .topBar {
@@ -21,8 +24,8 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background-color: #1C1933;
-      color: #FFF;
+      background-color: #1c1933;
+      color: #fff;
       padding: 12px 20px;
       border-radius: 8px;
       display: none;
@@ -40,25 +43,25 @@
 
     /* 實際按鈕樣式 */
     .topBarButton button {
-      background-color: #2B12EB;
-      color: #FFF;
+      background-color: #2b12eb;
+      color: #fff;
       border: none;
       padding: 8px 16px;
       font-size: 14px;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color .3s, transform .1s;
+      transition: background-color 0.3s, transform 0.1s;
     }
 
     /* 滑鼠懸停效果 */
     .topBarButton button:hover {
-      background-color: #1F0EC9;
+      background-color: #1f0ec9;
       transform: translateY(-1px);
     }
 
     /* 按下效果 */
     .topBarButton button:active {
-      background-color: #1A0AA0;
+      background-color: #1a0aa0;
       transform: translateY(1px);
     }
   </style>
@@ -68,45 +71,91 @@
   <!-- iOS Safari 加主畫面提示 -->
   <div id="a2hs-banner" class="topBar">
     <p>在 Safari 中點擊「分享」➜「加入主畫面」</p>
-    <div class="topBarButton"><button onclick="dismissIosBanner()">知道了</button></div>
+    <div class="topBarButton">
+      <button onclick="dismissIosBanner()">知道了</button>
+    </div>
+  </div>
+
+  <!-- Chrome / Android 安裝提示橫幅 -->
+  <div id="install-banner" class="topBar" style="display:none;">
+    <p>將 Weather Wise 加入主畫面，隨時查看天氣資訊！</p>
+    <div class="topBarButton">
+      <button id="install-btn">安裝</button>
+      <button onclick="dismissInstallBanner()">取消</button>
+    </div>
   </div>
 
   <!-- Flutter Bootstrapping -->
   <script src="./flutter_bootstrap.js" async></script>
 
   <script>
-    // iOS 加主畫面提示
+    let deferredPrompt;
+
+    // iOS 判斷
     function isIos() {
       return /iphone|ipad|ipod/i.test(navigator.userAgent);
     }
 
-    window.addEventListener('load', () => {
-      // 檢查是否為 PWA 模式
-      if (window.matchMedia('(display-mode: standalone)').matches) {
-        // 如果是 PWA 模式，隱藏提示橫幅
-        document.getElementById('a2hs-banner').style.display = 'none';
-      } else {
-        // 如果不是 PWA 模式，顯示 iOS 加主畫面提示
-        if (isIos() && !navigator.standalone) {
-          document.getElementById('a2hs-banner').style.display = 'flex';
-        }
-      }
-    });
+    // PWA standalone 判斷
+    function isStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    }
 
+    // 顯示 iOS 提示
+    function showIosBanner() {
+      document.getElementById('a2hs-banner').style.display = 'flex';
+    }
+
+    // 隱藏 iOS 提示
     function dismissIosBanner() {
       document.getElementById('a2hs-banner').style.display = 'none';
     }
 
-    // 監聽 Flutter 載入完成事件
-    window.addEventListener('flutter-loaded', () => {
-      // 隱藏提示橫幅
-      document.querySelector('.web-version').style.display = 'none';
+    // 顯示 Chrome / Android 安裝提示
+    function showInstallBanner() {
+      document.getElementById('install-banner').style.display = 'flex';
+    }
+
+    // 隱藏 Chrome / Android 安裝提示
+    function dismissInstallBanner() {
+      document.getElementById('install-banner').style.display = 'none';
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();  // 阻止瀏覽器自動提示
+      deferredPrompt = e;
+      if (!isIos() && !isStandalone()) {
+        showInstallBanner();
+      }
+    });
+
+    window.addEventListener('load', () => {
+      if (isIos() && !isStandalone()) {
+        showIosBanner();
+      }
+      if (isStandalone()) {
+        dismissIosBanner();
+        dismissInstallBanner();
+      }
+    });
+
+    document.getElementById('install-btn').addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('用戶接受安裝');
+      } else {
+        console.log('用戶取消安裝');
+      }
+      deferredPrompt = null;
+      dismissInstallBanner();
     });
   </script>
 
   <style id="splash-screen-style">
     html {
-      height: 100%
+      height: 100%;
     }
 
     body {
@@ -167,20 +216,37 @@
   </style>
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
-      document.getElementById("splash")?.remove();
-      document.getElementById("splash-branding")?.remove();
-      document.body.style.background = "transparent";
+      document.getElementById('splash')?.remove();
+      document.getElementById('splash-branding')?.remove();
+      document.body.style.background = 'transparent';
     }
   </script>
 
   <picture id="splash">
     <source
-      srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x"
-      media="(prefers-color-scheme: light)">
+      srcset="
+        splash/img/light-1x.png 1x,
+        splash/img/light-2x.png 2x,
+        splash/img/light-3x.png 3x,
+        splash/img/light-4x.png 4x
+      "
+      media="(prefers-color-scheme: light)"
+    />
     <source
-      srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x"
-      media="(prefers-color-scheme: dark)">
-    <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="" />
+      srcset="
+        splash/img/dark-1x.png 1x,
+        splash/img/dark-2x.png 2x,
+        splash/img/dark-3x.png 3x,
+        splash/img/dark-4x.png 4x
+      "
+      media="(prefers-color-scheme: dark)"
+    />
+    <img
+      class="center"
+      aria-hidden="true"
+      src="splash/img/light-1x.png"
+      alt=""
+    />
   </picture>
 </body>
 
