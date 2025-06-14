@@ -122,7 +122,7 @@
     }
 
     window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();  // 阻止瀏覽器自動提示
+      // e.preventDefault();  // 阻止瀏覽器自動提示
       deferredPrompt = e;
       if (!isIos() && !isStandalone()) {
         showInstallBanner();
