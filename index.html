@@ -30,16 +30,6 @@
     <div class="topBarButton">
       <button onclick="dismiss()">知道了</button>
     </div>
-
-    <div
-      style="width: 84px; height: 40px; max-width: 480px; min-width: 84px; padding-left: 16px; padding-right: 16px; background: #2B12EB; overflow: hidden; border-radius: 20px; justify-content: center; align-items: center; display: inline-flex">
-      <div
-        style="overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-        <button onclick="dismiss()"
-          style="text-align: center; color: white; font-size: 14px; font-weight: 700; line-height: 21px; word-wrap: break-word">
-          知道了</button>
-      </div>
-    </div>
   </div>
   <script>
     function isIos() {
@@ -68,9 +58,15 @@
       transform: translateX(-50%);
     }
 
-    /* .topBarButton {
-      background-color: ;
-    } */
+    .topBarButton {
+      background-color: #2B12EB;
+      color: white;
+      border-radius: 10;
+      font-size: 14;
+      margin: 5, 10, 5, 10;
+      width: 75;
+      height: 25;
+    }
   </style>
 
 
