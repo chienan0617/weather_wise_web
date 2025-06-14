@@ -27,7 +27,19 @@
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
   <div id="a2hs-banner" class="topBar">
     <p>在 Safari 中點擊「分享」圖示 ➜ 選擇「加入主畫面」。</p>
-    <button onclick="dismiss()">知道了</button>
+    <div class="topBarButton">
+      <button onclick="dismiss()">知道了</button>
+    </div>
+
+    <div
+      style="width: 84px; height: 40px; max-width: 480px; min-width: 84px; padding-left: 16px; padding-right: 16px; background: #2B12EB; overflow: hidden; border-radius: 20px; justify-content: center; align-items: center; display: inline-flex">
+      <div
+        style="overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
+        <div
+          style="text-align: center; color: white; font-size: 14px; font-family: Space Grotesk; font-weight: 700; line-height: 21px; word-wrap: break-word">
+          Search</div>
+      </div>
+    </div>
   </div>
   <script>
     function isIos() {
@@ -54,6 +66,10 @@
       top: 0;
       left: 50%;
       transform: translateX(-50%);
+    }
+
+    .topBarButton {
+      background-color: ;
     }
   </style>
 
