@@ -31,6 +31,12 @@
       <button onclick="dismiss()">知道了</button>
     </div>
   </div>
+
+  <div class="web-version">
+    <p>Web-Alpha 測試版</p>
+  </div>
+
+
   <script>
     function isIos() {
       return /iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -70,11 +76,6 @@
       line-height: 1.4;
     }
 
-    /* Button 容器 */
-    .topBarButton {
-      /* 保留 flex 排版空間 */
-    }
-
     /* 實際按鈕樣式 */
     .topBarButton button {
       background-color: #2B12EB;
@@ -109,6 +110,32 @@
     .topBarButton button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
+    }
+
+    /* Web‑version 標籤樣式 */
+    .web-version {
+      position: fixed;
+      top: 80px;
+      /* 避開 topBar */
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(28, 25, 51, 0.9);
+      color: #FFFFFF;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 可選：在 web‑version 中加上圖示 */
+    .web-version::before {
+      content: "⚙️";
+      margin-right: 4px;
     }
   </style>
 
