@@ -3,10 +3,9 @@
     "short_name": "weather_wise",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-2",
-iption": "weather_wise",
+    "background_color": "#171221",
+    "theme_color": "#171221",
+    "description": "weather_wise",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
