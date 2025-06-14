@@ -1,9 +1,15 @@
-<!DOCTYPE html><html><head>
+<!DOCTYPE html>
+<html>
+
+<head>
   <!-- <base href="/"> -->
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="weather_wise">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#171221">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171221">
+
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -78,7 +84,7 @@
       margin: 0;
       min-height: 100%;
       background-color: #111121;
-          background-size: 100% 100%;
+      background-size: 100% 100%;
     }
 
     .center {
@@ -91,19 +97,22 @@
     }
 
     .contain {
-      display:block;
-      width:100%; height:100%;
+      display: block;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
 
     .stretch {
-      display:block;
-      width:100%; height:100%;
+      display: block;
+      width: 100%;
+      height: 100%;
     }
 
     .cover {
-      display:block;
-      width:100%; height:100%;
+      display: block;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 
@@ -135,11 +144,16 @@
     }
   </script>
 </head>
+
 <body>
   <picture id="splash">
-      <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
-      <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
-      <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
+    <source
+      srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x"
+      media="(prefers-color-scheme: light)">
+    <source
+      srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x"
+      media="(prefers-color-scheme: dark)">
+    <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
   </picture>
 
 
@@ -170,4 +184,6 @@
   <script src="./flutter_bootstrap.js" async=""></script>
 
 
-</body></html>
+</body>
+
+</html>
