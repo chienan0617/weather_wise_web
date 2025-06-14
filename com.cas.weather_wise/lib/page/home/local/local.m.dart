@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/local_page.dart';
+import 'package:weather_wise/page/home/drawer.dart';
 import 'package:weather_wise/page/home/local/background.dart';
 import 'package:weather_wise/page/home/local/today_forecast.dart';
 import 'package:weather_wise/page/home/local/today_info.dart';
@@ -28,6 +29,7 @@ class _LocalPageState extends State<LocalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: SideBar(),
       extendBodyBehindAppBar: true,
       backgroundColor: const Color(0xFF111121),
       // appBar:

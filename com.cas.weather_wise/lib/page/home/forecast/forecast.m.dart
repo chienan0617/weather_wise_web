@@ -39,7 +39,7 @@ class _ForecastPageState extends State<ForecastPage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1C1933),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () => Util.openDrawer(context),
           icon: const Icon(Icons.menu, color: style_0, size: 26),
         ),
         title: Text(
@@ -62,6 +62,7 @@ class _ForecastPageState extends State<ForecastPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 15),
             Text(
               Language.word('Forecast'),
               style: const TextStyle(
@@ -71,7 +72,7 @@ class _ForecastPageState extends State<ForecastPage> {
                 fontSize: 24,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
             ...weatherList.map((w) => citySection(w, size)),
           ],
         ),
@@ -108,7 +109,7 @@ class _ForecastPageState extends State<ForecastPage> {
         child: Container(
           height: size.height * 0.15,
           margin: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(color: const Color(0xFF1C1933)),
+          decoration: BoxDecoration(color: const Color(0xFF1C1933), borderRadius: BorderRadius.circular(10)),
           // padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,10 +168,10 @@ class _ForecastPageState extends State<ForecastPage> {
                   const Expanded(child: SizedBox()),
                   // const SizedBox(height: 10,),
                   Text(
-                    DateFormat('yyyy-MM-dd HH:mm')
-                        .parse(weather.location.localtime.toString())
+                    '${DateFormat('yyyy-MM-dd HH:mm')
+                        .parse(weather.location.localtime)
                         .toString()
-                        .substring(5, 16),
+                        .substring(11, 13)}:${DateTime.now().minute}',
                     style: const TextStyle(
                       fontFamily: fontFamilyDefault,
                       color: Colors.white70,

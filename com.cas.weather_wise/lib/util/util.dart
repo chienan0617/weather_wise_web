@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -55,7 +56,7 @@ class Util {
           final dt = DateTime.parse("$date ${h.time.split(' ').last}");
           return (dt, h);
         })
-        .where((tuple) => !tuple.$1.isBefore(now.subtract(Duration(hours: 0))))
+        .where((tuple) => !tuple.$1.isBefore(now.subtract(Duration(hours: 2))))
         .toList();
   }
 
@@ -66,30 +67,34 @@ class Util {
     final now = DateTime.now();
 
     return w.forecast
-        .expand((day) {
-          return day.hour
-              .where((hour) {
-                // 只保留未來時間的預報
-                final dateTime = DateTime.parse(
-                  "${day.date} ${hour.time.split(' ').last}",
-                );
-                return dateTime.isAfter(now.subtract(Duration(hours: 1)));
-              })
-              .map((hour) {
-                final dateTime = DateTime.parse(
-                  "${day.date} ${hour.time.split(' ').last}",
-                );
-                return (
-                  hour.condition.code, // 天氣狀態碼
-                  Util.tempIsC() ? hour.tempC : hour.tempF, // 溫度（攝氏）
-                  hour.isDay, // 是否白天 (1/0)
-                  DateFormat('ha').format(dateTime), // 格式化時間，例如 "8AM"
-                );
-              });
-        })
-        .take(len) // 限制最多取幾筆
-        .toList();
+      .expand((day) {
+        return day.hour.where((hour) {
+          // 解析時加入 Z（表示 UTC），再轉成本地時間
+          final dtUtc = DateTime.parse(
+            "${day.date} ${hour.time.split(' ').last}Z"
+          );
+          final dtLocal = dtUtc.toLocal();
+
+          // 比較是否為未來時間
+          final lastUpdated = DateTime.parse(w.current.lastUpdated).toLocal();
+          return dtLocal.isAfter(lastUpdated.subtract(Duration(hours: 1)));
+        }).map((hour) {
+          final dtUtc = DateTime.parse(
+            "${day.date} ${hour.time.split(' ').last}Z"
+          );
+          final dtLocal = dtUtc.toLocal();
+          return (
+            hour.condition.code,
+            Util.tempIsC() ? hour.tempC : hour.tempF,
+            hour.isDay,
+            DateFormat('${SettingPageController.timeType.currentValue == 0 ? 'H' : 'h'}a').format(dtLocal), // 用24小時制(local)
+          );
+        });
+      })
+      .take(len)
+      .toList();
   }
+
 
   static bool tempIsC() => isC();
 
@@ -134,6 +139,15 @@ class Util {
       } else {
         return getImage(getPath(2));
       }
+    }
+  }
+
+  static void openDrawer(BuildContext context) {
+    try {
+      Scaffold.of(context).openDrawer();
+    } catch (e) {
+      log('message');
+      throw Exception('no drawer widget on superior');
     }
   }
 }

@@ -27,6 +27,11 @@ class Language {
     return wordData.words[text]?[index].toString() ?? error;
   }
 
+  @functional
+  static List<String> wordAll(List<String> words) {
+    return words.map((e) => word(e)).toList();
+  }
+
   static changeIndex(bool b, BuildContext context) {
     Data.app.put('language', b);
     index = Data.app.get<bool>('language') ? 1 : 0;

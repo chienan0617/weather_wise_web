@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/setting_page.dart';
 import 'package:weather_wise/util/file_handle.dart';
 import 'package:weather_wise/util/library.dart';
+import 'package:weather_wise/util/util.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -24,7 +25,7 @@ class _SettingPageState extends State<SettingPage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1C1933),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () => Util.openDrawer(context),
           icon: const Icon(Icons.menu, color: style_0, size: 26),
         ),
         title: Text(
@@ -80,6 +81,22 @@ class _SettingPageState extends State<SettingPage> {
             Switch(
               value: SettingPageController.isDay.value,
               onChanged: SettingPageController.isDay.onValueChanged,
+            ),
+          ),
+          section(
+            'Timekeeping Systems',
+            'Time unit',
+            DropdownButton<String>(
+              items: SettingPageController.timeType.getItems(),
+              onChanged: SettingPageController.timeType.onValueChanged,
+              value: SettingPageController.timeType.currentValue,
+              dropdownColor: Color.fromRGBO(0, 0, 0, 128),
+              icon: const Icon(
+                Icons.arrow_drop_down,
+                color: Colors.white,
+                size: 30,
+              ),
+              underline: const SizedBox(),
             ),
           ),
           divider(),

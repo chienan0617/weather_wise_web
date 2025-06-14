@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:weather_wise/func/controller/home_bottom_bar.dart';
 import 'package:weather_wise/util/service/weather.mod.dart';
 import 'package:weather_wise/util/util.dart';
 import 'package:weather_wise/util/file_handle.dart';
@@ -62,16 +63,13 @@ class _LocalBackgroundState extends State<LocalBackground> {
                 filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
                 child: Container(
                   color: Colors.black.withOpacity(0.1),
-                  // decoration: BoxDecoration(
-                  //   color: Colors.black.withOpacity(0.1)
-                  // ),
                 ),
               ),
             ),
             // backgroundColor: const Color(0xFF1C1933),
             leading: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.settings, size: 26, color: Colors.white),
+              onPressed: () => Util.openDrawer(context),
+              icon: const Icon(Icons.menu, size: 26, color: Colors.white),
             ),
             title: DropdownButton<String>(
               items: LocalPageController.getDropDownMenuItems(),
@@ -88,9 +86,10 @@ class _LocalBackgroundState extends State<LocalBackground> {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.menu, size: 26, color: Colors.white),
+                onPressed: () => HomePageCtrl.onValueChanged(4),
+                icon: const Icon(Icons.settings, size: 26, color: Colors.white),
               ),
+              const SizedBox(width: 10),
             ],
           ),
         ),

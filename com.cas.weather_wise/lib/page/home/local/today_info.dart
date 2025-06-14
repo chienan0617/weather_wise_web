@@ -37,17 +37,21 @@ class _TodayInfoState extends State<TodayInfo> {
             ),
           ),
           section(Icons.opacity, Language.word('Humidity'), '${cur.humidity}%'),
+          // section(
+          //   Icons.thermostat_outlined,
+          //   Language.word('Temperature'),
+          //   '${Util.tempIsC() ? cur.tempC : cur.tempF}°',
+          // ),
           section(
             Icons.thermostat_outlined,
-            Language.word('Temperature'),
-            '${Util.tempIsC() ? cur.tempC : cur.tempF}°',
-          ),
-          section(
-            Icons.thermostat_auto_outlined,
             Language.word('Feels Like'),
             '${Util.tempIsC() ? cur.feelslikeC : cur.feelslikeF}',
           ),
-          section(Icons.wb_sunny_outlined, Language.word('Ultraviolet Ray'), cur.uv.toInt()),
+          section(
+            Icons.wb_sunny_outlined,
+            Language.word('Ultraviolet Ray'),
+            cur.uv.toInt(),
+          ),
           // section(
           //   Icons.air_outlined,
           //   'Wind',
@@ -58,6 +62,11 @@ class _TodayInfoState extends State<TodayInfo> {
             Icons.water_drop_outlined,
             Language.word('Hourly Precipitation'),
             '${cur.precipMm} mm',
+          ),
+          section(
+            Icons.cloud_outlined,
+            Language.word('Cloud'),
+            '${cur.cloud}%',
           ),
           const SizedBox(height: 30),
         ],

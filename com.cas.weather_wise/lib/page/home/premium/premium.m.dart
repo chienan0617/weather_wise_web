@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_wise/util/file_handle.dart';
 import 'package:weather_wise/util/library.dart';
+import 'package:weather_wise/util/util.dart';
 
 class PremiumPage extends StatefulWidget {
   const PremiumPage({super.key});
@@ -17,7 +18,7 @@ class _PremiumPageState extends State<PremiumPage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1C1933),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () => Util.openDrawer(context),
           icon: const Icon(Icons.menu, color: style_0, size: 26),
         ),
         title: Text(

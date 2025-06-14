@@ -32,5 +32,10 @@
   "Temperature": ["Temperature", "溫度"],
   "Feels Like": ["Feels Like", "體感溫度"],
   "Ultraviolet Ray": ["Ultraviolet Ray", "紫外線"],
-  "Hourly Precipitation": ["Hourly Precipitation", "小時降雨"]
+  "Hourly Precipitation": ["Hourly Precipitation", "小時降雨"],
+  "Cloud": ["Cloud", "雲量"],
+  "Timekeeping Systems": ["Timekeeping Systems", "計時系統"],
+  "Time unit": ["Time unit", "計時單位"],
+  "12-hours": ["12-hours", "12小時"],
+  "24-hours": ["24-hours", "24小時"]
 }

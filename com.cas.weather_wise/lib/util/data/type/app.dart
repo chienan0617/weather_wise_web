@@ -28,6 +28,7 @@ class AppData implements Database {
     checkKeyExist('tempType', 0);
     checkKeyExist('backgroundType', 0);
     checkKeyExist('isDay', false);
+    checkKeyExist('timeType', 0);
   }
 
   @override

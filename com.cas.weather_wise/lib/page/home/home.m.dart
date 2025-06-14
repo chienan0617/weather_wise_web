@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
+      home: SizedBox(
         child: Scaffold(
           drawer: SideBar(),
           body: PageView(

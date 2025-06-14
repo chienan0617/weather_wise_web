@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_wise/page/home/search/search_bar.dart';
 import 'package:weather_wise/util/file_handle.dart';
 import 'package:weather_wise/util/library.dart';
+import 'package:weather_wise/util/util.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -18,7 +19,7 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1C1933),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () => Util.openDrawer(context),
           icon: const Icon(Icons.menu, color: style_0, size: 26),
         ),
         title: Text(

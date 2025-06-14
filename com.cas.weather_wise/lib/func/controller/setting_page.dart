@@ -11,6 +11,7 @@ class SettingPageController {
   static var tempType = _TempType();
   static var backgroundType = _BackgroundType();
   static var isDay = _IsDay();
+  static var timeType = _TimeType();
 }
 
 class _TempType {
@@ -94,6 +95,44 @@ class _BackgroundType {
   List<DropdownMenuItem<String>> getItems() {
     inited ? Language.error : init();
     return background
+        .map(
+          (v) => DropdownMenuItem(
+            value: v,
+            child: Text(
+              v,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: fontFamilyDefault,
+              ),
+            ),
+          ),
+        )
+        .toList();
+  }
+}
+
+class _TimeType {
+  String dataName = 'timeType';
+  List<String> temps = Language.wordAll(['24-hours', '12-hours']);
+  late String currentValue = temps[value];
+
+  int get value => Data.app.get<int>(dataName);
+  set value(int index) => Data.app.put<int>(dataName, index);
+
+  // @method String getCurrentItem() => page
+
+  @method
+  void onValueChanged(String? newValue) {
+    if (newValue != null) value = temps.indexOf(newValue);
+    currentValue = temps[value];
+    SettingPageController.refresh();
+    // log('message');
+  }
+
+  @method
+  List<DropdownMenuItem<String>> getItems() {
+    return temps
         .map(
           (v) => DropdownMenuItem(
             value: v,
