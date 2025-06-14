@@ -144,14 +144,14 @@ analyzer:
 
 flutter_native_splash:
   color: "#111121"
-  image: assets/icon/app_icon_debug.png
+  image: assets/icon/app_icon_debug_web.jpg
   android: true
   ios: true
 
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/icon/app_icon_debug.png"
+  image_path: "assets/icon/app_icon_debug_web.jpg"
 # To add assets to your application, add an assets section, like this:
 # assets:
 #   - images/a_dot_burr.jpeg
