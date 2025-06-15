@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -146,7 +144,6 @@ class Util {
     try {
       Scaffold.of(context).openDrawer();
     } catch (e) {
-      log('message');
       throw Exception('no drawer widget on superior');
     }
   }

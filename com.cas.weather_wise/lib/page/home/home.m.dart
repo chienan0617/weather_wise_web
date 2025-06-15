@@ -62,33 +62,37 @@ class _HomePageState extends State<HomePage> {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: BottomAppBar(
-            // height: kBottomNavigationBarHeight + 16,
+            height: kBottomNavigationBarHeight + 32,
             // padding: EdgeInsets.only(top: 0),
             color: const Color(0xFF1C1933),
             // shape: const CircularNotchedRectangle(),
             // notchMargin: 8.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildNavItem(Icons.location_on_outlined, 'Local', 0, size),
-                _buildNavItem(Icons.cloud_outlined, 'Forecast', 1, size),
-                // _buildNavItem(Icons.add, 'Premium', 2, size),
-                Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const SizedBox(height: 25),
-                    Text(
-                      Language.word('Premium'),
-                      style: TextStyle(
-                        color: HomePageCtrl.pageIndex == 2
-                            ? Colors.white
-                            : const Color(0xFF9993C6),
-                        fontSize: 11,
-                      ),
+                    _buildNavItem(Icons.location_on_outlined, 'Local', 0, size),
+                    _buildNavItem(Icons.cloud_outlined, 'Forecast', 1, size),
+                    // _buildNavItem(Icons.add, 'Premium', 2, size),
+                    Column(
+                      children: [
+                        Text(
+                          Language.word('Premium'),
+                          style: TextStyle(
+                            color: HomePageCtrl.pageIndex == 2
+                                ? Colors.white
+                                : const Color(0xFF9993C6),
+                            fontSize: 11,
+                          ),
+                        ),
+                      ],
                     ),
+                    _buildNavItem(Icons.search, 'Search', 3, size),
+                    _buildNavItem(Icons.settings_outlined, 'Setting', 4, size),
                   ],
                 ),
-                _buildNavItem(Icons.search, 'Search', 3, size),
-                _buildNavItem(Icons.settings_outlined, 'Setting', 4, size),
               ],
             ),
           ),
