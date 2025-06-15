@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+  <meta name="description" content="Weather Wise" />
+  <meta name="theme-color" content="#1C1933" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Weather Wise" />
+  <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+  <link rel="icon" type="image/png" href="./favicon.png" />
+  <title>weather_wise</title>
+  <link rel="manifest" href="./manifest.json" />
+  <meta
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    name="viewport"
+  />
+  <style>
+    .topBar {
+      position: fixed;
+      width: 75%;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #1c1933;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      display: none;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+
+    .topBar p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .topBarButton button {
+      background-color: #2b12eb;
+      margin-top: 10px;
+      /* margin-right: 10px; */
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.1s;
+    }
+
+    .topBarButton button:hover {
+      background-color: #1f0ec9;
+      transform: translateY(-1px);
+    }
+
+    .topBarButton button:active {
+      background-color: #1a0aa0;
+      transform: translateY(1px);
+    }
+
+    /* Splash-screen & content CSS */
+    html { height: 100%; }
+    body { margin: 0; min-height: 100%; background-color: #111121; background-size: 100% 100%; }
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    .contain {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .stretch {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .cover {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      -ms-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+    }
+    .bottomLeft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    .bottomRight {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="a2hs-banner" class="topBar">
+    <p>在 Safari 中點擊「分享」➜「加入主畫面」，隨時查看天氣資訊！</p>
+    <!-- <p>加入主畫面，隨時查看天氣資訊！</p> -->
+    <div class="topBarButton">
+      <button onclick="dismissIosBanner()">知道了</button>
+    </div>
+  </div>
+
+  <div id="install-banner" class="topBar" style="display:none;">
+    <p>加入主畫面，隨時查看天氣資訊！</p>
+    <div class="topBarButton">
+      <button id="install-btn">安裝</button>
+      <button onclick="dismissInstallBanner()">取消</button>
+    </div>
+  </div>
+
+  <script src="./flutter_bootstrap.js" async></script>
+
+  <script>
+    let deferredPrompt;
+
+    function isIos() {
+      return /iphone|ipad|ipod/i.test(navigator.userAgent);
+    }
+
+    function isStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    }
+
+    function showIosBanner() {
+      document.getElementById('a2hs-banner').style.display = 'flex';
+    }
+
+    function dismissIosBanner() {
+      document.getElementById('a2hs-banner').style.display = 'none';
+    }
+
+    function showInstallBanner() {
+      document.getElementById('install-banner').style.display = 'flex';
+    }
+
+    function dismissInstallBanner() {
+      document.getElementById('install-banner').style.display = 'none';
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      deferredPrompt = e;
+      if (!isIos() && !isStandalone()) {
+        showInstallBanner();
+      }
+    });
+
+    window.addEventListener('load', () => {
+      if (isIos() && !isStandalone()) {
+        showIosBanner();
+      }
+      if (isStandalone()) {
+        dismissIosBanner();
+        dismissInstallBanner();
+      }
+    });
+
+    document.getElementById('install-btn').addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('用戶接受安裝');
+      } else {
+        console.log('用戶取消安裝');
+      }
+      deferredPrompt = null;
+      dismissInstallBanner();
+    });
+  </script>
+
+  <style id="splash-screen-style">/* kept above */</style>
+  <script id="splash-screen-script">
+    function removeSplashFromWeb() {
+      document.getElementById('splash')?.remove();
+      document.body.style.background = 'transparent';
+    }
+  </script>
+
+  <picture id="splash">
+    <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)" />
+    <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)" />
+    <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="" />
+  </picture>
+</body>
+</html>
