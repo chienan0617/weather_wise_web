@@ -46,6 +46,30 @@ class _PremiumPageState extends State<PremiumPage> {
           ),
         ),
       ),
+      body: Column(
+        children: [
+          TestingWidget()
+        ],
+      ),
+    );
+  }
+}
+
+
+class TestingWidget extends StatefulWidget {
+  const TestingWidget({super.key});
+
+  @override
+  State<TestingWidget> createState() => _TestingWidgetState();
+}
+
+class _TestingWidgetState extends State<TestingWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+
+      ],
     );
   }
 }

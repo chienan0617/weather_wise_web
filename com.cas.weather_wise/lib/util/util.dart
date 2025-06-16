@@ -69,20 +69,17 @@ class Util {
     return w.forecast
       .expand((day) {
         return day.hour.where((hour) {
-          // 解析時加入 Z（表示 UTC），再轉成本地時間
-          final dtUtc = DateTime.parse(
-            "${day.date} ${hour.time.split(' ').last}Z"
-          );
-          final dtLocal = dtUtc.toLocal();
-
-          // 比較是否為未來時間
           final lastUpdated = DateTime.parse(w.current.lastUpdated).toLocal();
-          return dtLocal.isAfter(lastUpdated.subtract(Duration(hours: 1)));
+
+          return DateTime.parse(
+            "${day.date} ${hour.time.split(' ').last}"
+          ).toLocal().isAfter(lastUpdated.subtract(Duration(hours: 1)));
+
         }).map((hour) {
-          final dtUtc = DateTime.parse(
-            "${day.date} ${hour.time.split(' ').last}Z"
-          );
-          final dtLocal = dtUtc.toLocal();
+          final dtLocal = DateTime.parse(
+            "${day.date} ${hour.time.split(' ').last}"
+          ).toLocal();
+
           return (
             hour.condition.code,
             Util.tempIsC() ? hour.tempC : hour.tempF,
@@ -149,5 +146,9 @@ class Util {
       log('message');
       throw Exception('no drawer widget on superior');
     }
+  }
+
+  static bool isBirthDay() {
+    return (DateTime.now().month == DateTime.june && DateTime.now().day == 17);
   }
 }

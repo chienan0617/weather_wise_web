@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/home_bottom_bar.dart';
 import 'package:weather_wise/util/service/weather.mod.dart';
@@ -69,22 +70,28 @@ class _LocalBackgroundState extends State<LocalBackground> {
               onPressed: () => Util.openDrawer(context),
               icon: const Icon(Icons.menu, size: 26, color: Colors.white),
             ),
-            title: DropdownButton<String>(
-              items: LocalPageController.getDropDownMenuItems(),
-              onChanged: LocalPageController.onSelect,
-              value: LocalPageController.getDropDownMenuCurrentValue(),
-              dropdownColor: const Color(0xFF1C1933),
-              // dropdownColor: Color.fromRGBO(255, 255, 255, 255),
-              // dropdownColor: Colors.black,
-              // dropdownColor: Color.fromRGBO(0, 0, 0, 0.1),
-              icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-              underline: const SizedBox(),
-              elevation: 10,
-              hint: const Text(
-                "請選擇城市",
-                style: TextStyle(color: Colors.white54),
-              ),
-              // style: const TextStyle(color: Colors.white, fontSize: 16),
+            title: Row(
+              children: [
+                const Icon(
+                  Icons.location_on_outlined,
+                  color: Colors.white,
+                  size: 22,
+                ),
+                const SizedBox(width: 10),
+                DropdownButton<String>(
+                  items: LocalPageController.getDropDownMenuItems(),
+                  onChanged: LocalPageController.onSelect,
+                  value: LocalPageController.getDropDownMenuCurrentValue(),
+                  dropdownColor: const Color(0xFF1C1933),
+                  // dropdownColor: Color.fromRGBO(255, 255, 255, 255),
+                  // dropdownColor: Colors.black,
+                  // dropdownColor: Color.fromRGBO(0, 0, 0, 0.1),
+                  icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+                  underline: const SizedBox(),
+                  elevation: 10,
+                  // style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ],
             ),
             actions: [
               IconButton(
@@ -92,9 +99,14 @@ class _LocalBackgroundState extends State<LocalBackground> {
                 icon: const Icon(Icons.settings, size: 26, color: Colors.white),
               ),
               const SizedBox(width: 10),
+              // CupertinoButton(child: Icon(Icons.wallet), onPressed: () {})
             ],
           ),
         ),
+        Util.isBirthDay() ? const Align(
+          alignment: Alignment(-0.9, -0.7),
+          child: Icon(Icons.cake_outlined, size: 28, color: Colors.amber),
+        ) : const SizedBox(),
         Center(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16),

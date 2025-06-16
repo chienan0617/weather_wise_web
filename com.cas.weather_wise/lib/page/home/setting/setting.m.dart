@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_wise/func/controller/setting_page.dart';
 import 'package:weather_wise/util/file_handle.dart';
@@ -91,7 +92,7 @@ class _SettingPageState extends State<SettingPage> {
           section(
             'customize background',
             'open to customize background',
-            Switch(
+            CupertinoSwitch(
               value: SettingPageController.isDay.value,
               onChanged: SettingPageController.isDay.onValueChanged,
             ),

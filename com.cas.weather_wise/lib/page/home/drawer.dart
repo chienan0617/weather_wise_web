@@ -17,11 +17,8 @@ class _SideBarState extends State<SideBar> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-
           const UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
-              color: Color(0xFF1C1933),
-            ),
+            decoration: BoxDecoration(color: Color(0xFF1C1933)),
             accountName: Text(
               'CAStudio',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -45,13 +42,14 @@ class _SideBarState extends State<SideBar> {
           Container(
             color: const Color(0xFF111121),
             // width: double.infinity,
-            child: Column(
-              children: [],
-            ),
+            child: Column(children: []),
           ),
           ListTile(
             leading: const Icon(Icons.home, color: Colors.white),
-            title: Text(Language.word('Home'), style: const TextStyle(color: Colors.white)),
+            title: Text(
+              Language.word('Home'),
+              style: const TextStyle(color: Colors.white),
+            ),
             onTap: () {
               Navigator.pop(context);
               HomePageCtrl.onValueChanged(0);
@@ -60,14 +58,39 @@ class _SideBarState extends State<SideBar> {
           // const Expanded(child: SizedBox()),
           ListTile(
             leading: const Icon(Icons.settings_outlined, color: Colors.white),
-            title: Text(Language.word('Setting'), style: const TextStyle(color: Colors.white)),
+            title: Text(
+              Language.word('Setting'),
+              style: const TextStyle(color: Colors.white),
+            ),
             onTap: () {
               Navigator.pop(context);
               HomePageCtrl.onValueChanged(4);
             },
           ),
+
+          ListTile(
+            leading: const Icon(Icons.info_outline, color: Colors.white),
+            title: Text('About', style: const TextStyle(color: Colors.white)),
+            onTap: showAbout,
+          ),
         ],
       ),
+    );
+  }
+
+  void showAbout() {
+    showAboutDialog(
+      context: context,
+      applicationName: 'Weather Wise',
+      applicationIcon: Image.asset(
+        'assets/icon/app_icon_debug_web.png',
+        width: 50,
+        height: 50,
+      ),
+      applicationLegalese: 'Copy right (c) CAStudio',
+      applicationVersion: 'Web: 1.4.1-Alpha',
+      // barrierColor: Colors.amber,
+      barrierLabel: 'label',
     );
   }
 }
