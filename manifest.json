@@ -1,11 +1,11 @@
 {
-    "name": "Weather Wise",
-    "short_name": "Weather Wise",
+    "name": "weather_wise",
+    "short_name": "weather_wise",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#1c1933",
     "theme_color": "#1c1933",
-    "description": "Weather Wise",
+    "description": "weather_wise",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
