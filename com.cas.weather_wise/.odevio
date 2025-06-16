@@ -1,9 +1,0 @@
-build-type=configuration
-flutter=3.32.2
-minimal-ios-version=15.0
-app-version=1.0.5
-build-number=3
-mode=debug
-target=lib/main.dart
-flavor=dev
-tunnel-host=localhost
