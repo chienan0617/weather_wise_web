@@ -30866,7 +30866,7 @@ k.b=J.Ab(t.f.a(o.cr(0,"information")),n,n)}catch(j){p=A.au(j)
 s=1
 break}l=J.b0(k.aW(),"version")
 if(l==null)l=""
-if(l==="Beta 1.2.4+1"){s=1
+if(l==="Beta 1.4.5+2"){s=1
 break}else{o=$.dt().a
 o===$&&A.a()
 o.Y(0)
@@ -99847,7 +99847,7 @@ while(true)switch(s){case 0:q.n9("pageIndex",0)
 q.n9("tutored",!1)
 q.n9("language",!0)
 p=t.N
-q.n9("information",A.aG(["version","Beta 1.2.4+1","isPublicVersion",String(!1),"isStableVersion",String(!1),"isDebugMode",String(!0),"apiKey","569f2ae006bb4c4c9f8153435252005"],p,p))
+q.n9("information",A.aG(["version","Beta 1.4.5+2","isPublicVersion",String(!1),"isStableVersion",String(!1),"isDebugMode",String(!0),"apiKey","569f2ae006bb4c4c9f8153435252005"],p,p))
 q.n9("tempType",0)
 q.n9("backgroundType",0)
 q.n9("isDay",!1)
