@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#1c1933",
     "theme_color": "#1c1933",
-    "description": "Weather Wise",
+    "description": "Weather And Forecast",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
