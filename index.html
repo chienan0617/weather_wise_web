@@ -16,8 +16,67 @@
   <title>weather_wise</title>
   <link rel="manifest" href="./manifest.json">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="./download.css" id="downloa-style">
-  <link rel="stylesheet" href="./screen.css" id="splash-screen-style">
+  <style id="splash-screen-style">
+    html {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      background-color: #111121;
+      background-size: 100% 100%;
+    }
+
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .contain {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .stretch {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cover {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      -ms-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+    }
+
+    .bottomLeft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .bottomRight {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
       document.getElementById("splash")?.remove();
@@ -37,8 +96,13 @@
       media="(prefers-color-scheme: dark)">
     <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
   </picture>
+
+
+
+
+
   <div id="a2hs-banner" class="topBar">
-    <p>在 Safari 中點擊「分享」➜「加入主畫面」，以獲取更好的體驗！</p>
+    <p>在 Safari 中點擊「分享」➜「加入主畫面」，隨時查看天氣資訊！</p>
     <!-- <p>加入主畫面，隨時查看天氣資訊！</p> -->
     <div class="topBarButton">
       <button onclick="dismissIosBanner()">知道了</button>
@@ -55,14 +119,19 @@
 
   <script src="./flutter_bootstrap.js" async=""></script>
   <script src="./download.js"></script>
+
+
+  <style id="splash-screen-style">
+    /* kept above */
+  </style>
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
       document.getElementById('splash')?.remove();
       document.body.style.background = 'transparent';
     }
   </script>
-  <!-- <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-messaging.js"/> -->
+  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-messaging.js"/>
 </body>
 
 </html>
