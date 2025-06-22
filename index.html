@@ -1,4 +1,5 @@
 <!DOCTYPE html><html lang="zh-TW"><head>
+  <base href="/">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Weather Wise">
@@ -12,68 +13,6 @@
   <title>weather_wise</title>
   <link rel="manifest" href="./manifest.json">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<<<<<<< HEAD
-
-  <script>
-
-    let deferredPrompt;
-
-    function isIos() {
-      return /iphone|ipad|ipod/i.test(navigator.userAgent);
-    }
-
-    function isStandalone() {
-      return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-    }
-
-    function showIosBanner() {
-      document.getElementById('a2hs-banner').style.display = 'flex';
-    }
-
-    function dismissIosBanner() {
-      document.getElementById('a2hs-banner').style.display = 'none';
-    }
-
-    function showInstallBanner() {
-      document.getElementById('install-banner').style.display = 'flex';
-    }
-
-    function dismissInstallBanner() {
-      document.getElementById('install-banner').style.display = 'none';
-    }
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      deferredPrompt = e;
-      if (!isIos() && !isStandalone()) {
-        showInstallBanner();
-      }
-    });
-
-    window.addEventListener('load', () => {
-      if (isIos() && !isStandalone()) {
-        showIosBanner();
-      }
-      if (isStandalone()) {
-        dismissIosBanner();
-        dismissInstallBanner();
-      }
-    });
-
-    document.getElementById('install-btn').addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        console.log('用戶接受安裝');
-      } else {
-        console.log('用戶取消安裝');
-      }
-      deferredPrompt = null;
-      dismissInstallBanner();
-    });
-
-  </script>
-=======
   <style>
     .topBar {
       position: fixed;
@@ -176,7 +115,6 @@
 
 
 
->>>>>>> 1e6e4ba42e492d3a80a5144a71df6088cf082942
   <style id="splash-screen-style">
     html {
       height: 100%
@@ -338,12 +276,6 @@
       document.body.style.background = 'transparent';
     }
   </script>
-<<<<<<< HEAD
-  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-messaging.js" />
-</body>
-=======
->>>>>>> 1e6e4ba42e492d3a80a5144a71df6088cf082942
 
 
 
