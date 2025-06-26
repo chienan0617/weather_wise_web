@@ -106196,7 +106196,7 @@ mu(a){var s=0,r=A.N(t.H),q=this
 var $async$mu=A.J(function(b,c){if(b===1)return A.K(c,r)
 while(true)switch(s){case 0:q.l9("pageIndex",0)
 q.l9("tutored",!1)
-q.l9("language",0)
+q.l9("language",1)
 q.l9("information",A.aW1())
 q.l9("tempType",0)
 q.l9("backgroundType",0)
