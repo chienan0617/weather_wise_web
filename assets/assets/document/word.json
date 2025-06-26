@@ -26,7 +26,7 @@
   "customize background": ["customize background", "自訂背景"],
   "open to customize background": ["open to customize background", "打開以自訂背景"],
   "effective after opening customize background": ["effective after opening customize background", "打開自訂背景後生效"],
-  "background style": ["background style", "背景樣式"],
+  "weather background style": ["background style", "背景樣式"],
   "no K": ["no K", "沒有克氏溫標"],
   "Humidity": ["Humidity", "濕度"],
   "Temperature": ["Temperature", "溫度"],
@@ -70,5 +70,7 @@
   "search on map": ["search on map", "在地圖上搜尋"],
   "Home": ["Home", "首頁"],
   "About": ["About", "關於"],
-  "Error": ["Error", "錯誤"]
+  "Error": ["Error", "錯誤"],
+  "background style": ["background style", "背景主題"],
+  "application background style": ["application background style", "應用程式背景主題"]
 }
