@@ -72,5 +72,7 @@
   "About": ["About", "關於"],
   "Error": ["Error", "錯誤"],
   "background style": ["background style", "背景主題"],
-  "application background style": ["application background style", "應用程式背景主題"]
+  "application background style": ["application background style", "應用程式背景主題"],
+  "app language": ["app language", "應用程式語言"],
+  "switch to different language": ["switch to different language", "切換不同語言"]
 }
