@@ -33193,7 +33193,7 @@ Tx(a,b,c){return A.b7r(a,b,c)},
 b7r(a,b,c){var s=0,r=A.I(t.Wv),q,p,o,n,m,l,k
 var $async$Tx=A.E(function(d,e){if(d===1)return A.F(e,r)
 while(true)switch(s){case 0:s=3
-return A.K(A.b_4(A.jf("https://weather.cas617.workers.dev/api/location?lat="+A.h(a)+"&lon="+A.h(b),0,null)),$async$Tx)
+return A.K(A.b_4(A.jf("https://weather.cas617.workers.dev/api/location?lat="+A.h(B.d.aW(a,90))+"&lon="+A.h(B.d.aW(b,180)),0,null)),$async$Tx)
 case 3:l=e
 k=l.b
 if(k!==200)throw A.e(A.dG("WeatherAPI request failed: "+k))
